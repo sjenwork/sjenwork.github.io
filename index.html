@@ -102,6 +102,7 @@
       .desc-Content {
         padding: 10px;
         padding-left: 20px;
+        padding-bottom: 0px;
 
       }
 
@@ -133,7 +134,7 @@
 
       .desc-Box {
         /* border: 2px red solid; */
-        height: 200px;
+        /* height: 200px; */
         width: calc(100% - 20px);
         margin-left: 10px;
         margin-right: 10px;
@@ -144,6 +145,10 @@
 
       ul {
         list-style: None;
+      }
+
+      ol {
+        padding-left: 20px;
       }
 
       .name {
@@ -172,6 +177,7 @@
 
       .desc-Content {
         padding: 20px;
+        padding-bottom: 0px;
         display: flex;
         flex-direction: column;
         /* justify-content: center; */
@@ -190,10 +196,19 @@
         /* padding-top: 20px; */
         padding-bottom: 20px;
         padding-left: 10%;
+        padding-right: 10%;
       }
 
       .history {
-        margin-left: 40px;
+        margin-left: 20%;
+        line-height: 1.6em;
+        font-size: 1.1em;
+        font-family: Tahoma;
+        /* font: Tahoma; */
+      }
+
+      .history2 {
+        margin-left: 0%;
         line-height: 1.6em;
         font-size: 1.1em;
         font-family: Tahoma;
@@ -214,7 +229,8 @@
 
       }
 
-      .history {
+      .history,
+      .history2 {
         margin-left: 40px;
         line-height: 1.6em;
         font-size: 1.1em;
@@ -234,28 +250,79 @@
       }
     }
 
+    @media screen and (max-width: 500px) {
+      .name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .desc {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+
     .bottom {
       padding-bottom: 10px;
     }
 
     .top {
       padding-top: 10px;
-      border-top: 1px solid black;
+      /* border-top: 1px solid black; */
+
     }
 
     .body {
       /* border-top: 1px solid black; */
       padding: 10px;
-      margin-top: 30px;
+      /* margin-top: 30px; */
     }
 
     .card {
       display: flex;
       flex-direction: column;
-      border-top: 1px black solid;
+      border-top: 1px #e48fe4 solid;
+      /* box-shadow: 0px 0px 0px 1px #e48fe4; */
+
       /* height: 400px; */
     }
+
+    .lang {
+      padding-right: 40px;
+    }
+
+    .item td {
+      border-bottom: rgb(116, 116, 130) 1px solid;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    .projectName {
+      padding-right: 20px;
+      width: 150px;
+    }
+
+    .projectItem {
+      padding-right: 30px
+    }
+
+    .projectDesc {
+      max-width: 500px;
+      min-width: 200px;
+    }
+
+    .exp {
+      min-width: 500px;
+    }
   </style>
+
 </head>
 
 
@@ -271,8 +338,8 @@
               <span style='font-size: 0.8em;'> #JenSun</span>
               <span style=' font-size: 0.8em;'>#sjenwork@gmail.com</span>
             </div>
-            <div class='desc'>主要技能：資料整理/數據分析/機器學習/數據視覺化</div>
-            <div class='desc bottom'>次要技能：後端開發/前端網頁設計</div>
+            <div class='desc'><span>主要技能：</span><span>資料整理/數據分析/機器學習/數據視覺化</span></div>
+            <div class='desc bottom'><span>次要技能：</span><span>後端開發/前端網頁設計</span></div>
             <div class='hobit top'>喜歡用程式解決問題，沒有程式不能解決的問題，只有不能解決問題的程式。</div>
             <div class='hobit'>喜歡將數據視覺化，以圖表呈現數據特徵與趨勢。</div>
           </div>
@@ -298,6 +365,7 @@
           </div>
         </div>
         <div class='card'>
+          <div class='column'></div>
           <div class='column'>
             <h2>工作經歷</h2>
             <table class='history'>
@@ -316,15 +384,167 @@
 
               </tr>
             </table>
-            <!-- <div class='history'>2019/10 ~ &emsp;: 景丰科技股份有限公司</div>
-            <div class='history'>2017/08 ~ 2019/07: 研究助理</div>
-            <div class='history'>2013/08 ~ 2016/07: 研發替代役</div> -->
           </div>
         </div>
         <div class='card'>
           <div class='column'>
-            <h2>興趣及技能</h2>
-            <div></div>
+            <h2>作品</h2>
+            <table class='history2'>
+              <thead class='item'>
+                <td>專案名稱</td>
+                <td style='text-align: center;'>工作項目</td>
+                <td style='max-width: 500px; text-align: center;'>成果與說明</td>
+              </thead>
+              <tr class='item'>
+                <td class=' projectName'> 跨部會化學物質資訊平台<br>(化學雲)</td>
+                <td class='projectItem'>
+                  <ul style='list-style: circle;'>
+                    <li>新聞爬蟲、分類、推播</li>
+                    <li>易爆物統計圖表</li>
+                    <li>化學物質整併</li>
+                    <li>河川流域</li>
+                  </ul>
+                </td>
+                <td class='projectDesc'>
+                  <ul style='list-style: circle;'>
+                    <li>Github:
+                      <a href="https://github.com/sjenwork/newsWork_v3">
+                        sjenwork/newsWork_v3 </a>
+                    </li>
+                    <li>AWS:
+                      <a href="http://54.199.96.124:8080/ver1">ver1</a>、
+                      <a href="http://54.199.96.124:8080/ver2">ver2</a>、
+                      <a href="http://54.199.96.124:8080/ver3">ver3</a>、
+                      <a href="http://54.199.96.124:8080//chemiCloud/ver4">ver4</a>
+                    </li>
+                    <li>Github:
+                      <a href="https://github.com/sjenwork/ChemistryMerging">
+                        sjenwork/ChemistryMerging</a>
+                    </li>
+                    <li>AWS:
+                      <a href="http://54.199.96.124:8080/chemiCloud/riverbasin/ver2">ver1</a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td class='projectName'>中部科學園區資訊系統</td>
+                <td class='projectItem'>
+                  <ul style='list-style: circle;'>
+                    <li>大數據空品預測(PM2.5)成果展示(LSTM、RF)</li>
+                    <li>空氣盒子測站位置標示</li>
+                  </ul>
+                </td>
+                <td class='projectDesc'>
+                  <ul style='list-style: circle;'>
+                    <li> AWS:
+                      <a href="http://54.199.96.124:8080/predict/pm25_lstm">LSTM</a>、
+                      <a href="http://54.199.96.124:8080/predict/pm25">RF</a>
+                    </li>
+                    <li>Github:
+                      <a href="https://github.com/sjenwork/AirBox-TaiChung">sjenwork/AirBox-TaiChung
+                      </a>
+                    </li>
+                  </ul>
+                </td>
+                <td></td>
+              </tr>
+              <tr class='item'>
+                <td>Side Project </td>
+                <td>
+                  <ul style='list-style: circle;'>
+                    <li>全球ERSST海溫分佈歷史查詢</li>
+                    <li>CCTV影像能見度分級系統</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul style='list-style: circle;'>
+                    <li>AWS:
+                      <a href="http://54.199.96.124:8080/demonstrate/ersst">SST</a>
+                    </li>
+                    <li> AWS:
+                      <a href="">CCTV</a>
+                    </li>
+                  </ul>
+
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class=' card'>
+          <div class='column'>
+            <h2>程式語言</h2>
+            <table class='history2'>
+              <thead class='item'>
+                <td style='text-align: left;'>語言</td>
+                <td style='text-align: center;'>程度</td>
+                <td style='text-align: center;' class='exp'>說明</td>
+              </thead>
+              <tr class='item'>
+                <td>python</td>
+                <td>★★★★★</td>
+                <td style='max-width: 500px;'>
+                  <ul style='list-style: circle;'>
+                    <li>精通OOP </li>
+                    <li>精通數據整理工具numpy、pandas</li>
+                    <li>精通視覺化工具matplotlib、seaborn、pyplot</li>
+                    <li>精通資料結構與工具，如NetCDF4、xArray</li>
+                    <li>精通爬蟲框架，如selenium、requests、bs4</li>
+                    <li>熟悉flask、基礎django後端框架</li>
+                    <li>熟悉scikit-learn機器學習框架</li>
+                    <li>基礎pytorch框架</li>
+                    <li>基礎Bert、fastText之應用</li>
+                    <li>基礎GIS，如geoPandas、fiona、cartopy、basemap</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr class='item'>
+                <td>Linux</td>
+                <td>★★★★★</td>
+                <td>
+                  <ul style='list-style: circle;'>
+                    <li>網路管理、設定</li>
+                    <li>工作排程crontab</li>
+                    <li>熟悉centOS、unbuntu</li>
+                    <li>熟悉Regex</li>
+                    <li>熟悉bash</li>
+                  </ul>
+                </td>
+              </tr>
+
+              <tr class='item'>
+                <td>Javascript</td>
+                <td class='lang'>★★☆☆☆</td>
+                <td>
+                  <ul style='list-style: circle;'>
+                    <li>熟悉異步(async)程式設計</li>
+                    <li>熟悉前端框架Vue</li>
+                    <li>熟悉前端視覺化框架，如plotly.js、openlayer、chartjs</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr class='item'>
+                <td class='lang'>html、CSS</td>
+                <td class='lang'>★★☆☆☆</td>
+                <td>
+                  <ul style='list-style: circle;'>
+                    <li>熟悉異步(async)程式設計</li>
+                    <li>熟悉前端框架Vue</li>
+                    <li>熟悉前端視覺化框架，如plotly.js、openlayer、chartjs</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr class='item'>
+                <td>Matlab</td>
+                <td>★★★★★</td>
+                <td>
+                  <ul style='list-style: circle;'>
+                    <li>數據整理、分析與繪圖</li>
+                  </ul>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
 
