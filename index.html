@@ -13,27 +13,24 @@
 
     body {
       margin: 0px;
+      background-color: rgba(175, 255, 227, 0.74);
     }
 
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      border-radius: 100px;
-    }
 
-    @media screen and (max-width: 720px) {
+
+    @media screen and (max-width: 1000px) {
       .container {
         width: 100vw;
         height: 100vw;
-        background-color: rgba(175, 255, 227, 0.74);
+        /* background-color: rgba(175, 255, 227, 0.74); */
       }
     }
 
-    @media screen and (min-width: 720px) {
+    @media screen and (min-width: 1000px) {
       .container {
         width: 60vw;
         height: 100vw;
-        background-color: rgba(175, 255, 227, 0.74);
+        /* background-color: rgba(175, 255, 227, 0.74); */
       }
     }
 
@@ -56,7 +53,14 @@
         width: 200px;
         height: 200px;
         border-radius: 100px;
-        margin: 10px;
+        /* margin: 10px; */
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 100px;
+        /* margin: 10px; */
       }
 
       .desc-Box {
@@ -87,8 +91,17 @@
         margin-left: 20px;
       }
 
+      .hobit {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        /* padding-left: 0px; */
+        font-size: 1em;
+        color: rgb(48, 45, 45);
+      }
+
       .desc-Content {
-        padding: 20px;
+        padding: 10px;
+        padding-left: 20px;
 
         /* display: flex; */
         /* flex-direction: column; */
@@ -112,6 +125,13 @@
         height: 200px;
         border-radius: 100px;
         /* margin-top: 10px; */
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 100px;
+        /* margin: 10px; */
       }
 
       .desc-Box {
@@ -142,6 +162,17 @@
         font-size: 1.1em;
       }
 
+      .hobit {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        font-size: 1em;
+        color: rgb(48, 45, 45);
+
+        text-align: center;
+
+      }
+
       .desc-Content {
         padding: 20px;
         display: flex;
@@ -150,8 +181,15 @@
         align-items: center;
       }
 
-      ;
+    }
 
+    .bottom {
+      padding-bottom: 10px;
+    }
+
+    .top {
+      padding-top: 10px;
+      border-top: 1px solid black;
     }
   </style>
 </head>
@@ -167,7 +205,9 @@
           <div class='desc-Content'>
             <div class='name'>孫既仁 <span>(Ji-Jen Sun)</span> </div>
             <div class='desc'>主要技能：資料整理/數據分析/機器學習/數據視覺化</div>
-            <div class='desc'>次要技能：後端開發/前端網頁設計</div>
+            <div class='desc bottom'>次要技能：後端開發/前端網頁設計</div>
+            <div class='hobit top'>喜歡用程式解決問題，沒有程式不能解決的問題，只有不能解決問題的程式。</div>
+            <div class='hobit'>喜歡將數據視覺化，以圖表呈現數據特徵與趨勢。</div>
           </div>
         </div>
       </div>
