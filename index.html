@@ -46,6 +46,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding-left: 10%;
+        padding-right: 10%;
       }
 
       .icon {
@@ -216,7 +218,7 @@
       }
 
       .time {
-        padding-right: 60px
+        /* padding-right: 60px */
       }
     }
 
@@ -238,8 +240,12 @@
         /* font: Tahoma; */
       }
 
+      .history td {
+        text-align: center;
+      }
+
       .time {
-        padding-right: 30px
+        /* padding-right: 30px */
       }
 
       div.column {
@@ -285,7 +291,7 @@
     }
 
     .body {
-      /* border-top: 1px solid black; */
+      border-top: 1px solid black;
       padding: 10px;
       /* margin-top: 30px; */
     }
@@ -336,7 +342,7 @@
               <span style='font-size: 0.8em; padding-left: 20px;'> Ji-Jen Sun</span>
               <span style=' font-size: 0.8em; padding-left: 20px;'>sjenwork@gmail.com</span>
             </div>
-            <div class='desc'><span>資料整理/數據分析/機器學習/數據視覺化/後端開發/前端網頁設計</span></div>
+            <div class='desc' style='text-align: center;'><span>資料整理/數據分析/機器學習/數據視覺化/後端開發/前端網頁設計</span></div>
             <div class='hobit top'>喜歡用程式解決問題，沒有程式不能解決的問題，只有不能解決問題的程式。</div>
             <div class='hobit'>喜歡將數據視覺化，以圖表呈現數據特徵與趨勢。</div>
           </div>
@@ -346,7 +352,7 @@
         <div class='card'>
           <div class='column'>
             <h2>教育背景</h2>
-            <table class='history'>
+            <table class='history' style='width:70%'>
               <tr>
                 <td class='time'>2011/08 ~ 2013/06</td>
                 <td>台灣大學-大氣科學所</td>
@@ -365,7 +371,7 @@
           <div class='column'></div>
           <div class='column'>
             <h2>工作經歷</h2>
-            <table class='history'>
+            <table class='history' style='width:70%'>
               <tr>
                 <td>2019/10 ~</td>
                 <td>景丰科技股份有限公司</td>
@@ -388,8 +394,8 @@
             <h2>作品</h2>
             <table class='history2' style='width: 100%;'>
               <thead class='item'>
-                <td style='width:35%'>專案名稱</td>
-                <td style='text-align: center; width:65%'>工作項目與成果展示</td>
+                <td style='width:40%'>專案名稱</td>
+                <td style='text-align: center; width:60%'>工作項目與成果展示</td>
               </thead>
               <tr class='item'>
                 <td class='projectName'> 跨部會化學物質資訊平台<br>(化學雲)</td>
@@ -454,9 +460,9 @@
             <h2>程式語言</h2>
             <table class='history2' style='width: 100%;'>
               <thead class='item'>
-                <td style='text-align: left;'>語言</td>
-                <td style='text-align: center;' class='level'>程度</td>
-                <td style='text-align: center;'>說明</td>
+                <td style='text-align: left; width:20%'>語言</td>
+                <td style='text-align: center; width:20%' class='level'>程度</td>
+                <td style='text-align: center; width:60%'>說明</td>
               </thead>
               <tr class='item'>
                 <td>python</td>
