@@ -15,6 +15,12 @@
       margin: 0px;
     }
 
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 100px;
+    }
+
     @media screen and (max-width: 720px) {
       .container {
         width: 100vw;
@@ -38,29 +44,114 @@
     }
 
 
-    @media screen and (min-width: 720px) {
+    @media screen and (min-width: 1200px) {
       .header {
-        border: 1px red solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .icon {
-        border: 2px red solid;
+        border: 2px rgb(55, 47, 47) solid;
         width: 200px;
         height: 200px;
         border-radius: 100px;
         margin: 10px;
       }
 
-      .descripition {
-        border: 2px red solid;
+      .desc-Box {
+        /* border: 2px red solid; */
         height: 200px;
-        width: calc(100% - 250px);
+        width: calc(100% - 230px);
         margin: 10px;
       }
 
-      .headerLayout {
-        display: inline-block;
+      ul {
+        padding-left: 20px;
+        list-style: None;
       }
+
+      .name {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1.3em;
+      }
+
+      .desc {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        font-size: 1.1em;
+        display: list-item;
+        list-style-type: disc;
+        margin-left: 20px;
+      }
+
+      .desc-Content {
+        padding: 20px;
+
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* justify-content: center; */
+        /* align-items: center; */
+      }
+    }
+
+    @media screen and (max-width: 1200px) {
+      .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 10px;
+      }
+
+      .icon {
+        border: 2px rgb(55, 47, 47) solid;
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        /* margin-top: 10px; */
+      }
+
+      .desc-Box {
+        /* border: 2px red solid; */
+        height: 200px;
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+      }
+
+      ul {
+        list-style: None;
+      }
+
+      .name {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1.3em;
+      }
+
+      .desc {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        font-size: 1.1em;
+      }
+
+      .desc-Content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+      }
+
+      ;
+
     }
   </style>
 </head>
@@ -70,8 +161,15 @@
   <div class='hc'>
     <div class='container'>
       <div class='header'>
-        <div class='icon headerLayout'></div>
-        <div class='descripition headerLayout'></div>
+        <div class='icon headerLayout'><img
+            src="https://i.pinimg.com/originals/eb/d0/02/ebd002f69ccba8c11d7a35aef69a820e.jpg" alt=""></div>
+        <div class='desc-Box headerLayout'>
+          <div class='desc-Content'>
+            <div class='name'>孫既仁 <span>(Ji-Jen Sun)</span> </div>
+            <div class='desc'>主要技能：資料整理/數據分析/機器學習/數據視覺化</div>
+            <div class='desc'>次要技能：後端開發/前端網頁設計</div>
+          </div>
+        </div>
       </div>
 
     </div>
