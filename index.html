@@ -6,11 +6,76 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0px;
+    }
+
+    @media screen and (max-width: 720px) {
+      .container {
+        width: 100vw;
+        height: 100vw;
+        background-color: rgba(175, 255, 227, 0.74);
+      }
+    }
+
+    @media screen and (min-width: 720px) {
+      .container {
+        width: 60vw;
+        height: 100vw;
+        background-color: rgba(175, 255, 227, 0.74);
+      }
+    }
+
+    .hc {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    @media screen and (min-width: 720px) {
+      .header {
+        border: 1px red solid;
+      }
+
+      .icon {
+        border: 2px red solid;
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        margin: 10px;
+      }
+
+      .descripition {
+        border: 2px red solid;
+        height: 200px;
+        width: calc(100% - 250px);
+        margin: 10px;
+      }
+
+      .headerLayout {
+        display: inline-block;
+      }
+    }
+  </style>
 </head>
 
-<body>
-  <div>Hello world</div>
 
+<body>
+  <div class='hc'>
+    <div class='container'>
+      <div class='header'>
+        <div class='icon headerLayout'></div>
+        <div class='descripition headerLayout'></div>
+      </div>
+
+    </div>
+  </div>
 </body>
 
 </html>
