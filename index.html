@@ -231,7 +231,7 @@
 
       .history,
       .history2 {
-        margin-left: 40px;
+        /* margin-left: 40px; */
         line-height: 1.6em;
         font-size: 1.1em;
         font-family: Tahoma;
@@ -264,6 +264,13 @@
         justify-content: center;
         align-items: center;
       }
+
+      td.level {
+        /* visibility: hidden; */
+        display: none;
+      }
+
+
     }
 
 
@@ -286,14 +293,14 @@
     .card {
       display: flex;
       flex-direction: column;
-      border-top: 1px #e48fe4 solid;
+      /* border-top: 1px #e48fe4 solid; */
       /* box-shadow: 0px 0px 0px 1px #e48fe4; */
 
       /* height: 400px; */
     }
 
     .lang {
-      padding-right: 40px;
+      padding-right: 20px;
     }
 
     .item td {
@@ -311,15 +318,6 @@
 
     .projectItem {
       padding-right: 30px
-    }
-
-    .projectDesc {
-      max-width: 500px;
-      min-width: 200px;
-    }
-
-    .exp {
-      min-width: 500px;
     }
   </style>
 
@@ -388,40 +386,32 @@
         <div class='card'>
           <div class='column'>
             <h2>作品</h2>
-            <table class='history2' style="width:100%">
+            <table class='history2' style='width: 100%;'>
               <thead class='item'>
-                <td>專案名稱</td>
-                <td style='text-align: center;'>工作項目</td>
-                <td style='max-width: 500px; text-align: center;'>成果與說明</td>
+                <td style='width:35%'>專案名稱</td>
+                <td style='text-align: center; width:65%'>工作項目與成果展示</td>
               </thead>
               <tr class='item'>
-                <td class=' projectName'> 跨部會化學物質資訊平台<br>(化學雲)</td>
+                <td class='projectName'> 跨部會化學物質資訊平台<br>(化學雲)</td>
                 <td class='projectItem'>
                   <ul style='list-style: circle;'>
-                    <li>新聞爬蟲、分類、推播</li>
-                    <li>易爆物統計圖表</li>
-                    <li>化學物質整併</li>
-                    <li>河川流域</li>
-                  </ul>
-                </td>
-                <td class='projectDesc'>
-                  <ul style='list-style: circle;'>
-                    <li>Github:
-                      <a href="https://github.com/sjenwork/newsWork_v3">
-                        sjenwork/newsWork_v3 </a>
+                    <li><span>新聞爬蟲、分類、推播</span>
+                      <a href="https://github.com/sjenwork/newsWork_v3">link </a>
                     </li>
-                    <li>AWS:
-                      <a href="http://54.199.96.124:8080/ver1">ver1</a>、
-                      <a href="http://54.199.96.124:8080/ver2">ver2</a>、
-                      <a href="http://54.199.96.124:8080/ver3">ver3</a>、
-                      <a href="http://54.199.96.124:8080//chemiCloud/ver4">ver4</a>
+                    <li>
+                      <span>易爆物統計圖表</span>
+                      <a href="http://54.199.96.124:8080/ver1">v1</a>、
+                      <a href="http://54.199.96.124:8080/ver2">v2</a>、
+                      <a href="http://54.199.96.124:8080/ver3">v3</a>、
+                      <a href="http://54.199.96.124:8080//chemiCloud/ver4">v4</a>
                     </li>
-                    <li>Github:
-                      <a href="https://github.com/sjenwork/ChemistryMerging">
-                        sjenwork/ChemistryMerging</a>
+                    <li>
+                      <span>化學物質整併</span>
+                      <a href="https://github.com/sjenwork/ChemistryMerging"> link</a>
                     </li>
-                    <li>AWS:
-                      <a href="http://54.199.96.124:8080/chemiCloud/riverbasin/ver2">ver1</a>
+                    <li>
+                      <span>河川流域</span>
+                      <a href="http://54.199.96.124:8080/chemiCloud/riverbasin/ver2">link</a>
                     </li>
                   </ul>
                 </td>
@@ -430,42 +420,30 @@
                 <td class='projectName'>中部科學園區資訊系統</td>
                 <td class='projectItem'>
                   <ul style='list-style: circle;'>
-                    <li>大數據空品預測(PM2.5)成果展示(LSTM、RF)</li>
-                    <li>空氣盒子測站位置標示</li>
-                  </ul>
-                </td>
-                <td class='projectDesc'>
-                  <ul style='list-style: circle;'>
-                    <li> AWS:
+                    <li>
+                      <span>AI空品預測(PM2.5)成果展示</span>
                       <a href="http://54.199.96.124:8080/predict/pm25_lstm">LSTM</a>、
                       <a href="http://54.199.96.124:8080/predict/pm25">RF</a>
                     </li>
-                    <li>Github:
-                      <a href="https://github.com/sjenwork/AirBox-TaiChung">sjenwork/AirBox-TaiChung
-                      </a>
+                    <li>
+                      <span>空氣盒子測站位置標示</span>
+                      <a href="https://github.com/sjenwork/AirBox-TaiChung">link </a>
                     </li>
                   </ul>
                 </td>
-                <td></td>
               </tr>
               <tr class='item'>
-                <td>Side Project </td>
-                <td>
+                <td class='projectName'>Side Project </td>
+                <td class='projectItem'>
                   <ul style='list-style: circle;'>
-                    <li>全球ERSST海溫分佈歷史查詢</li>
-                    <li>CCTV影像能見度分級系統</li>
-                  </ul>
-                </td>
-                <td>
-                  <ul style='list-style: circle;'>
-                    <li>AWS:
-                      <a href="http://54.199.96.124:8080/demonstrate/ersst">SST</a>
+                    <li>
+                      <span>全球ERSST海溫分佈歷史查詢</span>
+                      <a href="http://54.199.96.124:8080/demonstrate/ersst">link</a>
                     </li>
-                    <li> AWS:
-                      <a href="">CCTV</a>
+                    <li>
+                      <span>CCTV影像能見度分級系統</span>
                     </li>
                   </ul>
-
                 </td>
               </tr>
             </table>
@@ -474,16 +452,16 @@
         <div class=' card'>
           <div class='column'>
             <h2>程式語言</h2>
-            <table class='history2' style="width:100%">
+            <table class='history2' style='width: 100%;'>
               <thead class='item'>
                 <td style='text-align: left;'>語言</td>
-                <td style='text-align: center;'>程度</td>
-                <td style='text-align: center;' class='exp'>說明</td>
+                <td style='text-align: center;' class='level'>程度</td>
+                <td style='text-align: center;'>說明</td>
               </thead>
               <tr class='item'>
                 <td>python</td>
-                <td>★★★★★</td>
-                <td style='max-width: 500px;'>
+                <td class='level'>★★★★★</td>
+                <td>
                   <ul style='list-style: circle;'>
                     <li>精通OOP </li>
                     <li>精通數據整理工具numpy、pandas</li>
@@ -500,7 +478,7 @@
               </tr>
               <tr class='item'>
                 <td>Linux</td>
-                <td>★★★★★</td>
+                <td class='level'>★★★★★</td>
                 <td>
                   <ul style='list-style: circle;'>
                     <li>網路管理、設定</li>
@@ -514,7 +492,7 @@
 
               <tr class='item'>
                 <td>Javascript</td>
-                <td class='lang'>★★☆☆☆</td>
+                <td class='lang level'>★★☆☆☆</td>
                 <td>
                   <ul style='list-style: circle;'>
                     <li>熟悉異步(async)程式設計</li>
@@ -525,7 +503,7 @@
               </tr>
               <tr class='item'>
                 <td class='lang'>html、CSS</td>
-                <td class='lang'>★★☆☆☆</td>
+                <td class='lang level'>★★☆☆☆</td>
                 <td>
                   <ul style='list-style: circle;'>
                     <li>熟悉異步(async)程式設計</li>
@@ -536,7 +514,7 @@
               </tr>
               <tr class='item'>
                 <td>Matlab</td>
-                <td>★★★★★</td>
+                <td class='level'>★★★★★</td>
                 <td>
                   <ul style='list-style: circle;'>
                     <li>數據整理、分析與繪圖</li>
