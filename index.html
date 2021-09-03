@@ -28,7 +28,7 @@
 
     @media screen and (min-width: 1000px) {
       .container {
-        width: 60vw;
+        width: 70vw;
         height: 100vw;
         /* background-color: rgba(175, 255, 227, 0.74); */
       }
@@ -103,11 +103,8 @@
         padding: 10px;
         padding-left: 20px;
 
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* justify-content: center; */
-        /* align-items: center; */
       }
+
     }
 
     @media screen and (max-width: 1200px) {
@@ -181,6 +178,23 @@
         align-items: center;
       }
 
+
+    }
+
+    @media screen and (min-width: 600px) {
+      .column {
+        /* margin-left: 10%; */
+        /* margin-right: 10%; */
+        /* border: 1px blue solid; */
+        height: 100%;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .column {
+        /* border: 1px blue solid; */
+        height: 100%;
+      }
     }
 
     .bottom {
@@ -190,6 +204,19 @@
     .top {
       padding-top: 10px;
       border-top: 1px solid black;
+    }
+
+    .body {
+      /* border-top: 1px solid black; */
+      padding: 10px;
+      margin-top: 30px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px black solid;
+      height: 400px;
     }
   </style>
 </head>
@@ -203,7 +230,10 @@
             src="https://i.pinimg.com/originals/eb/d0/02/ebd002f69ccba8c11d7a35aef69a820e.jpg" alt=""></div>
         <div class='desc-Box headerLayout'>
           <div class='desc-Content'>
-            <div class='name'>孫既仁 <span>(Ji-Jen Sun)</span> </div>
+            <div class='name'>孫既仁
+              <span style='font-size: 0.8em;'> #JenSun</span>
+              <span style=' font-size: 0.8em;'>#sjenwork@gmail.com</span>
+            </div>
             <div class='desc'>主要技能：資料整理/數據分析/機器學習/數據視覺化</div>
             <div class='desc bottom'>次要技能：後端開發/前端網頁設計</div>
             <div class='hobit top'>喜歡用程式解決問題，沒有程式不能解決的問題，只有不能解決問題的程式。</div>
@@ -211,7 +241,28 @@
           </div>
         </div>
       </div>
+      <div class='body'>
+        <div class='card'>
+          <div class='column'>
+            <h2>教育背景</h2>
+            <div></div>
+          </div>
+        </div>
+        <div class='card'>
+          <div class='column'>
+            <h2>工作經歷</h2>
+            <div></div>
+          </div>
+        </div>
+        <div class='card'>
+          <div class='column'>
+            <h2>興趣及技能</h2>
+            <div></div>
+          </div>
+        </div>
 
+
+      </div>
     </div>
   </div>
 </body>
