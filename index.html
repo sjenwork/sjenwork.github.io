@@ -13,23 +13,25 @@
 
     body {
       margin: 0px;
-      background-color: rgba(175, 255, 227, 0.74);
+      background-color: rgba(33, 33, 33, 1);
     }
 
 
 
     @media screen and (max-width: 700px) {
       .container {
+        position: relative;
         width: 100vw;
-        height: 100vw;
+        /* height: 100vw; */
         /* background-color: rgba(175, 255, 227, 0.74); */
       }
     }
 
     @media screen and (min-width: 700px) {
       .container {
+        position: relative;
         width: 70vw;
-        height: 100vw;
+        /* height: 100vw; */
         /* background-color: rgba(175, 255, 227, 0.74); */
       }
     }
@@ -43,11 +45,16 @@
 
     @media screen and (min-width: 1200px) {
       .header {
+        width: 70%;
+        position: fixed;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 5%;
+        padding-right: 5%;
+        background-color: rgba(193, 235, 190, 0.9);
+        border-radius: 10px;
+        height: 240px;
       }
 
       .icon {
@@ -84,6 +91,10 @@
       }
 
       .desc {
+        display: flex;
+        flex-wrap: wrap;
+        /* justify-content: center; */
+        /* text-align: center; */
         padding-top: 5px;
         padding-bottom: 5px;
         /* padding-left: 10px; */
@@ -94,6 +105,8 @@
       }
 
       .hobit {
+        display: flex;
+        flex-wrap: wrap;
         padding-top: 5px;
         padding-bottom: 5px;
         /* padding-left: 0px; */
@@ -117,6 +130,8 @@
         align-items: center;
         flex-direction: column;
         padding-top: 10px;
+        background-color: rgba(193, 235, 190, 0.9);
+        border-radius: 10px;
       }
 
       .icon {
@@ -160,6 +175,10 @@
       }
 
       .desc {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
         padding-top: 5px;
         padding-bottom: 5px;
         /* padding-left: 10px; */
@@ -167,6 +186,9 @@
       }
 
       .hobit {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         padding-top: 10px;
         padding-bottom: 5px;
         padding-left: 10px;
@@ -220,6 +242,10 @@
       .time {
         /* padding-right: 60px */
       }
+
+      .body {
+        margin-top: 240px;
+      }
     }
 
     @media screen and (max-width: 1200px) {
@@ -241,7 +267,7 @@
       }
 
       .history td {
-        text-align: center;
+        text-align: left;
       }
 
       .time {
@@ -265,9 +291,12 @@
       }
 
       .desc {
+        text-align: center;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: center;
+        /* flex-direction: column; */
+        /* justify-content: center; */
         align-items: center;
       }
 
@@ -292,14 +321,18 @@
 
     .body {
       border-top: 1px solid black;
-      padding: 10px;
+      /* padding: 10px; */
       /* margin-top: 30px; */
     }
 
     .card {
       display: flex;
       flex-direction: column;
-      /* border-top: 1px #e48fe4 solid; */
+      background-color: rgb(212, 239, 255);
+      border-radius: 10px;
+      border: 1px rgb(69, 69, 69, .4) solid;
+      margin-top: 2px;
+      margin-bottom: 2px;
       /* box-shadow: 0px 0px 0px 1px #e48fe4; */
 
       /* height: 400px; */
@@ -334,17 +367,30 @@
   <div class='hc'>
     <div class='container'>
       <div class='header'>
-        <div class='icon '><img src="https://i.pinimg.com/originals/eb/d0/02/ebd002f69ccba8c11d7a35aef69a820e.jpg"
-            alt=""></div>
+        <div class='icon'><img src="/image.jpeg" alt=""></div>
         <div class='desc-Box'>
           <div class='desc-Content'>
-            <div class='name'>孫既仁
-              <span style='font-size: 0.8em; padding-left: 20px;'> Ji-Jen Sun</span>
+            <div class='name' style='font-size: 1.5em;'>孫既仁
+              <span style='font-size: 1em; padding-left: 20px;'> Ji-Jen Sun</span>
               <span style=' font-size: 0.8em; padding-left: 20px;'>sjenwork@gmail.com</span>
             </div>
-            <div class='desc'><span>資料整理/數據分析/機器學習/數據視覺化/後端開發/前端網頁設計</span></div>
-            <div class='hobit top'>喜歡用程式解決問題，沒有程式不能解決的問題，只有不能解決問題的程式。</div>
-            <div class='hobit'>喜歡將數據視覺化，以圖表呈現數據特徵與趨勢。</div>
+            <div class='desc' style='font-weight: bold;'>
+              <span>資料整理</span>
+              <span>/數據分析</span>
+              <span>/機器學習</span>
+              <span>/數據視覺化</span>
+              <span>/後端開發</span>
+              <span>/前端網頁設計</span>
+            </div>
+            <div class='hobit top'>
+              <span> 喜歡用程式解決問題，</span>
+              <span> 沒有程式不能解決的問題，</span>
+              <span> 只有不能解決問題的程式。 </span>
+            </div>
+            <div class='hobit'>
+              <span> 喜歡將數據視覺化， </span>
+              <span> 以圖表呈現數據特徵與趨勢。</span>
+            </div>
           </div>
         </div>
       </div>
@@ -368,7 +414,6 @@
           </div>
         </div>
         <div class='card'>
-          <div class='column'></div>
           <div class='column'>
             <h2>工作經歷</h2>
             <table class='history' style='width:70%'>
@@ -392,7 +437,7 @@
         <div class='card'>
           <div class='column'>
             <h2>作品</h2>
-            <table class='history2' style='width: 100%;'>
+            <table class='history2' style='width: 95%; margin-left: 2.5%;'>
               <thead class='item'>
                 <td style='width:40%'>專案名稱</td>
                 <td style='text-align: center; width:60%'>工作項目與成果展示</td>
@@ -458,7 +503,7 @@
         <div class=' card'>
           <div class='column'>
             <h2>程式語言</h2>
-            <table class='history2' style='width: 100%;'>
+            <table class='history2' style='width: 95%; left: 2.5%;'>
               <thead class='item'>
                 <td style='text-align: left; width:20%'>語言</td>
                 <td style='text-align: center; width:20%' class='level'>程度</td>
