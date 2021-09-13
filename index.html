@@ -500,9 +500,14 @@
       margin-bottom: 2px;
     }
 
-    .projectItem li:hover {
+    .projectItem li span:hover {
       background-color: rgba(255, 223, 223, 0.9);
       cursor: context-menu;
+    }
+
+    .projectItem li a:hover {
+      color: red;
+      /* cursor: context-menu; */
     }
   </style>
 
@@ -634,7 +639,7 @@
                 <td class='projectItem'>
                   <ul style='list-style: circle;'>
                     <li name='airPred'>
-                      <span>AI空品預測(PM2.5)成果展示</span>
+                      <span>AI空品預測(PM<sub>2.5</sub> )成果展示</span>
                       <a href="http://54.199.96.124:8080/predict/pm25_lstm">LSTM</a>、
                       <a href="http://54.199.96.124:8080/predict/pm25">RF</a>
                     </li>
@@ -650,7 +655,7 @@
                 <td class='projectItem'>
                   <ul style='list-style: circle;'>
                     <li name='sstDisp'>
-                      <span>全球ERSST海溫分佈歷史查詢</span>
+                      <span>全球海溫分佈歷史查詢</span>
                       <a href="http://54.199.96.124:8080/demonstrate/ersst">aws</a>
                     </li>
                     <li name='cctv'>
@@ -663,7 +668,7 @@
                       <a href="#">aws</a>
                     </li>
                     <li name='chantail'>
-                      <span>Chantail訂單查詢系統</span>
+                      <span>香頭寶寶訂單查詢系統</span>
                       <a href="http://54.199.96.124:8080/chantail/query">query</a>
                       <a href="http://54.199.96.124:8080/chantail/display">display</a>
                     </li>
@@ -678,7 +683,7 @@
             <h2>專業技能</h2>
             <table class='history2' style='width: 100%;'>
               <thead class='item'>
-                <td style='text-align: left; width:20%'>語言</td>
+                <td style='text-align: left; width:20%'>名稱</td>
                 <td style='text-align: center; width:20%' class='level'>程度</td>
                 <td style='text-align: center; width:60%'>說明</td>
               </thead>
@@ -764,54 +769,58 @@
     </div>
   </div>
   <script>
-    let doc = document.querySelectorAll('.projectItem li')
-    doc.forEach(el => {
-      el.addEventListener('mousedown', (e) => {
-        let x = e.pageX
-        let y = e.pageY
-        let info = document.createElement('div')
-        info.setAttribute('class', 'showDesc')
-        info.style['background-color'] = 'rgba(225, 223, 223, 0.9)'
-        info.style['border'] = 'rgba(20, 20, 20, .9) 1px solid'
-        info.style['padding'] = '10px'
-        info.style['border-radius'] = '5px'
-        info.style['width'] = '200px'
-        let right = document.querySelector('.container').getBoundingClientRect().right
-        let diff = right - (200 + x)
-        console.log(right, `${x+20}`, diff)
-        console.log(diff < 0 ? x + diff : x)
-        // info.style['height'] = '200px'
-        info.style['position'] = 'absolute'
-        info.style['top'] = `${y-30}px`
-        info.style['left'] = diff < 0 ? `${x + diff}px` : `${x}px`
-        let name = el.getAttribute('name')
-        let text
+    addEventListener('click', (e) => {
+      // let ele = e.
+      // e.stopPropagation()
+      let x = e.pageX
+      let y = e.pageY
+      let info = document.createElement('div')
+      let right = document.querySelector('.container').getBoundingClientRect().right
+      let diff = right - (200 + x)
+      let loc = e.path[3].getAttribute('class')
+      let name = e.path[1].getAttribute('name')
+      let elem = document.querySelector('.showDesc')
+      let text
+
+      info.setAttribute('class', 'showDesc')
+      info.style['background-color'] = 'rgba(225, 223, 223, 0.9)'
+      info.style['border'] = 'rgba(20, 20, 20, .9) 1px solid'
+      info.style['padding'] = '10px'
+      info.style['border-radius'] = '5px'
+      info.style['width'] = '200px'
+      info.style['position'] = 'absolute'
+      info.style['top'] = `${y-30}px`
+      info.style['left'] = diff < 0 ? `${x + diff}px` : `${x}px`
+
+      if (loc === 'projectItem') {
+        if (elem) {
+          elem.remove()
+        }
         if (name === 'chantail') {
           text = '提供訂單搜尋工具，比對訂購清單與物流紀錄，以確認廠商是否出貨。'
         } else if (name === 'cctv') {
+          let elem = document.querySelector('.showDesc')
+          if (elem) {
+            elem.remove()
+          }
           text = '上傳CCTV拍攝的影像，可於頁面上瀏覽並直接提供能見度分級，並輸出分級結果。亦可直接上傳分級表，可以圖示展示分級之結果'
+          info.textContent = text
+          document.querySelector('.hc').append(info)
         } else if (name === 'sstDisp') {
           text = '提供歷史海溫資料以查詢海溫的分佈特徵，並可自行選擇範圍後取得特定區域面積平均的海溫時序變化。'
         } else if (name === 'airCond') {
           text = '（未完成）介接環保署空品資料，可直接於本系統內查詢歷史空品與即時空品資料。'
         } else {
-          text = '尚未建立說明'
+          text = '未提供相關資訊'
         }
         info.textContent = text
-
-
-        // info.style['height'] = '2px'
-
         document.querySelector('.hc').append(info)
-      })
-      el.addEventListener('mousemove', (e) => {
-        let elem = document.querySelector('.showDesc')
+      } else {
         if (elem) {
           elem.remove()
         }
-
-      })
-    })
+      }
+    });
   </script>
 </body>
 
