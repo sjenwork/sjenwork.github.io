@@ -776,10 +776,14 @@
         info.style['padding'] = '10px'
         info.style['border-radius'] = '5px'
         info.style['width'] = '200px'
+        let right = document.querySelector('.container').getBoundingClientRect().right
+        let diff = right - (200 + x)
+        console.log(right, `${x+20}`, diff)
+        console.log(diff < 0 ? x + diff : x)
         // info.style['height'] = '200px'
         info.style['position'] = 'absolute'
         info.style['top'] = `${y-30}px`
-        info.style['left'] = `${x}px`
+        info.style['left'] = diff < 0 ? `${x + diff}px` : `${x}px`
         let name = el.getAttribute('name')
         let text
         if (name === 'chantail') {
