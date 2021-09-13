@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Jen</title>
   <style>
     * {
       box-sizing: border-box;
@@ -499,6 +499,11 @@
       margin-top: 2px;
       margin-bottom: 2px;
     }
+
+    .projectItem li:hover {
+      background-color: rgba(255, 223, 223, 0.9);
+      cursor: context-menu;
+    }
   </style>
 
 </head>
@@ -602,21 +607,22 @@
                 <td class='projectName'> project 1</td>
                 <td class='projectItem'>
                   <ul style='list-style: circle;'>
-                    <li><span>新聞爬蟲、分類、推播</span>
+                    <li name='news'>
+                      <span>新聞爬蟲、分類、推播</span>
                       <a href="https://github.com/sjenwork/newsWork_v3">gh </a>
                     </li>
-                    <li>
+                    <li name='explosive'>
                       <span>易爆物統計圖表</span>
                       <!-- <a href="http://54.199.96.124:8080/ver1">v1</a>、 -->
                       <a href="http://54.199.96.124:8080/ver2">aws</a>、
                       <a href="http://54.199.96.124:8080/ver3">aws</a>
                       <!-- <a href="http://54.199.96.124:8080//chemiCloud/ver4">v4</a> -->
                     </li>
-                    <li>
+                    <li name='chemMerger'>
                       <span>化學物質整併</span>
                       <a href="https://github.com/sjenwork/ChemistryMerging"> gh</a>
                     </li>
-                    <li>
+                    <li name='river'>
                       <span>河川流域</span>
                       <a href="http://54.199.96.124:8080/chemiCloud/riverbasin/ver2">aws</a>
                     </li>
@@ -627,12 +633,12 @@
                 <td class='projectName'>Project 2</td>
                 <td class='projectItem'>
                   <ul style='list-style: circle;'>
-                    <li>
+                    <li name='airPred'>
                       <span>AI空品預測(PM2.5)成果展示</span>
                       <a href="http://54.199.96.124:8080/predict/pm25_lstm">LSTM</a>、
                       <a href="http://54.199.96.124:8080/predict/pm25">RF</a>
                     </li>
-                    <li>
+                    <li name='airBox'>
                       <span>空氣盒子測站位置標示</span>
                       <a href="https://github.com/sjenwork/AirBox-TaiChung">gh </a>
                     </li>
@@ -643,18 +649,23 @@
                 <td class='projectName'>Side Project </td>
                 <td class='projectItem'>
                   <ul style='list-style: circle;'>
-                    <li>
+                    <li name='sstDisp'>
                       <span>全球ERSST海溫分佈歷史查詢</span>
                       <a href="http://54.199.96.124:8080/demonstrate/ersst">aws</a>
                     </li>
-                    <li>
+                    <li name='cctv'>
                       <span>CCTV影像能見度分級系統</span>
                       <a href="http://54.199.96.124:8080/cctvviewer">aws</a>
                       <a href="https://github.com/sjenwork/cctvViewer">gh</a>
                     </li>
-                    <li>
+                    <li name='airCond'>
                       <span>台灣空氣品質查詢系統</span>
                       <a href="#">aws</a>
+                    </li>
+                    <li name='chantail'>
+                      <span>Chantail訂單查詢系統</span>
+                      <a href="http://54.199.96.124:8080/chantail/query">query</a>
+                      <a href="http://54.199.96.124:8080/chantail/display">display</a>
                     </li>
                   </ul>
                 </td>
@@ -737,7 +748,7 @@
                 <td class='level'>★★☆☆☆</td>
                 <td>
                   <ul style='list-style: circle;'>
-                    <li>架設伺服器</li>
+                    <li>架設網頁伺服器</li>
                   </ul>
                 </td>
               </tr>
@@ -753,6 +764,50 @@
     </div>
   </div>
   <script>
+    let doc = document.querySelectorAll('.projectItem li')
+    doc.forEach(el => {
+      el.addEventListener('mousedown', (e) => {
+        let x = e.pageX
+        let y = e.pageY
+        let info = document.createElement('div')
+        info.setAttribute('class', 'showDesc')
+        info.style['background-color'] = 'rgba(225, 223, 223, 0.9)'
+        info.style['border'] = 'rgba(20, 20, 20, .9) 1px solid'
+        info.style['padding'] = '10px'
+        info.style['border-radius'] = '5px'
+        info.style['width'] = '200px'
+        // info.style['height'] = '200px'
+        info.style['position'] = 'absolute'
+        info.style['top'] = `${y-30}px`
+        info.style['left'] = `${x}px`
+        let name = el.getAttribute('name')
+        let text
+        if (name === 'chantail') {
+          text = '提供訂單搜尋工具，比對訂購清單與物流紀錄，以確認廠商是否出貨。'
+        } else if (name === 'cctv') {
+          text = '上傳CCTV拍攝的影像，可於頁面上瀏覽並直接提供能見度分級，並輸出分級結果。亦可直接上傳分級表，可以圖示展示分級之結果'
+        } else if (name === 'sstDisp') {
+          text = '提供歷史海溫資料以查詢海溫的分佈特徵，並可自行選擇範圍後取得特定區域面積平均的海溫時序變化。'
+        } else if (name === 'airCond') {
+          text = '（未完成）介接環保署空品資料，可直接於本系統內查詢歷史空品與即時空品資料。'
+        } else {
+          text = '尚未建立說明'
+        }
+        info.textContent = text
+
+
+        // info.style['height'] = '2px'
+
+        document.querySelector('.hc').append(info)
+      })
+      el.addEventListener('mousemove', (e) => {
+        let elem = document.querySelector('.showDesc')
+        if (elem) {
+          elem.remove()
+        }
+
+      })
+    })
   </script>
 </body>
 
