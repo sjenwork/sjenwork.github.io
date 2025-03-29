@@ -1,0 +1,794 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary: #7928CA;
+    --secondary: #FF0080;
+    --dark-bg: #0f0f1a;
+    --dark-bg-rgb: 15, 15, 26;
+    --medium-bg: #1a1a2e;
+    --light-bg: #262640;
+    --text: #e0e0e0;
+    --accent: #00ffcc;
+    --gradient-1: linear-gradient(45deg, var(--primary), var(--secondary));
+    --gradient-2: linear-gradient(135deg, var(--accent), var(--primary));
+    --transition-speed: 0.5s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text);
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 25% 10%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 75% 90%, rgba(255, 0, 128, 0.15) 0%, transparent 40%);
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* 添加一个全局背景层，替代每个slide的重复背景 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="none"/><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="60" cy="40" r="0.8" fill="rgba(255,255,255,0.04)"/><circle cx="120" cy="30" r="1.2" fill="rgba(255,255,255,0.06)"/><circle cx="180" cy="80" r="0.7" fill="rgba(255,255,255,0.05)"/><circle cx="240" cy="25" r="1" fill="rgba(255,255,255,0.04)"/><circle cx="320" cy="60" r="0.9" fill="rgba(255,255,255,0.06)"/><circle cx="380" cy="120" r="1.1" fill="rgba(255,255,255,0.05)"/><circle cx="280" cy="160" r="0.7" fill="rgba(255,255,255,0.04)"/><circle cx="360" cy="220" r="1" fill="rgba(255,255,255,0.06)"/><circle cx="380" cy="320" r="0.8" fill="rgba(255,255,255,0.05)"/><circle cx="260" cy="340" r="1.2" fill="rgba(255,255,255,0.04)"/><circle cx="160" cy="380" r="0.9" fill="rgba(255,255,255,0.06)"/><circle cx="80" cy="320" r="1.1" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="240" r="0.8" fill="rgba(255,255,255,0.04)"/><circle cx="90" cy="180" r="1" fill="rgba(255,255,255,0.06)"/></svg>');
+    background-size: 600px 600px;
+    opacity: 0.15;
+    z-index: -1;
+    filter: blur(1.5px);
+}
+
+.presentation-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.slide {
+    min-height: 100vh;
+    max-height: 100vh; /* 限制最大高度为一个屏幕 */
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    transform: none;
+}
+
+.content {
+    max-width: 1200px;
+    width: 100%;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-height: 85vh; /* 限制内容最大高度 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 添加内容区域的滚动样式 */
+.content-scrollable {
+    overflow-y: auto;
+    flex: 1;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--medium-bg);
+    padding-right: 10px; /* 为滚动条留出空间 */
+    min-height: 200px;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain; /* 防止过度滚动 */
+}
+
+/* 自定义滚动条样式 */
+.content-scrollable::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-scrollable::-webkit-scrollbar-track {
+    background: var(--medium-bg);
+    border-radius: 10px;
+}
+
+.content-scrollable::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+.content-scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* 保持标题固定 */
+.content-title {
+    margin-bottom: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding-bottom: 0.5rem;
+    background: rgba(26, 26, 46, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content-title h2 {
+    margin-bottom: 0.5rem;
+}
+
+/* 移除每个slide的重复背景伪元素 */
+.slide::before {
+    content: none;
+}
+
+/* 为每个slide添加一个淡淡的渐变遮罩 */
+.slide {
+    position: relative;
+}
+
+.slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(var(--dark-bg-rgb), 0) 0%, rgba(var(--dark-bg-rgb), 0.2) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+h1, h2, h3, h4 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+h2 {
+    font-size: 2.5rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    color: var(--accent);
+}
+
+h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Title Slide */
+.title-slide {
+    background-image: radial-gradient(circle at center, rgba(121, 40, 202, 0.25) 0%, rgba(15, 15, 26, 0) 70%);
+}
+
+.title-slide .content {
+    text-align: center;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    max-height: none;
+    overflow: visible;
+}
+
+/* 标题容器，用于重叠效果 */
+.title-container {
+    position: relative;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 5.5rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2; /* 确保标题在装饰之上 */
+    text-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+}
+
+.title::after {
+    content: 'AI Agent';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    text-shadow: 0 0 20px var(--primary);
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.decoration {
+    width: 350px;
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-image: conic-gradient(from 0deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+    filter: blur(50px);
+    opacity: 0.6;
+    animation: rotate 20s linear infinite;
+    z-index: 1; /* 确保装饰在标题下方 */
+}
+
+/* 简报者信息样式 */
+.presenter-info {
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-out forwards;
+    opacity: 0;
+    animation-delay: 1.5s;
+}
+
+.presenter-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.presenter-title {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 5px;
+}
+
+.presenter-date {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Basics Slide */
+.two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.examples {
+    margin-top: 1.5rem;
+    background: rgba(38, 38, 64, 0.5);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent);
+}
+
+.examples ul {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.examples li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.examples li::before {
+    content: '•';
+    color: var(--accent);
+    position: absolute;
+    left: -1rem;
+}
+
+/* What is AI Agent Slide */
+.feature-list {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.feature-list li {
+    background: var(--light-bg);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    will-change: transform; /* 优化性能 */
+}
+
+.feature-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.feature-name {
+    font-weight: 700;
+    color: #fff;
+}
+
+.feature-en {
+    margin-left: 0.5rem;
+    opacity: 0.7;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.feature-list li::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* AI Levels Slide */
+.level-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
+.level {
+    background: var(--medium-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid transparent;
+    transition: transform 0.3s;
+}
+
+.level:hover {
+    transform: translateX(10px);
+}
+
+.level-1 {
+    border-left-color: #4fc3f7;
+}
+
+.level-2 {
+    border-left-color: #7c4dff;
+}
+
+.level-3 {
+    border-left-color: #ff4081;
+}
+
+.level-4 {
+    border-left-color: #ff9100;
+}
+
+.level h3 {
+    margin-bottom: 0.8rem;
+}
+
+.level .en {
+    opacity: 0.7;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.summary {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Types Slide */
+.types-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
+.type {
+    background: var(--medium-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.type:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.type h3 {
+    padding: 1rem;
+    background: var(--gradient-1);
+    color: white;
+    margin-bottom: 0;
+}
+
+.type-content {
+    padding: 1.5rem;
+}
+
+/* Examples Slide */
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
+.example-card {
+    background: var(--medium-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.example-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.example-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--gradient-1);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    background: var(--light-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+/* Core Principles Slide */
+.components-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
+.component {
+    background: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.component:hover {
+    transform: translateY(-5px);
+}
+
+.workflow-diagram {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
+.workflow-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--light-bg);
+    padding: 1rem;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.workflow-step:hover {
+    transform: translateX(10px);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.step-content h4 {
+    margin-bottom: 0.3rem;
+}
+
+.step-content p {
+    margin-bottom: 0;
+    opacity: 0.8;
+}
+
+/* RAG Slide */
+.rag-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
+.what-is-rag, .application {
+    background: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.importance-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
+.point {
+    background: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--accent);
+    transition: transform 0.3s;
+}
+
+.point:hover {
+    transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .two-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .content {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation-specific styles */
+.slide {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Add parallax elements */
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.parallax-element {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0.2;
+}
+
+.glow-effect {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: var(--gradient-1);
+    filter: blur(80px);
+    opacity: 0.2;
+    transition: transform 0.5s ease;
+}
+
+.floating-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.2;
+    transition: transform 0.3s ease;
+}
+
+/* 修复导航点层级 */
+.scroll-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 键盘导航提示样式 */
+.keyboard-hint {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+    animation: pulse 2s infinite alternate;
+}
+
+.keyboard-hint p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 触摸导航区域 */
+.touch-nav-area {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 15%;
+    z-index: 90;
+    cursor: pointer;
+}
+
+.left-nav {
+    left: 0;
+}
+
+.right-nav {
+    right: 0;
+}
+
+/* 触摸指示器 */
+.touch-indicator {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 95;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* 不拦截点击事件 */
+}
+
+.touch-indicator.left {
+    left: 20px;
+}
+
+.touch-indicator.right {
+    right: 20px;
+}
+
+.touch-indicator span {
+    font-size: 14px;
+}
+
+/* 在首页提示触摸导航 */
+.keyboard-hint p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 确保内容区域在移动设备上能正常滚动 */
+@media (max-width: 768px) {
+    .content {
+        max-height: 80vh; /* 在移动设备上稍微减小高度 */
+        padding: 1.2rem;
+    }
+    
+    .content-scrollable {
+        -webkit-overflow-scrolling: touch; /* 平滑滚动在iOS上 */
+    }
+    
+    .touch-nav-area {
+        width: 20%; /* 在小屏幕上增加触摸区域宽度 */
+    }
+} 
