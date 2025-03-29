@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent 简报</title>
+    <title>AI Agent 簡報</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -249,40 +249,116 @@
                 <div class="rag-content">
                     <div class="what-is-rag">
                         <h3>什麼是 RAG?</h3>
-                        <p>RAG 是一種讓 LLM 在生成回答<strong>之前</strong>，先從外部知識庫中<strong>檢索 (Retrieve)</strong> 相關資訊，並將這些資訊<strong>融入 (Augmented)</strong> 到其提示 (Prompt) 中的技術。</p>
+                        <p>RAG 是一種將<strong>檢索系統</strong>與<strong>文本生成模型</strong>結合的方法。系統在回應查詢時，不僅依賴 LLM 的參數知識，還會從外部知識庫檢索相關資訊來提供更精確、更新和可靠的回答。</p>
                     </div>
-                    
-                    <div class="why-important">
-                        <h3>為何對 AI Agent 至關重要?</h3>
-                        <div class="importance-points">
-                            <div class="point">
-                                <h4>提供即時性</h4>
-                                <p>LLM 的訓練數據是靜態的，RAG 可以讓 Agent 獲取最新的資訊。</p>
-                            </div>
-                            <div class="point">
-                                <h4>提供專業性/私有性</h4>
-                                <p>Agent 可以查詢特定的、私有的或領域專精的資料庫，這是通用 LLM 所不具備的。</p>
-                            </div>
-                            <div class="point">
-                                <h4>提高準確性/減少幻覺</h4>
-                                <p>將相關的、真實的資料提供給 LLM，可以讓 Agent 的回答更有依據，減少胡亂編造的可能性。</p>
-                            </div>
-                            <div class="point">
-                                <h4>降低成本/複雜度</h4>
-                                <p>相比於微調 (Fine-tuning) 整個 LLM，RAG 通常更容易實現和維護，特別是當知識需要頻繁更新時。</p>
-                            </div>
+                    <div class="why-rag">
+                        <h3>為什麼 AI Agent 需要 RAG?</h3>
+                        <ul class="point-list">
+                            <li class="point">
+                                <h4>最新資訊</h4>
+                                <p>LLM 訓練數據有時間截點，RAG 可提供最新知識</p>
+                            </li>
+                            <li class="point">
+                                <h4>專業領域知識</h4>
+                                <p>提供特定領域的深度知識，如法律、醫療、金融等</p>
+                            </li>
+                            <li class="point">
+                                <h4>減少幻覺 (Hallucination)</h4>
+                                <p>有實際資料做參考，減少 AI "編造" 答案的可能</p>
+                            </li>
+                            <li class="point">
+                                <h4>可引用來源</h4>
+                                <p>可以提供信息來源，增加透明度與可信度</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" id="applications">
+            <div class="content">
+                <h2>8. AI Agent 的應用與影響</h2>
+                <div class="applications-content">
+                    <div class="applications">
+                        <div class="application">
+                            <h4>企業應用</h4>
+                            <p>自動化客戶服務、智能市場分析、自動軟體開發與測試、財務報告生成與分析、智能招聘系統。</p>
+                        </div>
+                        <div class="application">
+                            <h4>個人應用</h4>
+                            <p>個人生產力輔助、自動學習輔助系統、智能家居控制、健康追蹤與建議、智能財務規劃。</p>
+                        </div>
+                        <div class="application">
+                            <h4>教育應用</h4>
+                            <p>個人化學習內容、智能輔導系統、自動評分與反饋、教育遊戲 NPCs。</p>
+                        </div>
+                        <div class="application">
+                            <h4>醫療應用</h4>
+                            <p>醫療診斷輔助、醫療數據分析、文獻研究助手、患者健康管理。</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" id="future">
+            <div class="content">
+                <h2>9. AI Agent 的未來發展方向</h2>
+                <div class="future-content">
+                    <h3>短期趨勢 (1-2年)</h3>
+                    <ul>
+                        <li>更強大的工具使用能力，特別是對特定領域工具的精確操作</li>
+                        <li>更好的長期記憶與上下文理解</li>
+                        <li>更完善的自主反思與自我糾錯能力</li>
+                        <li>嵌入業務應用和系統的專門化Agent</li>
+                    </ul>
                     
-                    <div class="application">
-                        <h3>在 Agent 中的應用</h3>
-                        <p>Agent 在「思考與規劃」階段，可以利用 RAG 從指定的知識庫 (如產品文件、客戶資料庫、歷史工單) 中檢索信息，以便更準確地理解問題、選擇工具或生成回答。</p>
+                    <h3>中期趨勢 (3-5年)</h3>
+                    <ul>
+                        <li>多Agent協作系統，形成"Agent團隊"</li>
+                        <li>與現實世界的更深度交互（機器人、IoT設備）</li>
+                        <li>擁有持續學習能力的永久Agent</li>
+                        <li>更安全、符合道德規範的Agent系統</li>
+                    </ul>
+                    
+                    <h3>挑戰與機遇</h3>
+                    <ul>
+                        <li>安全性與控制 - 確保Agent行為符合人類預期</li>
+                        <li>隱私保護 - 處理敏感數據時的安全措施</li>
+                        <li>互操作性 - 不同系統間的標準與整合</li>
+                        <li>商業模式 - 新型Agent服務的可持續發展模式</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" id="summary">
+            <div class="content">
+                <h2>10. 總結：智能代理新時代</h2>
+                <div class="summary-content">
+                    <h3>AI Agent的核心價值</h3>
+                    <div class="value-proposition">
+                        <p>在資訊爆炸和任務複雜化的今天，AI Agent提供了一種新的人機協作模式：</p>
+                        <ul>
+                            <li><strong>任務自動化</strong>：將重複、繁瑣的工作交給AI處理</li>
+                            <li><strong>能力增強</strong>：將人類創意與AI執行力結合</li>
+                            <li><strong>資訊處理</strong>：幫助過濾、整合和分析海量資訊</li>
+                            <li><strong>決策輔助</strong>：提供基於數據和分析的決策建議</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>未來展望</h3>
+                    <p>AI Agent 將逐漸從"工具"進化為"助手"，再成為"合作夥伴"。它們將深度融入我們的工作與生活，重新定義人類與技術的互動方式。</p>
+                    
+                    <div class="thanks">
+                        <h3>謝謝！</h3>
+                        <p>歡迎提問與交流</p>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html> 
