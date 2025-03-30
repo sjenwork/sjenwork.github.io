@@ -1818,3 +1818,149 @@ strong {
         grid-template-columns: 1fr;
     }
 }
+
+/* FlowiseAI 特別展示區域 */
+.highlight-tool {
+    color: #FF0080;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 0, 128, 0.3);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    padding: 0 4px;
+}
+
+.flowise-showcase {
+    margin: 15px 0;
+    background: rgba(11, 11, 25, 0.5);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid rgba(255, 0, 128, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.flowise-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.flowise-info p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.flowise-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.flowise-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    color: white;
+    text-decoration: none;
+}
+
+.flowise-link.website {
+    background: linear-gradient(45deg, #7928CA, #9F5AE5);
+}
+
+.flowise-link.video {
+    background: linear-gradient(45deg, #FF0080, #FF5CAA);
+}
+
+.flowise-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.link-icon {
+    font-size: 1.1rem;
+}
+
+/* 視頻模態框 */
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.video-modal.active .video-container {
+    transform: scale(1);
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 2001;
+}
+
+.video-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+@media (max-width: 768px) {
+    .flowise-links {
+        flex-direction: column;
+    }
+}

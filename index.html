@@ -126,7 +126,22 @@
                     <div class="type type-b">
                         <h3>B. 複雜工作流程自動化 / 任務輔助 <span class="en">(AI-Assisted Automation)</span></h3>
                         <div class="type-content">
-                            <p><strong>工具範例:</strong> LangChain, LangGraph, Assistants API (OpenAI), LangFlow, Flowise</p>
+                            <p><strong>工具範例:</strong> LangChain, LangGraph, Assistants API (OpenAI), LangFlow, <span class="highlight-tool">FlowiseAI</span></p>
+                            <div class="flowise-showcase">
+                                <div class="flowise-info">
+                                    <p>FlowiseAI 是一個開源的低程式碼工具，可用於構建自定義LLM流程與AI代理人。透過直觀的拖拉式界面，您可以快速創建複雜的AI應用。</p>
+                                    <div class="flowise-links">
+                                        <a href="https://flowiseai.com/" target="_blank" class="flowise-link website">
+                                            <span class="link-icon">🌐</span>
+                                            <span class="link-text">訪問官方網站</span>
+                                        </a>
+                                        <button class="flowise-link video" id="showVideoBtn">
+                                            <span class="link-icon">▶️</span>
+                                            <span class="link-text">觀看演示視頻</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             <p><strong>特點:</strong> 利用 AI (特別是 LLM) 的理解和推理能力，處理<strong>更動態、更複雜</strong>的任務。需要 AI 進行判斷、選擇工具或生成內容。</p>
                             <p><strong>AI 參與程度:</strong> 中到高，AI 參與決策和執行流程。</p>
                         </div>
@@ -465,6 +480,17 @@
             <h3 class="workflow-zoom-title">AI 輔助型郵件處理工作流程</h3>
             <canvas id="workflowZoomCanvas" class="workflow-zoom-canvas"></canvas>
             <div class="workflow-zoom-note">人工設計節點、指定連接方式、設定處理邏輯</div>
+        </div>
+    </div>
+
+    <!-- FlowiseAI視頻模態框 -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <div class="video-close" id="videoClose">✕</div>
+            <video id="flowiseVideo" controls>
+                <source src="./FlowiseAI_demo.mp4" type="video/mp4">
+                您的瀏覽器不支持視頻標籤。
+            </video>
         </div>
     </div>
 </body>

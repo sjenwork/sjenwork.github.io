@@ -1103,4 +1103,62 @@ window.addEventListener('resize', () => {
         zoomOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
+});
+
+// FlowiseAI 視頻模態框功能
+function initFlowiseVideoModal() {
+    const showVideoBtn = document.getElementById('showVideoBtn');
+    const videoModal = document.getElementById('videoModal');
+    const videoClose = document.getElementById('videoClose');
+    const flowiseVideo = document.getElementById('flowiseVideo');
+    
+    if (!showVideoBtn || !videoModal || !videoClose || !flowiseVideo) return;
+    
+    // 打開視頻模態框
+    showVideoBtn.addEventListener('click', () => {
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 防止背景滾動
+        
+        // 嘗試播放視頻
+        try {
+            flowiseVideo.play();
+        } catch (e) {
+            console.log('視頻自動播放失敗，需要用戶手動點擊播放');
+        }
+    });
+    
+    // 關閉視頻模態框
+    videoClose.addEventListener('click', () => {
+        closeVideoModal();
+    });
+    
+    // 點擊背景關閉模態框
+    videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+            closeVideoModal();
+        }
+    });
+    
+    // ESC 鍵關閉模態框
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+            closeVideoModal();
+        }
+    });
+    
+    // 關閉模態框並暫停視頻
+    function closeVideoModal() {
+        videoModal.classList.remove('active');
+        document.body.style.overflow = ''; // 恢復背景滾動
+        flowiseVideo.pause(); // 暫停視頻
+    }
+}
+
+// 初始化所有功能
+document.addEventListener('DOMContentLoaded', function() {
+    initSlideNavigation();
+    initParallaxEffect();
+    initTimelinePanel();
+    initWorkflowCanvas();
+    initFlowiseVideoModal(); // 添加FlowiseAI視頻模態框功能
 }); 
