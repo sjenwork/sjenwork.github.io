@@ -441,6 +441,41 @@ body {
     color: var(--tertiary-accent);
 }
 
+/* 影響列表樣式 */
+.impact-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.impact-list li {
+    position: relative;
+    padding: 0px 0 8px 25px;
+    margin-bottom: 12px;
+    line-height: 1;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.impact-list li:hover {
+    transform: translateX(5px);
+}
+
+.impact-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-accent);
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+.impact-list li strong {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
 /* 滾動導航 */
 .scroll-nav {
     position: fixed;
@@ -1005,6 +1040,13 @@ strong {
     opacity: 0.8;
 }
 
+.future-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-right: 5px; /* 为滚动条预留空间 */
+}
+
 /* RAG Slide */
 .rag-content {
     display: flex;
@@ -1027,6 +1069,9 @@ strong {
     padding-right: 5px; /* 为滚动条预留空间 */
 }
 
+li.point {
+    list-style-type: none;
+}
 .point {
     margin-bottom: 1rem;
     background: var(--light-bg);
@@ -1963,4 +2008,354 @@ strong {
     .flowise-links {
         flex-direction: column;
     }
+}
+
+/* MCP頁面樣式 */
+.mcp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.mcp-intro {
+    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.mcp-benefits h3, .mcp-architecture h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: var(--secondary-accent);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.benefit-card {
+    background: rgba(30, 30, 58, 0.5);
+    border-radius: 10px;
+    padding: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(42, 42, 82, 0.5);
+}
+
+.benefit-icon {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+    opacity: 0.85;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* 標準化接口 */
+.benefit-icon.memory {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238A35FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z'/%3E%3C/svg%3E");
+}
+
+/* 安全性與數據保護 */
+.benefit-icon.retrieval {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238A35FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'/%3E%3C/svg%3E");
+}
+
+/* 靈活的擴展性 */
+.benefit-icon.reasoning {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238A35FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z'/%3E%3C/svg%3E");
+}
+
+/* 即時上下文獲取 */
+.benefit-icon.efficiency {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238A35FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 10V3L4 14h7v7l9-11h-7z'/%3E%3C/svg%3E");
+}
+
+.benefit-card h4 {
+    color: var(--info);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.benefit-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.architecture-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    background: rgba(18, 18, 40, 0.5);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.arch-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 120px;
+}
+
+.node-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.node-title {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.arch-arrow {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin: 0 5px;
+}
+
+.mcp-future {
+    background: rgba(18, 18, 40, 0.6);
+    border-radius: 12px;
+    padding: 16px;
+    border-left: 3px solid var(--secondary);
+    margin-top: 10px;
+}
+
+.mcp-future p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .architecture-diagram {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .arch-arrow {
+        transform: rotate(90deg);
+        margin: 5px 0;
+    }
+}
+
+/* MCP 圖像展示區 */
+.mcp-image-showcase {
+    margin: 50px auto;
+    width: 100%;
+    max-width: 900px;
+    perspective: 1000px;
+}
+
+.mcp-image-container {
+    position: relative;
+    padding-top: 56.25%; /* 16:9比例 */
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(25,32,72,0.7) 0%, rgba(47,83,162,0.5) 100%);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 50px rgba(80,120,255,0.3);
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.mcp-image-container:hover {
+    transform: translateY(-5px) rotateX(5deg);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 60px rgba(80,120,255,0.4);
+}
+
+.mcp-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 2;
+    padding: 20px;
+}
+
+.mcp-image-container:hover .mcp-image {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.mcp-image-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(100,150,255,0.2) 0%, transparent 70%);
+    z-index: 1;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+}
+
+.mcp-image-container:hover .mcp-image-glow {
+    opacity: 0.8;
+}
+
+.mcp-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(20,30,80,0.2) 0%, rgba(10,20,40,0.3) 100%);
+    z-index: 3;
+    mix-blend-mode: overlay;
+}
+
+.mcp-image-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(100,150,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,150,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 3;
+    opacity: 0.3;
+    transition: opacity 0.5s ease;
+}
+
+.mcp-image-container:hover .mcp-image-grid {
+    opacity: 0.5;
+}
+
+.mcp-image-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.mcp-particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(150,200,255,0.6);
+    box-shadow: 0 0 10px rgba(150,200,255,0.8);
+    bottom: -10px;
+    animation: mcp-particle-float 15s infinite linear;
+}
+
+@keyframes mcp-particle-float {
+    0% {
+        transform: translateY(100%) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100%) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.mcp-image-caption {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 12px;
+    color: rgba(200,220,255,0.8);
+    font-style: italic;
+    z-index: 5;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .mcp-image-showcase {
+        margin: 30px auto;
+    }
+    
+    .mcp-image-container {
+        padding-top: 75%; /* 移動設備上更方便查看的比例 */
+    }
+    
+    .mcp-image-grid {
+        background-size: 15px 15px;
+    }
+}
+
+/* MCP的核心特點樣式 */
+
+/* MCP新聞區域樣式 */
+.mcp-news {
+    margin-top: 30px;
+}
+
+.mcp-news h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.benefit-icon.news {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238A35FF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1M19 8l-7 5-7-5m14 6a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h7a2 2 0 012 2v2M9 21h6'/%3E%3C/svg%3E");
+}
+
+.mcp-image-caption a {
+    color: rgba(200,220,255,0.9);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.mcp-image-caption a:hover {
+    color: #fff;
+    text-decoration: underline;
 }

@@ -109,23 +109,23 @@
                     <div class="type type-a">
                         <h3>A. 基礎工作流程自動化 <span class="en">(Rule-Based Automation)</span></h3>
                         <div class="type-content">
-                            <p><strong>工具範例:</strong> Zapier, Make, n8n</p>
-                            <div class="workflow-diagram-simple">
-                                <div class="trigger-node">觸發事件<small>新郵件</small></div>
-                                <div class="arrow">→</div>
-                                <div class="condition-node">條件<small>IF 包含關鍵字</small></div>
-                                <div class="arrow">→</div>
-                                <div class="action-node">動作<small>添加待辦事項</small></div>
-                            </div>
                             <p><strong>特點:</strong> 通常基於<strong>預先定義好的規則和流程 (If This Then That)</strong>。使用者設定好觸發條件和對應的操作。</p>
+                            <div class="workflow-diagram-simple">
+                                <div class="trigger-node">觸發事件</div>
+                                <div class="arrow">→</div>
+                                <div class="condition-node">條件</div>
+                                <div class="arrow">→</div>
+                                <div class="action-node">動作</div>
+                            </div>
+                            <p><strong>工具範例:</strong> Zapier, Make, n8n</p>
                             <p><strong>AI 參與程度:</strong> 較低，主要依賴設定好的邏輯。</p>
-                            <p class="reference"><a href="https://www.youtube.com/watch?v=3yuWjI9gKZU" target="_blank">參考資料 <i class="reference-icon">↗</i></a></p>
                             <button class="case-study-btn" id="showTimelineBtn">查看郵件處理自動化案例展示</button>
                         </div>
                     </div>
                     <div class="type type-b">
                         <h3>B. 複雜工作流程自動化 / 任務輔助 <span class="en">(AI-Assisted Automation)</span></h3>
                         <div class="type-content">
+                            <p><strong>特點:</strong> 利用 AI (特別是 LLM) 的理解和推理能力，處理<strong>更動態、更複雜</strong>的任務。需要 AI 進行判斷、選擇工具或生成內容。</p>
                             <p><strong>工具範例:</strong> LangChain, LangGraph, Assistants API (OpenAI), LangFlow, <span class="highlight-tool">FlowiseAI</span></p>
                             <div class="flowise-showcase">
                                 <div class="flowise-info">
@@ -135,14 +135,9 @@
                                             <span class="link-icon">🌐</span>
                                             <span class="link-text">訪問官方網站</span>
                                         </a>
-                                        <button class="flowise-link video" id="showVideoBtn">
-                                            <span class="link-icon">▶️</span>
-                                            <span class="link-text">觀看演示視頻</span>
-                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <p><strong>特點:</strong> 利用 AI (特別是 LLM) 的理解和推理能力，處理<strong>更動態、更複雜</strong>的任務。需要 AI 進行判斷、選擇工具或生成內容。</p>
                             <p><strong>AI 參與程度:</strong> 中到高，AI 參與決策和執行流程。</p>
                         </div>
                     </div>
@@ -272,9 +267,11 @@
             <div class="content">
                 <h2>7. 專業知識的重要性：RAG <br/> (Retrieval-Augmented Generation)</h2>
                 <div class="rag-content">
-                    <div class="what-is-rag">
+                    <div>
                         <h3>什麼是 RAG?</h3>
-                        <p>RAG 是一種將<strong>檢索系統</strong>與<strong>文本生成模型</strong>結合的方法。系統在回應查詢時，不僅依賴 LLM 的參數知識，還會從外部知識庫檢索相關資訊來提供更精確、更新和可靠的回答。</p>
+                        <div class="point">
+                            <p>RAG 是一種將<strong>檢索系統</strong>與<strong>文本生成模型</strong>結合的方法。系統在回應查詢時，不僅依賴 LLM 的參數知識，還會從外部知識庫檢索相關資訊來提供更精確、更新和可靠的回答。</p>
+                        </div>
                     </div>
                     <div class="why-rag">
                         <h3>為什麼 AI Agent 需要 RAG?</h3>
@@ -307,53 +304,121 @@
                 <div class="applications-content">
                     <div class="applications">
                         <div class="application">
-                            <h4>企業應用</h4>
-                            <p>自動化客戶服務、智能市場分析、自動軟體開發與測試、財務報告生成與分析、智能招聘系統。</p>
+                            <h4>個人</h4>
+                            <ul class="impact-list">
+                                <li>減少<strong>重複性質工作</strong>，將精力應用在<strong>關鍵事物</strong>上</li>
+                                <li><strong>資訊取得效率</strong>顯著提升，<strong>學習成本</strong>大幅降低</li>
+                                <li>學習重點改變，<strong>架構組織能力</strong>重要性提升，技術專業度相對重要性下降</li>
+                                <li>面對<strong>資訊過載</strong>，需要培養更強大的<strong>資訊篩選能力</strong></li>
+                                <li>對資訊<strong>真實性</strong>、<strong>正確性</strong>、<strong>時效性</strong>的要求提升</li>
+                            </ul>
                         </div>
                         <div class="application">
-                            <h4>個人應用</h4>
-                            <p>個人生產力輔助、自動學習輔助系統、智能家居控制、健康追蹤與建議、智能財務規劃。</p>
-                        </div>
-                        <div class="application">
-                            <h4>教育應用</h4>
-                            <p>個人化學習內容、智能輔導系統、自動評分與反饋、教育遊戲 NPCs。</p>
-                        </div>
-                        <div class="application">
-                            <h4>醫療應用</h4>
-                            <p>醫療診斷輔助、醫療數據分析、文獻研究助手、患者健康管理。</p>
+                            <h4>企業</h4>
+                            <ul class="impact-list">
+                                <li><strong>自動化</strong>繁瑣事項，提升<strong>管理效率</strong>與<strong>決策品質</strong></li>
+                                <li>釋放管理者時間，專注於<strong>策略規劃</strong>與<strong>人才培養</strong></li>
+                                <li>提供<strong>即時分析</strong>和<strong>多維度洞察</strong>，協助管理者全面觀察與分析</li>
+                                <li>降低<strong>關鍵人才風險</strong>，減少對特定員工的過度依賴</li>
+                                <li>創造<strong>競爭優勢</strong>，提升業務<strong>創新能力</strong>與<strong>市場適應力</strong></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="slide" id="future">
+        <section class="slide" id="mcp">
             <div class="content">
-                <h2>9. AI Agent 的未來發展方向</h2>
-                <div class="future-content">
-                    <h3>短期趨勢 (1-2年)</h3>
-                    <ul>
-                        <li>更強大的工具使用能力，特別是對特定領域工具的精確操作</li>
-                        <li>更好的長期記憶與上下文理解</li>
-                        <li>更完善的自主反思與自我糾錯能力</li>
-                        <li>嵌入業務應用和系統的專門化Agent</li>
-                    </ul>
+                <h2>9. AI Agent 發展關鍵： <br/>Model Context Protocol（MCP）</h2>
+                <div class="mcp-container">
+                    <div class="mcp-intro">
+                        <p>MCP（模型上下文協議，Model Context Protocol）是一種由Anthropic於2024年11月推出的開放標準，旨在促進大型語言模型（LLM）與外部數據源和工具之間的無縫通信。這一協議的核心目的是解決當前AI模型因數據孤島而無法充分發揮潛力的問題，從而提升AI應用的效率和靈活性。</p>
+                    </div>
                     
-                    <h3>中期趨勢 (3-5年)</h3>
-                    <ul>
-                        <li>多Agent協作系統，形成"Agent團隊"</li>
-                        <li>與現實世界的更深度交互（機器人、IoT設備）</li>
-                        <li>擁有持續學習能力的永久Agent</li>
-                        <li>更安全、符合道德規範的Agent系統</li>
-                    </ul>
+                    <div class="mcp-image-showcase">
+                        <div class="mcp-image-container">
+                            <div class="mcp-image-glow"></div>
+                            <img src="MCP.png" alt="Model Context Protocol架構圖" class="mcp-image">
+                            <div class="mcp-image-overlay"></div>
+                            <div class="mcp-image-grid"></div>
+                            <div class="mcp-image-particles">
+                                <div class="mcp-particle" style="left:15%; animation-delay: 0s;"></div>
+                                <div class="mcp-particle" style="left:35%; animation-delay: 2s;"></div>
+                                <div class="mcp-particle" style="left:55%; animation-delay: 1s;"></div>
+                                <div class="mcp-particle" style="left:75%; animation-delay: 3s;"></div>
+                                <div class="mcp-particle" style="left:25%; animation-delay: 2.5s;"></div>
+                                <div class="mcp-particle" style="left:65%; animation-delay: 4s;"></div>
+                                <div class="mcp-particle" style="left:85%; animation-delay: 1.5s;"></div>
+                            </div>
+                            <div class="mcp-image-caption">Anthropic© Model Context Protocol | <a href="https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/" target="_blank">來源：Norah Sakal</a></div>
+                        </div>
+                    </div>
                     
-                    <h3>挑戰與機遇</h3>
-                    <ul>
-                        <li>安全性與控制 - 確保Agent行為符合人類預期</li>
-                        <li>隱私保護 - 處理敏感數據時的安全措施</li>
-                        <li>互操作性 - 不同系統間的標準與整合</li>
-                        <li>商業模式 - 新型Agent服務的可持續發展模式</li>
-                    </ul>
+                    <div class="mcp-benefits">
+                        <h3>MCP 的主要特點</h3>
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon memory"></div>
+                                <h4>標準化接口</h4>
+                                <p>提供統一接口，使不同的AI模型能夠輕鬆訪問各種外部資源，如數據庫、API和文件系統，簡化開發過程。</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon retrieval"></div>
+                                <h4>安全性與數據保護</h4>
+                                <p>標準化的數據訪問接口減少直接接觸敏感數據的風險，內置安全機制確保只有授權請求才能訪問特定資源。</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon reasoning"></div>
+                                <h4>靈活的擴展性</h4>
+                                <p>支持插件式擴展，開發者可以通過新增MCP Server來接入新功能，使系統能夠根據需求靈活調整。</p>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon efficiency"></div>
+                                <h4>即時上下文獲取</h4>
+                                <p>允許AI模型在執行任務時實時獲取相關上下文信息，生成更準確和相關的回應，提升用戶體驗。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mcp-architecture">
+                        <h3>MCP 架構組成</h3>
+                        <div class="architecture-diagram">
+                            <div class="arch-node">
+                                <div class="node-circle">1</div>
+                                <div class="node-title">AI模型</div>
+                            </div>
+                            <div class="arch-arrow">→</div>
+                            <div class="arch-node">
+                                <div class="node-circle">2</div>
+                                <div class="node-title">MCP Client</div>
+                            </div>
+                            <div class="arch-arrow">→</div>
+                            <div class="arch-node">
+                                <div class="node-circle">3</div>
+                                <div class="node-title">MCP Server</div>
+                            </div>
+                            <div class="arch-arrow">→</div>
+                            <div class="arch-node">
+                                <div class="node-circle">4</div>
+                                <div class="node-title">外部數據源</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mcp-future">
+                        <p><strong>未來展望：</strong> MCP作為一種開放標準，為AI模型提供了一個強大的工具，使其能夠更有效地與外部系統互動，從而提升整體的智能化水平和應用範圍。隨著更多開發者和企業採用MCP，我們將看到更多創新的AI應用出現。</p>
+                    </div>
+                    
+                    <div class="mcp-news">
+                        <h3>產業最新動態</h3>
+                        <div class="benefit-card">
+                            <div class="benefit-icon news"></div>
+                            <h4>OpenAI 採用 Anthropic 的 MCP 標準</h4>
+                            <p>2025年3月，OpenAI宣布將在其產品中採用競爭對手Anthropic開發的Model Context Protocol標準。OpenAI CEO Sam Altman表示：「人們喜歡MCP，我們很高興能在我們的產品中添加支持。」這一決定標誌著MCP正在成為行業標準，為AI模型與數據源和工具的連接提供統一接口。</p>
+                            <p class="reference"><a href="https://techcrunch.com/2025/03/26/openai-adopts-rival-anthropics-standard-for-connecting-ai-models-to-data/" target="_blank">來源：TechCrunch <i class="reference-icon">↗</i></a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
