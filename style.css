@@ -458,54 +458,53 @@ body {
 
 /* 應用點 */
 .applications {
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .application {
     position: relative;
-    margin: 20px 0;
-    padding: 20px;
-    background: var(--light-bg);
-    border-radius: 10px;
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(30, 30, 58, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
 }
 
 .application h4 {
-    color: var(--tertiary-accent);
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 /* 影響列表樣式 */
 .impact-list {
     list-style: none;
     padding: 0;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 
 .impact-list li {
     position: relative;
-    padding: 0px 0 8px 25px;
-    margin-bottom: 12px;
-    line-height: 1;
-    transition: transform 0.3s, background 0.3s;
+    padding: 5px 0 5px 20px;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
 .impact-list li:hover {
-    transform: translateX(5px);
+    transform: none;
 }
 
 .impact-list li::before {
     content: '•';
     position: absolute;
     left: 0;
-    color: var(--secondary-accent);
-    font-size: 1.5em;
-    line-height: 1;
+    color: var(--accent);
+    font-size: 1.2em;
 }
 
 .impact-list li strong {
-    background: var(--gradient-1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
+    color: var(--accent);
+    font-weight: 600;
 }
 
 /* 滾動導航 */
