@@ -629,4 +629,478 @@ function addTouchIndicators() {
 // 檢測是否為移動設備
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-} 
+}
+
+// 時間軸案例展示功能
+document.addEventListener('DOMContentLoaded', function() {
+    const showTimelineBtn = document.getElementById('showTimelineBtn');
+    const timelinePanel = document.getElementById('timelinePanel');
+    const timelineOverlay = document.getElementById('timelineOverlay');
+    const timelinePanelClose = document.getElementById('timelinePanelClose');
+    
+    if (showTimelineBtn && timelinePanel && timelineOverlay && timelinePanelClose) {
+        // 顯示時間軸面板
+        showTimelineBtn.addEventListener('click', function() {
+            timelinePanel.classList.add('active');
+            timelineOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+            
+            // 初始化工作流程 Canvas
+            setTimeout(initWorkflowCanvas, 500);
+        });
+        
+        // 關閉時間軸面板的方法
+        const closeTimelinePanel = function() {
+            timelinePanel.classList.remove('active');
+            timelineOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // 恢復背景滾動
+        };
+        
+        // 點擊關閉按鈕
+        timelinePanelClose.addEventListener('click', closeTimelinePanel);
+        
+        // 點擊遮罩層關閉
+        timelineOverlay.addEventListener('click', closeTimelinePanel);
+        
+        // ESC 鍵關閉
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && timelinePanel.classList.contains('active')) {
+                closeTimelinePanel();
+            }
+        });
+        
+        // 時間軸項目動畫
+        const animateTimelineItems = function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+        };
+        
+        // 初始化時間軸項目樣式
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'all 0.5s ease';
+        });
+        
+        // 打開面板時執行動畫
+        showTimelineBtn.addEventListener('click', function() {
+            setTimeout(animateTimelineItems, 300);
+        });
+        
+        // 處理窗口大小變化
+        window.addEventListener('resize', function() {
+            if (timelinePanel.classList.contains('active')) {
+                initWorkflowCanvas();
+            }
+        });
+    }
+});
+
+// 初始化工作流程 Canvas
+function initWorkflowCanvas() {
+    const canvas = document.getElementById('workflowCanvas');
+    if (!canvas) return;
+    
+    // 高解析度支持 - 適配Retina顯示
+    setupHiDPICanvas(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    
+    // 計算合適的節點位置 - 修改以確保在可見範圍內
+    const centerY = canvas.originalHeight * 0.35; // 稍微往上移動
+    const nodes = [
+        { id: 1, x: canvas.originalWidth * 0.06, y: centerY, radius: 15, color: '#4A5568', text: '收到郵件', type: 'email', description: '新電子郵件' },
+        { id: 2, x: canvas.originalWidth * 0.33, y: centerY, radius: 15, color: '#7928CA', text: 'LLM分析', type: 'ai', description: '解析郵件\n內容與意圖' },
+        { id: 3, x: canvas.originalWidth * 0.60, y: centerY, radius: 15, color: '#7928CA', text: '判斷類型', type: 'ai', description: '郵件分類\n決定處理方式' },
+        { id: 4, x: canvas.originalWidth * 0.87, y: centerY, radius: 15, color: '#0987A0', text: '執行動作', type: 'action', description: '轉發郵件、歸檔\n或生成摘要' }
+    ];
+    
+    // 清空畫布
+    ctx.clearRect(0, 0, canvas.originalWidth, canvas.originalHeight);
+    
+    // 繪製連接線和箭頭
+    for (let i = 0; i < nodes.length - 1; i++) {
+        const startNode = nodes[i];
+        const endNode = nodes[i + 1];
+        drawConnection(ctx, startNode, endNode);
+    }
+    
+    // 繪製節點
+    nodes.forEach((node, index) => {
+        drawNode(ctx, node, index);
+    });
+    
+    // 添加動畫效果
+    animateNodes(ctx, nodes, canvas);
+    
+    // 添加點擊放大功能
+    setupZoomFeature(canvas, nodes);
+}
+
+// 高解析度Canvas設置
+function setupHiDPICanvas(canvas) {
+    // 獲取容器尺寸
+    const container = canvas.parentElement;
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    
+    // 獲取設備像素比
+    const dpr = window.devicePixelRatio || 1;
+    
+    // 設置Canvas顯示尺寸
+    canvas.style.width = containerWidth + 'px';
+    canvas.style.height = containerHeight + 'px';
+    
+    // 設置Canvas繪圖緩衝區尺寸 (更高分辨率)
+    canvas.width = containerWidth * dpr;
+    canvas.height = containerHeight * dpr;
+    
+    // 縮放Canvas上下文以匹配設備像素比
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    
+    // 為後續使用存儲原始尺寸
+    canvas.originalWidth = containerWidth;
+    canvas.originalHeight = containerHeight;
+}
+
+// 繪製節點之間的連接線
+function drawConnection(ctx, startNode, endNode) {
+    ctx.beginPath();
+    
+    // 線條漸變色
+    const gradient = ctx.createLinearGradient(startNode.x, startNode.y, endNode.x, endNode.y);
+    gradient.addColorStop(0, hexToRgba(startNode.color, 0.8));
+    gradient.addColorStop(1, hexToRgba(endNode.color, 0.8));
+    
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 3; // 增加線寬
+    
+    // 計算箭頭點
+    const dx = endNode.x - startNode.x;
+    const dy = endNode.y - startNode.y;
+    const angle = Math.atan2(dy, dx);
+    
+    // 避開節點
+    const startX = startNode.x + (startNode.radius + 3) * Math.cos(angle);
+    const startY = startNode.y + (startNode.radius + 3) * Math.sin(angle);
+    const endX = endNode.x - (endNode.radius + 9) * Math.cos(angle);
+    const endY = endNode.y - (endNode.radius + 9) * Math.sin(angle);
+    
+    // 繪製線條
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+    
+    // 繪製箭頭
+    const arrowSize = 8; // 增大箭頭
+    ctx.beginPath();
+    ctx.fillStyle = hexToRgba(endNode.color, 0.9);
+    ctx.moveTo(endX, endY);
+    ctx.lineTo(
+        endX - arrowSize * Math.cos(angle - Math.PI / 7),
+        endY - arrowSize * Math.sin(angle - Math.PI / 7)
+    );
+    ctx.lineTo(
+        endX - arrowSize * Math.cos(angle + Math.PI / 7),
+        endY - arrowSize * Math.sin(angle + Math.PI / 7)
+    );
+    ctx.closePath();
+    ctx.fill();
+}
+
+// 繪製節點
+function drawNode(ctx, node, index) {
+    // 繪製發光效果
+    const glowRadius = node.radius * 1.8;
+    const gradient = ctx.createRadialGradient(
+        node.x, node.y, node.radius * 0.5,
+        node.x, node.y, glowRadius
+    );
+    gradient.addColorStop(0, hexToRgba(node.color, 0.8));
+    gradient.addColorStop(1, hexToRgba(node.color, 0));
+    
+    ctx.beginPath();
+    ctx.fillStyle = gradient;
+    ctx.arc(node.x, node.y, glowRadius, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // 繪製節點主體
+    ctx.beginPath();
+    ctx.fillStyle = node.color;
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // 繪製節點邊框
+    ctx.beginPath();
+    ctx.strokeStyle = hexToRgba('#ffffff', 0.3);
+    ctx.lineWidth = 2;
+    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // 如果是AI節點，添加特殊標記
+    if (node.type === 'ai') {
+        ctx.beginPath();
+        ctx.fillStyle = '#FF0080';
+        ctx.arc(node.x + node.radius * 0.6, node.y - node.radius * 0.6, node.radius / 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // 添加AI文字
+        ctx.font = 'bold 8px Arial';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('AI', node.x + node.radius * 0.6, node.y - node.radius * 0.6);
+    }
+    
+    // 繪製節點名稱
+    ctx.font = '13px "Noto Sans TC", sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(node.text, node.x, node.y);
+    
+    // 繪製節點描述 (多行文字) - 修改文字位置確保在可見範圍內
+    if (node.description) {
+        drawMultilineText(
+            ctx,
+            node.description,
+            node.x,
+            node.y + node.radius * 1.7, // 減少與節點的距離
+            13,
+            120, // 最大寬度
+            'center',
+            '#ffffff',
+            'rgba(0, 0, 0, 0.3)',
+            8
+        );
+    }
+}
+
+// 多行文字繪製函數
+function drawMultilineText(ctx, text, x, y, lineHeight, maxWidth, align, textColor, bgColor, padding) {
+    const lines = text.split('\n');
+    const totalHeight = lineHeight * lines.length;
+    
+    // 計算背景矩形的尺寸
+    let maxLineWidth = 0;
+    ctx.font = '11px "Noto Sans TC", sans-serif';
+    
+    for (const line of lines) {
+        const lineWidth = ctx.measureText(line).width;
+        if (lineWidth > maxLineWidth) {
+            maxLineWidth = lineWidth;
+        }
+    }
+    
+    // 限制最大寬度
+    maxLineWidth = Math.min(maxLineWidth, maxWidth);
+    
+    // 繪製背景
+    const bgWidth = maxLineWidth + padding * 2;
+    const bgHeight = totalHeight + padding * 2;
+    let bgX = x;
+    
+    if (align === 'center') {
+        bgX = x - bgWidth / 2;
+    } else if (align === 'right') {
+        bgX = x - bgWidth;
+    }
+    
+    // 確保背景在可見範圍內
+    let bgY = y - padding;
+    
+    // 檢查是否超出下邊界，如果是則向上移動
+    const containerHeight = ctx.canvas.originalHeight || ctx.canvas.height;
+    const bottomEdge = bgY + bgHeight;
+    if (bottomEdge > containerHeight - 10) {
+        // 改為在節點上方顯示
+        const nodeRadius = 15; // 使用一個合理的預設值
+        const newBgY = y - bgHeight - nodeRadius * 2;
+        if (newBgY > 10) { // 確保不會超出上邊界
+            bgY = newBgY;
+            y = y - bgHeight - nodeRadius * 2 + padding;
+        }
+    }
+    
+    // 繪製圓角矩形背景
+    ctx.beginPath();
+    ctx.fillStyle = bgColor;
+    ctx.roundRect(bgX, bgY, bgWidth, bgHeight, 5);
+    ctx.fill();
+    
+    // 繪製多行文字
+    ctx.fillStyle = textColor;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    
+    lines.forEach((line, i) => {
+        const lineY = y + i * lineHeight;
+        ctx.fillText(line, x, lineY);
+    });
+}
+
+// 添加節點動畫效果
+function animateNodes(ctx, nodes, canvas) {
+    let time = 0;
+    const animate = () => {
+        time += 0.01;
+        
+        // 清空畫布
+        ctx.clearRect(0, 0, canvas.originalWidth, canvas.originalHeight);
+        
+        // 重新繪製連接線
+        for (let i = 0; i < nodes.length - 1; i++) {
+            const startNode = nodes[i];
+            const endNode = nodes[i + 1];
+            drawConnection(ctx, startNode, endNode);
+        }
+        
+        // 繪製帶有微小運動的節點
+        nodes.forEach((node, index) => {
+            const nodeWithOffset = { ...node };
+            
+            // 添加微小的上下移動
+            nodeWithOffset.y = node.y + Math.sin(time + index * 0.5) * 2;
+            
+            drawNode(ctx, nodeWithOffset, index);
+        });
+        
+        // 如果Canvas不在文檔中，則停止動畫
+        if (!document.body.contains(canvas)) {
+            return;
+        }
+        
+        requestAnimationFrame(animate);
+    };
+    
+    animate();
+}
+
+// 輔助函數：十六進制顏色轉換為 rgba
+function hexToRgba(hex, alpha = 1) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+// 添加 roundRect 方法 (如果瀏覽器不支援)
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
+        if (width < 2 * radius) radius = width / 2;
+        if (height < 2 * radius) radius = height / 2;
+        this.beginPath();
+        this.moveTo(x + radius, y);
+        this.arcTo(x + width, y, x + width, y + height, radius);
+        this.arcTo(x + width, y + height, x, y + height, radius);
+        this.arcTo(x, y + height, x, y, radius);
+        this.arcTo(x, y, x + width, y, radius);
+        this.closePath();
+        return this;
+    };
+}
+
+// 設置放大功能
+function setupZoomFeature(canvas, nodes) {
+    // 獲取DOM元素
+    const container = canvas.parentElement;
+    const zoomOverlay = document.getElementById('workflowZoomOverlay');
+    const zoomCanvas = document.getElementById('workflowZoomCanvas');
+    const closeBtn = document.getElementById('workflowZoomClose');
+    
+    if (!zoomOverlay || !zoomCanvas || !closeBtn) return;
+    
+    // 點擊Canvas打開放大視圖
+    container.addEventListener('click', () => {
+        // 顯示放大層
+        zoomOverlay.classList.add('active');
+        
+        // 設置放大Canvas
+        setupHiDPICanvas(zoomCanvas);
+        
+        // 重新計算節點位置，使其適應放大Canvas
+        const scaledNodes = nodes.map(node => {
+            const scaleFactorX = zoomCanvas.originalWidth / canvas.originalWidth;
+            const scaleFactorY = zoomCanvas.originalHeight / canvas.originalHeight;
+            
+            return {
+                ...node,
+                x: node.x * scaleFactorX,
+                y: node.y * scaleFactorY,
+                radius: node.radius * 1.5, // 放大節點
+            };
+        });
+        
+        // 繪製放大的工作流程圖
+        const zoomCtx = zoomCanvas.getContext('2d');
+        
+        // 清空畫布
+        zoomCtx.clearRect(0, 0, zoomCanvas.originalWidth, zoomCanvas.originalHeight);
+        
+        // 繪製連接線
+        for (let i = 0; i < scaledNodes.length - 1; i++) {
+            drawConnection(zoomCtx, scaledNodes[i], scaledNodes[i + 1]);
+        }
+        
+        // 繪製節點
+        scaledNodes.forEach((node, index) => {
+            drawNode(zoomCtx, node, index);
+        });
+        
+        // 添加節點動畫
+        animateNodes(zoomCtx, scaledNodes, zoomCanvas);
+        
+        // 阻止頁面滾動
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // 點擊關閉按鈕關閉放大視圖
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // 防止事件冒泡
+        zoomOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // 點擊背景關閉放大視圖
+    zoomOverlay.addEventListener('click', (e) => {
+        if (e.target === zoomOverlay) {
+            zoomOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // ESC 鍵關閉放大視圖
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && zoomOverlay.classList.contains('active')) {
+            zoomOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// 處理窗口大小變化，重新初始化Canvas
+window.addEventListener('resize', () => {
+    const canvas = document.getElementById('workflowCanvas');
+    const zoomCanvas = document.getElementById('workflowZoomCanvas');
+    const zoomOverlay = document.getElementById('workflowZoomOverlay');
+    
+    // 重新初始化普通Canvas
+    if (canvas && canvas.parentElement.offsetWidth > 0) {
+        initWorkflowCanvas();
+    }
+    
+    // 如果放大視圖已打開，也重新初始化放大Canvas
+    if (zoomCanvas && zoomOverlay && zoomOverlay.classList.contains('active')) {
+        // 在此處可以調用特定函數重新繪製放大視圖
+        // 或者直接關閉放大視圖
+        zoomOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}); 

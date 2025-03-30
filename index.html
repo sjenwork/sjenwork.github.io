@@ -109,8 +109,16 @@
                         <h3>A. 基礎工作流程自動化 <span class="en">(Rule-Based Automation)</span></h3>
                         <div class="type-content">
                             <p><strong>工具範例:</strong> Zapier, Make, n8n</p>
+                            <div class="workflow-diagram-simple">
+                                <div class="trigger-node">觸發事件<small>新郵件</small></div>
+                                <div class="arrow">→</div>
+                                <div class="condition-node">條件<small>IF 包含關鍵字</small></div>
+                                <div class="arrow">→</div>
+                                <div class="action-node">動作<small>添加待辦事項</small></div>
+                            </div>
                             <p><strong>特點:</strong> 通常基於<strong>預先定義好的規則和流程 (If This Then That)</strong>。使用者設定好觸發條件和對應的操作。</p>
                             <p><strong>AI 參與程度:</strong> 較低，主要依賴設定好的邏輯。</p>
+                            <button class="case-study-btn" id="showTimelineBtn">查看郵件處理自動化案例展示</button>
                         </div>
                     </div>
                     <div class="type type-b">
@@ -140,12 +148,12 @@
                     <div class="example-card">
                         <div class="icon development"></div>
                         <h3>開發輔助</h3>
-                        <p>GitHub Copilot, Cursor, CodiumAI (理解程式碼上下文，自動生成程式碼、除錯、寫註解)</p>
+                        <p>理解程式碼上下文，自動生成程式碼、除錯、寫註解(GitHub Copilot, CodiumAI, Cursor AI)</p>
                     </div>
                     <div class="example-card">
                         <div class="icon research"></div>
                         <h3>研究與分析</h3>
-                        <p>Perplexity AI, Consensus (理解問題，搜尋、整合、總結學術論文或網路資訊)</p>
+                        <p>理解問題，搜尋、整合、總結學術論文或網路資訊(Perplexity AI, Consensus AI)</p>
                     </div>
                     <div class="example-card">
                         <div class="icon assistant"></div>
@@ -155,7 +163,7 @@
                     <div class="example-card">
                         <div class="icon customer"></div>
                         <h3>客戶服務</h3>
-                        <p>能理解客戶問題，查詢知識庫，甚至執行帳戶操作 (如退款、修改訂單) 的客服 Agent</p>
+                        <p>能理解客戶問題，查詢知識庫，甚至執行動作的客服 Agent，如：客服機器人</p>
                     </div>
                     <div class="example-card">
                         <div class="icon gaming"></div>
@@ -360,5 +368,75 @@
         </section>
     </div>
     <script src="script.js"></script>
+
+    <!-- 時間軸面板 -->
+    <div class="timeline-overlay" id="timelineOverlay"></div>
+    <div class="timeline-panel" id="timelinePanel">
+        <div class="timeline-panel-close" id="timelinePanelClose">✕</div>
+        <h2 class="timeline-title">郵件處理自動化案例：從人工到 AI</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-era">完全人工作業</div>
+                <div class="timeline-content">
+                    <p>收到信件人工打開信件、轉寄、下載附件，並進行人工彙整。</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-era">人工設定自動化</div>
+                <div class="timeline-content">
+                    <ul>
+                        <li>基於規則篩選轉寄（Gmail 篩選器）</li>
+                        <li>Gmail 外掛自動放置於雲端資料夾</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-era">AI 輔助型自動化</div>
+                <div class="timeline-content">
+                    <ul>
+                        <li><strong>透過 n8n、Make 等工具，以拖拉、節點、串接的方式，結合 NLP (例如 OpenAI)，判斷郵件內容，決定是否屬於特定類型信件並轉寄</strong></li>
+                        
+                        <div class="canvas-workflow-container">
+                            <canvas id="workflowCanvas" class="canvas-workflow"></canvas>
+                            <div class="canvas-workflow-note">人工設計節點、建立流程和邏輯關係</div>
+                        </div>
+                        
+                        <li>自動存放於雲端資料夾</li>
+                        <li>可自動化建立檔案歸檔</li>
+                        <li>強調「人機協作」的概念，AI 負責處理重複性、規則性的工作，而人類負責處理複雜、需要判斷的情況</li>
+                        <li>「AI 的錯誤率」和「異常處理機制」是實際應用中必須考慮的問題</li>
+                        <li>增加對資料安全的提醒</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-era">AI 自動型</div>
+                <div class="timeline-content">
+                    <ul>
+                        <li>藉由大型語言模型，自動判斷郵件類型、內容摘要、附件內容分析、自動分類歸檔，並且自動產出後續使用報表</li>
+                        <li>可根據郵件內容自動判斷相關人員並轉發，並且總結郵件以及附件檔案，自動產出報表</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas工作流程圖放大視圖 -->
+    <div class="workflow-zoom-overlay" id="workflowZoomOverlay">
+        <div class="workflow-zoom-container">
+            <div class="workflow-zoom-close" id="workflowZoomClose">✕</div>
+            <h3 class="workflow-zoom-title">AI 輔助型郵件處理工作流程</h3>
+            <canvas id="workflowZoomCanvas" class="workflow-zoom-canvas"></canvas>
+            <div class="workflow-zoom-note">人工設計節點、指定連接方式、設定處理邏輯</div>
+        </div>
+    </div>
 </body>
 </html> 
