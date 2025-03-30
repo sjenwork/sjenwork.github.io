@@ -626,12 +626,12 @@ body::before {
     margin-bottom: 0.5rem;
 }
 
-/* 移除每个slide的重复背景伪元素 */
+/* 移除每個slide的重複背景偽元素 */
 .slide::before {
     content: none;
 }
 
-/* 为每个slide添加一个淡淡的渐变遮罩 */
+/* 為每個slide添加一個淡淡的漸變遮罩 */
 .slide {
     position: relative;
 }
@@ -699,7 +699,7 @@ strong {
     overflow: visible;
 }
 
-/* 标题容器，用于重叠效果 */
+/* 標題容器，用於重疊效果 */
 .title-container {
     position: relative;
     height: 350px;
@@ -718,7 +718,7 @@ strong {
     -webkit-text-fill-color: transparent;
     margin-bottom: 0;
     position: relative;
-    z-index: 2; /* 确保标题在装饰之上 */
+    z-index: 2; /* 確保標題在裝飾之上 */
     text-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
 }
 
@@ -747,10 +747,10 @@ strong {
     filter: blur(50px);
     opacity: 0.6;
     animation: rotate 20s linear infinite;
-    z-index: 1; /* 确保装饰在标题下方 */
+    z-index: 1; /* 確保裝飾在標題下方 */
 }
 
-/* 简报者信息样式 */
+/* 簡報者信息樣式 */
 .presenter-info {
     margin-bottom: 30px;
     animation: fadeIn 1.5s ease-out forwards;
@@ -796,13 +796,6 @@ strong {
     }
 }
 
-/* Basics Slide */
-/* .two-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-} */
-
 .examples {
     margin-top: 1.5rem;
     background: rgba(38, 38, 64, 0.5);
@@ -846,7 +839,7 @@ strong {
     position: relative;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
-    will-change: transform; /* 优化性能 */
+    will-change: transform; /* 優化性能 */
 }
 
 .feature-list li:hover {
@@ -884,7 +877,7 @@ strong {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 .level {
@@ -938,7 +931,7 @@ strong {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 .type {
@@ -969,7 +962,7 @@ strong {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 .example-card {
@@ -996,26 +989,13 @@ strong {
     background: var(--gradient-1);
 }
 
-.icon {
-    /* width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    background: var(--light-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--accent); */
-}
-
 /* Core Principles Slide */
 .components-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 .component {
@@ -1034,7 +1014,7 @@ strong {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 .workflow-step {
@@ -1083,7 +1063,7 @@ strong {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 /* RAG Slide */
@@ -1091,7 +1071,7 @@ strong {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 .what-is-rag, .application {
@@ -1105,7 +1085,7 @@ strong {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
-    padding-right: 5px; /* 为滚动条预留空间 */
+    padding-right: 5px; /* 為滾動條預留空間 */
 }
 
 li.point {
@@ -1175,7 +1155,7 @@ li.point {
     transition: transform 0.3s ease;
 }
 
-/* 修复导航点层级 */
+/* 修復導航點層級 */
 .scroll-nav {
     position: fixed;
     right: 20px;
@@ -1187,7 +1167,7 @@ li.point {
     gap: 10px;
 }
 
-/* 键盘导航提示样式 */
+/* 鍵盤導航提示樣式 */
 .keyboard-hint {
     margin-top: 30px;
     padding: 10px 20px;
@@ -1216,7 +1196,7 @@ li.point {
     }
 }
 
-/* 触摸导航区域 */
+/* 觸摸導航區域 */
 .touch-nav-area {
     position: fixed;
     top: 0;
@@ -1234,7 +1214,7 @@ li.point {
     right: 0;
 }
 
-/* 触摸指示器 */
+/* 觸摸指示器 */
 .touch-indicator {
     position: fixed;
     top: 50%;
@@ -1250,7 +1230,7 @@ li.point {
     z-index: 95;
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none; /* 不拦截点击事件 */
+    pointer-events: none; /* 不攔截點擊事件 */
 }
 
 .touch-indicator.left {
@@ -1265,7 +1245,7 @@ li.point {
     font-size: 14px;
 }
 
-/* 在首页提示触摸导航 */
+/* 在首頁提示觸摸導航 */
 .keyboard-hint p {
     margin: 0;
     font-size: 0.9rem;
@@ -1273,19 +1253,19 @@ li.point {
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* 确保内容区域在移动设备上能正常滚动 */
+/* 確保內容區域在移動設備上能正常滾動 */
 @media (max-width: 768px) {
     .content {
-        max-height: 80vh; /* 在移动设备上稍微减小高度 */
+        max-height: 80vh; /* 在移動設備上稍微減小高度 */
         padding: 1.2rem;
     }
     
     .content-scrollable {
-        -webkit-overflow-scrolling: touch; /* 平滑滚动在iOS上 */
+        -webkit-overflow-scrolling: touch; /* 平滑滾動在iOS上 */
     }
     
     .touch-nav-area {
-        width: 20%; /* 在小屏幕上增加触摸区域宽度 */
+        width: 20%; /* 在小屏幕上增加觸摸區域寬度 */
     }
 }
 
