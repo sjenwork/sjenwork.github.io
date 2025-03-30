@@ -1171,4 +1171,19 @@ function renderReferences(data) {
 // 初始化所有功能
 document.addEventListener('DOMContentLoaded', function() {
     initWorkflowCanvas();
+});
+
+// 滾動指示器處理
+document.addEventListener('DOMContentLoaded', function() {
+    const contentScrollables = document.querySelectorAll('.content-scrollable');
+    
+    contentScrollables.forEach(scrollable => {
+        scrollable.addEventListener('scroll', function() {
+            if (this.scrollTop > 20) {
+                this.classList.add('scrolled');
+            } else {
+                this.classList.remove('scrolled');
+            }
+        });
+    });
 }); 

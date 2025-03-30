@@ -50,23 +50,31 @@
                     </div>
                 </div>
             </div>
+            <div class="scroll-indicator">
+                <span class="scroll-indicator-icon">↓</span>
+                <span>向下滾動查看更多內容</span>
+            </div>            
         </section>
 
         <section class="slide" id="what-is-aiagent">
             <div class="content">
-                <h2>2. AI Agent 是什麼？</h2>
-                <div class="definition">
-                    <h3>定義</h3>
-                    <p>AI Agent 是結合了 AI 技術（特別是大型語言模型 LLM）的 Agent。它不僅能感知和行動，更能利用 AI 的<strong>推理、規劃、學習和決策能力</strong>，以更自主、更智能的方式達成目標。</p>
+                <div class="content-title">
+                    <h2>2. AI Agent 是什麼？</h2>
                 </div>
-                <div class="core-features">
-                    <h3>核心特點</h3>
-                    <ul class="feature-list">
-                        <li><span class="feature-name">自主性</span> <span class="feature-en">(Autonomy)</span></li>
-                        <li><span class="feature-name">反應性</span> <span class="feature-en">(Reactivity)</span></li>
-                        <li><span class="feature-name">預動性</span> <span class="feature-en">(Pro-activeness)</span></li>
-                        <li><span class="feature-name">社交性</span> <span class="feature-en">(Social ability)</span> - 與其他 Agent 或人互動</li>
-                    </ul>
+                <div class="content-scrollable">
+                    <div class="definition">
+                        <h3>定義</h3>
+                        <p>AI Agent 是結合了 AI 技術（特別是大型語言模型 LLM）的 Agent。它不僅能感知和行動，更能利用 AI 的<strong>推理、規劃、學習和決策能力</strong>，以更自主、更智能的方式達成目標。</p>
+                    </div>
+                    <div class="core-features">
+                        <h3>核心特點</h3>
+                        <ul class="feature-list">
+                            <li><span class="feature-name">自主性</span> <span class="feature-en">(Autonomy)</span></li>
+                            <li><span class="feature-name">反應性</span> <span class="feature-en">(Reactivity)</span></li>
+                            <li><span class="feature-name">預動性</span> <span class="feature-en">(Pro-activeness)</span></li>
+                            <li><span class="feature-name">社交性</span> <span class="feature-en">(Social ability)</span> - 與其他 Agent 或人互動</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -97,337 +105,395 @@
                     </div>
                     <div class="summary">
                         <p><strong>簡單來說，AI Agent 是 AI 能力發展到一定階段，能夠"思考"並"行動"以完成任務的實體。</strong></p>
-                    </div>
+                    </div>                    
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
 
         <section class="slide" id="types">
             <div class="content">
-                <h2>4. AI Agent 的類型與能力分級</h2>
-                <div class="types-container">
-                    <div class="type type-a">
-                        <h3>A. 基礎工作流程自動化 <span class="en">(Rule-Based Automation)</span></h3>
-                        <div class="type-content">
-                            <p><strong>特點:</strong> 通常基於<strong>預先定義好的規則和流程 (If This Then That)</strong>。使用者設定好觸發條件和對應的操作。</p>
-                            <div class="workflow-diagram-simple">
-                                <div class="trigger-node">觸發事件</div>
-                                <div class="arrow">→</div>
-                                <div class="condition-node">條件</div>
-                                <div class="arrow">→</div>
-                                <div class="action-node">動作</div>
+                <div class="content-title">
+                    <h2>4. AI Agent 的類型與能力分級</h2>
+                </div>
+                <div class="content-scrollable">
+                    <div class="types-container">
+                        <div class="type type-a">
+                            <h3>A. 基礎工作流程自動化 <span class="en">(Rule-Based Automation)</span></h3>
+                            <div class="type-content">
+                                <p><strong>特點:</strong> 通常基於<strong>預先定義好的規則和流程 (If This Then That)</strong>。使用者設定好觸發條件和對應的操作。</p>
+                                <div class="workflow-diagram-simple">
+                                    <div class="trigger-node">觸發事件</div>
+                                    <div class="arrow">→</div>
+                                    <div class="condition-node">條件</div>
+                                    <div class="arrow">→</div>
+                                    <div class="action-node">動作</div>
+                                </div>
+                                <p><strong>工具範例:</strong> Zapier, Make, n8n</p>
+                                <p><strong>AI 參與程度:</strong> 較低，主要依賴設定好的邏輯。</p>
+                                <button class="case-study-btn" id="showTimelineBtn">查看郵件處理自動化案例展示</button>
                             </div>
-                            <p><strong>工具範例:</strong> Zapier, Make, n8n</p>
-                            <p><strong>AI 參與程度:</strong> 較低，主要依賴設定好的邏輯。</p>
-                            <button class="case-study-btn" id="showTimelineBtn">查看郵件處理自動化案例展示</button>
                         </div>
-                    </div>
-                    <div class="type type-b">
-                        <h3>B. 複雜工作流程自動化 / 任務輔助 <span class="en">(AI-Assisted Automation)</span></h3>
-                        <div class="type-content">
-                            <p><strong>特點:</strong> 利用 AI (特別是 LLM) 的理解和推理能力，處理<strong>更動態、更複雜</strong>的任務。需要 AI 進行判斷、選擇工具或生成內容。</p>
-                            <p><strong>工具範例:</strong> LangChain, LangGraph, Assistants API (OpenAI), LangFlow, <span class="highlight-tool">FlowiseAI</span></p>
-                            <div class="flowise-showcase">
-                                <div class="flowise-info">
-                                    <p>FlowiseAI 是一個開源的低程式碼工具，可用於構建自定義LLM流程與AI代理人。透過直觀的拖拉式界面，您可以快速創建複雜的AI應用。</p>
-                                    <div class="flowise-links">
-                                        <a href="https://flowiseai.com/" target="_blank" class="flowise-link website">
-                                            <span class="link-icon">🌐</span>
-                                            <span class="link-text">訪問官方網站</span>
-                                        </a>
+                        <div class="type type-b">
+                            <h3>B. 複雜工作流程自動化 / 任務輔助 <span class="en">(AI-Assisted Automation)</span></h3>
+                            <div class="type-content">
+                                <p><strong>特點:</strong> 利用 AI (特別是 LLM) 的理解和推理能力，處理<strong>更動態、更複雜</strong>的任務。需要 AI 進行判斷、選擇工具或生成內容。</p>
+                                <p><strong>工具範例:</strong> LangChain, LangGraph, Assistants API (OpenAI), LangFlow, <span class="highlight-tool">FlowiseAI</span></p>
+                                <div class="flowise-showcase">
+                                    <div class="flowise-info">
+                                        <p>FlowiseAI 是一個開源的低程式碼工具，可用於構建自定義LLM流程與AI代理人。透過直觀的拖拉式界面，您可以快速創建複雜的AI應用。</p>
+                                        <div class="flowise-links">
+                                            <a href="https://flowiseai.com/" target="_blank" class="flowise-link website">
+                                                <span class="link-icon">🌐</span>
+                                                <span class="link-text">訪問官方網站</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
+                                <p><strong>AI 參與程度:</strong> 中到高，AI 參與決策和執行流程。</p>
                             </div>
-                            <p><strong>AI 參與程度:</strong> 中到高，AI 參與決策和執行流程。</p>
+                        </div>
+                        <div class="type type-c">
+                            <h3>C. 目標導向自主完成 <span class="en">(Autonomous Goal Achievement)</span></h3>
+                            <div class="type-content">
+                                <p><strong>工具/框架範例:</strong> Auto-GPT, BabyAGI, AgentGPT</p>
+                                <p><strong>特點:</strong> 使用者<strong>只定義最終目標</strong>，AI Agent 會<strong>自主地進行規劃</strong>、分解任務、選擇並執行工具、從錯誤中學習、自我反思和修正，直到目標達成。</p>
+                                <p><strong>AI 參與程度:</strong> 非常高，AI 具有高度自主性。</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="type type-c">
-                        <h3>C. 目標導向自主完成 <span class="en">(Autonomous Goal Achievement)</span></h3>
-                        <div class="type-content">
-                            <p><strong>工具/框架範例:</strong> Auto-GPT, BabyAGI, AgentGPT</p>
-                            <p><strong>特點:</strong> 使用者<strong>只定義最終目標</strong>，AI Agent 會<strong>自主地進行規劃</strong>、分解任務、選擇並執行工具、從錯誤中學習、自我反思和修正，直到目標達成。</p>
-                            <p><strong>AI 參與程度:</strong> 非常高，AI 具有高度自主性。</p>
-                        </div>
-                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
 
         <section class="slide" id="examples">
             <div class="content">
-                <h2>5. AI Agent 應用範例</h2>
-                <div class="examples-grid">
-                    <div class="example-card">
-                        <div class="icon development"></div>
-                        <h3>開發輔助</h3>
-                        <p>理解程式碼上下文，自動生成程式碼、除錯、寫註解(GitHub Copilot, CodiumAI, Cursor AI)</p>
+                <div class="content-title">
+                    <h2>5. AI Agent 應用範例</h2>
+                </div>
+                <div class="content-scrollable">
+                    <div class="examples-grid">
+                        <div class="example-card">
+                            <div class="icon development"></div>
+                            <h3>開發輔助</h3>
+                            <p>理解程式碼上下文，自動生成程式碼、除錯、寫註解(GitHub Copilot, CodiumAI, Cursor AI)</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="icon research"></div>
+                            <h3>研究與分析</h3>
+                            <p>理解問題，搜尋、整合、總結學術論文或網路資訊(Perplexity AI, Consensus AI)</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="icon assistant"></div>
+                            <h3>個人助理</h3>
+                            <p>能整合行事曆、郵件、通訊軟體，自動安排會議、回覆信件、管理待辦事項的 Agent</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="icon customer"></div>
+                            <h3>客戶服務</h3>
+                            <p>能理解客戶問題，查詢知識庫，甚至執行動作的客服 Agent，如：客服機器人</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="icon gaming"></div>
+                            <h3>遊戲 NPC</h3>
+                            <p>更聰明、反應更真實、能與玩家進行複雜互動的遊戲角色</p>
+                        </div>
+                        <div class="example-card">
+                            <div class="icon science"></div>
+                            <h3>科學研究</h3>
+                            <p>設計實驗、分析數據、生成假設的科學研究 Agent</p>
+                        </div>
                     </div>
-                    <div class="example-card">
-                        <div class="icon research"></div>
-                        <h3>研究與分析</h3>
-                        <p>理解問題，搜尋、整合、總結學術論文或網路資訊(Perplexity AI, Consensus AI)</p>
-                    </div>
-                    <div class="example-card">
-                        <div class="icon assistant"></div>
-                        <h3>個人助理</h3>
-                        <p>能整合行事曆、郵件、通訊軟體，自動安排會議、回覆信件、管理待辦事項的 Agent</p>
-                    </div>
-                    <div class="example-card">
-                        <div class="icon customer"></div>
-                        <h3>客戶服務</h3>
-                        <p>能理解客戶問題，查詢知識庫，甚至執行動作的客服 Agent，如：客服機器人</p>
-                    </div>
-                    <div class="example-card">
-                        <div class="icon gaming"></div>
-                        <h3>遊戲 NPC</h3>
-                        <p>更聰明、反應更真實、能與玩家進行複雜互動的遊戲角色</p>
-                    </div>
-                    <div class="example-card">
-                        <div class="icon science"></div>
-                        <h3>科學研究</h3>
-                        <p>設計實驗、分析數據、生成假設的科學研究 Agent</p>
-                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
 
         <section class="slide" id="principles">
             <div class="content">
-                <h2>6. AI Agent 的核心原理</h2>
-                <div class="core-components">
-                    <h3>核心組件</h3>
-                    <div class="components-container">
-                        <div class="component">
-                            <h4>大型語言模型 (LLM)</h4>
-                            <p>作為 Agent 的「大腦」，負責理解、推理、規劃、決策。</p>
+                <div class="content-title">
+                    <h2>6. AI Agent 的核心原理</h2>
+                </div>
+                <div class="content-scrollable">
+                    <div class="core-components">
+                        <h3>核心組件</h3>
+                        <div class="components-container">
+                            <div class="component">
+                                <h4>大型語言模型 (LLM)</h4>
+                                <p>作為 Agent 的「大腦」，負責理解、推理、規劃、決策。</p>
+                            </div>
+                            <div class="component">
+                                <h4>工具 (Tools)</h4>
+                                <p>Agent 的「手腳」，使其能與外界互動。例如：網路搜尋 API、計算器、程式碼執行環境、資料庫查詢接口等。</p>
+                            </div>
+                            <div class="component">
+                                <h4>記憶 (Memory)</h4>
+                                <p>儲存對話歷史、過去的行動、學習到的知識，以便做出連貫和明智的決策 (包含短期記憶和長期記憶)。</p>
+                            </div>
+                            <div class="component">
+                                <h4>規劃器 (Planner)</h4>
+                                <p>將複雜目標分解成可執行的小步驟。</p>
+                            </div>
+                            <div class="component">
+                                <h4>資料/知識庫 (Data/Knowledge Base)</h4>
+                                <p>提供 Agent 所需的特定領域知識或即時資訊 (RAG)。</p>
+                            </div>
                         </div>
-                        <div class="component">
-                            <h4>工具 (Tools)</h4>
-                            <p>Agent 的「手腳」，使其能與外界互動。例如：網路搜尋 API、計算器、程式碼執行環境、資料庫查詢接口等。</p>
-                        </div>
-                        <div class="component">
-                            <h4>記憶 (Memory)</h4>
-                            <p>儲存對話歷史、過去的行動、學習到的知識，以便做出連貫和明智的決策 (包含短期記憶和長期記憶)。</p>
-                        </div>
-                        <div class="component">
-                            <h4>規劃器 (Planner)</h4>
-                            <p>將複雜目標分解成可執行的小步驟。</p>
-                        </div>
-                        <div class="component">
-                            <h4>資料/知識庫 (Data/Knowledge Base)</h4>
-                            <p>提供 Agent 所需的特定領域知識或即時資訊 (RAG)。</p>
+                    </div>
+                    
+                    <div class="workflow">
+                        <h3>基本運作流程 (ReAct: Reason + Act 框架)</h3>
+                        <div class="workflow-diagram">
+                            <div class="workflow-step" id="step1">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>接收問題/目標</h4>
+                                    <p>Agent 收到使用者指令或感知到環境變化</p>
+                                </div>
+                            </div>
+                            <div class="workflow-step" id="step2">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>思考與規劃</h4>
+                                    <p>LLM 理解目標，分析當前狀況，參考記憶和知識庫，決定下一步</p>
+                                </div>
+                            </div>
+                            <div class="workflow-step" id="step3">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>執行動作</h4>
+                                    <p>Agent 調用選定的工具，執行具體操作</p>
+                                </div>
+                            </div>
+                            <div class="workflow-step" id="step4">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>觀察結果</h4>
+                                    <p>Agent 接收工具執行的結果或環境的反饋</p>
+                                </div>
+                            </div>
+                            <div class="workflow-step" id="step5">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h4>循環/完成</h4>
+                                    <p>判斷目標是否達成，如未達成則回到步驟 2</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="workflow">
-                    <h3>基本運作流程 (ReAct: Reason + Act 框架)</h3>
-                    <div class="workflow-diagram">
-                        <div class="workflow-step" id="step1">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>接收問題/目標</h4>
-                                <p>Agent 收到使用者指令或感知到環境變化</p>
-                            </div>
-                        </div>
-                        <div class="workflow-step" id="step2">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h4>思考與規劃</h4>
-                                <p>LLM 理解目標，分析當前狀況，參考記憶和知識庫，決定下一步</p>
-                            </div>
-                        </div>
-                        <div class="workflow-step" id="step3">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h4>執行動作</h4>
-                                <p>Agent 調用選定的工具，執行具體操作</p>
-                            </div>
-                        </div>
-                        <div class="workflow-step" id="step4">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h4>觀察結果</h4>
-                                <p>Agent 接收工具執行的結果或環境的反饋</p>
-                            </div>
-                        </div>
-                        <div class="workflow-step" id="step5">
-                            <div class="step-number">5</div>
-                            <div class="step-content">
-                                <h4>循環/完成</h4>
-                                <p>判斷目標是否達成，如未達成則回到步驟 2</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
 
         <section class="slide" id="rag">
             <div class="content">
-                <h2>7. 專業知識的重要性：RAG <br/> (Retrieval-Augmented Generation)</h2>
-                <div class="rag-content">
-                    <div>
-                        <h3>什麼是 RAG?</h3>
-                        <div class="point">
-                            <p>RAG 是一種將<strong>檢索系統</strong>與<strong>文本生成模型</strong>結合的方法。系統在回應查詢時，不僅依賴 LLM 的參數知識，還會從外部知識庫檢索相關資訊來提供更精確、更新和可靠的回答。</p>
+                <div class="content-title">
+                    <h2>7. 專業知識的重要性：RAG <br/> (Retrieval-Augmented Generation)</h2>
+                </div>
+                <div class="content-scrollable">
+                    <div class="rag-content">
+                        <div>
+                            <h3>什麼是 RAG?</h3>
+                            <div class="point">
+                                <p>RAG 是一種將<strong>檢索系統</strong>與<strong>文本生成模型</strong>結合的方法。系統在回應查詢時，不僅依賴 LLM 的參數知識，還會從外部知識庫檢索相關資訊來提供更精確、更新和可靠的回答。</p>
+                            </div>
+                        </div>
+                        <div class="why-rag">
+                            <h3>為什麼 AI Agent 需要 RAG?</h3>
+                            <ul class="point-list">
+                                <li class="point">
+                                    <h4>最新資訊</h4>
+                                    <p>LLM 訓練數據有時間截點，RAG 可提供最新知識</p>
+                                </li>
+                                <li class="point">
+                                    <h4>專業領域知識</h4>
+                                    <p>提供特定領域的深度知識，如法律、醫療、環境評估等專業知識</p>
+                                </li>
+                                <li class="point">
+                                    <h4>減少幻覺 (Hallucination)</h4>
+                                    <p>有實際資料做參考，減少 AI "編造" 答案的可能</p>
+                                </li>
+                                <li class="point">
+                                    <h4>可引用來源</h4>
+                                    <p>可以提供信息來源，增加透明度與可信度</p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="why-rag">
-                        <h3>為什麼 AI Agent 需要 RAG?</h3>
-                        <ul class="point-list">
-                            <li class="point">
-                                <h4>最新資訊</h4>
-                                <p>LLM 訓練數據有時間截點，RAG 可提供最新知識</p>
-                            </li>
-                            <li class="point">
-                                <h4>專業領域知識</h4>
-                                <p>提供特定領域的深度知識，如法律、醫療、環境評估等專業知識</p>
-                            </li>
-                            <li class="point">
-                                <h4>減少幻覺 (Hallucination)</h4>
-                                <p>有實際資料做參考，減少 AI "編造" 答案的可能</p>
-                            </li>
-                            <li class="point">
-                                <h4>可引用來源</h4>
-                                <p>可以提供信息來源，增加透明度與可信度</p>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
 
         <section class="slide" id="applications">
             <div class="content">
-                <h2>8. AI Agent 的應用與影響</h2>
-                <div>
-                    <div class="applications">
-                        <div class="application">
-                            <h4>個人層面影響</h4>
-                            <ul class="impact-list">
-                                <li>減少<strong>重複性質工作</strong>，將精力應用在關鍵事物上</li>
-                                <li><strong>資訊取得效率</strong>顯著提升，學習成本大幅降低</li>
-                                <li>學習重點改變，<strong>架構組織能力</strong>重要性提升</li>
-                                <li>面對<strong>資訊過載</strong>，需要培養更強大的資訊篩選能力</li>
-                                <li>對資訊<strong>真實性</strong>與<strong>正確性</strong>的要求提升</li>
-                            </ul>
-                        </div>
-                        <div class="application">
-                            <h4>企業層面影響</h4>
-                            <ul class="impact-list">
-                                <li><strong>自動化</strong>繁瑣事項，提升管理效率與決策品質</li>
-                                <li>釋放管理者時間，專注於<strong>策略規劃</strong>與人才培養</li>
-                                <li>提供<strong>即時分析</strong>和多維度洞察，協助管理者全面分析</li>
-                                <li>降低<strong>關鍵人才風險</strong>，減少對特定員工的過度依賴</li>
-                                <li>創造<strong>競爭優勢</strong>，提升業務創新能力與市場適應力</li>
-                            </ul>
+                <div class="content-title">
+                    <h2>8. AI Agent 的應用與影響</h2>
+                </div>
+                <div class="content-scrollable">
+                    <div>
+                        <div class="applications">
+                            <div class="application">
+                                <h4>個人層面影響</h4>
+                                <ul class="impact-list">
+                                    <li>減少<strong>重複性質工作</strong>，將精力應用在關鍵事物上</li>
+                                    <li><strong>資訊取得效率</strong>顯著提升，學習成本大幅降低</li>
+                                    <li>學習重點改變，<strong>架構組織能力</strong>重要性提升</li>
+                                    <li>面對<strong>資訊過載</strong>，需要培養更強大的資訊篩選能力</li>
+                                    <li>對資訊<strong>真實性</strong>與<strong>正確性</strong>的要求提升</li>
+                                </ul>
+                            </div>
+                            <div class="application">
+                                <h4>企業層面影響</h4>
+                                <ul class="impact-list">
+                                    <li><strong>自動化</strong>繁瑣事項，提升管理效率與決策品質</li>
+                                    <li>釋放管理者時間，專注於<strong>策略規劃</strong>與人才培養</li>
+                                    <li>提供<strong>即時分析</strong>和多維度洞察，協助管理者全面分析</li>
+                                    <li>降低<strong>關鍵人才風險</strong>，減少對特定員工的過度依賴</li>
+                                    <li>創造<strong>競爭優勢</strong>，提升業務創新能力與市場適應力</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
 
         <section class="slide" id="mcp">
             <div class="content">
-                <h2>9. AI Agent 發展關鍵： <br/>Model Context Protocol（MCP）</h2>
-                <div class="mcp-container">
-                    <div class="mcp-intro">
-                        <p>MCP（模型上下文協議，Model Context Protocol）是一種由Anthropic於2024年11月推出的開放標準，旨在促進大型語言模型（LLM）與外部數據源和工具之間的無縫通信。這一協議的核心目的是解決當前AI模型因數據孤島而無法充分發揮潛力的問題，從而提升AI應用的效率和靈活性。</p>
-                    </div>
-                    
-                    <div class="mcp-image-showcase">
-                        <div class="mcp-image-container">
-                            <div class="mcp-image-glow"></div>
-                            <img src="MCP.png" alt="Model Context Protocol架構圖" class="mcp-image">
-                            <div class="mcp-image-overlay"></div>
-                            <div class="mcp-image-grid"></div>
-                            <div class="mcp-image-particles">
-                                <div class="mcp-particle" style="left:15%; animation-delay: 0s;"></div>
-                                <div class="mcp-particle" style="left:35%; animation-delay: 2s;"></div>
-                                <div class="mcp-particle" style="left:55%; animation-delay: 1s;"></div>
-                                <div class="mcp-particle" style="left:75%; animation-delay: 3s;"></div>
-                                <div class="mcp-particle" style="left:25%; animation-delay: 2.5s;"></div>
-                                <div class="mcp-particle" style="left:65%; animation-delay: 4s;"></div>
-                                <div class="mcp-particle" style="left:85%; animation-delay: 1.5s;"></div>
-                            </div>
-                            <div class="mcp-image-caption">Anthropic© Model Context Protocol | <a href="https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/" target="_blank">來源：Norah Sakal</a></div>
+                <div class="content-title">
+                    <h2>9. AI Agent 發展關鍵： <br/>Model Context Protocol（MCP）</h2>
+                </div>
+                <div class="content-scrollable">
+                    <div class="mcp-container">
+                        <div class="mcp-intro">
+                            <p>MCP（模型上下文協議，Model Context Protocol）是一種由Anthropic於2024年11月推出的開放標準，旨在促進大型語言模型（LLM）與外部數據源和工具之間的無縫通信。這一協議的核心目的是解決當前AI模型因數據孤島而無法充分發揮潛力的問題，從而提升AI應用的效率和靈活性。</p>
                         </div>
-                    </div>
-                    
-                    <div class="mcp-benefits">
-                        <h3>MCP 的主要特點</h3>
-                        <div class="benefits-grid">
-                            <div class="benefit-card">
-                                <div class="benefit-icon memory"></div>
-                                <h4>標準化接口</h4>
-                                <p>提供統一接口，使不同的AI模型能夠輕鬆訪問各種外部資源，如數據庫、API和文件系統，簡化開發過程。</p>
-                            </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon retrieval"></div>
-                                <h4>安全性與數據保護</h4>
-                                <p>標準化的數據訪問接口減少直接接觸敏感數據的風險，內置安全機制確保只有授權請求才能訪問特定資源。</p>
-                            </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon reasoning"></div>
-                                <h4>靈活的擴展性</h4>
-                                <p>支持插件式擴展，開發者可以通過新增MCP Server來接入新功能，使系統能夠根據需求靈活調整。</p>
-                            </div>
-                            <div class="benefit-card">
-                                <div class="benefit-icon efficiency"></div>
-                                <h4>即時上下文獲取</h4>
-                                <p>允許AI模型在執行任務時實時獲取相關上下文信息，生成更準確和相關的回應，提升用戶體驗。</p>
+                        
+                        <div class="mcp-image-showcase">
+                            <div class="mcp-image-container">
+                                <div class="mcp-image-glow"></div>
+                                <img src="MCP.png" alt="Model Context Protocol架構圖" class="mcp-image">
+                                <div class="mcp-image-overlay"></div>
+                                <div class="mcp-image-grid"></div>
+                                <div class="mcp-image-particles">
+                                    <div class="mcp-particle" style="left:15%; animation-delay: 0s;"></div>
+                                    <div class="mcp-particle" style="left:35%; animation-delay: 2s;"></div>
+                                    <div class="mcp-particle" style="left:55%; animation-delay: 1s;"></div>
+                                    <div class="mcp-particle" style="left:75%; animation-delay: 3s;"></div>
+                                    <div class="mcp-particle" style="left:25%; animation-delay: 2.5s;"></div>
+                                    <div class="mcp-particle" style="left:65%; animation-delay: 4s;"></div>
+                                    <div class="mcp-particle" style="left:85%; animation-delay: 1.5s;"></div>
+                                </div>
+                                <div class="mcp-image-caption">Anthropic© Model Context Protocol | <a href="https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/" target="_blank">來源：Norah Sakal</a></div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="mcp-architecture">
-                        <h3>MCP 架構組成</h3>
-                        <div class="architecture-diagram">
-                            <div class="arch-node">
-                                <div class="node-circle">1</div>
-                                <div class="node-title">AI模型</div>
+                        
+                        <div class="mcp-benefits">
+                            <h3>MCP 的主要特點</h3>
+                            <div class="benefits-grid">
+                                <div class="benefit-card">
+                                    <div class="benefit-icon memory"></div>
+                                    <h4>標準化接口</h4>
+                                    <p>提供統一接口，使不同的AI模型能夠輕鬆訪問各種外部資源，如數據庫、API和文件系統，簡化開發過程。</p>
+                                </div>
+                                <div class="benefit-card">
+                                    <div class="benefit-icon retrieval"></div>
+                                    <h4>安全性與數據保護</h4>
+                                    <p>標準化的數據訪問接口減少直接接觸敏感數據的風險，內置安全機制確保只有授權請求才能訪問特定資源。</p>
+                                </div>
+                                <div class="benefit-card">
+                                    <div class="benefit-icon reasoning"></div>
+                                    <h4>靈活的擴展性</h4>
+                                    <p>支持插件式擴展，開發者可以通過新增MCP Server來接入新功能，使系統能夠根據需求靈活調整。</p>
+                                </div>
+                                <div class="benefit-card">
+                                    <div class="benefit-icon efficiency"></div>
+                                    <h4>即時上下文獲取</h4>
+                                    <p>允許AI模型在執行任務時實時獲取相關上下文信息，生成更準確和相關的回應，提升用戶體驗。</p>
+                                </div>
                             </div>
-                            <div class="arch-arrow">→</div>
-                            <div class="arch-node">
-                                <div class="node-circle">2</div>
-                                <div class="node-title">MCP Client</div>
+                        </div>
+                        
+                        <div class="mcp-architecture">
+                            <h3>MCP 架構組成</h3>
+                            <div class="architecture-diagram">
+                                <div class="arch-node">
+                                    <div class="node-circle">1</div>
+                                    <div class="node-title">AI模型</div>
+                                </div>
+                                <div class="arch-arrow">→</div>
+                                <div class="arch-node">
+                                    <div class="node-circle">2</div>
+                                    <div class="node-title">MCP Client</div>
+                                </div>
+                                <div class="arch-arrow">→</div>
+                                <div class="arch-node">
+                                    <div class="node-circle">3</div>
+                                    <div class="node-title">MCP Server</div>
+                                </div>
+                                <div class="arch-arrow">→</div>
+                                <div class="arch-node">
+                                    <div class="node-circle">4</div>
+                                    <div class="node-title">外部數據源</div>
+                                </div>
                             </div>
-                            <div class="arch-arrow">→</div>
-                            <div class="arch-node">
-                                <div class="node-circle">3</div>
-                                <div class="node-title">MCP Server</div>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                            <div class="arch-node">
-                                <div class="node-circle">4</div>
-                                <div class="node-title">外部數據源</div>
+                        </div>
+                        
+                        <div class="mcp-future">
+                            <p><strong>未來展望：</strong> MCP作為一種開放標準，為AI模型提供了一個強大的工具，使其能夠更有效地與外部系統互動，從而提升整體的智能化水平和應用範圍。隨著更多開發者和企業採用MCP，我們將看到更多創新的AI應用出現。</p>
+                        </div>
+                        
+                        <div class="mcp-news">
+                            <h3>產業最新動態</h3>
+                            <div class="benefit-card">
+                                <div class="benefit-icon news"></div>
+                                <h4>OpenAI 採用 Anthropic 的 MCP 標準</h4>
+                                <p>2025年3月，OpenAI宣布將在其產品中採用競爭對手Anthropic開發的Model Context Protocol標準。OpenAI CEO Sam Altman表示：「人們喜歡MCP，我們很高興能在我們的產品中添加支持。」這一決定標誌著MCP正在成為行業標準，為AI模型與數據源和工具的連接提供統一接口。</p>
+                                <p class="reference"><a href="https://techcrunch.com/2025/03/26/openai-adopts-rival-anthropics-standard-for-connecting-ai-models-to-data/" target="_blank">來源：TechCrunch <i class="reference-icon">↗</i></a></p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="mcp-future">
-                        <p><strong>未來展望：</strong> MCP作為一種開放標準，為AI模型提供了一個強大的工具，使其能夠更有效地與外部系統互動，從而提升整體的智能化水平和應用範圍。隨著更多開發者和企業採用MCP，我們將看到更多創新的AI應用出現。</p>
-                    </div>
-                    
-                    <div class="mcp-news">
-                        <h3>產業最新動態</h3>
-                        <div class="benefit-card">
-                            <div class="benefit-icon news"></div>
-                            <h4>OpenAI 採用 Anthropic 的 MCP 標準</h4>
-                            <p>2025年3月，OpenAI宣布將在其產品中採用競爭對手Anthropic開發的Model Context Protocol標準。OpenAI CEO Sam Altman表示：「人們喜歡MCP，我們很高興能在我們的產品中添加支持。」這一決定標誌著MCP正在成為行業標準，為AI模型與數據源和工具的連接提供統一接口。</p>
-                            <p class="reference"><a href="https://techcrunch.com/2025/03/26/openai-adopts-rival-anthropics-standard-for-connecting-ai-models-to-data/" target="_blank">來源：TechCrunch <i class="reference-icon">↗</i></a></p>
-                        </div>
-                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
 
         <section class="slide" id="summary">
             <div class="content">
-                <h2>10. 參考資料</h2>
-                <div class="summary-content" id="referencesContainer">
+                <div class="content-title">
+                    <h2>10. 參考資料</h2>
+                </div>
+                <div class="content-scrollable" id="referencesContainer">
                     <!-- 參考資料將透過JavaScript從JSON動態生成 -->
+                </div>
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator-icon">↓</span>
+                    <span>向下滾動查看更多內容</span>
                 </div>
             </div>
         </section>
