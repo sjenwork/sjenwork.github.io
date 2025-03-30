@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 添加觸摸屏導航
     setupTouchNavigation();
+    
+    // 加載參考資料
+    loadReferences();
 });
 
 // 創建隨機視差元素 - 優化視差元素的分佈和動畫效果
@@ -1105,60 +1108,67 @@ window.addEventListener('resize', () => {
     }
 });
 
-// FlowiseAI 視頻模態框功能
-function initFlowiseVideoModal() {
-    const showVideoBtn = document.getElementById('showVideoBtn');
-    const videoModal = document.getElementById('videoModal');
-    const videoClose = document.getElementById('videoClose');
-    const flowiseVideo = document.getElementById('flowiseVideo');
-    
-    if (!showVideoBtn || !videoModal || !videoClose || !flowiseVideo) return;
-    
-    // 打開視頻模態框
-    showVideoBtn.addEventListener('click', () => {
-        videoModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // 防止背景滾動
+// 加載參考資料
+async function loadReferences() {
+    try {
+        const response = await fetch('references.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         
-        // 嘗試播放視頻
-        try {
-            flowiseVideo.play();
-        } catch (e) {
-            console.log('視頻自動播放失敗，需要用戶手動點擊播放');
-        }
-    });
-    
-    // 關閉視頻模態框
-    videoClose.addEventListener('click', () => {
-        closeVideoModal();
-    });
-    
-    // 點擊背景關閉模態框
-    videoModal.addEventListener('click', (e) => {
-        if (e.target === videoModal) {
-            closeVideoModal();
-        }
-    });
-    
-    // ESC 鍵關閉模態框
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && videoModal.classList.contains('active')) {
-            closeVideoModal();
-        }
-    });
-    
-    // 關閉模態框並暫停視頻
-    function closeVideoModal() {
-        videoModal.classList.remove('active');
-        document.body.style.overflow = ''; // 恢復背景滾動
-        flowiseVideo.pause(); // 暫停視頻
+        const data = await response.json();
+        renderReferences(data);
+    } catch (error) {
+        console.error('加載參考資料時發生錯誤:', error);
+        document.getElementById('referencesContainer').innerHTML = 
+            '<p class="error">加載參考資料時發生錯誤。請刷新頁面或稍後再試。</p>';
     }
+}
+
+// 渲染參考資料
+function renderReferences(data) {
+    const container = document.getElementById('referencesContainer');
+    container.innerHTML = '';
+    
+    data.categories.forEach(category => {
+        // 創建類別區域
+        const sectionEl = document.createElement('div');
+        sectionEl.className = 'ref-section';
+        
+        // 創建標題
+        const titleEl = document.createElement('h3');
+        titleEl.className = category.id;
+        titleEl.textContent = category.title;
+        sectionEl.appendChild(titleEl);
+        
+        // 創建引用網格
+        const gridEl = document.createElement('div');
+        gridEl.className = 'ref-grid';
+        
+        // 添加每個引用
+        category.references.forEach(ref => {
+            const cardEl = document.createElement('div');
+            cardEl.className = `ref-card ${category.id}`;
+            
+            const authorEl = document.createElement('strong');
+            authorEl.textContent = ref.author;
+            
+            const linkEl = document.createElement('a');
+            linkEl.href = ref.url;
+            linkEl.target = '_blank';
+            linkEl.textContent = ref.title;
+            
+            cardEl.appendChild(authorEl);
+            cardEl.appendChild(linkEl);
+            gridEl.appendChild(cardEl);
+        });
+        
+        sectionEl.appendChild(gridEl);
+        container.appendChild(sectionEl);
+    });
 }
 
 // 初始化所有功能
 document.addEventListener('DOMContentLoaded', function() {
-    initSlideNavigation();
-    initParallaxEffect();
-    initTimelinePanel();
     initWorkflowCanvas();
-    initFlowiseVideoModal(); // 添加FlowiseAI視頻模態框功能
 }); 

@@ -1,0 +1,67 @@
+{
+  "categories": [
+    {
+      "id": "youtube",
+      "title": "Youtube 影片",
+      "references": [
+        {
+          "author": "李宏毅 Hung-yi Lee",
+          "title": "第二講：一堂課搞懂 AI Agent 的原理",
+          "url": "https://www.youtube.com/watch?v=M2Yg1kwPpts"
+        },
+        {
+          "author": "Will 保哥",
+          "title": "全面掌握 GitHub Copilot 代理人模式 (Agent Mode)：FreeSEED 官網設計",
+          "url": "https://www.youtube.com/watch?v=MJYaJucAA9k"
+        },
+        {
+          "author": "G股團長 金睿",
+          "title": "全球首款通用型AI Agent完勝ChatGPT",
+          "url": "https://www.youtube.com/watch?v=KoXeo2Hr5KQ"
+        },
+        {
+          "author": "追日Gucci-AI效率革命聯盟",
+          "title": "ChatGPT 只是入門？AI Agent 革命將淘汰 90% 的 AI 使用者",
+          "url": "https://www.youtube.com/watch?v=7WIifNSkx4E"
+        },
+        {
+            "author": "AI Uncovered",
+            "title": "OpenAI Just Open-Sourced AI Agents—This Changes Everything!",
+            "url": "https://www.youtube.com/watch?v=VhuRNLrgCWo"
+        },
+        {
+          "author": "huangyihe",
+          "title": "有了MCP，AI才完整",
+          "url": "https://www.youtube.com/watch?v=ElX5HO0wXyo"
+        },
+        {
+          "author": "Manus AI",
+          "title": "Introducing Manus: The General AI Agent",
+          "url": "https://www.youtube.com/watch?v=K27diMbCsuw"
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "技術文章",
+      "references": [
+{
+            "author": "Norah Sakal",
+            "title": "What is Model Context Protocol (MCP)? How it simplifies AI integrations compared to APIs",
+            "url": "https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/"
+          }
+      ]
+    },
+    {
+      "id": "news",
+      "title": "相關新聞",
+      "references": [
+        {
+            "author": "TechCrunch",
+            "title": "OpenAI adopts rival Anthropic's standard for connecting AI models to data",
+            "url": "https://techcrunch.com/2025/03/26/openai-adopts-rival-anthropics-standard-for-connecting-ai-models-to-data/"
+          }
+      ]
+    }
+  ]
+} 
