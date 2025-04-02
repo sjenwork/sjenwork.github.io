@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 與 AI 的奇幻之旅</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 添加Prism.js的CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css">
+    <!-- 引用外部CSS文件 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- 封面幻燈片 -->
+            <section data-background="linear-gradient(135deg, #8a7fba 0%, #b9e28c 100%)" class="title-slide">
+                <h1 style="color: white;">Python 與 AI 的奇幻之旅</h1>
+                <h3 style="color: #f0f0f0;">大一程式設計課程</h3>
+                <div class="image-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python Logo" style="height: 100px; margin-right: 30px;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/8637/8637099.png" alt="AI Icon" style="height: 100px;">
+                </div>
+            </section>
+
+            <!-- 第一部分：啟程：AI 的神秘面紗 -->
+            <section data-background-color="#8A7FBA" class="section-title">
+                <h2>1. 啟程：AI 的神秘面紗</h2>
+            </section>
+
+            <section data-transition="zoom">
+                <h3>1.1 什麼是 AI？</h3>
+                <div class="two-columns">
+                    <div class="column" style="flex: 6;">
+                        <ul style="font-size: 0.85em;">
+                            <li>人工智慧（Artificial Intelligence）</li>
+                            <li>模擬人類智慧的技術</li>
+                            <li>從簡單的規則系統到複雜的神經網路</li>
+                        </ul>
+                        <p style="font-size: 0.9em; margin-top: 0.5em;">生活中的 AI：</p>
+                        <ul style="font-size: 0.85em;">
+                            <li>語音助理（Siri、Google Assistant）</li>
+                            <li>推薦系統（Netflix、YouTube）</li>
+                            <li>智慧家電設備（Google Home、小愛同學）</li>
+                        </ul>
+                    </div>
+                    <div class="column" style="flex: 4;">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/4616/4616734.png" alt="AI 在日常生活中">
+                        </div>
+                        <p class="caption">AI 已經融入我們的日常生活</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="slide">
+                <h3>1.2 LLM 是什麼？</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <p>大型語言模型（Large Language Models）</p>
+                        <ul>
+                            <li>透過大量文本資料訓練</li>
+                            <li>能夠理解和生成人類語言</li>
+                            <li>知名例子：GPT-4、Claude、Gemini</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9778/9778674.png" alt="大腦與文字">
+                        </div>
+                        <p class="caption">LLM 像是一個大腦，處理和生成文字</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="fade">
+                <h3>1.3 LLM 的超能力</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <ul>
+                            <li>文本生成與創作</li>
+                            <li>自然語言理解與問答</li>
+                            <li>翻譯與跨語言溝通</li>
+                            <li>程式碼生成與輔助編程</li>
+                            <li>知識提取與摘要</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3227/3227831.png" alt="超人 AI">
+                        </div>
+                        <p class="caption">LLM 擁有許多超能力</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="convex">
+                <h3>1.4 聊天背後的魔法</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <p>ChatGPT/Gemini 如何運作？</p>
+                        <ul>
+                            <li>預測下一個詞的機率</li>
+                            <li>基於上下文理解和生成</li>
+                            <li>透過提示工程優化輸出</li>
+                            <li>從數十億參數中提取知識</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2665/2665038.png" alt="對話框與程式碼">
+                        </div>
+                        <p class="caption">LLM 會理解並生成合適的回應</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="fade-in slide-out">
+                <h3>1.5 感官全開</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <p>多模態 AI：</p>
+                        <ul>
+                            <li>不僅處理文字，還能理解多種媒體</li>
+                            <li>圖像處理與生成</li>
+                            <li>語音識別與合成</li>
+                            <li>影片分析</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/10022/10022710.png" alt="多模態 AI">
+                        </div>
+                        <p class="caption">多模態 AI 可以處理多種感官資料</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二部分：Python：AI 的魔法棒 -->
+            <section data-background-color="#8A7FBA" class="section-title">
+                <h2>2. Python：AI 的魔法棒</h2>
+            </section>
+
+            <section data-transition="zoom">
+                <h3>2.1 Python 與 AI 的甜蜜邂逅</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <p>為什麼 Python 是 AI 開發的熱門語言？</p>
+                        <ul>
+                            <li>簡潔易讀的語法</li>
+                            <li>豐富的 AI 相關函式庫</li>
+                            <li>強大的社群支援</li>
+                            <li>適合快速原型製作</li>
+                            <li>與 C/C++ 的整合能力</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/6062/6062646.png" alt="Python 與 AI">
+                        </div>
+                        <p class="caption">Python 是 AI 開發的首選語言</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="slide">
+                <h3>2.2 AI 函式庫巡禮</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <ul>
+                            <li><b>NumPy</b>：高效陣列運算</li>
+                            <li><b>Pandas</b>：資料分析與處理</li>
+                            <li><b>Scikit-learn</b>：機器學習工具箱</li>
+                            <li><b>TensorFlow/PyTorch</b>：深度學習框架</li>
+                            <li><b>NLTK/spaCy</b>：自然語言處理</li>
+                            <li><b>OpenCV</b>：電腦視覺</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9356/9356230.png" alt="Python 庫">
+                        </div>
+                        <p class="caption">Python 擁有豐富的 AI 函式庫</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="convex">
+                <h3>2.3 Python 在 AI 的應用</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3039/3039418.png" alt="圖像辨識" style="height: 80px; display: block; margin: 0 auto;">
+                        <p style="text-align: center;">圖像辨識</p>
+                    </div>
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2271/2271068.png" alt="自然語言處理" style="height: 80px; display: block; margin: 0 auto;">
+                        <p style="text-align: center;">自然語言處理</p>
+                    </div>
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2329/2329087.png" alt="數據分析" style="height: 80px; display: block; margin: 0 auto;">
+                        <p style="text-align: center;">資料分析與預測</p>
+                    </div>
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/4616/4616734.png" alt="強化學習" style="height: 80px; display: block; margin: 0 auto;">
+                        <p style="text-align: center;">強化學習</p>
+                    </div>
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1648/1648517.png" alt="機器人控制" style="height: 80px; display: block; margin: 0 auto;">
+                        <p style="text-align: center;">機器人控制</p>
+                    </div>
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3068/3068325.png" alt="醫療診斷" style="height: 80px; display: block; margin: 0 auto;">
+                        <p style="text-align: center;">醫療診斷</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第三部分：實戰：用 Python 駕馭 AI -->
+            <section data-background-color="#8A7FBA" class="section-title">
+                <h2>3. 實戰：用 Python 駕馭 AI</h2>
+            </section>
+
+            <section data-transition="zoom">
+                <h3>3.1 ChatGPT 來幫忙</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <p>利用 ChatGPT 輔助 Python AI 開發：</p>
+                        <ul>
+                            <li>解釋複雜概念</li>
+                            <li>生成程式碼範例</li>
+                            <li>幫助除錯問題</li>
+                            <li>優化現有程式碼</li>
+                            <li>學習新的 AI 技術</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9073/9073117.png" alt="ChatGPT 界面">
+                        </div>
+                        <p class="caption">ChatGPT 可以幫助你學習和使用 AI</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="slide">
+                <h3>3.2 <span class="info-tooltip" data-modal="ideModal">ide</span> 神助攻</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <p>AI 輔助程式工具：</p>
+                        <ul>
+                            <li><b><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">vs code</a></b> + <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">github copilot</a></li>
+                            <li><b><a href="https://cursor.sh/" target="_blank" rel="noopener noreferrer">cursor</a></b> - 內建 ai 的程式碼編輯器</li>
+                            <li><b><a href="https://codeium.com/windsurf" target="_blank" rel="noopener noreferrer">windsurf</a></b> - 程式碼生成工具</li>
+                            <li><b><a href="https://www.jetbrains.com/ai/" target="_blank" rel="noopener noreferrer">jetbrains ai assistant</a></b></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/11508/11508811.png" alt="ide 界面">
+                        </div>
+                        <p class="caption">現代 ide 提供強大的 ai 輔助功能</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="convex">
+                <h3>3.3 範例教學：簡單線性回歸</h3>
+                <div class="two-columns">
+                    <div class="column" style="flex: 5;">
+                        <div class="code-example">
+                            <pre><code class="language-python">// 正在加載python代碼...</code></pre>
+                            <div class="code-source">
+                                <a href="python/linear_regression.py" target="_blank">查看源碼文件</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column" style="flex: 6;">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3624/3624545.png" alt="線性回歸圖">
+                        </div>
+                        <p class="caption">簡單線性回歸示例的結果圖</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第四部分：結語：AI 的無限可能 -->
+            <section data-background-color="#8A7FBA" class="section-title">
+                <h2>4. 結語：AI 的無限可能</h2>
+            </section>
+
+            <section data-transition="zoom">
+                <h3>未來展望</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <ul>
+                            <li>AI 技術持續快速發展</li>
+                            <li>更多跨領域應用出現</li>
+                            <li>Python 作為 AI 開發的重要工具</li>
+                            <li>進入 AI 開發領域的黃金時期</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9807/9807331.png" alt="未來科技">
+                        </div>
+                        <p class="caption">AI 的未來充滿無限可能</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="fade">
+                <h3>倫理提醒</h3>
+                <div class="two-columns">
+                    <div class="column">
+                        <p>AI 發展需要重視：</p>
+                        <ul>
+                            <li>資料隱私與安全</li>
+                            <li>演算法偏見與公平性</li>
+                            <li>透明度與可解釋性</li>
+                            <li>社會影響與就業變革</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <div class="image-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2911/2911001.png" alt="AI 倫理">
+                        </div>
+                        <p class="caption">AI 技術需要負責任地使用</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom" data-background="linear-gradient(135deg, #8A7FBA 0%, #B9E28C 100%)">
+                <h2 style="color: white; text-align: center;">謝謝聆聽！</h2>
+                <div class="image-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3940/3940731.png" alt="感謝" style="height: 150px;">
+                </div>
+                <h3 style="color: white; text-align: center;">讓我們一起探索 Python 與 AI 的精彩世界！</h3>
+                
+                <!-- 下載按鈕容器 -->
+                <div class="download-container">
+                    <a href="#" onclick="exportToPDF()" class="download-button">
+                        <i class="fas fa-file-pdf"></i> 下載PDF
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- 固定在右下角的下載按鈕 -->
+    <div class="floating-download">
+        <a href="#" onclick="exportToPDF()" title="下載PDF">
+            <i class="fas fa-file-pdf"></i>
+        </a>
+    </div>
+
+    <!-- 模態視窗 - IDE說明 -->
+    <div id="ideModal" class="modal-overlay">
+        <div class="modal-container">
+            <span class="modal-close">&times;</span>
+            <div class="modal-title">什麼是 IDE？</div>
+            <div class="modal-content">
+                <p><strong>整合開發環境</strong>（Integrated Development Environment，簡稱<strong>IDE</strong>）是一種專為程式設計師打造的應用程式，整合了開發軟體時所需的各種工具。</p>
+                <p>現代 IDE 通常包含：</p>
+                <ul>
+                    <li>程式碼編輯器（具有語法高亮、自動完成功能）</li>
+                    <li>編譯器或解釋器</li>
+                    <li>除錯工具（Debugger）</li>
+                    <li>版本控制整合</li>
+                    <li>智能程式碼提示</li>
+                    <li>AI輔助功能（如GitHub Copilot）</li>
+                </ul>
+                <p>IDE讓開發者能在單一應用程式內完成編寫、測試和部署程式的所有工作，大幅提高開發效率。</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn">了解了</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引用外部JS庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- 添加Prism.js和相關插件 -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    
+    <!-- 引用外部JS文件 -->
+    <script src="js/script.js"></script>
+    
+    <!-- 確保代碼加載 -->
+    <script>
+        // 確保在頁面完全加載後再調用
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                console.log('頁面已完全加載，準備加載Python代碼...');
+                if (typeof loadPythonCode === 'function') {
+                    loadPythonCode();
+                } else {
+                    console.error('loadPythonCode函數未定義!');
+                }
+            }, 1000); // 延遲1秒確保所有資源都已加載
+        });
+    </script>
+</body>
+</html> 
