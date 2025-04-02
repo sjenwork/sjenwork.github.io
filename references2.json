@@ -1,0 +1,27 @@
+{
+  "categories": [
+    {
+      "id": "youtube",
+      "title": "Youtube 影片",
+      "references": [
+        {
+          "author": "漢克蔡 - Ai 集",
+          "title": "重點摘要！15分鐘，幫你搞懂Google AI提示詞工程課程！幫你工作的AI大軍！",
+          "url": "https://www.youtube.com/watch?v=nCT0VIHVWzM"
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "技術文章",
+      "references": [
+      ]
+    },
+    {
+      "id": "news",
+      "title": "相關新聞",
+      "references": [
+      ]
+    }
+  ]
+} 
