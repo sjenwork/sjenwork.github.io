@@ -1,39 +1,62 @@
-# AI Agent 簡報專案
+# 個人網站
 
-這是一個關於 AI Agent 的網頁簡報專案，採用樹狀目錄結構組織。
+這是一個個人網站項目，包含多個功能板塊，展示個人作品、知識分享與技術內容。
 
 ## 目錄結構
 
 ```
 /
-├── index.html (重定向頁面)
+├── index.html (個人網站首頁)
 └── slides/
-    └── aiagent/
-        ├── index.html (AI Agent 簡報主頁)
-        ├── style.css
-        ├── script.js
-        ├── references.json
-        ├── references2.json
-        ├── MCP.png
-        ├── FlowiseAI_demo.mp4
-        └── 其他資源文件
+    ├── aiagent/
+    │   ├── index.html (AI Agent 簡報)
+    │   ├── style.css
+    │   ├── script.js
+    │   ├── resources...
+    │
+    └── talk-python-ai/
+        ├── index.html (Python 與 AI 簡報)
+        ├── css/
+        ├── js/
+        ├── python/
+        └── resources...
 ```
 
-## 訪問方式
+## 網站功能
 
-當訪問根目錄時，將自動重定向到 `slides/aiagent/` 路徑。
+網站包含以下主要功能區：
 
-## 內容說明
+1. **導航系統**：
+   - 左側抽屜式導航菜單
+   - 各功能區域快速切換
+   - 響應式設計，適配移動設備
 
-這個簡報主要介紹了 AI Agent 的基本概念、原理、類型、應用範例以及發展趨勢等內容。
+2. **內容區域**：
+   - **簡報集合**：展示各類技術簡報
+   - **專案展示**：展示個人開發項目
+   - **部落格文章**：技術文章與學習筆記
+   - **學習資源**：收集的優質學習資料
+   - **關於我**：個人介紹、技能展示與聯絡方式
 
 ## 技術實現
 
 - 純 HTML/CSS/JavaScript 實現
-- 使用 GSAP 實現動畫效果
 - 響應式設計，支持不同尺寸的設備
-- 支持鍵盤導航和觸摸屏操作
+- 卡片式內容展示
+- 動態內容切換功能
+- FontAwesome 圖標集成
+- 不同簡報採用不同的框架技術:
+  - AI Agent: GSAP 動畫庫
+  - Python 與 AI: Reveal.js 演示框架
 
 ## 使用方法
 
-克隆此存儲庫後，可以直接在瀏覽器中打開 index.html 文件，或使用 HTTP 服務器（如 live-server）啟動項目。 
+克隆此存儲庫後，可以直接在瀏覽器中打開 index.html 文件，或使用 HTTP 服務器（如 live-server）啟動項目。
+
+## 未來計劃
+
+- 添加更多簡報內容
+- 完善專案展示區域
+- 增加實際部落格文章
+- 豐富學習資源內容
+- 添加深色/淺色主題切換功能 

@@ -3,36 +3,661 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; URL=slides/aiagent/">
-    <title>重定向到 AI Agent 簡報</title>
+    <title>個人網站 | 首頁</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-color: #1a1a2e;
+            --card-bg: #242447;
+            --primary-color: #64dfdf;
+            --text-color: #f0f0f0;
+            --hover-color: #80ffdb;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --sidebar-width: 250px;
+            --sidebar-bg: #16162e;
+            --sidebar-hover: #2d2d5b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* 側邊導航欄 */
+        #sidebar {
+            height: 100%;
+            width: 0; /* 初始寬度為0 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: var(--sidebar-bg);
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            z-index: 100;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        #sidebar.open {
+            width: var(--sidebar-width);
+        }
+        
+        .sidebar-item {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            display: block;
+            transition: 0.3s;
+            border-left: 4px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .sidebar-item:hover, .sidebar-item.active {
+            background-color: var(--sidebar-hover);
+            border-left-color: var(--primary-color);
+        }
+        
+        .sidebar-item i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        #openSidebar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        #openSidebar:hover {
+            background-color: var(--hover-color);
+            transform: scale(1.05);
+        }
+        
+        #closeSidebar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        
+        /* 主內容區 */
+        #mainContent {
+            padding: 2rem;
+            transition: margin-left 0.3s ease;
+        }
+        
+        #mainContent.shifted {
+            margin-left: var(--sidebar-width);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-color), #b9e28c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .slides-grid, .projects-grid, .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .slide-card, .project-card, .blog-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-card:hover, .project-card:hover, .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+        
+        .card-preview {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide-card:hover .card-preview img, 
+        .project-card:hover .card-preview img,
+        .blog-card:hover .card-preview img {
+            transform: scale(1.1);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(26, 26, 46, 0), rgba(26, 26, 46, 0.8));
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        .card-description {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            flex-grow: 1;
+        }
+        
+        .card-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .card-link:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .profile {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #1a1a2e;
-            color: #fff;
+            margin-bottom: 3rem;
+        }
+        
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
             text-align: center;
         }
-        a {
-            color: #64dfdf;
-            text-decoration: none;
-            border-bottom: 1px solid #64dfdf;
-            padding-bottom: 2px;
+        
+        .skill-item {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             transition: all 0.3s ease;
         }
-        a:hover {
-            color: #80ffdb;
-            border-bottom-color: #80ffdb;
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .resource-item {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .resource-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            #mainContent {
+                padding: 1rem;
+            }
+            
+            .slides-grid, .projects-grid, .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #mainContent.shifted {
+                margin-left: 0;
+            }
+            
+            #sidebar.open {
+                width: 100%;
+            }
+            
+            .profile {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>正在重定向...</h1>
-    <p>如果您沒有被自動重定向，請<a href="slides/aiagent/">點擊這裡</a>前往 AI Agent 簡報。</p>
+    <!-- 側邊導航欄 -->
+    <div id="sidebar">
+        <button id="closeSidebar">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#" class="sidebar-item active" data-section="presentations">
+            <i class="fas fa-desktop"></i> 簡報集合
+        </a>
+        <a href="#" class="sidebar-item" data-section="projects">
+            <i class="fas fa-code"></i> 專案展示
+        </a>
+        <a href="#" class="sidebar-item" data-section="blog">
+            <i class="fas fa-blog"></i> 部落格文章
+        </a>
+        <a href="#" class="sidebar-item" data-section="resources">
+            <i class="fas fa-book"></i> 學習資源
+        </a>
+        <a href="#" class="sidebar-item" data-section="about">
+            <i class="fas fa-user"></i> 關於我
+        </a>
+    </div>
+    
+    <!-- 側邊欄切換按鈕 -->
+    <button id="openSidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- 主內容區 -->
+    <div id="mainContent">
+        <div class="container">
+            <header>
+                <h1>個人網站</h1>
+                <p class="subtitle">探索知識，分享見解</p>
+            </header>
+            
+            <!-- 簡報區塊 -->
+            <div class="section active" id="presentations">
+                <h2 class="section-title">簡報集合</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">這裡收集了我製作的各種主題簡報，涵蓋AI、程式設計等領域。</p>
+                <div class="slides-grid">
+                    <!-- AI Agent 簡報卡片 -->
+                    <div class="slide-card">
+                        <div class="card-preview">
+                            <img src="https://cdn-icons-png.flaticon.com/512/8637/8637099.png" alt="AI Agent 簡報預覽">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">AI Agent 簡報</h2>
+                            <p class="card-description">探索 AI Agent 的基本概念、原理、類型、應用範例以及發展趨勢。了解人工智能如何通過代理形式改變我們的生活和工作方式。</p>
+                            <a href="slides/aiagent/" class="card-link">查看簡報</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Python 與 AI 簡報卡片 -->
+                    <div class="slide-card">
+                        <div class="card-preview">
+                            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python 與 AI 簡報預覽">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">Python 與 AI 的奇幻之旅</h2>
+                            <p class="card-description">探索 Python 與人工智能的結合，了解如何使用 Python 進行 AI 開發，以及 AI 技術在各領域的應用。適合程式設計初學者的入門指南。</p>
+                            <a href="slides/talk-python-ai/" class="card-link">查看簡報</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 專案展示區塊 -->
+            <div class="section" id="projects">
+                <h2 class="section-title">專案展示</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">這裡展示了我的開發專案，包括前後端、AI應用等多種類型。</p>
+                <div class="projects-grid">
+                    <!-- 專案卡片範例 -->
+                    <div class="project-card">
+                        <div class="card-preview">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2721/2721304.png" alt="網站開發專案">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">個人網站開發</h2>
+                            <p class="card-description">使用HTML、CSS和JavaScript開發的響應式個人網站，包含多個功能頁面和互動元素。</p>
+                            <p><small>技術：HTML/CSS, JavaScript</small></p>
+                            <a href="#" class="card-link">查看專案</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="card-preview">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1336/1336494.png" alt="AI應用專案">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">AI助理應用</h2>
+                            <p class="card-description">基於大型語言模型開發的AI助理應用，能夠理解自然語言並執行多種任務。</p>
+                            <p><small>技術：Python, LangChain, OpenAI API</small></p>
+                            <a href="#" class="card-link">查看專案</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 部落格文章區塊 -->
+            <div class="section" id="blog">
+                <h2 class="section-title">部落格文章</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">這裡是我撰寫的技術文章和學習筆記，記錄我的知識探索歷程。</p>
+                <div class="blog-grid">
+                    <!-- 部落格文章卡片範例 -->
+                    <div class="blog-card">
+                        <div class="card-preview">
+                            <img src="https://cdn-icons-png.flaticon.com/512/10831/10831608.png" alt="深度學習文章">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">深度學習入門指南</h2>
+                            <p class="card-description">本文介紹深度學習的基本概念、常用框架和入門級專案，幫助新手快速上手。</p>
+                            <p><small>發布日期：2024-02-15</small></p>
+                            <a href="#" class="card-link">閱讀文章</a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card">
+                        <div class="card-preview">
+                            <img src="https://cdn-icons-png.flaticon.com/512/8099/8099237.png" alt="前端開發文章">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">現代前端開發技巧</h2>
+                            <p class="card-description">分享我在前端開發中使用的高效工具和技巧，幫助你提高開發效率和代碼質量。</p>
+                            <p><small>發布日期：2024-01-22</small></p>
+                            <a href="#" class="card-link">閱讀文章</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 學習資源區塊 -->
+            <div class="section" id="resources">
+                <h2 class="section-title">學習資源</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">這裡匯集了我收集的優質學習資源，幫助你在技術領域不斷進步。</p>
+                <div class="resources-grid">
+                    <div class="resource-item">
+                        <h3 class="resource-title">機器學習資源</h3>
+                        <ul>
+                            <li><a href="#" style="color: var(--primary-color);">Stanford CS229 機器學習課程</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">Kaggle 機器學習入門</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">《機器學習實戰》書籍推薦</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">TensorFlow 官方教程</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <h3 class="resource-title">Web 開發資源</h3>
+                        <ul>
+                            <li><a href="#" style="color: var(--primary-color);">MDN Web 文檔</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">FreeCodeCamp 課程</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">CSS-Tricks 網站</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">JavaScript.info 教程</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <h3 class="resource-title">Python 編程資源</h3>
+                        <ul>
+                            <li><a href="#" style="color: var(--primary-color);">Python 官方文檔</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">Real Python 教程</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">Python Crash Course 書籍</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">PyCharm IDE 使用指南</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <h3 class="resource-title">AI 研究資源</h3>
+                        <ul>
+                            <li><a href="#" style="color: var(--primary-color);">arXiv AI 論文庫</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">OpenAI 研究博客</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">DeepMind 研究成果</a></li>
+                            <li><a href="#" style="color: var(--primary-color);">AI 倫理與發展趨勢</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 關於我區塊 -->
+            <div class="section" id="about">
+                <h2 class="section-title">關於我</h2>
+                <div class="profile">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="個人照片" class="profile-image">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">孫既仁</h3>
+                    <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 1.5rem;">AI 開發者 | Web 開發者 | 技術講師</p>
+                </div>
+                
+                <div class="about-content">
+                    <p style="margin-bottom: 1.5rem;">我是一名專注於人工智能和Web開發的工程師，擁有多年的軟體開發經驗。我熱衷於探索最新的技術趨勢，並將其應用於解決實際問題。</p>
+                    
+                    <p style="margin-bottom: 1.5rem;">在工作之餘，我喜歡撰寫技術文章、製作教學簡報，並參與開源項目。我相信知識共享的價值，希望通過我的貢獻幫助更多人學習和成長。</p>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">專業技能</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-python skill-icon"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js skill-icon"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-react skill-icon"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-node-js skill-icon"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database skill-icon"></i>
+                            <span>SQL/NoSQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-robot skill-icon"></i>
+                            <span>機器學習</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-brain skill-icon"></i>
+                            <span>深度學習</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-desktop skill-icon"></i>
+                            <span>Web 開發</span>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">聯絡方式</h3>
+                    <p>
+                        <i class="fas fa-envelope" style="color: var(--primary-color); margin-right: 10px;"></i> 
+                        <a href="mailto:example@example.com" style="color: var(--text-color); text-decoration: none;">example@example.com</a>
+                    </p>
+                    <p>
+                        <i class="fab fa-github" style="color: var(--primary-color); margin-right: 10px;"></i> 
+                        <a href="https://github.com/" target="_blank" style="color: var(--text-color); text-decoration: none;">github.com/sjenwork</a>
+                    </p>
+                    <p>
+                        <i class="fab fa-linkedin" style="color: var(--primary-color); margin-right: 10px;"></i> 
+                        <a href="https://linkedin.com/" target="_blank" style="color: var(--text-color); text-decoration: none;">linkedin.com/in/username</a>
+                    </p>
+                </div>
+            </div>
+            
+            <footer>
+                <p>&copy; 2024 個人網站. 保留所有權利。</p>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        // 直接在頁面載入後執行
+        window.onload = function() {
+            const openBtn = document.getElementById('openSidebar');
+            const closeBtn = document.getElementById('closeSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const sections = document.querySelectorAll('.section');
+            
+            // 打開側邊欄
+            openBtn.addEventListener('click', function() {
+                console.log("嘗試打開側邊欄");
+                sidebar.classList.add('open');
+                if (window.innerWidth > 768) {
+                    mainContent.classList.add('shifted');
+                }
+            });
+            
+            // 關閉側邊欄
+            closeBtn.addEventListener('click', function() {
+                console.log("嘗試關閉側邊欄");
+                sidebar.classList.remove('open');
+                mainContent.classList.remove('shifted');
+            });
+            
+            // 側邊欄項目點擊
+            sidebarItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log("點擊側邊欄項目: " + this.getAttribute('data-section'));
+                    
+                    // 清除所有激活狀態
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // 設置當前激活狀態
+                    this.classList.add('active');
+                    const targetSection = this.getAttribute('data-section');
+                    document.getElementById(targetSection).classList.add('active');
+                    
+                    // 在移動設備上自動關閉側邊欄
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            });
+            
+            console.log("側邊欄功能已初始化");
+        };
+    </script>
 </body>
 </html> 
