@@ -172,6 +172,7 @@ body {
     align-items: center;
     padding: 20px 0;
     border-radius: 0; /* 確保側邊欄沒有圓角 */
+    touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
 }
 
 #sidebar.open {
@@ -1340,4 +1341,365 @@ a, button, input, select, textarea {
     transition-property: background-color, color, border-color, box-shadow;
     transition-duration: 0.3s;
     transition-timing-function: var(--transition-function);
+}
+
+/* 快捷鍵指南樣式 */
+.shortcut-guide {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 300px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s var(--transition-function);
+    overflow: hidden;
+    border-left: 4px solid var(--primary-color);
+}
+
+.shortcut-guide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.guide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--section-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.guide-header h3 {
+    margin: 0;
+    color: var(--heading-color);
+    font-size: 1.2rem;
+}
+
+.guide-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s var(--transition-function);
+}
+
+.guide-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.guide-content {
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.shortcut-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.key {
+    background-color: var(--section-bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-right: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 80px;
+    text-align: center;
+}
+
+.description {
+    flex: 1;
+    color: var(--text-color);
+}
+
+/* 回到頂部按鈕 */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s var(--transition-function);
+    z-index: 99;
+}
+
+.back-to-top.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .shortcut-guide {
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
+/* 手勢提示按鈕 */
+.gesture-tips-button {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 99;
+    transition: all 0.3s var(--transition-function);
+}
+
+.gesture-tips-button:hover, .gesture-tips-button:focus {
+    background-color: var(--hover-color);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 手勢提示對話框 */
+.gesture-tips-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 300px;
+    max-width: 90%;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s var(--transition-function);
+    overflow: hidden;
+    border-left: 4px solid var(--primary-color);
+}
+
+.gesture-tips-dialog.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.tips-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--section-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tips-header h3 {
+    margin: 0;
+    color: var(--heading-color);
+    font-size: 1.2rem;
+}
+
+.tips-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s var(--transition-function);
+}
+
+.tips-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.tips-content {
+    padding: 15px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.gesture-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.gesture-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.gesture-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--section-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.gesture-desc {
+    flex: 1;
+}
+
+.gesture-desc h4 {
+    margin: 0 0 5px;
+    color: var(--heading-color);
+    font-size: 1rem;
+}
+
+.gesture-desc p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+/* 手勢提示動畫 */
+.gesture-icon i {
+    animation: pulseIcon 2s infinite;
+}
+
+@keyframes pulseIcon {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* 滑動動畫效果 */
+.gesture-icon .fa-arrow-right {
+    animation: swipeRight 2s infinite;
+}
+
+.gesture-icon .fa-arrow-left {
+    animation: swipeLeft 2s infinite;
+}
+
+.gesture-icon .fa-exchange {
+    animation: swipeExchange 3s infinite;
+}
+
+.gesture-icon .fa-arrows-h {
+    animation: pinchAnimation 3s infinite;
+}
+
+@keyframes swipeRight {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(-5px); }
+}
+
+@keyframes swipeLeft {
+    0% { transform: translateX(5px); }
+    50% { transform: translateX(-5px); }
+    100% { transform: translateX(5px); }
+}
+
+@keyframes swipeExchange {
+    0% { transform: translateX(-5px); }
+    33% { transform: translateX(5px); }
+    66% { transform: translateX(-5px); }
+    100% { transform: translateX(-5px); }
+}
+
+@keyframes pinchAnimation {
+    0% { transform: scaleX(0.8); }
+    50% { transform: scaleX(1.2); }
+    100% { transform: scaleX(0.8); }
+}
+
+/* 側邊欄滑動優化 */
+#sidebar {
+    /* 已有樣式 */
+    touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .gesture-tips-button {
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    /* 當回到頂部按鈕顯示時，提示按鈕移動位置 */
+    .back-to-top.active ~ .gesture-tips-button {
+        transform: translateY(-65px);
+    }
 } 
