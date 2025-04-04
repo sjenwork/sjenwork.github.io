@@ -171,6 +171,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px 0;
+    border-radius: 0; /* 確保側邊欄沒有圓角 */
 }
 
 #sidebar.open {
@@ -218,12 +219,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0 30px;
+    padding: 20px 0 25px;
     margin-bottom: 20px;
     width: 100%;
     border-bottom: 1px solid var(--border-light);
     background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 0 0 0; /* 移除圓角 */
 }
 
 .user-avatar-container {
@@ -774,15 +775,15 @@ footer p {
     }
     
     .theme-switcher {
-        bottom: 15px;
-        right: 15px;
-        padding: 8px;
+        width: 85%; /* 在小螢幕上稍微寬一點 */
+        padding: 6px; /* 更小的內邊距 */
+        margin-bottom: 15px; /* 更小的底部間距 */
     }
     
     .theme-option {
-        width: 25px;
-        height: 25px;
-        margin: 0 3px;
+        width: 22px; /* 更小的主題選項 */
+        height: 22px; /* 更小的主題選項 */
+        margin: 0 3px; /* 更小的間距 */
     }
     
     footer {
@@ -824,26 +825,28 @@ body::before {
     border-left-color: #7986cb;
 }
 
-/* 主題切換器樣式 */
+/* 主題切換器樣式 - 調整為側邊欄底部 */
 .theme-switcher {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    position: relative; /* 改為相對定位 */
+    margin-top: auto; /* 推至sidebar底部 */
+    margin-bottom: 20px; /* 底部間距 */
     z-index: 1000;
-    background-color: var(--card-bg);
-    border-radius: 50px;
-    box-shadow: 0 2px 10px var(--shadow-color);
-    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* 半透明背景，更協調 */
+    border-radius: 20px; /* 更小的圓角，更協調 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 8px; /* 更小的內邊距 */
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
+    justify-content: center; /* 居中顯示 */
+    width: 75%; /* 調整寬度稍微小一點 */
 }
 
 .theme-option {
-    width: 30px;
-    height: 30px;
+    width: 25px; /* 更小的主題選項 */
+    height: 25px; /* 更小的主題選項 */
     border-radius: 50%;
-    margin: 0 5px;
+    margin: 0 4px;
     cursor: pointer;
     border: 2px solid transparent;
     transition: all 0.3s var(--transition-function);
@@ -854,10 +857,10 @@ body::before {
 }
 
 .theme-option.active {
-    border-color: var(--primary-color);
-    border-width: 3px;
-    transform: scale(1.2);
-    box-shadow: 0 0 8px var(--primary-color);
+    border-color: white; /* 使用白色邊框，更協調 */
+    border-width: 2px; /* 細一點的邊框 */
+    transform: scale(1.15);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* 柔和的發光效果 */
 }
 
 /* 各個主題選項的固定顏色 */
