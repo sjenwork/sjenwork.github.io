@@ -178,11 +178,20 @@ function initSidebar() {
         e.stopPropagation();
         
         sidebar.classList.toggle('open');
-        menuToggle.classList.toggle('open');
+        this.classList.toggle('open');
         
         // 在大屏幕上移動主內容區
         if (window.innerWidth > 768) {
             mainContent.classList.toggle('shifted');
+        }
+        
+        // 根據側邊欄狀態修改按鈕圖標
+        if(sidebar.classList.contains('open')) {
+            // 如果側邊欄打開，改變圖標為關閉圖標
+            this.querySelector('i').className = 'fa fa-times';
+        } else {
+            // 如果側邊欄關閉，改變圖標為菜單圖標
+            this.querySelector('i').className = 'fa fa-bars';
         }
     });
     

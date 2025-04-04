@@ -166,7 +166,7 @@ body {
     overflow-x: hidden;
     transition: transform var(--transition-speed) var(--transition-function);
     box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
-    z-index: 100;
+    z-index: 1000; /* 提高z-index確保側邊欄在按鈕上方 */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -191,7 +191,7 @@ body {
     height: 50px;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 103;
+    z-index: 1001; /* 確保按鈕在側邊欄上方 */
     box-shadow: 0 4px 10px var(--shadow-color);
     display: flex;
     align-items: center;
@@ -693,19 +693,38 @@ footer p {
 
 @media (max-width: 768px) {
     #sidebar {
-        width: 85%; /* 手機版更寬的sidebar */
-        left: calc(-1 * 85%); /* 確保完全在畫面外 */
+        width: var(--sidebar-width);
+        left: calc(-1 * var(--sidebar-width));
+        z-index: 1000; /* 確保側邊欄在按鈕上方 */
     }
     
     #sidebar.open {
-        transform: translateX(100%);
+        transform: translateX(var(--sidebar-width));
     }
     
+    /* 在側邊欄打開時移動菜單按鈕 */
     #menuToggle {
         top: 15px;
         left: 15px;
         width: 45px;
         height: 45px;
+        z-index: 1001; /* 確保按鈕在側邊欄上方 */
+        transition: transform var(--transition-speed) var(--transition-function),
+                    background-color var(--transition-speed) var(--transition-function),
+                    box-shadow var(--transition-speed) var(--transition-function);
+    }
+    
+    /* 當側邊欄打開時，移動菜單按鈕到右側外側 */
+    #sidebar.open ~ #mainContent #menuToggle {
+        transform: translateX(calc(var(--sidebar-width) + 15px));
+        background-color: var(--primary-color);
+        z-index: 1001; /* 確保按鈕在側邊欄上方 */
+        left: 0;
+    }
+    
+    /* 調整菜單按鈕旋轉方向 */
+    #sidebar.open ~ #mainContent #menuToggle i {
+        transform: rotate(180deg);
     }
     
     #mainContent {
