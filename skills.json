@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Python",
+        "icon": "fab fa-python"
+    },
+    {
+        "name": "JavaScript",
+        "icon": "fab fa-js"
+    },
+    {
+        "name": "Vue",
+        "icon": "fab fa-vuejs"
+    },
+    {
+        "name": "Linux",
+        "icon": "fab fa-linux"
+    },
+    {
+        "name": "Bash",
+        "icon": "fas fa-terminal"
+    },
+    {
+        "name": "Docker",
+        "icon": "fab fa-docker"
+    },
+    {
+        "name": "SQL/NoSQL",
+        "icon": "fas fa-database"
+    },
+    {
+        "name": "機器學習",
+        "icon": "fas fa-robot"
+    },
+    {
+        "name": "深度學習",
+        "icon": "fas fa-brain"
+    },
+    {
+        "name": "Web 開發",
+        "icon": "fas fa-desktop"
+    }
+] 
