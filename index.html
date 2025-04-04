@@ -8,44 +8,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 側邊導航欄 -->
     <div id="sidebar">
         <!-- 用戶資訊區塊 -->
         <div class="user-profile">
             <div class="user-avatar-container">
-                <img src="images/profile/avatar.jpg" alt="用戶頭像" class="user-avatar">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="用戶頭像" class="user-avatar">
                 <!-- <span class="notification-badge">3</span> -->
             </div>
             <div class="user-name">孫既仁</div>
         </div>
         <!-- 側邊欄菜單 -->
         <div class="sidebar-menu">
-            <a href="#" class="sidebar-item active" data-section="presentations">
-                <i class="fas fa-desktop"></i> 簡報集合
-            </a>
-            <a href="#" class="sidebar-item" data-section="projects">
-                <i class="fas fa-code"></i> 專案展示
-            </a>
-            <a href="#" class="sidebar-item" data-section="blog">
-                <i class="fas fa-blog"></i> 部落格文章
-            </a>
-            <a href="#" class="sidebar-item" data-section="resources">
-                <i class="fas fa-book"></i> 學習資源
-            </a>
-            <a href="#" class="sidebar-item" data-section="about">
-                <i class="fas fa-user"></i> 關於我
-            </a>
+            <a href="#" class="sidebar-item active" data-section="presentations"><i class="fa fa-home"></i>首頁</a>
+            <a href="#" class="sidebar-item" data-section="presentations"><i class="fa fa-desktop"></i>簡報</a>
+            <a href="#" class="sidebar-item" data-section="projects"><i class="fa fa-code"></i>專案</a>
+            <a href="#" class="sidebar-item" data-section="blog"><i class="fa fa-pencil"></i>部落格</a>
+            <a href="#" class="sidebar-item" data-section="about"><i class="fa fa-user"></i>關於我</a>
+            <a href="#" class="sidebar-item" data-section="about"><i class="fa fa-star"></i>技能</a>
+            <a href="#" class="sidebar-item" data-section="resources"><i class="fa fa-book"></i>資源</a>
         </div>
     </div>
     
-    <!-- 主內容區 -->
+    <button id="menuToggle"><i class="fa fa-bars"></i></button>
+
+    <!-- 主題切換器 -->
+    <div class="theme-switcher">
+        <div class="theme-option active" data-theme="default" title="藍紫主題"></div>
+        <div class="theme-option" data-theme="dark" title="深色主題"></div>
+        <div class="theme-option" data-theme="green" title="綠色主題"></div>
+        <div class="theme-option" data-theme="ocean" title="海洋主題"></div>
+        <div class="theme-option" data-theme="warm" title="暖色主題"></div>
+    </div>
+
     <div id="mainContent">
         <header>
-            <!-- 菜單切換按鈕 -->
-            <button id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            
             <img src="images/banners/header-bg.jpg" alt="header背景圖片" class="banner-image">
             <div class="header-content">
                 <h1>個人網站</h1>

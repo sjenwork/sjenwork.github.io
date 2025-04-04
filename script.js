@@ -11,18 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     sidebar.classList.remove('open');
     mainContent.classList.remove('shifted');
     
-    // 菜單切換按鈕點擊事件
-    menuToggle.addEventListener('click', function(e) {
-        // 防止事件冒泡，避免觸發mainContent的點擊事件
-        e.stopPropagation();
-        
-        sidebar.classList.toggle('open');
-        this.classList.toggle('open');
-        
-        // 切換主內容區域的寬度和位置
-        mainContent.classList.toggle('shifted');
-    });
-    
     // 側邊欄項目點擊事件
     sidebarItems.forEach(item => {
         item.addEventListener('click', function(e) {
@@ -70,6 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // 加載技能數據並生成技能列表
     loadSkills();
     
+    // 初始化側邊欄
+    initSidebar();
+    
+    // 初始化主題切換器
+    initThemeSwitcher();
+    
     console.log("側邊欄功能已初始化");
 });
 
@@ -114,4 +108,117 @@ function loadSkills() {
             console.error('加載技能數據時出錯：', error);
             skillsContainer.innerHTML = '<p style="color: red;">無法加載技能數據，請稍後再試。</p>';
         });
+}
+
+// 初始化側邊欄功能
+function initSidebar() {
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    
+    // 菜單按鈕點擊事件
+    menuToggle.addEventListener('click', function(e) {
+        // 防止事件冒泡到mainContent
+        e.stopPropagation();
+        
+        sidebar.classList.toggle('open');
+        menuToggle.classList.toggle('open');
+        
+        // 在大屏幕上移動主內容區
+        if (window.innerWidth > 768) {
+            mainContent.classList.toggle('shifted');
+        }
+    });
+    
+    // 點擊側邊欄項目
+    sidebarItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 移除所有項目的活動狀態
+            sidebarItems.forEach(i => i.classList.remove('active'));
+            
+            // 設置當前項目為活動狀態
+            this.classList.add('active');
+            
+            // 獲取對應的部分ID
+            const sectionId = this.getAttribute('data-section');
+            
+            // 隱藏所有部分
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 顯示所選部分
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // 在移動設備上關閉側邊欄
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+                menuToggle.classList.remove('open');
+            }
+        });
+    });
+    
+    // 點擊主內容區域時在移動設備上關閉側邊欄
+    mainContent.addEventListener('click', function() {
+        if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+            menuToggle.classList.remove('open');
+        }
+    });
+}
+
+// 初始化主題切換功能
+function initThemeSwitcher() {
+    const themeOptions = document.querySelectorAll('.theme-option');
+    
+    // 檢查本地存儲中是否有保存的主題
+    const savedTheme = localStorage.getItem('preferred-theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+        
+        // 更新活動選項
+        themeOptions.forEach(option => {
+            if (option.getAttribute('data-theme') === savedTheme) {
+                option.classList.add('active');
+            } else {
+                option.classList.remove('active');
+            }
+        });
+    }
+    
+    // 為每個主題選項添加點擊事件
+    themeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+            
+            // 移除所有選項的活動狀態
+            themeOptions.forEach(opt => opt.classList.remove('active'));
+            
+            // 設置當前選項為活動狀態
+            this.classList.add('active');
+            
+            // 設置主題
+            setTheme(theme);
+            
+            // 保存偏好到本地存儲
+            localStorage.setItem('preferred-theme', theme);
+        });
+    });
+}
+
+// 設置主題
+function setTheme(theme) {
+    // 移除舊主題
+    document.documentElement.removeAttribute('data-theme');
+    
+    // 如果不是默認主題，則添加新主題
+    if (theme !== 'default') {
+        document.documentElement.setAttribute('data-theme', theme);
+    }
 } 

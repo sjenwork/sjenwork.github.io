@@ -1,4 +1,5 @@
 :root {
+    /* 默認主題變量 (當前藍紫色主題) */
     --bg-color: #f7f5f3; /* 溫暖的淺灰背景 */
     --card-bg: #ffffff; /* 白色卡片背景 */
     --primary-color: #7986cb; /* 柔和的藍紫色替代強紫色 */
@@ -11,6 +12,66 @@
     --notification-color: #ef5350; /* 稍柔和的紅色通知 */
     --section-bg: #f1f3f7; /* 淡藍灰色區塊背景 */
     --header-overlay: rgba(55, 71, 79, 0.7); /* 深灰色半透明遮罩 */
+}
+
+/* 深色主題 */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --primary-color: #bb86fc;
+    --text-color: #e0e0e0;
+    --hover-color: #d7a9ff;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --sidebar-bg: #000000;
+    --sidebar-hover: #2d2d2d;
+    --notification-color: #cf6679;
+    --section-bg: #252525;
+    --header-overlay: rgba(0, 0, 0, 0.8);
+}
+
+/* 綠色主題 */
+[data-theme="green"] {
+    --bg-color: #f0f7f4;
+    --card-bg: #ffffff;
+    --primary-color: #2e7d32;
+    --text-color: #2e2e2e;
+    --hover-color: #43a047;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --sidebar-bg: #1b5e20;
+    --sidebar-hover: #2e7d32;
+    --notification-color: #f44336;
+    --section-bg: #e8f5e9;
+    --header-overlay: rgba(27, 94, 32, 0.8);
+}
+
+/* 海洋主題 */
+[data-theme="ocean"] {
+    --bg-color: #e3f2fd;
+    --card-bg: #ffffff;
+    --primary-color: #0277bd;
+    --text-color: #263238;
+    --hover-color: #039be5;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --sidebar-bg: #01579b;
+    --sidebar-hover: #0288d1;
+    --notification-color: #ff5722;
+    --section-bg: #bbdefb;
+    --header-overlay: rgba(1, 87, 155, 0.8);
+}
+
+/* 暖色主題 */
+[data-theme="warm"] {
+    --bg-color: #fff8e1;
+    --card-bg: #ffffff;
+    --primary-color: #ff6f00;
+    --text-color: #4e342e;
+    --hover-color: #ff8f00;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --sidebar-bg: #e65100;
+    --sidebar-hover: #f57c00;
+    --notification-color: #d81b60;
+    --section-bg: #ffecb3;
+    --header-overlay: rgba(230, 81, 0, 0.8);
 }
 
 * {
@@ -533,6 +594,18 @@ footer {
     .slide-card, .project-card, .blog-card {
         max-width: 100%;
     }
+    
+    .theme-switcher {
+        bottom: 15px;
+        right: 15px;
+        padding: 8px;
+    }
+    
+    .theme-option {
+        width: 25px;
+        height: 25px;
+        margin: 0 3px;
+    }
 }
 
 /* 背景紋理效果 */
@@ -563,4 +636,65 @@ body::before {
 .sidebar-item.active {
     background-color: #546e7a;
     border-left-color: #7986cb;
+}
+
+/* 主題切換器樣式 */
+.theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--card-bg);
+    border-radius: 50px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.theme-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.theme-option:hover {
+    transform: scale(1.1);
+}
+
+.theme-option.active {
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* 各個主題選項的顏色 */
+.theme-option[data-theme="default"] {
+    background: linear-gradient(135deg, #7986cb 50%, #37474f 50%);
+}
+
+.theme-option[data-theme="dark"] {
+    background: linear-gradient(135deg, #bb86fc 50%, #121212 50%);
+}
+
+.theme-option[data-theme="green"] {
+    background: linear-gradient(135deg, #2e7d32 50%, #1b5e20 50%);
+}
+
+.theme-option[data-theme="ocean"] {
+    background: linear-gradient(135deg, #0277bd 50%, #01579b 50%);
+}
+
+.theme-option[data-theme="warm"] {
+    background: linear-gradient(135deg, #ff6f00 50%, #e65100 50%);
+}
+
+/* 主題切換器懸停效果增強 */
+.theme-switcher:hover {
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transform: translateY(-2px);
 } 
