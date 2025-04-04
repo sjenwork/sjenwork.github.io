@@ -1,37 +1,60 @@
 :root {
-    /* 默認主題變量 (當前藍紫色主題) */
-    --bg-color: #f7f5f3; /* 溫暖的淺灰背景 */
-    --card-bg: #ffffff; /* 白色卡片背景 */
-    --primary-color: #7986cb; /* 柔和的藍紫色替代強紫色 */
-    --text-color: #333333; /* 深色文字確保可讀性 */
-    --hover-color: #9fa8da; /* 更淺的藍紫色作為懸停效果 */
-    --shadow-color: rgba(68, 68, 68, 0.15); /* 中性陰影 */
+    /* 默認主題變量 (藍紫色主題) */
+    --bg-color: #f7f5f3;
+    --card-bg: #ffffff;
+    --primary-color: #7986cb;
+    --text-color: #333333;
+    --hover-color: #9fa8da;
+    --shadow-color: rgba(68, 68, 68, 0.15);
     --sidebar-width: 280px;
-    --sidebar-bg: #37474f; /* 更柔和的深灰色側邊欄 */
-    --sidebar-hover: #546e7a; /* 更柔和的灰色作為懸停效果 */
-    --notification-color: #ef5350; /* 稍柔和的紅色通知 */
-    --section-bg: #f1f3f7; /* 淡藍灰色區塊背景 */
-    --header-overlay: rgba(55, 71, 79, 0.7); /* 深灰色半透明遮罩 */
+    --sidebar-bg: #37474f;
+    --sidebar-hover: #546e7a;
+    --notification-color: #ef5350;
+    --section-bg: #f1f3f7;
+    --header-overlay: rgba(55, 71, 79, 0.7);
+    
+    /* 透明度變量 */
+    --trans-light: 0.1;
+    --trans-medium: 0.2;
+    --trans-dark: 0.3;
+    
+    /* 輔助顏色變量 */
+    --border-color: rgba(121, 134, 203, 0.15);
+    --border-light: rgba(255, 255, 255, 0.2);
+    --heading-color: var(--sidebar-bg);
+    --grid-color: rgba(55, 71, 79, 0.03);
+    --avatar-border: var(--primary-color);
+    --header-bg: rgba(55, 71, 79, 0.6);
+    --card-border-bottom: var(--primary-color);
+    --icon-bg: #f5f7fc;
+    --icon-border: #dde3f0;
 }
 
 /* 深色主題 */
 [data-theme="dark"] {
     --bg-color: #121212;
     --card-bg: #1e1e1e;
-    --primary-color: #bb86fc; /* 亮紫色 */
+    --primary-color: #bb86fc;
     --text-color: #e0e0e0;
-    --hover-color: #d7a9ff; /* 更亮的紫色 */
-    --shadow-color: rgba(187, 134, 252, 0.25); /* 紫色陰影 */
+    --hover-color: #d7a9ff;
+    --shadow-color: rgba(187, 134, 252, 0.25);
     --sidebar-bg: #1a1a1a;
-    --sidebar-hover: #3a3052; /* 深紫色調 */
-    --notification-color: #ff79c6; /* 粉紫色通知 */
+    --sidebar-hover: #3a3052;
+    --notification-color: #ff79c6;
     --section-bg: #2d2d2d;
     --header-overlay: rgba(18, 18, 18, 0.85);
     
-    /* 深色主題專用變量 */
-    --dark-purple-accent: #6200ee; /* 深紫色強調 */
-    --dark-purple-light: rgba(187, 134, 252, 0.15); /* 淡紫色背景 */
-    --dark-purple-border: rgba(187, 134, 252, 0.3); /* 淡紫色邊框 */
+    /* 深色主題特有變量 */
+    --border-color: rgba(187, 134, 252, 0.3);
+    --border-light: rgba(187, 134, 252, 0.1);
+    --heading-color: var(--primary-color);
+    --dark-accent: #6200ee;
+    --grid-color: rgba(187, 134, 252, 0.05);
+    --avatar-border: var(--dark-accent);
+    --header-bg: rgba(98, 0, 238, 0.2);
+    --card-border-bottom: var(--dark-accent);
+    --icon-bg: rgba(187, 134, 252, 0.1);
+    --icon-border: rgba(187, 134, 252, 0.2);
 }
 
 /* 綠色主題 */
@@ -47,6 +70,17 @@
     --notification-color: #f44336;
     --section-bg: #e8f5e9;
     --header-overlay: rgba(27, 94, 32, 0.8);
+    
+    /* 綠色主題特有變量 */
+    --border-color: rgba(46, 125, 50, 0.2);
+    --border-light: rgba(255, 255, 255, 0.2);
+    --heading-color: var(--primary-color);
+    --grid-color: rgba(27, 94, 32, 0.05);
+    --avatar-border: var(--primary-color);
+    --header-bg: rgba(27, 94, 32, 0.4);
+    --card-border-bottom: var(--primary-color);
+    --icon-bg: rgba(46, 125, 50, 0.1);
+    --icon-border: rgba(46, 125, 50, 0.2);
 }
 
 /* 海洋主題 */
@@ -62,6 +96,17 @@
     --notification-color: #ff5722;
     --section-bg: #bbdefb;
     --header-overlay: rgba(1, 87, 155, 0.8);
+    
+    /* 海洋主題特有變量 */
+    --border-color: rgba(2, 119, 189, 0.2);
+    --border-light: rgba(255, 255, 255, 0.2);
+    --heading-color: var(--primary-color);
+    --grid-color: rgba(1, 87, 155, 0.05);
+    --avatar-border: var(--primary-color);
+    --header-bg: rgba(1, 87, 155, 0.4);
+    --card-border-bottom: var(--primary-color);
+    --icon-bg: rgba(2, 119, 189, 0.1);
+    --icon-border: rgba(2, 119, 189, 0.2);
 }
 
 /* 暖色主題 */
@@ -77,6 +122,17 @@
     --notification-color: #d81b60;
     --section-bg: #ffecb3;
     --header-overlay: rgba(230, 81, 0, 0.8);
+    
+    /* 暖色主題特有變量 */
+    --border-color: rgba(255, 111, 0, 0.2);
+    --border-light: rgba(255, 255, 255, 0.2);
+    --heading-color: var(--primary-color);
+    --grid-color: rgba(230, 81, 0, 0.05);
+    --avatar-border: var(--primary-color);
+    --header-bg: rgba(230, 81, 0, 0.4);
+    --card-border-bottom: var(--primary-color);
+    --icon-bg: rgba(255, 111, 0, 0.1);
+    --icon-border: rgba(255, 111, 0, 0.2);
 }
 
 * {
@@ -115,12 +171,13 @@ body {
     transform: translateX(var(--sidebar-width)); /* 使用transform顯示菜單 */
 }
 
+/* 菜單按鈕 - 現在在header內 */
 #menuToggle {
     position: absolute;
     top: 20px;
     left: 20px;
-    background-color: rgba(52, 73, 94, 0.9); /* 深灰色按鈕 */
-    color: white; /* 白色圖標 */
+    background-color: var(--sidebar-bg);
+    color: white;
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -128,7 +185,7 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 103;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px var(--shadow-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -136,8 +193,8 @@ body {
 }
 
 #menuToggle:hover {
-    background-color: rgba(121, 134, 203, 0.9); /* 柔和的藍紫色 */
-    box-shadow: 0 0 10px rgba(121, 134, 203, 0.3);
+    background-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--shadow-color);
 }
 
 #menuToggle.open {
@@ -153,7 +210,7 @@ body {
     padding: 20px 0 30px;
     margin-bottom: 20px;
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid var(--border-light);
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 0 0 15px 15px;
 }
@@ -167,9 +224,9 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 3px solid #7986cb; /* 柔和的藍紫色 */
+    border: 3px solid var(--avatar-border);
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px var(--shadow-color);
 }
 
 .notification-badge {
@@ -262,9 +319,9 @@ header {
     z-index: 2;
     padding: 2rem;
     width: 100%;
-    background-color: rgba(55, 71, 79, 0.6);
+    background-color: var(--header-bg);
     backdrop-filter: blur(2px);
-    border-bottom: 1px solid rgba(121, 134, 203, 0.15);
+    border-bottom: 1px solid var(--border-color);
 }
 
 h1 {
@@ -321,12 +378,12 @@ h1 {
     flex-direction: column;
     max-width: 300px;
     width: 100%;
-    border-bottom: 3px solid #7986cb; /* 柔和的藍紫色 */
+    border-bottom: 3px solid var(--card-border-bottom);
 }
 
 .slide-card:hover, .project-card:hover, .blog-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(121, 134, 203, 0.15); /* 柔和的藍紫色陰影 */
+    box-shadow: 0 8px 15px var(--shadow-color);
 }
 
 .card-preview {
@@ -359,8 +416,8 @@ h1 {
     background: linear-gradient(
         to bottom,
         rgba(255, 255, 255, 0.1) 0%,
-        rgba(55, 71, 79, 0.15) 50%,
-        rgba(55, 71, 79, 0.3) 100%
+        rgba(var(--grid-color), 0.15) 50%,
+        rgba(var(--grid-color), 0.3) 100%
     );
 }
 
@@ -369,14 +426,14 @@ h1 {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    background-color: var(--card-bg); /* 確保內容區背景色固定 */
-    border-top: 1px solid rgba(55, 71, 79, 0.1); /* 更新深灰色邊框 */
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
 }
 
 .card-title {
     font-size: 1.5rem;
     margin-bottom: 0.8rem;
-    color: #37474f; /* 更新為柔和的深灰色 */
+    color: var(--heading-color);
     font-weight: 600;
 }
 
@@ -385,7 +442,7 @@ h1 {
     opacity: 0.9;
     flex-grow: 1;
     line-height: 1.5;
-    color: #555;
+    color: var(--text-color);
 }
 
 .card-link {
@@ -423,12 +480,12 @@ h1 {
 .section-title {
     text-align: center;
     margin-bottom: 2rem;
-    color: #37474f; /* 更新為柔和的深灰色 */
+    color: var(--heading-color);
     font-weight: 600;
 }
 
 .section-title:hover {
-    color: #7986cb; /* 懸停時變為柔和的藍紫色 */
+    color: var(--primary-color);
 }
 
 .profile {
@@ -462,26 +519,26 @@ h1 {
 }
 
 .skill-item {
-    background-color: #f4f6fb; /* 更淡的藍紫色背景 */
+    background-color: var(--card-bg);
     padding: 1rem;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: all 0.3s ease;
-    border-bottom: 2px solid #7986cb; /* 柔和的藍紫色邊框 */
-    box-shadow: 0 2px 10px rgba(121, 134, 203, 0.08);
+    border-bottom: 2px solid var(--card-border-bottom);
+    box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .skill-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(121, 134, 203, 0.15);
+    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .skill-icon {
     font-size: 2rem;
     margin-bottom: 0.5rem;
-    color: #7986cb; /* 柔和的藍紫色 */
+    color: var(--primary-color);
 }
 
 .resources-grid {
@@ -491,24 +548,24 @@ h1 {
 }
 
 .resource-item {
-    background-color: #f4f6fb; /* 更淡的藍紫色背景 */
+    background-color: var(--card-bg);
     padding: 1.5rem;
     border-radius: 10px;
     transition: all 0.3s ease;
     border-left: 3px solid var(--primary-color);
-    box-shadow: 0 2px 10px rgba(121, 134, 203, 0.08);
-    border-bottom: 2px solid #7986cb; /* 柔和的藍紫色邊框 */
+    box-shadow: 0 2px 10px var(--shadow-color);
+    border-bottom: 2px solid var(--card-border-bottom);
 }
 
 .resource-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(121, 134, 203, 0.15);
+    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .resource-title {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
-    color: #37474f; /* 更新為柔和的深灰色 */
+    color: var(--heading-color);
 }
 
 footer {
@@ -516,9 +573,9 @@ footer {
     margin-top: 2rem;
     padding-top: 1rem;
     padding-bottom: 2rem;
-    border-top: 1px solid rgba(121, 134, 203, 0.2);
+    border-top: 1px solid var(--border-color);
     color: #ecf0f1;
-    background-color: #37474f;
+    background-color: var(--sidebar-bg);
 }
 
 /* 響應式處理 */
@@ -624,18 +681,18 @@ body::before {
     height: 100%;
     pointer-events: none;
     background-image: 
-        linear-gradient(to bottom, rgba(55, 71, 79, 0.03) 1px, transparent 1px),
-        linear-gradient(to right, rgba(55, 71, 79, 0.03) 1px, transparent 1px);
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px);
     background-size: 25px 25px;
     z-index: -1;
 }
 
 /* 保留圖標類型圖片的填充效果 */
 .card-preview img[src*="flaticon"] {
-    background-color: #f5f7fc; /* 淡藍灰色背景 */
+    background-color: var(--icon-bg);
     padding: 30px;
     object-fit: contain;
-    border-bottom: 1px solid #dde3f0;
+    border-bottom: 1px solid var(--icon-border);
 }
 
 /* 側邊欄導航細節更新 */
@@ -675,16 +732,18 @@ body::before {
 
 .theme-option.active {
     border-color: var(--primary-color);
-    transform: scale(1.1);
+    border-width: 3px;
+    transform: scale(1.15);
+    box-shadow: 0 0 8px var(--primary-color);
 }
 
-/* 各個主題選項的顏色 */
+/* 各個主題選項的固定顏色 */
 .theme-option[data-theme="default"] {
     background: linear-gradient(135deg, #7986cb 50%, #37474f 50%);
 }
 
 .theme-option[data-theme="dark"] {
-    background: linear-gradient(135deg, #bb86fc 50%, #121212 50%);
+    background: linear-gradient(135deg, #bb86fc 50%, #1a1a1a 50%);
 }
 
 .theme-option[data-theme="green"] {
@@ -705,13 +764,12 @@ body::before {
     transform: translateY(-2px);
 }
 
-/* 深色主題特定樣式 */
+/* 清理掉深色主題的特定樣式，使用統一的變量 */
 [data-theme="dark"] .card-content {
-    border-top: 1px solid var(--dark-purple-border);
+    border-top: 1px solid var(--border-color);
 }
 
 [data-theme="dark"] .section-title {
-    color: var(--primary-color);
     text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
 }
 
@@ -719,20 +777,17 @@ body::before {
 [data-theme="dark"] .project-card, 
 [data-theme="dark"] .blog-card {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    border-bottom: 3px solid var(--dark-purple-accent);
 }
 
 [data-theme="dark"] .slide-card:hover, 
 [data-theme="dark"] .project-card:hover, 
 [data-theme="dark"] .blog-card:hover {
-    box-shadow: 0 8px 20px rgba(187, 134, 252, 0.3);
+    box-shadow: 0 8px 20px var(--shadow-color);
 }
 
 [data-theme="dark"] .skill-item, 
 [data-theme="dark"] .resource-item {
     background-color: #252525;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    border-bottom: 2px solid var(--primary-color);
     border-left: none;
 }
 
@@ -740,75 +795,24 @@ body::before {
 [data-theme="dark"] .resource-item:hover {
     background-color: #303030;
     border-bottom-color: var(--hover-color);
-    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.2);
-}
-
-[data-theme="dark"] .card-preview img[src*="flaticon"] {
-    background-color: rgba(187, 134, 252, 0.1);
-    border-bottom: 1px solid rgba(187, 134, 252, 0.2);
 }
 
 [data-theme="dark"] #menuToggle {
-    background-color: rgba(98, 0, 238, 0.9);
+    background-color: var(--dark-accent);
 }
 
 [data-theme="dark"] #menuToggle:hover {
     background-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(187, 134, 252, 0.5);
-}
-
-[data-theme="dark"] .sidebar-item:hover {
-    background-color: var(--sidebar-hover);
-    border-left: 3px solid var(--primary-color);
-}
-
-[data-theme="dark"] .user-profile {
-    background-color: rgba(187, 134, 252, 0.05);
-    border-bottom: 1px solid rgba(187, 134, 252, 0.1);
-}
-
-[data-theme="dark"] a {
-    color: var(--primary-color);
-}
-
-[data-theme="dark"] .section-bg {
-    background-color: var(--dark-purple-light);
-}
-
-[data-theme="dark"] .theme-switcher {
-    background-color: #252525;
-    box-shadow: 0 0 15px rgba(187, 134, 252, 0.2);
-}
-
-[data-theme="dark"] .theme-option.active {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 8px var(--primary-color);
-}
-
-[data-theme="dark"] .card-title {
-    color: var(--primary-color);
-}
-
-[data-theme="dark"] .header-content {
-    background-color: rgba(98, 0, 238, 0.2);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(187, 134, 252, 0.15);
+    box-shadow: 0 0 15px var(--shadow-color);
 }
 
 [data-theme="dark"] .user-avatar {
-    border-color: var(--dark-purple-accent);
-    box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
-}
-
-[data-theme="dark"] body::before {
-    background-image: 
-        linear-gradient(to bottom, rgba(187, 134, 252, 0.05) 1px, transparent 1px),
-        linear-gradient(to right, rgba(187, 134, 252, 0.05) 1px, transparent 1px);
+    box-shadow: 0 0 15px var(--shadow-color);
 }
 
 [data-theme="dark"] .card-link,
 [data-theme="dark"] .resource-item a {
-    background: linear-gradient(to right, var(--primary-color), var(--dark-purple-accent));
+    background: linear-gradient(to right, var(--primary-color), var(--dark-accent));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
