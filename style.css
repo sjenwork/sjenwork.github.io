@@ -1630,11 +1630,11 @@ a, button, input, select, textarea {
 }
 
 /* 手勢提示動畫更新 */
-.gesture-icon .fa-hand-o-right {
+.gesture-icon .fa-arrow-circle-right {
     animation: swipeRight 2s infinite;
 }
 
-.gesture-icon .fa-hand-o-left {
+.gesture-icon .fa-arrow-circle-left {
     animation: swipeLeft 2s infinite;
 }
 
@@ -1644,6 +1644,12 @@ a, button, input, select, textarea {
 
 .gesture-icon .fa-arrows-v {
     animation: upDownAnimation 2s infinite;
+}
+
+/* 確保所有手勢圖標有基本動畫 */
+.gesture-icon i {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 @keyframes swipeRight {

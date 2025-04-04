@@ -659,14 +659,14 @@ function initMobileGestures() {
             </div>
             <div class="tips-content">
                 <div class="gesture-item">
-                    <div class="gesture-icon"><i class="fa fa-hand-o-right"></i></div>
+                    <div class="gesture-icon"><i class="fa fa-arrow-circle-right"></i></div>
                     <div class="gesture-desc">
                         <h4>雙指向右滑動</h4>
                         <p>使用兩根手指向右滑動可打開側邊欄</p>
                     </div>
                 </div>
                 <div class="gesture-item">
-                    <div class="gesture-icon"><i class="fa fa-hand-o-left"></i></div>
+                    <div class="gesture-icon"><i class="fa fa-arrow-circle-left"></i></div>
                     <div class="gesture-desc">
                         <h4>雙指向左滑動</h4>
                         <p>側邊欄開啟時，使用兩根手指向左滑動可關閉側邊欄</p>
