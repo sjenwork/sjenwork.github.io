@@ -1,0 +1,21 @@
+{
+  "intro": [
+    "我是一名專注於人工智能和web開發的工程師，擁有多年的軟體開發經驗。我熱衷於探索最新的技術趨勢，並將其應用於解決實際問題。",
+    "在工作之餘，我喜歡撰寫技術文章、製作教學簡報，並參與開源項目。我相信知識共享的價值，希望通過我的貢獻幫助更多人學習和成長。"
+  ],
+  "contactTitle": "聯絡方式",
+  "contacts": [
+    {
+      "type": "email",
+      "icon": "fa-envelope",
+      "value": "sjenwork@gmail.com",
+      "link": "mailto:sjenwork@gmail.com"
+    },
+    {
+      "type": "github",
+      "icon": "fa-github",
+      "value": "github.com/sjenwork",
+      "link": "https://github.com/"
+    }
+  ]
+} 

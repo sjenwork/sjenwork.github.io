@@ -86,6 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 加載技能數據並生成技能列表
     loadSkills();
     
+    // 加載聯絡資訊
+    loadContactInfo();
+    
     // 初始化側邊欄
     initSidebar();
     
@@ -138,7 +141,7 @@ function loadSkills() {
     }
     
     // 使用fetch API加載skills.json文件
-    fetch('skills.json')
+    fetch('json/skills.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('無法加載技能數據：' + response.status);
@@ -171,6 +174,76 @@ function loadSkills() {
         .catch(error => {
             console.error('加載技能數據時出錯：', error);
             skillsContainer.innerHTML = '<p style="color: red;">無法加載技能數據，請稍後再試。</p>';
+        });
+}
+
+// 從JSON文件加載聯絡資訊
+function loadContactInfo() {
+    const aboutContentElement = document.querySelector('.about-content');
+    
+    if (!aboutContentElement) {
+        console.error('找不到about-content元素');
+        return;
+    }
+    
+    // 使用fetch API加載contact.json文件
+    fetch('json/contact.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('無法加載聯絡資訊：' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // 清空容器
+            aboutContentElement.innerHTML = '';
+            
+            // 添加自我介紹段落
+            data.intro.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                p.style.marginBottom = '1.5rem';
+                aboutContentElement.appendChild(p);
+            });
+            
+            // 添加聯絡方式標題
+            const h3 = document.createElement('h3');
+            h3.textContent = data.contactTitle;
+            h3.style.color = 'var(--primary-color)';
+            h3.style.margin = '2rem 0 1rem';
+            aboutContentElement.appendChild(h3);
+            
+            // 添加聯絡方式
+            data.contacts.forEach(contact => {
+                const p = document.createElement('p');
+                
+                // 創建圖標
+                const icon = document.createElement('i');
+                icon.className = `fas ${contact.icon}`;
+                icon.style.color = 'var(--primary-color)';
+                icon.style.marginRight = '10px';
+                
+                // 創建鏈接
+                const link = document.createElement('a');
+                link.href = contact.link;
+                link.textContent = contact.value;
+                link.style.color = 'var(--text-color)';
+                link.style.textDecoration = 'none';
+                
+                // 如果是GitHub鏈接，添加target="_blank"
+                if (contact.type === 'github') {
+                    link.target = '_blank';
+                }
+                
+                // 組裝
+                p.appendChild(icon);
+                p.appendChild(link);
+                aboutContentElement.appendChild(p);
+            });
+        })
+        .catch(error => {
+            console.error('加載聯絡資訊時出錯：', error);
+            aboutContentElement.innerHTML = '<p style="color: red;">無法加載聯絡資訊，請稍後再試。</p>';
         });
 }
 
