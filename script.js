@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('mainContent');
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const sections = document.querySelectorAll('.section');
+    const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
+    
+    // 為每個卡片和技能項添加淡入效果類
+    const fadeElements = document.querySelectorAll('.slide-card, .project-card, .blog-card, .skill-item, .resource-item');
+    fadeElements.forEach(element => {
+        element.classList.add('fade-in-element');
+    });
+    
+    // 初始化滾動檢測
+    initScrollDetection();
     
     // 確保側邊欄初始狀態為收起
     sidebar.classList.remove('open');
@@ -16,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             
+            // 顯示頁面切換效果
+            pageTransitionOverlay.classList.add('active');
+            
             // 移除所有項目的活動狀態
             sidebarItems.forEach(i => i.classList.remove('active'));
             
@@ -25,17 +38,29 @@ document.addEventListener('DOMContentLoaded', function() {
             // 獲取對應的部分ID
             const sectionId = this.getAttribute('data-section');
             
-            // 隱藏所有部分
-            sections.forEach(section => section.classList.remove('active'));
-            
-            // 顯示對應的部分
-            document.getElementById(sectionId).classList.add('active');
-            
-            // 在小螢幕上點擊後關閉sidebar
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('open');
-                menuToggle.classList.remove('open');
-            }
+            // 使用延遲切換部分，使過渡效果更流暢
+            setTimeout(() => {
+                // 隱藏所有部分
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // 顯示對應的部分
+                document.getElementById(sectionId).classList.add('active');
+                
+                // 在小螢幕上點擊後關閉sidebar
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    menuToggle.classList.remove('open');
+                }
+                
+                // 隱藏頁面切換效果
+                pageTransitionOverlay.classList.remove('active');
+                
+                // 滾動到頂部
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                
+                // 重新初始化滾動檢測（適用於新顯示的部分）
+                initScrollDetection();
+            }, 300);
         });
     });
     
@@ -53,6 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth > 768 && sidebar.classList.contains('open')) {
             mainContent.classList.add('shifted');
         }
+        
+        // 重新初始化滾動檢測
+        initScrollDetection();
     });
     
     // 加載技能數據並生成技能列表
@@ -66,6 +94,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log("側邊欄功能已初始化");
 });
+
+// 初始化滾動檢測
+function initScrollDetection() {
+    const fadeElements = document.querySelectorAll('.fade-in-element');
+    
+    // 檢查元素是否在視口中
+    function checkVisibility() {
+        fadeElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementBottom = element.getBoundingClientRect().bottom;
+            const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
+            
+            if (isVisible) {
+                element.classList.add('visible');
+            }
+        });
+    }
+    
+    // 初始檢查
+    checkVisibility();
+    
+    // 滾動時檢查
+    window.addEventListener('scroll', checkVisibility);
+}
 
 // 從JSON文件加載技能數據並動態生成技能列表
 function loadSkills() {
@@ -91,7 +143,7 @@ function loadSkills() {
             // 為每個技能創建元素
             skills.forEach(skill => {
                 const skillItem = document.createElement('div');
-                skillItem.className = 'skill-item';
+                skillItem.className = 'skill-item fade-in-element';
                 
                 const icon = document.createElement('i');
                 icon.className = skill.icon + ' skill-icon';
@@ -103,6 +155,9 @@ function loadSkills() {
                 skillItem.appendChild(name);
                 skillsContainer.appendChild(skillItem);
             });
+            
+            // 重新初始化滾動檢測
+            initScrollDetection();
         })
         .catch(error => {
             console.error('加載技能數據時出錯：', error);
@@ -176,6 +231,7 @@ function initSidebar() {
 // 初始化主題切換功能
 function initThemeSwitcher() {
     const themeOptions = document.querySelectorAll('.theme-option');
+    const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
     
     // 檢查本地存儲中是否有保存的主題
     const savedTheme = localStorage.getItem('preferred-theme');
@@ -197,17 +253,25 @@ function initThemeSwitcher() {
         option.addEventListener('click', function() {
             const theme = this.getAttribute('data-theme');
             
-            // 移除所有選項的活動狀態
-            themeOptions.forEach(opt => opt.classList.remove('active'));
+            // 顯示頁面切換效果
+            pageTransitionOverlay.classList.add('active');
             
-            // 設置當前選項為活動狀態
-            this.classList.add('active');
-            
-            // 設置主題
-            setTheme(theme);
-            
-            // 保存偏好到本地存儲
-            localStorage.setItem('preferred-theme', theme);
+            setTimeout(() => {
+                // 移除所有選項的活動狀態
+                themeOptions.forEach(opt => opt.classList.remove('active'));
+                
+                // 設置當前選項為活動狀態
+                this.classList.add('active');
+                
+                // 設置主題
+                setTheme(theme);
+                
+                // 保存偏好到本地存儲
+                localStorage.setItem('preferred-theme', theme);
+                
+                // 隱藏頁面切換效果
+                pageTransitionOverlay.classList.remove('active');
+            }, 300);
         });
     });
 }

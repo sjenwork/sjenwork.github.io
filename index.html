@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="page-transition-overlay"></div>
+    
     <div id="sidebar">
         <!-- 用戶資訊區塊 -->
         <div class="user-profile">
@@ -19,12 +21,12 @@
         </div>
         <!-- 側邊欄菜單 -->
         <div class="sidebar-menu">
-            <a href="#" class="sidebar-item active" data-section="presentations"><i class="fa fa-home"></i>首頁</a>
-            <a href="#" class="sidebar-item" data-section="presentations"><i class="fa fa-desktop"></i>簡報</a>
+            <!-- <a href="#" class="sidebar-item active" data-section="presentations"><i class="fa fa-home"></i>首頁</a> -->
+            <a href="#" class="sidebar-item active" data-section="presentations"><i class="fa fa-desktop"></i>簡報</a>
             <a href="#" class="sidebar-item" data-section="projects"><i class="fa fa-code"></i>專案</a>
             <a href="#" class="sidebar-item" data-section="blog"><i class="fa fa-pencil"></i>部落格</a>
             <a href="#" class="sidebar-item" data-section="about"><i class="fa fa-user"></i>關於我</a>
-            <a href="#" class="sidebar-item" data-section="about"><i class="fa fa-star"></i>技能</a>
+            <a href="#" class="sidebar-item" data-section="skills"><i class="fa fa-star"></i>技能</a>
             <a href="#" class="sidebar-item" data-section="resources"><i class="fa fa-book"></i>資源</a>
         </div>
     </div>
@@ -40,6 +42,7 @@
 
     <div id="mainContent">
         <header>
+            <!-- 菜單按鈕移至header內部 -->
             <button id="menuToggle"><i class="fa fa-bars"></i></button>
             <img src="images/banners/header-bg.jpg" alt="header背景圖片" class="banner-image">
             <div class="header-content">
@@ -211,11 +214,6 @@
                     
                     <p style="margin-bottom: 1.5rem;">在工作之餘，我喜歡撰寫技術文章、製作教學簡報，並參與開源項目。我相信知識共享的價值，希望通過我的貢獻幫助更多人學習和成長。</p>
                     
-                    <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">專業技能</h3>
-                    <div id="skills-container" class="skill-grid">
-                        <!-- 技能項目將從JSON文件動態加載 -->
-                    </div>
-                    
                     <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">聯絡方式</h3>
                     <p>
                         <i class="fas fa-envelope" style="color: var(--primary-color); margin-right: 10px;"></i> 
@@ -225,6 +223,15 @@
                         <i class="fab fa-github" style="color: var(--primary-color); margin-right: 10px;"></i> 
                         <a href="https://github.com/" target="_blank" style="color: var(--text-color); text-decoration: none;">github.com/sjenwork</a>
                     </p>
+                </div>
+            </div>
+
+            <!-- 技能區塊 -->
+            <div class="section" id="skills">
+                <h2 class="section-title">專業技能</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">這裡展示了我專精的技術領域和相關技能。</p>
+                <div id="skills-container" class="skill-grid">
+                    <!-- 技能項目將從JSON文件動態加載 -->
                 </div>
             </div>
         </div>
