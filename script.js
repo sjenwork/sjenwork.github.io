@@ -537,40 +537,11 @@ function initMobileGestures() {
         // 只處理快速滑動
         if (swipeTime > maxSwipeTime) return;
         
-        // 處理水平滑動
-        if (isHorizontalSwipe && Math.abs(swipeDistanceX) > minSwipeDistance) {
-            // 從左向右滑動 (打開側邊欄)
-            if (swipeDistanceX > 0 && touchStartX < 50 && !sidebar.classList.contains('open')) {
-                e.preventDefault();
-                sidebar.classList.add('open');
-                menuToggle.classList.add('open');
-                
-                // 在大屏幕上移動主內容區
-                if (window.innerWidth > 768) {
-                    mainContent.classList.add('shifted');
-                }
-                
-                // 更新按鈕圖標
-                menuToggle.querySelector('i').className = 'fa fa-times';
-                
-                // 添加振動反饋
-                if (window.navigator && window.navigator.vibrate) {
-                    window.navigator.vibrate(50);
-                }
-            }
-            // 從右向左滑動 (關閉側邊欄)
-            else if (swipeDistanceX < 0 && sidebar.classList.contains('open')) {
-                e.preventDefault();
-                sidebar.classList.remove('open');
-                menuToggle.classList.remove('open');
-                
-                // 更新按鈕圖標
-                menuToggle.querySelector('i').className = 'fa fa-bars';
-                
-                // 添加振動反饋
-                if (window.navigator && window.navigator.vibrate) {
-                    window.navigator.vibrate(50);
-                }
+        // 處理雙指手勢 (如果可用)
+        if (e.touches && e.touches.length > 1) {
+            // 雙指向下滑動返回頂部
+            if (!isHorizontalSwipe && swipeDistanceY > minSwipeDistance) {
+                window.scrollTo({top: 0, behavior: 'smooth'});
             }
         }
         
@@ -599,61 +570,66 @@ function initMobileGestures() {
                 }
             }
         }
-        
-        // 處理雙指手勢 (如果可用)
-        if (e.touches && e.touches.length > 1) {
-            // 雙指向下滑動返回頂部
-            if (!isHorizontalSwipe && swipeDistanceY > minSwipeDistance) {
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            }
-        }
     });
     
-    // 添加手指放大縮小手勢處理
-    let initialPinchDistance = 0;
+    // 添加雙指左右滑動手勢處理
+    let multiTouchStartX = 0;
     
     document.addEventListener('touchstart', function(e) {
+        // 檢測是否是雙指觸摸
         if (e.touches.length === 2) {
-            initialPinchDistance = getPinchDistance(e);
+            // 記錄雙指觸摸的起始X坐標（使用兩指的平均位置）
+            multiTouchStartX = (e.touches[0].screenX + e.touches[1].screenX) / 2;
         }
     }, { passive: true });
     
-    document.addEventListener('touchmove', function(e) {
-        if (e.touches.length === 2) {
-            const currentDistance = getPinchDistance(e);
-            const pinchChange = currentDistance - initialPinchDistance;
+    document.addEventListener('touchend', function(e) {
+        // 檢測是否由雙指觸摸結束（通過originalEvent）
+        if (e.changedTouches.length === 2 || 
+            (e.changedTouches.length === 1 && e.touches.length === 0 && multiTouchStartX !== 0)) {
             
-            // 如果擴大手勢夠大，打開側邊欄
-            if (pinchChange > 100 && !sidebar.classList.contains('open')) {
-                sidebar.classList.add('open');
-                menuToggle.classList.add('open');
-                menuToggle.querySelector('i').className = 'fa fa-times';
-                
-                // 添加振動反饋
-                if (window.navigator && window.navigator.vibrate) {
-                    window.navigator.vibrate(50);
+            // 計算雙指滑動的結束X坐標（使用結束時的平均位置）
+            const multiTouchEndX = (e.changedTouches[0].screenX + 
+                                   (e.changedTouches[1] ? e.changedTouches[1].screenX : e.changedTouches[0].screenX)) / 2;
+            
+            // 計算雙指水平滑動距離
+            const multiSwipeDistance = multiTouchEndX - multiTouchStartX;
+            
+            // 判斷是左滑還是右滑，並且設置最小滑動距離門檻
+            if (Math.abs(multiSwipeDistance) > minSwipeDistance * 1.2) {
+                // 雙指向右滑動 - 打開側邊欄
+                if (multiSwipeDistance > 0 && !sidebar.classList.contains('open')) {
+                    sidebar.classList.add('open');
+                    menuToggle.classList.add('open');
+                    menuToggle.querySelector('i').className = 'fa fa-times';
+                    
+                    // 在大屏幕上移動主內容區
+                    if (window.innerWidth > 768) {
+                        mainContent.classList.add('shifted');
+                    }
+                    
+                    // 添加振動反饋
+                    if (window.navigator && window.navigator.vibrate) {
+                        window.navigator.vibrate(50);
+                    }
+                }
+                // 雙指向左滑動 - 關閉側邊欄
+                else if (multiSwipeDistance < 0 && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    menuToggle.classList.remove('open');
+                    menuToggle.querySelector('i').className = 'fa fa-bars';
+                    
+                    // 添加振動反饋
+                    if (window.navigator && window.navigator.vibrate) {
+                        window.navigator.vibrate(50);
+                    }
                 }
             }
-            // 如果縮小手勢夠大，關閉側邊欄
-            else if (pinchChange < -100 && sidebar.classList.contains('open')) {
-                sidebar.classList.remove('open');
-                menuToggle.classList.remove('open');
-                menuToggle.querySelector('i').className = 'fa fa-bars';
-                
-                // 添加振動反饋
-                if (window.navigator && window.navigator.vibrate) {
-                    window.navigator.vibrate(50);
-                }
-            }
+            
+            // 重置雙指起始位置
+            multiTouchStartX = 0;
         }
     }, { passive: true });
-    
-    // 計算兩個觸摸點之間的距離
-    function getPinchDistance(e) {
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-        return Math.sqrt(dx * dx + dy * dy);
-    }
     
     // 處理頁面切換動畫
     function showPageTransition() {
@@ -683,17 +659,17 @@ function initMobileGestures() {
             </div>
             <div class="tips-content">
                 <div class="gesture-item">
-                    <div class="gesture-icon"><i class="fa fa-arrow-right"></i></div>
+                    <div class="gesture-icon"><i class="fa fa-hand-o-right"></i></div>
                     <div class="gesture-desc">
-                        <h4>從左向右滑動</h4>
-                        <p>從螢幕左邊緣向右滑動可打開側邊欄</p>
+                        <h4>雙指向右滑動</h4>
+                        <p>使用兩根手指向右滑動可打開側邊欄</p>
                     </div>
                 </div>
                 <div class="gesture-item">
-                    <div class="gesture-icon"><i class="fa fa-arrow-left"></i></div>
+                    <div class="gesture-icon"><i class="fa fa-hand-o-left"></i></div>
                     <div class="gesture-desc">
-                        <h4>從右向左滑動</h4>
-                        <p>側邊欄開啟時向左滑動可關閉側邊欄</p>
+                        <h4>雙指向左滑動</h4>
+                        <p>側邊欄開啟時，使用兩根手指向左滑動可關閉側邊欄</p>
                     </div>
                 </div>
                 <div class="gesture-item">
@@ -704,10 +680,10 @@ function initMobileGestures() {
                     </div>
                 </div>
                 <div class="gesture-item">
-                    <div class="gesture-icon"><i class="fa fa-arrows-h"></i></div>
+                    <div class="gesture-icon"><i class="fa fa-arrows-v"></i></div>
                     <div class="gesture-desc">
-                        <h4>雙指縮放</h4>
-                        <p>雙指展開可打開側邊欄，雙指捏合可關閉側邊欄</p>
+                        <h4>雙指下滑</h4>
+                        <p>使用兩根手指向下滑動可快速回到頁面頂部</p>
                     </div>
                 </div>
             </div>
