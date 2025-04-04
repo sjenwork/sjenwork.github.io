@@ -570,12 +570,19 @@ h1 {
 
 footer {
     text-align: center;
+    padding: 2rem 0;
     margin-top: 2rem;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    border-top: 1px solid var(--border-color);
-    color: #ecf0f1;
+    width: 100%;
     background-color: var(--sidebar-bg);
+    color: #ecf0f1;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border-color);
+}
+
+footer p {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 /* 響應式處理 */
@@ -668,6 +675,14 @@ footer {
         width: 25px;
         height: 25px;
         margin: 0 3px;
+    }
+    
+    footer {
+        padding: 1.5rem 0;
+    }
+    
+    footer p {
+        padding: 0 1rem;
     }
 }
 
