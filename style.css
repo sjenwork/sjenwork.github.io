@@ -1,14 +1,16 @@
 :root {
-    --bg-color: #1a1a2e;
-    --card-bg: #242447;
-    --primary-color: #64dfdf;
-    --text-color: #f0f0f0;
-    --hover-color: #80ffdb;
-    --shadow-color: rgba(0, 0, 0, 0.3);
+    --bg-color: #f7f5f3; /* 溫暖的淺灰背景 */
+    --card-bg: #ffffff; /* 白色卡片背景 */
+    --primary-color: #7986cb; /* 柔和的藍紫色替代強紫色 */
+    --text-color: #333333; /* 深色文字確保可讀性 */
+    --hover-color: #9fa8da; /* 更淺的藍紫色作為懸停效果 */
+    --shadow-color: rgba(68, 68, 68, 0.15); /* 中性陰影 */
     --sidebar-width: 280px;
-    --sidebar-bg: #16162e;
-    --sidebar-hover: #2d2d5b;
-    --notification-color: #ff4757;
+    --sidebar-bg: #37474f; /* 更柔和的深灰色側邊欄 */
+    --sidebar-hover: #546e7a; /* 更柔和的灰色作為懸停效果 */
+    --notification-color: #ef5350; /* 稍柔和的紅色通知 */
+    --section-bg: #f1f3f7; /* 淡藍灰色區塊背景 */
+    --header-overlay: rgba(55, 71, 79, 0.7); /* 深灰色半透明遮罩 */
 }
 
 * {
@@ -31,11 +33,11 @@ body {
     width: var(--sidebar-width);
     position: fixed;
     top: 0;
-    left: calc(-1 * var(--sidebar-width)); /* 確保完全在畫面外 */
+    left: calc(-1 * var(--sidebar-width));
     background-color: var(--sidebar-bg);
     overflow-x: hidden;
     transition: transform 0.4s ease;
-    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -51,32 +53,30 @@ body {
     position: absolute;
     top: 20px;
     left: 20px;
-    background-color: rgba(26, 26, 46, 0.8); /* 調整背景透明度 */
-    color: var(--text-color); /* 使用淺色文字 */
-    border: none; /* 移除邊框 */
+    background-color: rgba(52, 73, 94, 0.9); /* 深灰色按鈕 */
+    color: white; /* 白色圖標 */
+    border: none;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 103; /* 確保菜單按鈕在banner和其他元素之上 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    z-index: 103;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px); /* 添加模糊效果，增加質感 */
 }
 
 #menuToggle:hover {
-    background-color: rgba(36, 36, 71, 0.9);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-    transform: translateY(-2px);
+    background-color: rgba(121, 134, 203, 0.9); /* 柔和的藍紫色 */
+    box-shadow: 0 0 10px rgba(121, 134, 203, 0.3);
 }
 
 #menuToggle.open {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
-    background-color: rgba(100, 223, 223, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background-color: var(--primary-color);
 }
 
 /* 用戶資訊區塊樣式 */
@@ -87,7 +87,9 @@ body {
     padding: 20px 0 30px;
     margin-bottom: 20px;
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0 0 15px 15px;
 }
 
 .user-avatar-container {
@@ -99,8 +101,9 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 3px solid var(--primary-color);
+    border: 3px solid #7986cb; /* 柔和的藍紫色 */
     object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .notification-badge {
@@ -123,28 +126,31 @@ body {
 .user-name {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--text-color);
+    color: white;
 }
 
 /* 側邊欄菜單項 */
 .sidebar-menu {
     width: 100%;
+    margin-top: 1rem; /* 增加頂部間距 */
 }
 
 .sidebar-item {
     padding: 15px 20px;
     text-decoration: none;
     font-size: 1.1rem;
-    color: var(--text-color);
+    color: white; /* 修改為白色，在深色側邊欄上更清晰 */
     display: block;
     transition: 0.3s;
-    border-left: 4px solid transparent;
+    border-left: 3px solid transparent;
     white-space: nowrap;
+    margin-bottom: 5px;
 }
 
 .sidebar-item:hover, .sidebar-item.active {
-    background-color: var(--sidebar-hover);
+    background-color: #546e7a; /* 淺灰色 */
     border-left-color: var(--primary-color);
+    color: white;
 }
 
 .sidebar-item i {
@@ -160,6 +166,7 @@ body {
     position: relative; /* 讓絕對定位的子元素相對於它定位 */
     width: 100%; /* 預設寬度為100% */
     margin-left: 0; /* 預設左邊距為0 */
+    background-color: var(--bg-color); /* 確保mainContent有背景色 */
 }
 
 #mainContent.shifted {
@@ -175,12 +182,13 @@ header {
     width: 100%;
     overflow: hidden;
     border-radius: 0; /* 移除圓角 */
-    box-shadow: 0 4px 15px var(--shadow-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 0;
     height: 300px; /* 固定header高度 */
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(52, 73, 94, 0.7); /* 深灰色背景，半透明 */
 }
 
 .header-content {
@@ -188,24 +196,22 @@ header {
     z-index: 2;
     padding: 2rem;
     width: 100%;
-    background-color: rgba(26, 26, 46, 0.6); /* 半透明背景 */
+    background-color: rgba(55, 71, 79, 0.6);
+    backdrop-filter: blur(2px);
 }
 
 h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--primary-color), #b9e28c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .subtitle {
     font-size: 1.2rem;
-    opacity: 0.9;
+    opacity: 0.95;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Banner圖片樣式 */
@@ -223,7 +229,8 @@ h1 {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
-    padding: 0 2rem 2rem 2rem; /* 添加左右邊界距離 */
+    padding: 0 2rem 2rem 2rem;
+    background-color: transparent; /* 確保容器背景透明 */
 }
 
 .slides-grid, .projects-grid, .blog-grid {
@@ -232,6 +239,7 @@ h1 {
     gap: 2rem;
     width: 100%;
     justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .slide-card, .project-card, .blog-card {
@@ -246,17 +254,19 @@ h1 {
     flex-direction: column;
     max-width: 300px;
     width: 100%;
+    border-bottom: 3px solid #7986cb; /* 柔和的藍紫色 */
 }
 
 .slide-card:hover, .project-card:hover, .blog-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px var(--shadow-color);
+    box-shadow: 0 8px 15px rgba(121, 134, 203, 0.15); /* 柔和的藍紫色陰影 */
 }
 
 .card-preview {
     height: 180px;
     position: relative;
     overflow: hidden;
+    background-color: var(--card-bg);
 }
 
 .card-preview img {
@@ -264,6 +274,7 @@ h1 {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    opacity: 0.95; /* 輕微調整透明度，使圖像更鮮明 */
 }
 
 .slide-card:hover .card-preview img, 
@@ -278,7 +289,12 @@ h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(rgba(26, 26, 46, 0), rgba(26, 26, 46, 0.8));
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(55, 71, 79, 0.15) 50%,
+        rgba(55, 71, 79, 0.3) 100%
+    );
 }
 
 .card-content {
@@ -286,24 +302,29 @@ h1 {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    background-color: var(--card-bg); /* 確保內容區背景色固定 */
+    border-top: 1px solid rgba(55, 71, 79, 0.1); /* 更新深灰色邊框 */
 }
 
 .card-title {
     font-size: 1.5rem;
     margin-bottom: 0.8rem;
-    color: var(--primary-color);
+    color: #37474f; /* 更新為柔和的深灰色 */
+    font-weight: 600;
 }
 
 .card-description {
     margin-bottom: 1.5rem;
     opacity: 0.9;
     flex-grow: 1;
+    line-height: 1.5;
+    color: #555;
 }
 
 .card-link {
     display: inline-block;
     background-color: var(--primary-color);
-    color: var(--bg-color);
+    color: white; /* 改為白色，更清晰 */
     text-decoration: none;
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
@@ -315,10 +336,17 @@ h1 {
 .card-link:hover {
     background-color: var(--hover-color);
     transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .section {
     display: none;
+    background-color: var(--section-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    border-left: 4px solid var(--primary-color);
 }
 
 .section.active {
@@ -328,7 +356,12 @@ h1 {
 .section-title {
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--primary-color);
+    color: #37474f; /* 更新為柔和的深灰色 */
+    font-weight: 600;
+}
+
+.section-title:hover {
+    color: #7986cb; /* 懸停時變為柔和的藍紫色 */
 }
 
 .profile {
@@ -362,24 +395,26 @@ h1 {
 }
 
 .skill-item {
-    background-color: var(--card-bg);
+    background-color: #f4f6fb; /* 更淡的藍紫色背景 */
     padding: 1rem;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: all 0.3s ease;
+    border-bottom: 2px solid #7986cb; /* 柔和的藍紫色邊框 */
+    box-shadow: 0 2px 10px rgba(121, 134, 203, 0.08);
 }
 
 .skill-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(121, 134, 203, 0.15);
 }
 
 .skill-icon {
     font-size: 2rem;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    color: #7986cb; /* 柔和的藍紫色 */
 }
 
 .resources-grid {
@@ -389,21 +424,24 @@ h1 {
 }
 
 .resource-item {
-    background-color: var(--card-bg);
+    background-color: #f4f6fb; /* 更淡的藍紫色背景 */
     padding: 1.5rem;
     border-radius: 10px;
     transition: all 0.3s ease;
+    border-left: 3px solid var(--primary-color);
+    box-shadow: 0 2px 10px rgba(121, 134, 203, 0.08);
+    border-bottom: 2px solid #7986cb; /* 柔和的藍紫色邊框 */
 }
 
 .resource-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(121, 134, 203, 0.15);
 }
 
 .resource-title {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
-    color: var(--primary-color);
+    color: #37474f; /* 更新為柔和的深灰色 */
 }
 
 footer {
@@ -411,8 +449,9 @@ footer {
     margin-top: 2rem;
     padding-top: 1rem;
     padding-bottom: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0.7;
+    border-top: 1px solid rgba(121, 134, 203, 0.2);
+    color: #ecf0f1;
+    background-color: #37474f;
 }
 
 /* 響應式處理 */
@@ -494,4 +533,34 @@ footer {
     .slide-card, .project-card, .blog-card {
         max-width: 100%;
     }
+}
+
+/* 背景紋理效果 */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: 
+        linear-gradient(to bottom, rgba(55, 71, 79, 0.03) 1px, transparent 1px),
+        linear-gradient(to right, rgba(55, 71, 79, 0.03) 1px, transparent 1px);
+    background-size: 25px 25px;
+    z-index: -1;
+}
+
+/* 保留圖標類型圖片的填充效果 */
+.card-preview img[src*="flaticon"] {
+    background-color: #f5f7fc; /* 淡藍灰色背景 */
+    padding: 30px;
+    object-fit: contain;
+    border-bottom: 1px solid #dde3f0;
+}
+
+/* 側邊欄導航細節更新 */
+.sidebar-item.active {
+    background-color: #546e7a;
+    border-left-color: #7986cb;
 } 
