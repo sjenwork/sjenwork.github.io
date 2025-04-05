@@ -155,30 +155,6 @@ body {
     animation: fadeIn 0.6s ease-in-out;
 }
 
-/* 側邊導航欄 - 優化動畫效果 */
-#sidebar {
-    height: 100%;
-    width: var(--sidebar-width);
-    position: fixed;
-    top: 0;
-    left: calc(-1 * var(--sidebar-width));
-    background-color: var(--sidebar-bg);
-    overflow-x: hidden;
-    transition: transform var(--transition-speed) var(--transition-function);
-    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
-    z-index: 1000; /* 提高z-index確保側邊欄在按鈕上方 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    border-radius: 0; /* 確保側邊欄沒有圓角 */
-    touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
-}
-
-#sidebar.open {
-    transform: translateX(var(--sidebar-width)); /* 使用transform顯示菜單 */
-    transition: transform var(--transition-speed) var(--transition-function);
-}
 
 /* 菜單按鈕 - 調整為header內部絕對定位 */
 #menuToggle {
@@ -265,54 +241,6 @@ body {
     color: white;
 }
 
-/* 側邊欄菜單樣式 */
-.sidebar-menu {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0 10px;
-}
-
-/* 側邊欄菜單項 - 增加延遲加載效果 */
-.sidebar-item {
-    width: 100%;
-    padding: 15px 20px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    color: white;
-    display: block;
-    transition: all 0.2s var(--transition-function);
-    border-left: 3px solid transparent;
-    white-space: nowrap;
-    margin-bottom: 5px;
-    position: relative;
-    overflow: hidden;
-}
-
-.sidebar-item:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
-}
-
-.sidebar-item:hover:after {
-    width: 100%;
-}
-
-.sidebar-item.active:after {
-    width: 100%;
-}
-
-.sidebar-item i {
-    margin-right: 15px;
-    width: 20px;
-    text-align: center;
-}
 
 /* 主內容區 - 優化過渡效果 */
 #mainContent {
@@ -694,16 +622,6 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    #sidebar {
-        width: var(--sidebar-width);
-        left: calc(-1 * var(--sidebar-width));
-        z-index: 1000; /* 確保側邊欄在按鈕上方 */
-    }
-    
-    #sidebar.open {
-        transform: translateX(var(--sidebar-width));
-    }
-    
     /* 在側邊欄打開時移動菜單按鈕 */
     #menuToggle {
         top: 15px;
@@ -714,19 +632,6 @@ footer p {
         transition: transform var(--transition-speed) var(--transition-function),
                     background-color var(--transition-speed) var(--transition-function),
                     box-shadow var(--transition-speed) var(--transition-function);
-    }
-    
-    /* 當側邊欄打開時，移動菜單按鈕到右側外側 */
-    #sidebar.open ~ #mainContent #menuToggle {
-        transform: translateX(calc(var(--sidebar-width) + 15px));
-        background-color: var(--primary-color);
-        z-index: 1001; /* 確保按鈕在側邊欄上方 */
-        left: 0;
-    }
-    
-    /* 調整菜單按鈕旋轉方向 */
-    #sidebar.open ~ #mainContent #menuToggle i {
-        transform: rotate(180deg);
     }
     
     #mainContent {
@@ -775,17 +680,7 @@ footer p {
         max-width: 100%;
     }
     
-    .theme-switcher {
-        width: 85%; /* 在小螢幕上稍微寬一點 */
-        padding: 6px; /* 更小的內邊距 */
-        margin-bottom: 15px; /* 更小的底部間距 */
-    }
-    
-    .theme-option {
-        width: 22px; /* 更小的主題選項 */
-        height: 22px; /* 更小的主題選項 */
-        margin: 0 3px; /* 更小的間距 */
-    }
+
     
     footer {
         padding: 1.5rem 0;
@@ -820,152 +715,9 @@ body::before {
     border-bottom: 1px solid var(--icon-border);
 }
 
-/* 側邊欄導航細節更新 */
-.sidebar-item.active {
-    background-color: #546e7a;
-    border-left-color: #7986cb;
-}
 
-/* 主題切換器樣式 - 調整為側邊欄底部 */
-.theme-switcher {
-    position: relative; /* 改為相對定位 */
-    margin-top: auto; /* 推至sidebar底部 */
-    margin-bottom: 20px; /* 底部間距 */
-    z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.1); /* 半透明背景，更協調 */
-    border-radius: 20px; /* 更小的圓角，更協調 */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    padding: 8px; /* 更小的內邊距 */
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-    justify-content: center; /* 居中顯示 */
-    width: 75%; /* 調整寬度稍微小一點 */
-}
 
-.theme-option {
-    width: 25px; /* 更小的主題選項 */
-    height: 25px; /* 更小的主題選項 */
-    border-radius: 50%;
-    margin: 0 4px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.3s var(--transition-function);
-}
 
-.theme-option:hover {
-    transform: scale(1.1);
-}
-
-.theme-option.active {
-    border-color: white; /* 使用白色邊框，更協調 */
-    border-width: 2px; /* 細一點的邊框 */
-    transform: scale(1.15);
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* 柔和的發光效果 */
-}
-
-/* 各個主題選項的固定顏色 */
-.theme-option[data-theme="default"] {
-    background: linear-gradient(135deg, #7986cb 50%, #37474f 50%);
-}
-
-.theme-option[data-theme="dark"] {
-    background: linear-gradient(135deg, #bb86fc 50%, #1a1a1a 50%);
-}
-
-.theme-option[data-theme="green"] {
-    background: linear-gradient(135deg, #2e7d32 50%, #1b5e20 50%);
-}
-
-.theme-option[data-theme="ocean"] {
-    background: linear-gradient(135deg, #0277bd 50%, #01579b 50%);
-}
-
-.theme-option[data-theme="warm"] {
-    background: linear-gradient(135deg, #ff6f00 50%, #e65100 50%);
-}
-
-/* 主題切換器懸停效果增強 */
-.theme-switcher:hover {
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transform: translateY(-2px);
-}
-
-/* 清理掉深色主題的特定樣式，使用統一的變量 */
-[data-theme="dark"] .card-content {
-    border-top: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .section-title {
-    text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
-}
-
-[data-theme="dark"] .slide-card, 
-[data-theme="dark"] .project-card, 
-[data-theme="dark"] .blog-card {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="dark"] .slide-card:hover, 
-[data-theme="dark"] .project-card:hover, 
-[data-theme="dark"] .blog-card:hover {
-    box-shadow: 0 8px 20px var(--shadow-color);
-}
-
-[data-theme="dark"] .skill-item, 
-[data-theme="dark"] .resource-item {
-    background-color: #252525;
-    border-left: none;
-}
-
-[data-theme="dark"] .skill-item:hover, 
-[data-theme="dark"] .resource-item:hover {
-    background-color: #303030;
-    border-bottom-color: var(--hover-color);
-}
-
-[data-theme="dark"] #menuToggle {
-    background-color: var(--dark-accent);
-}
-
-[data-theme="dark"] #menuToggle:hover {
-    background-color: var(--primary-color);
-    box-shadow: 0 0 15px var(--shadow-color);
-}
-
-[data-theme="dark"] .user-avatar {
-    box-shadow: 0 0 15px var(--shadow-color);
-}
-
-[data-theme="dark"] .card-link,
-[data-theme="dark"] .resource-item a {
-    background: linear-gradient(to right, var(--primary-color), var(--dark-accent));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 600;
-}
-
-/* 綠色主題的header-content */
-[data-theme="green"] .header-content {
-    background-color: rgba(27, 94, 32, 0.4);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(46, 125, 50, 0.2);
-}
-
-/* 海洋主題的header-content */
-[data-theme="ocean"] .header-content {
-    background-color: rgba(1, 87, 155, 0.4);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(2, 119, 189, 0.2);
-}
-
-/* 暖色主題的header-content */
-[data-theme="warm"] .header-content {
-    background-color: rgba(230, 81, 0, 0.4);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(255, 111, 0, 0.2);
-}
 
 /* 添加漂亮的滾動效果 */
 html {
@@ -1020,18 +772,7 @@ html {
     transform: translateX(100%);
 }
 
-/* 主題切換器動畫增強 */
-.theme-option {
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
 
-.theme-option:hover {
-    transform: scale(1.15);
-}
-
-.theme-option.active {
-    transform: scale(1.2);
-}
 
 /* 按鈕懸停特效增強 */
 .card-link {
@@ -1130,19 +871,7 @@ html {
     visibility: visible;
 }
 
-/* 優化側邊欄菜單項展開效果 */
-#sidebar.open .sidebar-item {
-    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    opacity: 0;
-}
 
-#sidebar.open .sidebar-item:nth-child(1) { animation-delay: 0.1s; }
-#sidebar.open .sidebar-item:nth-child(2) { animation-delay: 0.15s; }
-#sidebar.open .sidebar-item:nth-child(3) { animation-delay: 0.2s; }
-#sidebar.open .sidebar-item:nth-child(4) { animation-delay: 0.25s; }
-#sidebar.open .sidebar-item:nth-child(5) { animation-delay: 0.3s; }
-#sidebar.open .sidebar-item:nth-child(6) { animation-delay: 0.35s; }
-#sidebar.open .sidebar-item:nth-child(7) { animation-delay: 0.4s; }
 
 @keyframes slideIn {
     from {
@@ -1216,16 +945,7 @@ html {
     transition-delay: 0.5s;
 }
 
-/* 側邊欄動畫效果優化 */
-#sidebar {
-    /* ... existing code ... */
-    transition: transform var(--transition-speed) var(--transition-function);
-}
 
-#sidebar.open {
-    /* ... existing code ... */
-    transition: transform var(--transition-speed) var(--transition-function);
-}
 
 /* 菜單按鈕動畫 */
 #menuToggle {
@@ -1249,16 +969,7 @@ html {
     transition: transform var(--transition-speed) var(--transition-function);
 }
 
-/* 側邊欄項目動畫 */
-.sidebar-item {
-    /* ... existing code ... */
-    transition: all 0.2s var(--transition-function);
-}
 
-.sidebar-item:hover, .sidebar-item.active {
-    /* ... existing code ... */
-    transition: all 0.2s var(--transition-function);
-}
 
 /* 頁面過渡效果 */
 .page-transition-overlay {
@@ -1320,17 +1031,7 @@ html {
     transition: all 0.3s var(--transition-function);
 }
 
-/* 主題切換動畫 */
-.theme-option {
-    /* ... existing code ... */
-    transition: all 0.3s var(--transition-function);
-}
 
-.theme-option:hover, .theme-option.active {
-    /* ... existing code ... */
-    transform: scale(1.1);
-    transition: all 0.3s var(--transition-function);
-}
 
 /* 基本動畫效果 */
 a, button, input, select, textarea {
@@ -1678,11 +1379,7 @@ a, button, input, select, textarea {
     100% { transform: translateY(-4px); }
 }
 
-/* 側邊欄滑動優化 */
-#sidebar {
-    /* 已有樣式 */
-    touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
-}
+
 
 /* 響應式調整 */
 @media (max-width: 768px) {

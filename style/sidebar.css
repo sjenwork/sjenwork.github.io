@@ -1,0 +1,148 @@
+/* 側邊導航欄 - 優化動畫效果 */
+#sidebar {
+    height: 100%;
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: calc(-1 * var(--sidebar-width));
+    background-color: var(--sidebar-bg);
+    overflow-x: hidden;
+    transition: transform var(--transition-speed) var(--transition-function);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000; /* 提高z-index確保側邊欄在按鈕上方 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-radius: 0; /* 確保側邊欄沒有圓角 */
+    touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
+}
+
+#sidebar.open {
+    transform: translateX(var(--sidebar-width)); /* 使用transform顯示菜單 */
+    transition: transform var(--transition-speed) var(--transition-function);
+}
+
+/* 側邊欄菜單樣式 */
+.sidebar-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+/* 側邊欄菜單項 - 增加延遲加載效果 */
+.sidebar-item {
+    width: 100%;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: white;
+    display: block;
+    transition: all 0.2s var(--transition-function);
+    border-left: 3px solid transparent;
+    white-space: nowrap;
+    margin-bottom: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-item:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.sidebar-item:hover:after {
+    width: 100%;
+}
+
+.sidebar-item.active:after {
+    width: 100%;
+}
+
+.sidebar-item i {
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: var(--sidebar-width);
+        left: calc(-1 * var(--sidebar-width));
+        z-index: 1000; /* 確保側邊欄在按鈕上方 */
+    }
+    
+    #sidebar.open {
+        transform: translateX(var(--sidebar-width));
+    }
+
+    
+    /* 當側邊欄打開時，移動菜單按鈕到右側外側 */
+    #sidebar.open ~ #mainContent #menuToggle {
+        transform: translateX(calc(var(--sidebar-width) + 15px));
+        background-color: var(--primary-color);
+        z-index: 1001; /* 確保按鈕在側邊欄上方 */
+        left: 0;
+    }
+    
+    /* 調整菜單按鈕旋轉方向 */
+    #sidebar.open ~ #mainContent #menuToggle i {
+        transform: rotate(180deg);
+    }    
+}    
+
+/* 側邊欄導航細節更新 */
+.sidebar-item.active {
+    background-color: #546e7a;
+    border-left-color: #7986cb;
+}
+
+/* 優化側邊欄菜單項展開效果 */
+#sidebar.open .sidebar-item {
+    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+#sidebar.open .sidebar-item:nth-child(1) { animation-delay: 0.1s; }
+#sidebar.open .sidebar-item:nth-child(2) { animation-delay: 0.15s; }
+#sidebar.open .sidebar-item:nth-child(3) { animation-delay: 0.2s; }
+#sidebar.open .sidebar-item:nth-child(4) { animation-delay: 0.25s; }
+#sidebar.open .sidebar-item:nth-child(5) { animation-delay: 0.3s; }
+#sidebar.open .sidebar-item:nth-child(6) { animation-delay: 0.35s; }
+#sidebar.open .sidebar-item:nth-child(7) { animation-delay: 0.4s; }
+
+
+/* 側邊欄動畫效果優化 */
+#sidebar {
+    /* ... existing code ... */
+    transition: transform var(--transition-speed) var(--transition-function);
+}
+
+#sidebar.open {
+    /* ... existing code ... */
+    transition: transform var(--transition-speed) var(--transition-function);
+}
+
+/* 側邊欄項目動畫 */
+.sidebar-item {
+    /* ... existing code ... */
+    transition: all 0.2s var(--transition-function);
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+    /* ... existing code ... */
+    transition: all 0.2s var(--transition-function);
+}
+
+/* 側邊欄滑動優化 */
+#sidebar {
+    /* 已有樣式 */
+    touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
+}
