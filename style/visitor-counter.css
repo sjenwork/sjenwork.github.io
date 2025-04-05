@@ -1,0 +1,60 @@
+
+/* 頁腳信息 */
+.footer-info {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 900;
+    transition: all 0.3s ease;
+}
+
+.footer-info:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* 訪問計數器 */
+.visitor-counter {
+    color: white;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visitor-count {
+    margin-left: 5px;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* 深色主題下的計數器樣式 */
+[data-theme="dark"] .visitor-count {
+    background-color: var(--primary-color);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .footer-info {
+        bottom: 10px;
+        right: 10px;
+        padding: 6px 12px;
+    }
+    
+    .visitor-counter {
+        font-size: 0.75rem;
+    }
+    
+    .visitor-count {
+        padding: 1px 5px;
+    }
+} 

@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>個人網站 | 首頁</title>
+    
+    <!-- Google Analytics - 使用外部JS文件 -->
+    <script src="script/ga-init.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/construction.css">
     <link rel="stylesheet" href="style/sidebar.css">
     <link rel="stylesheet" href="style/themes.css">
+    <link rel="stylesheet" href="style/visitor-counter.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body>
     <div class="page-transition-overlay"></div>
@@ -273,7 +281,18 @@
         </div>
     </div>
 
+    <!-- 在footer或其他適當位置添加訪問計數器 -->
+    <div class="footer-info">
+        <div class="visitor-counter">
+            訪問人次：<span class="visitor-count">--</span>
+        </div>
+    </div>
+
     <script src="script/script.js"></script>
+    <script src="script/sidebar.js"></script>
     <script src="script/construction.js"></script>
+    <script src="script/visitor-counter.js"></script>
+    <script src="script/analytics.js"></script>
+    <script src="script/user-behavior.js"></script>
 </body>
 </html> 

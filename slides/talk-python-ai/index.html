@@ -398,7 +398,6 @@
         // 確保在頁面完全加載後再調用
         window.addEventListener('load', function() {
             setTimeout(function() {
-                console.log('頁面已完全加載，準備加載Python代碼...');
                 if (typeof loadPythonCode === 'function') {
                     loadPythonCode();
                 } else {

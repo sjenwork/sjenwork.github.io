@@ -107,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化 AI 實驗室功能
     initPlaygroundFeatures();
     
-    console.log("側邊欄功能已初始化");
 });
 
 // 初始化滾動檢測

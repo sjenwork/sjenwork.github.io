@@ -61,26 +61,21 @@ function exportToPDF() {
 
 // 加載Python代碼函數
 function loadPythonCode() {
-    console.log('開始加載Python代碼...');
     fetch('python/linear_regression.py')
         .then(response => {
             if (!response.ok) {
                 throw new Error('無法加載Python代碼: ' + response.statusText);
             }
-            console.log('Python代碼獲取成功，解析內容...');
             return response.text();
         })
         .then(code => {
-            console.log('獲取到Python代碼內容，代碼長度：', code.length);
             // 獲取代碼區塊元素，使用正確的CSS選擇器
             const codeElements = document.querySelectorAll('.code-example pre code.language-python');
-            console.log('找到代碼元素數量：', codeElements.length);
             
             if (codeElements.length === 0) {
                 console.error('找不到匹配的代碼元素：.code-example pre code.language-python');
                 // 嘗試使用舊的選擇器
                 const oldCodeElements = document.querySelectorAll('.code-example pre code.python');
-                console.log('使用舊選擇器找到代碼元素數量：', oldCodeElements.length);
                 
                 if (oldCodeElements.length > 0) {
                     oldCodeElements.forEach(element => {
@@ -88,7 +83,6 @@ function loadPythonCode() {
                         // 使用Prism.js進行語法高亮
                         if (typeof Prism !== 'undefined') {
                             Prism.highlightElement(element);
-                            console.log('應用Prism高亮到舊選擇器元素');
                         } else {
                             console.error('Prism未定義，無法進行語法高亮');
                         }
@@ -101,12 +95,10 @@ function loadPythonCode() {
                     // 使用Prism.js進行語法高亮
                     if (typeof Prism !== 'undefined') {
                         Prism.highlightElement(element);
-                        console.log('應用Prism高亮成功');
                     } else {
                         console.error('Prism未定義，無法進行語法高亮');
                     }
                 });
-                console.log('代碼更新完成');
             }
         })
         .catch(error => {
