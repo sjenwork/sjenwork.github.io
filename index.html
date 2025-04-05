@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>個人網站 | 首頁</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/construction.css">
 </head>
 <body>
     <div class="page-transition-overlay"></div>
@@ -25,6 +26,7 @@
             <a href="#" class="sidebar-item active" data-section="presentations"><i class="fa fa-desktop"></i>簡報</a>
             <a href="#" class="sidebar-item" data-section="projects"><i class="fa fa-code"></i>專案</a>
             <a href="#" class="sidebar-item" data-section="blog"><i class="fa fa-pencil"></i>部落格</a>
+            <a href="#" class="sidebar-item" data-section="playground"><i class="fa fa-flask"></i>AI 實驗室</a>
             <a href="#" class="sidebar-item" data-section="about"><i class="fa fa-user"></i>關於我</a>
             <a href="#" class="sidebar-item" data-section="skills"><i class="fa fa-star"></i>技能</a>
             <a href="#" class="sidebar-item" data-section="resources"><i class="fa fa-book"></i>資源</a>
@@ -100,7 +102,7 @@
                             <h2 class="card-title">個人網站開發</h2>
                             <p class="card-description">使用HTML、CSS和JavaScript開發的響應式個人網站，包含多個功能頁面和互動元素。</p>
                             <p><small>技術：HTML/CSS, JavaScript</small></p>
-                            <a href="#" class="card-link">查看專案</a>
+                            <a href="https://sjenwork.github.io/" class="card-link">查看專案</a>
                         </div>
                     </div>
                     
@@ -110,9 +112,9 @@
                             <div class="card-overlay"></div>
                         </div>
                         <div class="card-content">
-                            <h2 class="card-title">AI助理應用</h2>
-                            <p class="card-description">基於大型語言模型開發的AI助理應用，能夠理解自然語言並執行多種任務。</p>
-                            <p><small>技術：Python, LangChain, OpenAI API</small></p>
+                            <h2 class="card-title">ai 應用軟體</h2>
+                            <p class="card-description">基於大型語言模型開發的ai應用軟體，能夠理解自然語言並執行多種任務。</p>
+                            <p><small>技術：python, openai api, gemini api, groq api, mistral api</small></p>
                             <a href="#" class="card-link">查看專案</a>
                         </div>
                     </div>
@@ -150,6 +152,36 @@
                             <a href="#" class="card-link">閱讀文章</a>
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <!-- AI 實驗室區塊 -->
+            <div class="section" id="playground">
+                <h2 class="section-title">AI 實驗室</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">這裡提供了一系列 AI 功能的互動式演示，讓你體驗人工智能的魅力。</p>
+                
+                <div class="playground-container">
+                    <!-- 文本生成實驗 -->
+                    <div class="playground-card">
+                        <h3 class="playground-title">文本生成</h3>
+                        <div class="playground-content">
+                            <p>輸入提示詞，讓 AI 為你生成創意文本。</p>
+                            <div class="playground-control">
+                                <textarea class="playground-input" placeholder="輸入一個提示詞，例如：寫一首關於人工智能的短詩..." rows="3"></textarea>
+                                <button class="playground-button" data-function="text-generation">生成</button>
+                            </div>
+                            <div class="playground-result">
+                                <div class="result-placeholder">AI 生成的內容將顯示在這裡...</div>
+                                <div class="result-content" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                
+                <div class="playground-disclaimer">
+                    <p><i class="fa fa-info-circle"></i> 注意：這些 AI 功能僅供演示和學習目的，實際效果可能因模型和網絡狀況而異。</p>
                 </div>
             </div>
             
@@ -229,6 +261,17 @@
         </footer>
     </div>
     
-    <script src="script.js"></script>
+    <div class="construction-notice">
+        <div class="notice-content">
+            <i class="fa fa-exclamation-triangle"></i>
+            <h2>網站建置中</h2>
+            <p>親愛的訪客，本網站目前正在建置中，部分功能暫時不可用。</p>
+            <p>我們正在努力完善網站內容，感謝您的耐心等待。</p>
+            <button class="notice-close">我知道了</button>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+    <script src="script/construction.js"></script>
 </body>
 </html> 
