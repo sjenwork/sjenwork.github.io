@@ -3,6 +3,11 @@
  * 用於載入GA4並設置基本配置
  */
 
+// 創建全局gtag函數
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;  // 確保gtag函數在全局範圍可用
+
 // 動態載入Google Analytics腳本
 (function() {
     // 創建script元素
@@ -15,10 +20,9 @@
     firstScript.parentNode.insertBefore(gaScript, firstScript);
     
     // 初始化GA4
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-D5BW7CYDM0');
     
     // 輸出日誌
+    console.log('Google Analytics 已初始化');
 })(); 
