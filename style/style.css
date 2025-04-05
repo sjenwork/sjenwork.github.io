@@ -587,21 +587,28 @@ h1 {
     color: var(--heading-color);
 }
 
+/* 頁腳樣式優化 */
 footer {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 15px 0;
     text-align: center;
-    padding: 2rem 0;
     margin-top: 2rem;
-    width: 100%;
-    background-color: var(--sidebar-bg);
-    color: #ecf0f1;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: #666;
 }
 
 footer p {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 訪問計數器樣式已移至visitor-counter.css統一管理 */
+
+@media (max-width: 768px) {
+    footer {
+        padding: 10px 0;
+        font-size: 0.8rem;
+    }
 }
 
 /* 響應式處理 */
@@ -679,8 +686,6 @@ footer p {
     .slide-card, .project-card, .blog-card {
         max-width: 100%;
     }
-    
-
     
     footer {
         padding: 1.5rem 0;

@@ -6,9 +6,9 @@
 // Firebase 配置
 // 注意: 請將以下配置替換為您從Firebase控制台獲得的配置
 const firebaseConfig = {
-    apiKey: "AIzaSyB3gvcVEiFkm5jptM1qw5uZMsED0yLIXiA", // 請替換為您的API密鑰
-    authDomain: "sjenwork-github.firebaseapp.com", 
-    databaseURL: "https://sjenwork-github-default-rtdb.asia-southeast1.firebasedatabase.app", // 請確保使用您的資料庫URL
+    apiKey: "AIzaSyB3gvcVEiFkm5jptM1qw5uZMsED0yLIXiA",
+    authDomain: "sjenwork-github.firebaseapp.com",
+    databaseURL: "https://sjenwork-github-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "sjenwork-github",
     storageBucket: "sjenwork-github.appspot.com",
     messagingSenderId: "1010951404944",
