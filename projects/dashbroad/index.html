@@ -1,0 +1,2548 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>化學雲分析儀表板</title>
+    <!-- 引入 Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Chart.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入 Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- 引入日期選擇器 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        /* 現有樣式... */
+        
+        /* 資料上傳狀態圖例樣式 */
+        .status-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .status-indicator.scheduled {
+            background-color: #ffc107; /* 黃色 - 需要上傳 */
+        }
+        
+        .status-indicator.uploaded {
+            background-color: #28a745; /* 綠色 - 已正確上傳 */
+        }
+        
+        .status-indicator.error {
+            background-color: #dc3545; /* 紅色 - 有誤待修正 */
+        }
+        
+        .status-indicator.corrected {
+            background-color: #17a2b8; /* 藍綠色 - 已修正回覆 */
+        }
+        
+        .status-indicator.missing {
+            background-color: #6c757d; /* 灰色 - 已超過未上傳 */
+        }
+        
+        .status-indicator.normal {
+            background-color: #f8f9fa; /* 淺灰色 - 非上傳月份 */
+            border: 1px solid #dee2e6;
+        }
+        
+        /* 深色模式樣式 */
+        .dark-mode .status-indicator.normal {
+            background-color: #343a40; /* 深色模式下的深灰色 */
+            border: 1px solid #495057;
+        }
+        
+        .dark-mode .timeline-header,
+        .dark-mode .timeline-row {
+            color: #f8f9fa;
+        }
+        
+        .dark-mode .timeline-month-status .status-tooltip {
+            background-color: rgba(255,255,255,0.9);
+            color: #212529;
+        }
+        
+        /* 時間軸樣式 */
+        .timeline-container {
+            overflow-x: auto;
+            padding: 20px;
+        }
+        
+        .timeline-header {
+            display: flex;
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 10px;
+        }
+        
+        .dark-mode .timeline-header {
+            border-bottom: 1px solid #495057;
+        }
+        
+        .timeline-month {
+            flex: 0 0 70px;
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+        }
+        
+        .timeline-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .timeline-system {
+            flex: 0 0 150px;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+        
+        .timeline-status {
+            display: flex;
+        }
+        
+        .timeline-month-status {
+            flex: 0 0 70px;
+            height: 30px;
+            margin: 0 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .timeline-month-status .status-dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+        }
+        
+        .timeline-month-status .status-tooltip {
+            position: absolute;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            display: none;
+            z-index: 10;
+        }
+        
+        .timeline-month-status:hover .status-tooltip {
+            display: block;
+        }
+        
+        /* 卡片在深色模式下的樣式 */
+        .dark-mode .card {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .card-header {
+            background-color: #1a202c;
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .card-body {
+            color: #e2e8f0;
+        }
+        
+        /* 服務器狀態詳情卡片 */
+        .dark-mode .server-status-card .progress {
+            background-color: #4a5568;
+        }
+        
+        .dark-mode .server-status-card .cpu-usage,
+        .dark-mode .server-status-card .memory-usage,
+        .dark-mode .server-status-card .disk-usage,
+        .dark-mode .server-status-card .network-usage {
+            color: #e2e8f0;
+        }
+        
+        /* 最近安全事件卡片 */
+        .dark-mode .security-event-item {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .security-event-item .event-time {
+            color: #a0aec0;
+        }
+        
+        .dark-mode .security-event-severity.high {
+            background-color: #742a2a;
+        }
+        
+        .dark-mode .security-event-severity.medium {
+            background-color: #744a2a;
+        }
+        
+        .dark-mode .security-event-severity.low {
+            background-color: #2a4a74;
+        }
+        
+        /* 使用者習慣摘要卡片 */
+        .dark-mode .user-habit-card .stat-value {
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .user-habit-card .stat-label {
+            color: #a0aec0;
+        }
+        
+        .dark-mode .user-habit-card .trend-up {
+            color: #48bb78;
+        }
+        
+        .dark-mode .user-habit-card .trend-down {
+            color: #f56565;
+        }
+        
+        /* 硬碟健康狀態卡片 */
+        .dark-mode .disk-health-card .disk-status {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .disk-health-card .health-indicator {
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .disk-health-card .health-good {
+            color: #48bb78;
+        }
+        
+        .dark-mode .disk-health-card .health-warning {
+            color: #ed8936;
+        }
+        
+        .dark-mode .disk-health-card .health-critical {
+            color: #f56565;
+        }
+        
+        /* 表格在深色模式下的樣式 */
+        .dark-mode .table {
+            color: #e2e8f0;
+        }
+        
+        .dark-mode .table thead th {
+            background-color: #1a202c;
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .table td {
+            border-color: #4a5568;
+        }
+        
+        .dark-mode .table-hover tbody tr:hover {
+            background-color: #2c3344;
+        }
+        
+        /* 圖表在深色模式下的樣式 */
+        .dark-mode .chart-container {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="theme-toggle-container">
+        <button id="themeToggle" class="btn theme-toggle">
+            <i class="bi bi-moon-fill"></i>
+        </button>
+    </div>
+    
+    <div class="container-fluid p-0">
+        <!-- 頂部導航欄 -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="bi bi-cloud me-2"></i>化學雲分析儀表板
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <button class="btn btn-sm btn-primary save-dashboard-btn">
+                                <i class="bi bi-save me-1"></i>儲存儀表板
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid mt-3">
+            <!-- 標籤頁區域 -->
+            <div class="dashboard-tabs mb-3">
+                <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account-dashboard" type="button" role="tab" aria-controls="account-dashboard" aria-selected="true">
+                            <i class="bi bi-people-fill me-2"></i>帳號統計
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="usage-tab" data-bs-toggle="tab" data-bs-target="#usage-dashboard" type="button" role="tab" aria-controls="usage-dashboard" aria-selected="false">
+                            <i class="bi bi-graph-up me-2"></i>功能使用
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="behavior-tab" data-bs-toggle="tab" data-bs-target="#behavior-dashboard" type="button" role="tab" aria-controls="behavior-dashboard" aria-selected="false">
+                            <i class="bi bi-bar-chart-line me-2"></i>使用者行為
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="transform-tab" data-bs-toggle="tab" data-bs-target="#transform-dashboard" type="button" role="tab" aria-controls="transform-dashboard" aria-selected="false">
+                            <i class="bi bi-arrow-repeat me-2"></i>轉置狀態
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security-dashboard" type="button" role="tab" aria-controls="security-dashboard" aria-selected="false">
+                            <i class="bi bi-shield-lock me-2"></i>安全分析
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="storage-tab" data-bs-toggle="tab" data-bs-target="#storage-dashboard" type="button" role="tab" aria-controls="storage-dashboard" aria-selected="false">
+                            <i class="bi bi-hdd-rack me-2"></i>存儲分析
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-dashboard" type="button" role="tab" aria-controls="personal-dashboard" aria-selected="false">
+                            <i class="bi bi-grid-3x3-gap me-2"></i>個人化儀表板
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="upload-status-tab" data-bs-toggle="tab" data-bs-target="#upload-status-dashboard" type="button" role="tab" aria-controls="upload-status-dashboard" aria-selected="false">
+                            <i class="bi bi-cloud-upload me-2"></i>資料上傳狀態
+                        </button>
+                    </li>
+                    <li class="nav-item ms-auto">
+                        <button class="btn btn-sm btn-outline-primary" id="addDashboardTab">
+                            <i class="bi bi-plus-lg"></i> 新增
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content" id="dashboardTabsContent">
+                <!-- 帳號統計標籤頁 - 當前儀表板 -->
+                <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel" aria-labelledby="account-tab">
+                    <div class="row">
+                        <!-- 左側篩選面板 -->
+                        <div class="col-lg-3 col-md-4 mb-4">
+                            <div class="filter-panel">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">篩選條件</h5>
+                                        <button id="resetFilters" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-counterclockwise me-1"></i>重置
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- 時間範圍選擇 -->
+                                        <div class="mb-3">
+                                            <label class="form-label">時間範圍</label>
+                                            <div class="input-group">
+                                                <input type="text" id="dateRange" class="form-control">
+                                                <span class="input-group-text"><i class="bi bi-calendar-range"></i></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 時間粒度選擇 -->
+                                        <div class="mb-3">
+                                            <label class="form-label">時間粒度</label>
+                                            <select id="timeGranularity" class="form-select">
+                                                <option value="day">日</option>
+                                                <option value="month" selected>月</option>
+                                                <option value="quarter">季</option>
+                                                <option value="year">年</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 帳號角色選擇 -->
+                                        <div class="mb-3">
+                                            <label class="form-label">帳號角色</label>
+                                            <div class="role-select-container">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input role-checkbox" type="checkbox" value="all" id="roleAll" checked>
+                                                    <label class="form-check-label" for="roleAll">全部</label>
+                                                </div>
+                                                <div class="role-options">
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input role-checkbox" type="checkbox" value="fire" id="roleFire">
+                                                        <label class="form-check-label" for="roleFire">消防單位</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input role-checkbox" type="checkbox" value="economic" id="roleEconomic">
+                                                        <label class="form-check-label" for="roleEconomic">經濟部</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input role-checkbox" type="checkbox" value="labor" id="roleLabor">
+                                                        <label class="form-check-label" for="roleLabor">勞動部</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input role-checkbox" type="checkbox" value="health" id="roleHealth">
+                                                        <label class="form-check-label" for="roleHealth">衛福部</label>
+                                                    </div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input role-checkbox" type="checkbox" value="environment" id="roleEnvironment">
+                                                        <label class="form-check-label" for="roleEnvironment">環境部</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 帳號狀態選擇 -->
+                                        <div class="mb-3">
+                                            <label class="form-label">帳號狀態</label>
+                                            <select id="accountStatus" class="form-select">
+                                                <option value="all" selected>全部</option>
+                                                <option value="active">活躍</option>
+                                                <option value="inactive">非活躍</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <button id="applyFilters" class="btn btn-primary w-100">
+                                            <i class="bi bi-funnel-fill me-1"></i>套用篩選
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- 已儲存的儀表板 -->
+                                <div class="card mt-3">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">已儲存的儀表板</h5>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <ul class="list-group list-group-flush" id="savedDashboards">
+                                            <!-- 儲存的儀表板會動態添加在這裡 -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 右側儀表板內容 -->
+                        <div class="col-lg-9 col-md-8">
+                            <div class="dashboard-content">
+                                <!-- 頂部概述卡片 -->
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card stat-card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">總帳號數</h6>
+                                                        <h3 class="mb-0" id="totalAccounts">0</h3>
+                                                    </div>
+                                                    <div class="stat-icon">
+                                                        <i class="bi bi-people-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2 growth-info">
+                                                    <span id="accountGrowth">+0%</span> 相比上一期間
+                                                </div>
+                                                <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                                    <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card stat-card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">活躍帳號</h6>
+                                                        <h3 class="mb-0" id="activeAccounts">0</h3>
+                                                    </div>
+                                                    <div class="stat-icon">
+                                                        <i class="bi bi-person-check-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2 growth-info">
+                                                    <span id="activeGrowth">+0%</span> 相比上一期間
+                                                </div>
+                                                <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                                    <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card stat-card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">本期新增</h6>
+                                                        <h3 class="mb-0" id="newAccounts">0</h3>
+                                                    </div>
+                                                    <div class="stat-icon">
+                                                        <i class="bi bi-person-plus-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2 growth-info">
+                                                    <span id="newAccountsGrowth">+0%</span> 相比上一期間
+                                                </div>
+                                                <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                                    <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 mb-4">
+                                        <div class="card stat-card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">主要角色</h6>
+                                                        <h3 class="mb-0" id="topRole">-</h3>
+                                                    </div>
+                                                    <div class="stat-icon">
+                                                        <i class="bi bi-briefcase-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2 growth-info">
+                                                    佔比 <span id="topRolePercentage">0%</span>
+                                                </div>
+                                                <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                                    <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 圖表區域 -->
+                                <div class="row">
+                                    <!-- 時間序列圖 -->
+                                    <div class="col-lg-8 mb-4">
+                                        <div class="card chart-card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0">帳號數量變化趨勢</h5>
+                                                <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                                    <i class="bi bi-arrows-fullscreen"></i>
+                                                </button>
+                                            </div>
+                                            <div class="card-body">
+                                                <canvas id="timeSeriesChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 角色分布餅圖 -->
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="card chart-card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0">角色分布</h5>
+                                                <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                                    <i class="bi bi-arrows-fullscreen"></i>
+                                                </button>
+                                            </div>
+                                            <div class="card-body">
+                                                <canvas id="rolePieChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 台灣地圖 -->
+                                    <div class="col-lg-8 mb-4">
+                                        <div class="card chart-card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0">縣市分布</h5>
+                                                <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                                    <i class="bi bi-arrows-fullscreen"></i>
+                                                </button>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="taiwanMap" class="taiwan-map"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 狀態比例柱狀圖 -->
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="card chart-card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0">各角色活躍度</h5>
+                                                <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                                    <i class="bi bi-arrows-fullscreen"></i>
+                                                </button>
+                                            </div>
+                                            <div class="card-body">
+                                                <canvas id="statusBarChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 功能使用統計標籤頁 -->
+                <div class="tab-pane fade" id="usage-dashboard" role="tabpanel" aria-labelledby="usage-tab">
+                    <!-- 篩選條件 -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">查詢功能使用分析</h5>
+                                    <button id="usageResetFilters" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-arrow-counterclockwise me-1"></i>重置
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- 時間範圍選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">時間範圍</label>
+                                            <div class="input-group">
+                                                <input type="text" id="usageDateRange" class="form-control">
+                                                <span class="input-group-text"><i class="bi bi-calendar-range"></i></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 時間粒度選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">時間粒度</label>
+                                            <select id="timeGranularity" class="form-select">
+                                                <option value="1">1分鐘</option>
+                                                <option value="10" selected>10分鐘</option>
+                                                <option value="30">30分鐘</option>
+                                                <option value="60">1小時</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 熱度排名顯示數量 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">熱度排名顯示數量</label>
+                                            <select id="heatRankLimit" class="form-select">
+                                                <option value="10" selected>前10名</option>
+                                                <option value="20">前20名</option>
+                                                <option value="50">前50名</option>
+                                                <option value="100">前100名</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 帳號角色選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">帳號角色</label>
+                                            <select id="usageRoleFilter" class="form-select">
+                                                <option value="all" selected>全部</option>
+                                                <option value="fire">消防單位</option>
+                                                <option value="economic">經濟部</option>
+                                                <option value="labor">勞動部</option>
+                                                <option value="health">衛福部</option>
+                                                <option value="environment">環境部</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <button id="applyUsageFilters" class="btn btn-primary float-end">
+                                                <i class="bi bi-funnel-fill me-1"></i>套用篩選
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 頂部概述卡片 -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">總查詢次數</h6>
+                                            <h3 class="mb-0" id="totalQueries">0</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-search"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="queriesGrowth">+0%</span> 相比上一期間
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">平均查詢間隔</h6>
+                                            <h3 class="mb-0" id="avgQueryInterval">0秒</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-hourglass-split"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="intervalGrowth">+0%</span> 相比上一期間
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">高峰期查詢</h6>
+                                            <h3 class="mb-0" id="peakQueries">0</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-graph-up"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="peakTime">--:--</span> 當日高峰時段
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">主要查詢角色</h6>
+                                            <h3 class="mb-0" id="topQueryRole">-</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-person-badge"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        佔比 <span id="topRoleQueryPercentage">0%</span>
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 使用時間序列圖 -->
+                    <div class="row">
+                        <div class="col-lg-8 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">查詢功能使用時間序列</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="queryTimeSeriesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 角色使用對比圖 -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">各角色查詢次數</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="roleQueryPieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 熱門查詢記錄 -->
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">查詢熱度排行榜</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">查詢對象</th>
+                                                    <th scope="col">類型</th>
+                                                    <th scope="col">查詢次數</th>
+                                                    <th scope="col">查詢角色分布</th>
+                                                    <th scope="col">趨勢</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="queryHeatRankTable">
+                                                <!-- 動態生成內容 -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 查詢分布熱力圖 -->
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">24小時查詢分布</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="queryHeatmapChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 查詢響應時間 -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">查詢響應時間</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="queryResponseTimeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 安全分析標籤頁 -->
+                <div class="tab-pane fade" id="security-dashboard" role="tabpanel" aria-labelledby="security-tab">
+                    <!-- 篩選條件 -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">安全分析儀表板</h5>
+                                    <button id="securityResetFilters" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-arrow-counterclockwise me-1"></i>重置
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- 時間範圍選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">時間範圍</label>
+                                            <div class="input-group">
+                                                <input type="text" id="securityDateRange" class="form-control">
+                                                <span class="input-group-text"><i class="bi bi-calendar-range"></i></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 時間粒度選擇 -->
+                                        <div class="col-md-2 mb-3">
+                                            <label class="form-label">時間粒度</label>
+                                            <select id="securityTimeGranularity" class="form-select">
+                                                <option value="hour">每小時</option>
+                                                <option value="day" selected>每天</option>
+                                                <option value="week">每週</option>
+                                                <option value="month">每月</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 使用者選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">使用者類型</label>
+                                            <select id="securityUserType" class="form-select">
+                                                <option value="all" selected>全部使用者</option>
+                                                <option value="admin">管理員</option>
+                                                <option value="normal">一般使用者</option>
+                                                <option value="api">API服務</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 事件類型選擇 -->
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">事件類型</label>
+                                            <select id="securityEventType" class="form-select">
+                                                <option value="all" selected>全部事件</option>
+                                                <option value="login">登入事件</option>
+                                                <option value="access">資源訪問</option>
+                                                <option value="error">錯誤事件</option>
+                                                <option value="alert">安全警告</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <button id="applySecurityFilters" class="btn btn-primary float-end">
+                                                <i class="bi bi-funnel-fill me-1"></i>套用篩選
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 頂部概述卡片 -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">總訪問次數</h6>
+                                            <h3 class="mb-0" id="totalAccessCount">38,492</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-door-open-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="accessGrowth" class="text-success">+5.2%</span> 相比上一期間
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">異常訪問</h6>
+                                            <h3 class="mb-0" id="abnormalAccessCount">127</h3>
+                                        </div>
+                                        <div class="stat-icon text-danger">
+                                            <i class="bi bi-exclamation-triangle-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="abnormalGrowth" class="text-danger">+12.7%</span> 相比上一期間
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">總流量</h6>
+                                            <h3 class="mb-0" id="totalTraffic">256.8 GB</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-arrow-down-up"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="trafficGrowth" class="text-success">+3.4%</span> 相比上一期間
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">已阻擋IP</h6>
+                                            <h3 class="mb-0" id="blockedIpCount">42</h3>
+                                        </div>
+                                        <div class="stat-icon text-danger">
+                                            <i class="bi bi-shield-x"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        當前阻擋中
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 訪問時間序列圖 -->
+                    <div class="row">
+                        <div class="col-lg-8 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">訪問量時間趨勢</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="securityAccessChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 登入成功率圓餅圖 -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">登入成功率</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="loginSuccessChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 最近的安全事件 -->
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">最近安全事件</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">時間</th>
+                                                    <th scope="col">使用者</th>
+                                                    <th scope="col">IP 位址</th>
+                                                    <th scope="col">事件類型</th>
+                                                    <th scope="col">狀態</th>
+                                                    <th scope="col">詳細資訊</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="securityEventsTable">
+                                                <!-- 動態生成內容 -->
+                                                <tr>
+                                                    <td>2023-10-16 08:45:12</td>
+                                                    <td>admin</td>
+                                                    <td>192.168.1.105</td>
+                                                    <td>登入</td>
+                                                    <td><span class="badge bg-success">成功</span></td>
+                                                    <td><button class="btn btn-sm btn-link">查看</button></td>
+                                                </tr>
+                                                <tr class="table-warning">
+                                                    <td>2023-10-16 08:30:45</td>
+                                                    <td>user123</td>
+                                                    <td>203.0.113.42</td>
+                                                    <td>登入</td>
+                                                    <td><span class="badge bg-warning">多次嘗試</span></td>
+                                                    <td><button class="btn btn-sm btn-link">查看</button></td>
+                                                </tr>
+                                                <tr class="table-danger">
+                                                    <td>2023-10-16 08:15:33</td>
+                                                    <td>unknown</td>
+                                                    <td>45.33.21.18</td>
+                                                    <td>訪問資源</td>
+                                                    <td><span class="badge bg-danger">未授權</span></td>
+                                                    <td><button class="btn btn-sm btn-link">查看</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2023-10-16 08:12:10</td>
+                                                    <td>system</td>
+                                                    <td>內部系統</td>
+                                                    <td>資料庫備份</td>
+                                                    <td><span class="badge bg-success">成功</span></td>
+                                                    <td><button class="btn btn-sm btn-link">查看</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 使用者訪問熱力圖 -->
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">使用者訪問熱力圖</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="accessHeatmapChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 異常IP來源地圖 -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">異常IP來源分布</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div id="abnormalIPMap" class="ip-map" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 存儲分析標籤頁 -->
+                <div class="tab-pane fade" id="storage-dashboard" role="tabpanel" aria-labelledby="storage-tab">
+                    <!-- 篩選條件 -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">存儲分析儀表板</h5>
+                                    <div>
+                                        <button id="refreshStorage" class="btn btn-sm btn-outline-primary me-2">
+                                            <i class="bi bi-arrow-repeat me-1"></i>刷新數據
+                                        </button>
+                                        <button id="storageResetFilters" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-counterclockwise me-1"></i>重置
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- 時間範圍選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">時間範圍</label>
+                                            <div class="input-group">
+                                                <input type="text" id="storageDateRange" class="form-control">
+                                                <span class="input-group-text"><i class="bi bi-calendar-range"></i></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 時間粒度選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">時間粒度</label>
+                                            <select id="storageTimeGranularity" class="form-select">
+                                                <option value="minute">每分鐘</option>
+                                                <option value="hour" selected>每小時</option>
+                                                <option value="day">每天</option>
+                                                <option value="week">每週</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 服務器選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">服務器選擇</label>
+                                            <select id="serverSelect" class="form-select">
+                                                <option value="all" selected>全部服務器</option>
+                                                <option value="server1">主服務器</option>
+                                                <option value="server2">備用服務器</option>
+                                                <option value="server3">資料庫服務器</option>
+                                                <option value="server4">檔案服務器</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 指標選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">主要指標</label>
+                                            <select id="metricSelect" class="form-select">
+                                                <option value="all" selected>全部指標</option>
+                                                <option value="disk">硬碟使用</option>
+                                                <option value="cpu">CPU使用率</option>
+                                                <option value="ram">記憶體使用</option>
+                                                <option value="network">網路流量</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <button id="applyStorageFilters" class="btn btn-primary float-end">
+                                                <i class="bi bi-funnel-fill me-1"></i>套用篩選
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 頂部概述卡片 -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">硬碟使用率</h6>
+                                            <h3 class="mb-0" id="diskUsage">72.4%</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-hdd-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 72.4%" aria-valuenow="72.4" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 small">
+                                        已使用: <span id="diskUsed">3.62 TB</span> / <span id="diskTotal">5 TB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">CPU使用率</h6>
+                                            <h3 class="mb-0" id="cpuUsage">38.2%</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-cpu-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 38.2%" aria-valuenow="38.2" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 small">
+                                        平均負載: <span id="cpuLoad">1.24</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">記憶體使用率</h6>
+                                            <h3 class="mb-0" id="ramUsage">56.7%</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-memory"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 56.7%" aria-valuenow="56.7" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 small">
+                                        已使用: <span id="ramUsed">45.4 GB</span> / <span id="ramTotal">80 GB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">網路流量</h6>
+                                            <h3 class="mb-0" id="networkTraffic">84.3 MB/s</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-speedometer2"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 small d-flex justify-content-between">
+                                        <span>↑ <span id="uploadSpeed">25.7 MB/s</span></span>
+                                        <span>↓ <span id="downloadSpeed">58.6 MB/s</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 資源使用時間序列圖 -->
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">資源使用趨勢</h5>
+                                    <div>
+                                        <div class="btn-group" role="group">
+                                            <input type="radio" class="btn-check" name="resourceMetric" id="resourceMetricCPU" autocomplete="off" checked>
+                                            <label class="btn btn-outline-primary btn-sm" for="resourceMetricCPU">CPU</label>
+                                            
+                                            <input type="radio" class="btn-check" name="resourceMetric" id="resourceMetricRAM" autocomplete="off">
+                                            <label class="btn btn-outline-primary btn-sm" for="resourceMetricRAM">記憶體</label>
+                                            
+                                            <input type="radio" class="btn-check" name="resourceMetric" id="resourceMetricDisk" autocomplete="off">
+                                            <label class="btn btn-outline-primary btn-sm" for="resourceMetricDisk">硬碟</label>
+                                            
+                                            <input type="radio" class="btn-check" name="resourceMetric" id="resourceMetricNetwork" autocomplete="off">
+                                            <label class="btn btn-outline-primary btn-sm" for="resourceMetricNetwork">網路</label>
+                                        </div>
+                                        <button class="btn btn-sm btn-link fullscreen-btn ms-2">
+                                            <i class="bi bi-arrows-fullscreen"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="resourceUsageChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 硬碟使用詳情 -->
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">硬碟使用詳情</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="diskUsageChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CPU核心使用情況 -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">CPU核心使用情況</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="cpuCoresChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 服務器狀態表格 -->
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">服務器狀態詳情</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">服務器名稱</th>
+                                                    <th scope="col">狀態</th>
+                                                    <th scope="col">CPU使用率</th>
+                                                    <th scope="col">記憶體使用率</th>
+                                                    <th scope="col">硬碟使用率</th>
+                                                    <th scope="col">網路流量</th>
+                                                    <th scope="col">已運行時間</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="serverStatusTable">
+                                                <!-- 動態生成內容 -->
+                                                <tr>
+                                                    <td>主服務器</td>
+                                                    <td><span class="badge bg-success">正常</span></td>
+                                                    <td>42.3%</td>
+                                                    <td>61.5%</td>
+                                                    <td>75.8%</td>
+                                                    <td>42.7 MB/s</td>
+                                                    <td>45天 7小時</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>備用服務器</td>
+                                                    <td><span class="badge bg-success">正常</span></td>
+                                                    <td>12.1%</td>
+                                                    <td>38.7%</td>
+                                                    <td>54.2%</td>
+                                                    <td>8.5 MB/s</td>
+                                                    <td>45天 7小時</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>資料庫服務器</td>
+                                                    <td><span class="badge bg-warning">注意</span></td>
+                                                    <td>78.6%</td>
+                                                    <td>85.2%</td>
+                                                    <td>62.3%</td>
+                                                    <td>31.2 MB/s</td>
+                                                    <td>23天 14小時</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>檔案服務器</td>
+                                                    <td><span class="badge bg-success">正常</span></td>
+                                                    <td>25.8%</td>
+                                                    <td>42.3%</td>
+                                                    <td>87.5%</td>
+                                                    <td>58.6 MB/s</td>
+                                                    <td>30天 9小時</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 硬碟健康狀態 -->
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">硬碟健康狀態</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">設備</th>
+                                                    <th scope="col">型號</th>
+                                                    <th scope="col">容量</th>
+                                                    <th scope="col">健康度</th>
+                                                    <th scope="col">溫度</th>
+                                                    <th scope="col">已使用時間</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="diskHealthTable">
+                                                <!-- 動態生成內容 -->
+                                                <tr>
+                                                    <td>/dev/sda</td>
+                                                    <td>Samsung SSD 870 EVO</td>
+                                                    <td>1 TB</td>
+                                                    <td>
+                                                        <div class="progress" style="height: 10px;">
+                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 92%;" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">92%</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>38°C</td>
+                                                    <td>426天</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>/dev/sdb</td>
+                                                    <td>WD Red Pro</td>
+                                                    <td>4 TB</td>
+                                                    <td>
+                                                        <div class="progress" style="height: 10px;">
+                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 89%;" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100">89%</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>42°C</td>
+                                                    <td>578天</td>
+                                                </tr>
+                                                <tr class="table-warning">
+                                                    <td>/dev/sdc</td>
+                                                    <td>Seagate Ironwolf</td>
+                                                    <td>6 TB</td>
+                                                    <td>
+                                                        <div class="progress" style="height: 10px;">
+                                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 68%;" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">68%</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>47°C</td>
+                                                    <td>912天</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>/dev/sdd</td>
+                                                    <td>Samsung SSD 980 PRO</td>
+                                                    <td>2 TB</td>
+                                                    <td>
+                                                        <div class="progress" style="height: 10px;">
+                                                            <div class="progress-bar bg-success" role="progressbar" style="width: 97%;" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100">97%</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>35°C</td>
+                                                    <td>124天</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 記憶體使用詳情 -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">記憶體使用詳情</h5>
+                                    <button class="btn btn-sm btn-link fullscreen-btn ms-auto">
+                                        <i class="bi bi-arrows-fullscreen"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="ramDetailChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 轉置狀態標籤頁 -->
+                <div class="tab-pane fade" id="transform-dashboard" role="tabpanel" aria-labelledby="transform-tab">
+                    <!-- 篩選條件 -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">轉置狀態分析</h5>
+                                    <button id="transformResetFilters" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-arrow-counterclockwise me-1"></i>重置
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- 時間範圍選擇 -->
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">時間範圍</label>
+                                            <div class="input-group">
+                                                <input type="text" id="transformDateRange" class="form-control">
+                                                <span class="input-group-text"><i class="bi bi-calendar-range"></i></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 時間粒度選擇 -->
+                                        <div class="col-md-2 mb-3">
+                                            <label class="form-label">時間粒度</label>
+                                            <select id="transformTimeGranularity" class="form-select">
+                                                <option value="hour">每小時</option>
+                                                <option value="day" selected>每天</option>
+                                                <option value="week">每週</option>
+                                                <option value="month">每月</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 數據指標選擇 -->
+                                        <div class="col-md-2 mb-3">
+                                            <label class="form-label">數據指標</label>
+                                            <select id="transformMetric" class="form-select">
+                                                <option value="count" selected>資料筆數</option>
+                                                <option value="size">檔案大小</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- 系統來源選擇 -->
+                                        <div class="col-md-5 mb-3">
+                                            <label class="form-label">系統來源</label>
+                                            <div class="d-flex flex-wrap source-select-container">
+                                                <div class="form-check me-3 mb-2">
+                                                    <input class="form-check-input source-checkbox" type="checkbox" value="all" id="sourceAll" checked>
+                                                    <label class="form-check-label" for="sourceAll">全部</label>
+                                                </div>
+                                                <div class="form-check me-3 mb-2">
+                                                    <input class="form-check-input source-checkbox" type="checkbox" value="system1" id="sourceSystem1">
+                                                    <label class="form-check-label" for="sourceSystem1">系統一</label>
+                                                </div>
+                                                <div class="form-check me-3 mb-2">
+                                                    <input class="form-check-input source-checkbox" type="checkbox" value="system2" id="sourceSystem2">
+                                                    <label class="form-check-label" for="sourceSystem2">系統二</label>
+                                                </div>
+                                                <div class="form-check me-3 mb-2">
+                                                    <input class="form-check-input source-checkbox" type="checkbox" value="system3" id="sourceSystem3">
+                                                    <label class="form-check-label" for="sourceSystem3">系統三</label>
+                                                </div>
+                                                <div class="form-check me-3 mb-2">
+                                                    <input class="form-check-input source-checkbox" type="checkbox" value="system4" id="sourceSystem4">
+                                                    <label class="form-check-label" for="sourceSystem4">系統四</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-2">
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <div>
+                                                <button id="saveTransformView" class="btn btn-secondary">
+                                                    <i class="bi bi-bookmark-plus me-1"></i>儲存視圖
+                                                </button>
+                                                <button id="setDefaultView" class="btn btn-outline-secondary ms-2">
+                                                    <i class="bi bi-star me-1"></i>設為預設
+                                                </button>
+                                            </div>
+                                            <button id="applyTransformFilters" class="btn btn-primary">
+                                                <i class="bi bi-funnel-fill me-1"></i>套用篩選
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 已儲存的視圖列表 -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="saved-views-container">
+                                <div class="d-flex flex-wrap" id="savedTransformViews">
+                                    <!-- 已儲存的視圖將在這裡動態添加 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 轉置狀態 -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">轉置記錄矩陣圖</h5>
+                                    <div class="chart-actions">
+                                        <button class="btn btn-outline-secondary btn-sm zoom-in-btn" title="放大">
+                                            <i class="bi bi-zoom-in"></i>
+                                        </button>
+                                        <button class="btn btn-outline-secondary btn-sm zoom-out-btn" title="縮小">
+                                            <i class="bi bi-zoom-out"></i>
+                                        </button>
+                                        <button class="btn btn-outline-secondary btn-sm fullscreen-btn" title="全屏">
+                                            <i class="bi bi-arrows-fullscreen"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="matrix-chart-container" style="height: 400px; overflow: auto; position: relative;">
+                                        <div id="transformMatrixChart" class="matrix-chart" style="cursor: grab;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 新增：時間序列表格視圖 -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card chart-card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">轉置進度時間序列</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="time-nav me-3">
+                                            <button class="btn btn-outline-secondary btn-sm time-nav-prev" title="前一個時間區間">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </button>
+                                            <span class="mx-2 time-range-display">顯示區間</span>
+                                            <button class="btn btn-outline-secondary btn-sm time-nav-next" title="後一個時間區間">
+                                                <i class="bi bi-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                        <select class="form-select form-select-sm me-2 time-range-select" style="width: 120px;">
+                                            <option value="day">每日</option>
+                                            <option value="week">每週</option>
+                                            <option value="month">每月</option>
+                                        </select>
+                                        <div class="form-check form-switch me-2">
+                                            <input class="form-check-input" type="checkbox" id="showCompletedOnly">
+                                            <label class="form-check-label" for="showCompletedOnly">僅顯示已完成</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="timeline-view-container">
+                                        <div id="hoverSystemInfoTimeline" class="hover-system-info-timeline" style="display: none;"></div>
+                                        <div class="timeline-table-container">
+                                            <table id="timelineTable" class="timeline-table">
+                                                <thead id="timelineTableHead">
+                                                    <!-- 表頭由JavaScript填充 -->
+                                                </thead>
+                                                <tbody id="timelineTableBody">
+                                                    <!-- 表格內容由JavaScript填充 -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">進行中的轉置任務</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row" id="activeTransformTasks">
+                                        <!-- 進行中的轉置任務將在這裡動態添加 -->
+                                        <div class="col-lg-4 mb-3">
+                                            <div class="card transform-task-card">
+                                                <div class="card-header d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">系統一資料轉置</h6>
+                                                    <span class="badge bg-primary">進行中</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="mb-2"><strong>來源：</strong>系統一</p>
+                                                    <p class="mb-2"><strong>開始時間：</strong>2023-10-15 14:30</p>
+                                                    <div class="mb-2">
+                                                        <div class="d-flex justify-content-between">
+                                                            <span>處理進度：</span>
+                                                            <span>65%</span>
+                                                        </div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="task-stats mt-3">
+                                                        <div class="row g-2">
+                                                            <div class="col-4">
+                                                                <div class="p-2 border rounded text-center">
+                                                                    <div>總筆數</div>
+                                                                    <strong>1,250</strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="p-2 border rounded text-center">
+                                                                    <div>已完成</div>
+                                                                    <strong>812</strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="p-2 border rounded text-center text-danger">
+                                                                    <div>有問題</div>
+                                                                    <strong>5</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <div class="card transform-task-card">
+                                                <div class="card-header d-flex justify-content-between align-items-center">
+                                                    <h6 class="mb-0">系統二資料轉置</h6>
+                                                    <span class="badge bg-primary">進行中</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="mb-2"><strong>來源：</strong>系統二</p>
+                                                    <p class="mb-2"><strong>開始時間：</strong>2023-10-15 15:45</p>
+                                                    <div class="mb-2">
+                                                        <div class="d-flex justify-content-between">
+                                                            <span>處理進度：</span>
+                                                            <span>35%</span>
+                                                        </div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="task-stats mt-3">
+                                                        <div class="row g-2">
+                                                            <div class="col-4">
+                                                                <div class="p-2 border rounded text-center">
+                                                                    <div>總筆數</div>
+                                                                    <strong>3,800</strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="p-2 border rounded text-center">
+                                                                    <div>已完成</div>
+                                                                    <strong>1,330</strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="p-2 border rounded text-center text-danger">
+                                                                    <div>有問題</div>
+                                                                    <strong>12</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 已完成的轉置任務 -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">已完成的轉置任務</h5>
+                                    <div>
+                                        <select id="completedTimeRange" class="form-select form-select-sm">
+                                            <option value="7">最近一週</option>
+                                            <option value="30" selected>最近一個月</option>
+                                            <option value="90">最近三個月</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row" id="completedTransformTasks">
+                                        <!-- 已完成的轉置任務將在這裡動態添加 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 使用者行為分析標籤頁 -->
+                <div class="tab-pane fade" id="behavior-dashboard" role="tabpanel" aria-labelledby="behavior-tab">
+                    <!-- 篩選條件 -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">使用者行為分析</h5>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-2" id="saveBehaviorDashboard">
+                                            <i class="bi bi-save me-1"></i> 儲存
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary" id="behavior-export-data">
+                                            <i class="bi bi-download me-1"></i> 匯出
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">時間範圍</label>
+                                            <div class="input-group">
+                                                <input type="text" id="behaviorDateRange" class="form-control">
+                                                <span class="input-group-text"><i class="bi bi-calendar-range"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label class="form-label">時間粒度</label>
+                                            <select id="behaviorTimeGranularity" class="form-select">
+                                                <option value="hour">小時</option>
+                                                <option value="day" selected>日</option>
+                                                <option value="week">週</option>
+                                                <option value="month">月</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label">使用者類型</label>
+                                            <select id="behaviorUserType" class="form-select">
+                                                <option value="all" selected>全部</option>
+                                                <option value="admin">管理員</option>
+                                                <option value="normal">一般用戶</option>
+                                                <option value="fire">消防單位</option>
+                                                <option value="economic">經濟部</option>
+                                                <option value="labor">勞動部</option>
+                                                <option value="environment">環境部</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label class="form-label">行為類型</label>
+                                            <select id="behaviorActionType" class="form-select">
+                                                <option value="all" selected>全部行為</option>
+                                                <option value="login">登入</option>
+                                                <option value="search">搜尋</option>
+                                                <option value="query">查詢</option>
+                                                <option value="report">報表</option>
+                                                <option value="upload">上傳</option>
+                                                <option value="download">下載</option>
+                                                <option value="edit">編輯</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-end mb-3">
+                                            <div class="d-grid gap-2 w-100">
+                                                <button class="btn btn-primary" id="applyBehaviorFilters">
+                                                    <i class="bi bi-funnel-fill me-1"></i> 套用
+                                                </button>
+                                                <button class="btn btn-outline-secondary" id="resetBehaviorFilters">
+                                                    <i class="bi bi-arrow-counterclockwise me-1"></i> 重置
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 行為數據概覽卡片 -->
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">活躍使用者</h6>
+                                            <h3 class="mb-0" id="activeUsers">0</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-people-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="activeUsersGrowth">+0%</span> 相比上一期間
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">平均使用時長</h6>
+                                            <h3 class="mb-0" id="avgSessionTime">0 分鐘</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-clock-history"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="sessionTimeGrowth">+0%</span> 相比上一期間
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">最常用功能</h6>
+                                            <h3 class="mb-0" id="topFeature">查詢</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-star-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        <span id="topFeatureUsage">1,256 次</span> 使用次數
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card stat-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">使用尖峰時段</h6>
+                                            <h3 class="mb-0" id="peakHour">10:00-11:00</h3>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="bi bi-graph-up"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 growth-info">
+                                        平均 <span id="peakHourUsers">65</span> 名同時在線用戶
+                                    </div>
+                                    <button class="btn btn-sm btn-link fullscreen-btn mt-2 p-0">
+                                        <i class="bi bi-arrows-fullscreen"></i> 詳細資訊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 使用者行為圖表 -->
+                    <div class="row">
+                        <!-- 左側：使用者活躍度排行 -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card chart-card h-100">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5>使用者活躍度排行</h5>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            顯示: 前10名
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item active" href="#" data-value="10">前10名</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="20">前20名</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="50">前50名</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="#" data-value="all">顯示全部</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="userActivityRankingChart" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 右側：使用者行為時間分布 -->
+                        <div class="col-lg-8 mb-4">
+                            <div class="card chart-card h-100">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5>使用者行為時間分布</h5>
+                                    <div class="chart-controls">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary active" data-action="daily">每日</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-action="weekly">每週</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" data-action="hourly">時段</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="behaviorTimeDistributionChart" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 行為流程與使用習慣分析 -->
+                    <div class="row">
+                        <!-- 常見行為流程 -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card h-100">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5>使用者行為流程分析</h5>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary active" data-view="common">常見流程</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-view="user">用戶分群</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="behaviorFlowChart" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 功能使用頻率 -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card chart-card h-100">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5>功能使用頻率</h5>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            分組: 功能類型
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item active" href="#" data-value="feature">功能類型</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="userType">使用者類型</a></li>
+                                            <li><a class="dropdown-item" href="#" data-value="timeframe">時間段</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="featureUsageChart" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 使用者使用習慣表格 -->
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5>使用者習慣摘要</h5>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary" id="exportUserHabits">
+                                            <i class="bi bi-download me-1"></i> 匯出
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">使用者</th>
+                                                    <th scope="col">角色</th>
+                                                    <th scope="col">偏好使用時段</th>
+                                                    <th scope="col">最常用功能</th>
+                                                    <th scope="col">平均使用時長</th>
+                                                    <th scope="col">使用頻率</th>
+                                                    <th scope="col">行為特徵</th>
+                                                    <th scope="col">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="userHabitsTable">
+                                                <!-- 使用者習慣數據會在這裡動態生成 -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <nav aria-label="使用者習慣分頁">
+                                        <ul class="pagination pagination-sm justify-content-end mb-0">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一頁</a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">下一頁</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 個人化儀表板內容 -->
+                <div class="tab-pane fade" id="personal-dashboard" role="tabpanel" aria-labelledby="personal-tab">
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <h4 class="mb-3">我的個人化儀表板</h4>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary" id="savePersonalView">
+                                    <i class="bi bi-save"></i> 儲存視圖
+                                </button>
+                                <button class="btn btn-sm btn-outline-success" id="addCardToPersonal">
+                                    <i class="bi bi-plus-lg"></i> 新增卡片
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 已儲存的視圖 -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    已儲存的視圖
+                                </div>
+                                <div class="card-body">
+                                    <div class="saved-views-list" id="personalSavedViews">
+                                        <span class="text-muted">尚未儲存視圖</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 個人化卡片區域 -->
+                    <div class="row" id="personalCardsContainer">
+                        <div class="col-12 text-center py-5 empty-state" id="personalEmptyState">
+                            <i class="bi bi-grid-3x3-gap" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3">您的個人化儀表板尚無內容</h5>
+                            <p class="text-muted">請使用「新增卡片」按鈕或在其他頁籤中對卡片進行右鍵選擇「新增至個人化儀表板」</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 新增卡片模態框 -->
+                <div class="modal fade" id="addCardModal" tabindex="-1" aria-labelledby="addCardModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addCardModalLabel">選擇要添加的卡片</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="form-group">
+                                            <label for="cardSourceTab">來源標籤頁</label>
+                                            <select class="form-select" id="cardSourceTab">
+                                                <option value="account">帳號統計</option>
+                                                <option value="usage">功能使用統計</option>
+                                                <option value="transform">轉置狀態</option>
+                                                <option value="security">安全分析</option>
+                                                <option value="storage">存儲分析</option>
+                                                <option value="behavior">使用者行為分析</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 mb-3">
+                                        <div class="form-group">
+                                            <label for="cardSelection">選擇卡片</label>
+                                            <select class="form-select" id="cardSelection">
+                                                <option value="">請先選擇來源標籤頁</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header bg-light">卡片預覽</div>
+                                            <div class="card-body" id="cardPreviewArea">
+                                                <p class="text-muted text-center">請選擇卡片以預覽</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="confirmAddCard">確認添加</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 儲存視圖模態框 -->
+                <div class="modal fade" id="savePersonalViewModal" tabindex="-1" aria-labelledby="savePersonalViewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="savePersonalViewModalLabel">儲存個人化視圖</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="personalViewName">視圖名稱</label>
+                                    <input type="text" class="form-control" id="personalViewName" placeholder="請輸入視圖名稱">
+                                </div>
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="checkbox" id="setAsDefaultPersonalView">
+                                    <label class="form-check-label" for="setAsDefaultPersonalView">
+                                        設為預設視圖
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="confirmSavePersonalView">儲存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 資料上傳狀態儀表板內容 -->
+                <div class="tab-pane fade" id="upload-status-dashboard" role="tabpanel" aria-labelledby="upload-status-tab">
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <h4 class="mb-3">系統資料上傳狀態追蹤</h4>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary" id="exportUploadStatus">
+                                    <i class="bi bi-download"></i> 匯出報表
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" id="refreshUploadStatus">
+                                    <i class="bi bi-arrow-clockwise"></i> 重整數據
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 過濾選項 -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>過濾選項</span>
+                                        <a href="#" class="btn btn-sm btn-link" data-bs-toggle="collapse" data-bs-target="#filterOptions">
+                                            <i class="bi bi-chevron-down"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body collapse show" id="filterOptions">
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="yearSelection">年度</label>
+                                            <select class="form-select" id="yearSelection">
+                                                <option value="2025" selected>2025</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="systemSelection">系統來源</label>
+                                            <select class="form-select" id="systemSelection">
+                                                <option value="all" selected>所有系統</option>
+                                                <option value="system_a">系統 A</option>
+                                                <option value="system_b">系統 B</option>
+                                                <option value="system_c">系統 C</option>
+                                                <option value="system_d">系統 D</option>
+                                                <option value="system_e">系統 E</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="statusSelection">上傳狀態</label>
+                                            <select class="form-select" id="statusSelection">
+                                                <option value="all" selected>所有狀態</option>
+                                                <option value="scheduled">待上傳</option>
+                                                <option value="uploaded">已上傳</option>
+                                                <option value="error">有誤待修正</option>
+                                                <option value="corrected">已修正</option>
+                                                <option value="missing">未上傳</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button class="btn btn-sm btn-primary" id="applyFilters">
+                                                <i class="bi bi-funnel"></i> 套用過濾
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" id="resetFilters">
+                                                <i class="bi bi-x-circle"></i> 重置
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 狀態圖例 -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-light">狀態圖例</div>
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="status-indicator scheduled"></div>
+                                            <span class="ms-2">需要上傳</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="status-indicator uploaded"></div>
+                                            <span class="ms-2">已正確上傳</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="status-indicator error"></div>
+                                            <span class="ms-2">有誤待修正</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="status-indicator corrected"></div>
+                                            <span class="ms-2">已修正回覆</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="status-indicator missing"></div>
+                                            <span class="ms-2">已超過未上傳</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="status-indicator normal"></div>
+                                            <span class="ms-2">非上傳月份</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 時間軸視圖 -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-light">系統上傳時間軸</div>
+                                <div class="card-body p-0">
+                                    <div class="timeline-container" id="uploadStatusTimeline">
+                                        <div class="text-center py-5">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">載入中...</span>
+                                            </div>
+                                            <p class="mt-2">正在載入資料上傳狀態...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 未上傳或有誤數據列表 -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">待上傳系統 (未來30天)</div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>系統名稱</th>
+                                                    <th>應上傳日期</th>
+                                                    <th>剩餘天數</th>
+                                                    <th>狀態</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="upcomingUploadsList">
+                                                <!-- 動態生成內容 -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">上傳異常追蹤</div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>系統名稱</th>
+                                                    <th>上傳日期</th>
+                                                    <th>問題描述</th>
+                                                    <th>狀態</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="errorTrackingList">
+                                                <!-- 動態生成內容 -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 新增儀表板模態框 -->
+    <div class="modal fade" id="addDashboardModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">新增儀表板</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="newDashboardName" class="form-label">儀表板名稱</label>
+                        <input type="text" class="form-control" id="newDashboardName" placeholder="輸入儀表板名稱">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dashboardIcon" class="form-label">選擇圖示</label>
+                        <select class="form-select" id="dashboardIcon">
+                            <option value="bi-graph-up">📊 數據圖表</option>
+                            <option value="bi-shield-lock">🔒 安全</option>
+                            <option value="bi-hdd-rack">💾 存儲</option>
+                            <option value="bi-speedometer">🏁 性能</option>
+                            <option value="bi-gear">⚙️ 設定</option>
+                            <option value="bi-bell">🔔 通知</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dashboardTemplate" class="form-label">模板</label>
+                        <select class="form-select" id="dashboardTemplate">
+                            <option value="blank">空白儀表板</option>
+                            <option value="account">帳號統計</option>
+                            <option value="usage">功能使用統計</option>
+                            <option value="security">安全分析</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="confirmAddDashboard">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 儲存儀表板模態框 -->
+    <div class="modal fade" id="saveDashboardModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">儲存儀表板</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="dashboardName" class="form-label">儀表板名稱</label>
+                        <input type="text" class="form-control" id="dashboardName" placeholder="輸入儀表板名稱">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dashboardDescription" class="form-label">描述（選填）</label>
+                        <textarea class="form-control" id="dashboardDescription" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="confirmSaveDashboard">儲存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 全螢幕模態框 -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+        <div class="close-fullscreen">
+            <i class="bi bi-x-lg"></i>
+        </div>
+        <h2 id="fullscreenTitle"></h2>
+        <div class="chart-container">
+            <div id="fullscreenContent" class="w-100 h-100"></div>
+        </div>
+    </div>
+    
+    <!-- JavaScript 引入 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <!-- 引入 Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/zh-tw.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/usage.js"></script>
+    <script src="js/transform.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/behavior.js"></script>
+    <script src="js/personal.js"></script>
+    <script src="js/upload_status.js"></script>
+</body>
+</html> 
