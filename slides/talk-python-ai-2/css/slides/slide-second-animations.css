@@ -1,0 +1,65 @@
+/* slide-second-animations.css - 第二頁特效動畫 */
+
+/* =====================================
+   第二頁特效動畫 - 修正選擇器與增強效果
+   ===================================== */
+
+/* 標題動畫 */
+#slide-2 .content-section-title {
+  animation: fadeIn 0.8s ease-out 0.2s both,
+             glow 5s ease-in-out 2s infinite !important;
+}
+
+/* 修正內容塊選擇器，確保內容始終可見 */
+#slide-2 .content-scrollable .content-block {
+  border-radius: 10px !important; 增加圓角
+  padding: 10px !important; /* 增加內邊距 */
+  will-change: transform, opacity, box-shadow !important; /* 優化性能 */
+  transition: all 0.3s ease-out; /* 平滑過渡 */
+}
+
+/* 分隔線樣式 */
+#slide-2 .content-scrollable .section-divider {
+  height: 3px !important; /* 增加高度 */
+  background: linear-gradient(to right, transparent, var(--primary-color), transparent) !important; /* 漸變效果 */
+  will-change: transform, opacity !important; /* 優化性能 */
+  transition: all 0.3s ease-out; /* 平滑過渡 */
+}
+
+/* 角落圖標樣式 */
+#slide-2 .corner-icon {
+  transform-origin: center !important;
+  font-size: 3rem !important; /* 增大圖標 */
+  color: var(--primary-color) !important; /* 確保顏色正確 */
+  will-change: transform, opacity !important; /* 優化性能 */
+  animation: float 8s ease-in-out infinite !important; /* 持續浮動 */
+}
+
+/* 背景裝飾動畫 - 加強浮動效果 */
+#slide-2 .bg-decoration {
+  animation: float 20s ease-in-out infinite !important;
+  animation-play-state: running !important; /* 確保動畫運行 */
+  transform-origin: center !important;
+  will-change: transform !important; /* 優化性能 */
+}
+
+#slide-2 .bg-decoration.circle-1 {
+  animation-delay: -5s !important;
+}
+
+#slide-2 .bg-decoration.circle-2 {
+  animation-delay: -10s !important;
+}
+
+#slide-2 .bg-decoration.shape-1 {
+  animation-delay: -15s !important;
+}
+
+#slide-2 .bg-decoration.grid-pattern {
+  animation: pulse 30s ease-in-out infinite !important;
+}
+
+#slide-2 .bg-decoration.wave-pattern {
+  animation: float 25s ease-in-out infinite !important;
+  animation-delay: -8s !important;
+} 

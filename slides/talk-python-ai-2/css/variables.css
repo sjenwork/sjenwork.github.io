@@ -1,0 +1,28 @@
+/* variables.css - 全局變數定義 */
+
+:root {
+    --primary-color: #FFD700;    /* 金色：主要強調色 */
+    --secondary-color: #4682B4;  /* 鋼藍色：次要強調色 */
+    --accent-color: #FF8200;     /* 橙色：強調色 */
+    --text-color: #E0E0E0;       /* 淺灰色：主要文字 */
+    --light-bg: #121212;         /* 深黑色：背景色 */
+    --dark-bg: #000000;          /* 純黑色：深色背景 */
+    
+    /* 新增的顏色變量 */
+    --title-color: #FFD700;      /* 金色：標題 */
+    --text-dark: #FFFFFF;        /* 白色：深色文字 */
+    --text-medium: #B0B0B0;      /* 中灰色：中等文字 */
+    --bg-light: #1A1A1A;         /* 深灰色：淺背景 */
+    --bg-light-blue: #2A2A2A;    /* 深藍灰色：卡片背景 */
+    --ai-color: #FFA500;         /* 橙色：AI相關 */
+    --llm-color: #FFD700;        /* 金色：LLM相關 */
+    
+    /* 新增透明度變量 */
+    --bg-transparent: rgba(26, 26, 26, 0.75);  /* 半透明背景 */
+    --border-transparent: rgba(255, 215, 0, 0.25);  /* 半透明邊框 */
+    
+    /* 新增裝飾元素顏色 */
+    --glow-primary: rgba(255, 215, 0, 0.3);    /* 金色光暈 */
+    --glow-secondary: rgba(70, 130, 180, 0.3); /* 鋼藍光暈 */
+    --glow-accent: rgba(255, 130, 0, 0.3);     /* 橙色光暈 */
+} 

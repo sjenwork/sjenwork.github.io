@@ -1,0 +1,222 @@
+/* slides-common.css - 所有幻燈片共用的樣式 */
+
+/* 幻燈片通用樣式 */
+.slide {
+    background-color: var(--bg-light);
+}
+
+/* 幻燈片內容通用樣式 */
+.slide-content {
+    overflow: hidden;
+}
+
+/* 幻燈片標題通用樣式 */
+.slide-content h2 {
+    color: var(--primary-color);
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.slide-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transform: scaleX(0.7);
+    transform-origin: left;
+}
+
+/* 小標題樣式 */
+.slide-content h3 {
+    color: var(--secondary-color);
+    font-size: 24px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* 角落圖標 */
+.corner-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-color);
+    opacity: 0.5;
+    font-size: 3rem;
+}
+
+/* 段落樣式 */
+
+/* 強調文字 */
+.slide-content strong {
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+/* 引用文字 */
+.slide-content em {
+    color: var(--text-medium);
+}
+
+/* 列表樣式 */
+.slide-content ul {
+    margin-bottom: 1.5rem;
+}
+
+.slide-content li {
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.slide-content li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+/* 通用內容幻燈片樣式 */
+.content-slide {
+    background-color: var(--dark-bg);
+}
+
+/* 內容頁幻燈片內容區域樣式 */
+.content-slide .slide-content {
+    /* 保留與佈局相關的特定樣式，其餘使用 layout.css 中的統一設置 */
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 內容區域可滾動部分 */
+.content-slide .content-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+/* 定義滾動條樣式 */
+.content-slide .content-scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-slide .content-scrollable::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.content-slide .content-scrollable::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.content-slide .content-scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* 內容區段標題 */
+.content-section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* 內容區塊共用樣式 */
+.content-block {
+    background-color: rgba(64, 64, 64, 0.3);
+    border-left: 3px solid var(--primary-color);    
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border-left: 3px solid var(--primary-color);    
+}
+
+.content-block-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.content-block-title i {
+    margin-right: 0.8rem;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+}
+
+
+.slide p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+
+.slide .section-divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+    margin: 2rem auto;
+}
+
+/* 資訊列表共用樣式 */
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.info-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+/* 表格共用樣式 */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.content-table th {
+    background-color: rgba(255, 215, 0, 0.1);
+    color: var(--primary-color);
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.content-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.content-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+} 

@@ -1,0 +1,178 @@
+/* responsive.css - 響應式樣式 */
+
+/* 桌面大尺寸螢幕 */
+@media (min-width: 1440px) {
+    .slide-content {
+        width: 95%;
+        height: 95%;
+        padding: 2rem;
+    }
+    
+
+    
+    .main-title {
+        font-size: 64pt;
+    }
+    
+    .subtitle {
+        font-size: 28pt;
+    }
+}
+
+/* 桌面中等尺寸螢幕 */
+@media (max-width: 1200px) {
+    .slide-content {
+        width: 95%;
+        height: 95%;
+        padding: 1.5rem;
+    }
+    
+
+    
+    .main-title {
+        font-size: 48pt;
+    }
+    
+    .subtitle {
+        font-size: 22pt;
+    }
+    
+    .slide-first .overview li {
+        font-size: 20pt;
+    }
+}
+
+/* 平板電腦 */
+@media (max-width: 992px) {
+    .slide-content {
+        width: 95%;
+        height: 95%;
+        padding: 1.5rem;
+    }
+    
+    
+    .main-title {
+        font-size: 42pt;
+    }
+    
+    .subtitle {
+        font-size: 20pt;
+    }
+    
+    .presenter-info {
+        font-size: 14pt;
+    }
+    
+    .slide-first .overview h3 {
+        font-size: 24pt;
+    }
+    
+    .slide-first .overview li {
+        font-size: 18pt;
+    }
+    
+    .slide-content h2 {
+        font-size: 32px;
+    }
+    
+    .slide-content h3 {
+        font-size: 22px;
+    }
+}
+
+/* 大型手機 */
+@media (max-width: 768px) {
+    .slide-content {
+        width: 95%;
+        height: 95%;
+        padding: 1rem;
+    }
+    
+    
+    .main-title {
+        font-size: 36pt;
+    }
+    
+    .subtitle {
+        font-size: 18pt;
+        max-width: 90%;
+    }
+    
+    .presenter-info {
+        font-size: 12pt;
+    }
+    
+    .title-separator {
+        margin: 1rem auto 2rem;
+    }
+    
+    .slide-first .overview {
+        padding: 0 1rem;
+        margin: 0 1rem;
+    }
+    
+    .slide-first .overview h3 {
+        font-size: 22pt;
+        margin-bottom: 1.5rem;
+    }
+    
+    .slide-first .overview ul {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .slide-first .overview li {
+        font-size: 16pt;
+    }
+    
+    .slide-content h2 {
+        font-size: 28px;
+    }
+    
+    .slide-content h3 {
+        font-size: 20px;
+    }
+    
+    .corner-icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* 小型手機 */
+@media (max-width: 576px) {
+    /* 確保首頁內容有合適的邊距 */
+    
+    .main-title {
+        font-size: 30pt;
+    }
+    
+    .subtitle {
+        font-size: 16pt;
+    }
+    
+    .presenter-info {
+        font-size: 10pt;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .slide-first .overview h3 {
+        font-size: 20pt;
+    }
+    
+    .slide-first .overview li {
+        font-size: 14pt;
+    }
+    
+    .slide-content h2 {
+        font-size: 24px;
+    }
+    
+    .slide-content h3 {
+        font-size: 18px;
+    }
+    
+    .corner-icon {
+        font-size: 2rem;
+    }
+} 

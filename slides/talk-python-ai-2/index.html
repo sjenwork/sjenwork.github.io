@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 與 AI：從基礎到 LLM 應用</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/backgrounds.css">
+    <link rel="stylesheet" href="css/slides-common.css">
+    <link rel="stylesheet" href="css/slides/slide-first.css">
+    <link rel="stylesheet" href="css/slides/slide-second.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations-common.css">
+    <link rel="stylesheet" href="css/slides/slide-first-animations.css">
+    <link rel="stylesheet" href="css/slides/slide-second-animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="progress-bar"></div>
+    
+    <!-- 垂直頁面導航 -->
+    <div class="vertical-nav">
+        <div class="nav-dots">
+            <div class="nav-dot active" data-slide="1"></div>
+            <div class="nav-dot" data-slide="2"></div>
+            <div class="nav-dot" data-slide="3"></div>
+            <div class="nav-dot" data-slide="4"></div>
+            <div class="nav-dot" data-slide="5"></div>
+            <div class="nav-dot" data-slide="6"></div>
+            <div class="nav-dot" data-slide="7"></div>
+            <div class="nav-dot" data-slide="8"></div>
+            <div class="nav-dot" data-slide="9"></div>
+        </div>
+    </div>
+    
+    <main class="slides-container">
+        <!-- 投影片 1：簡報標題與概述 -->
+        <div id="slide-1" class="slide slide-first active">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration dots-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+                <div class="bg-decoration mysterious-orb"></div>
+                <div class="bg-decoration mysterious-trail"></div>
+                <div class="bg-decoration constellation-path"></div>
+                <div class="bg-decoration star star-1"></div>
+                <div class="bg-decoration star star-2"></div>
+                <div class="bg-decoration star star-3"></div>
+                <div class="bg-decoration star star-4"></div>
+                <div class="bg-decoration star star-5"></div>
+            </div>
+            
+            <div class="slide-content">
+                <div class="title-container">
+                    <div class="python-logo">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h1 class="main-title">Python 與 AI</h1>
+                    <p class="subtitle">從基礎到 LLM 應用</p>
+                    <div class="presenter-info">
+                        <span><i class="fas fa-user"></i>講師: 孫既仁</span>
+                        <span><i class="fas fa-calendar-alt"></i>2025年04月11日</span>
+                    </div>
+                    <div class="title-separator"></div>
+                </div>
+                
+                <div class="overview">
+                    <h3>本次演講將涵蓋以下主題</h3>
+                    <ul>
+                        <li><i class="fas fa-brain"></i>AI 的核心概念與子領域</li>
+                        <li><i class="fas fa-language"></i>自然語言與 LLM 技術</li>
+                        <li><i class="fas fa-code"></i>Python 在 AI 開發中的角色</li>
+                        <li><i class="fas fa-chart-line"></i>從入門到進階的實作教學</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 2：AI 核心概念 -->
+        <div id="slide-2" class="slide slide-second content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">AI 核心概念</div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-brain"></i> 什麼是 AI？
+                        </div>
+                        <p><strong>模擬人類智慧的技術</strong></p>
+                        <p class="examples"><em>範例：自動駕駛汽車（Tesla）、語音助理（Siri）</em></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">關鍵子領域</div>
+                        <ul class="info-list">
+                            <li>
+                                <i class="fas fa-chart-line"></i>
+                                <strong>機器學習</strong>：從數據學習模式，如垃圾郵件過濾器
+                            </li>
+                            <li>
+                                <i class="fas fa-network-wired"></i>
+                                <strong>深度學習</strong>：使用神經網路處理複雜數據，如圖像辨識
+                            </li>
+                            <li>
+                                <i class="fas fa-gamepad"></i>
+                                <strong>強化學習</strong>：透過環境互動學習，如遊戲 AI（AlphaGo）
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <p class="summary-text"><em>總結：AI 是廣泛領域，涵蓋多種技術。</em></p>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 3：自然語言與 LLM -->
+        <div id="slide-3" class="slide slide-third content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">自然語言與 LLM</div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-book"></i> 自然語言 (NL)
+                        </div>
+                        <p><strong>人類日常語言，具複雜語法與語境</strong></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-language"></i> 自然語言處理 (NLP)
+                        </div>
+                        <p><strong>AI 分支，讓電腦理解與生成語言</strong></p>
+                        <div class="tag-container">
+                            <span class="tag">翻譯系統</span>
+                            <span class="tag">情感分析</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-robot"></i> 大型語言模型 (LLM)
+                        </div>
+                        <p><strong>生成式 AI，擅長文本生成與問答</strong></p>
+                        <div class="tag-container">
+                            <span class="tag">ChatGPT</span>
+                            <span class="tag">Claude</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-images"></i> 多模態 LLM
+                        </div>
+                        <p><strong>整合文字、圖像等數據，提升互動能力</strong></p>
+                        <div class="tag-container">
+                            <span class="tag">GPT-4V</span>
+                            <span class="tag">Gemini</span>
+                        </div>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 4：AI 與 LLM 的關係 -->
+        <div id="slide-4" class="slide slide-fourth content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">AI 與 LLM 的關係</div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-hospital-user"></i> AI 的範圍
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>專家系統</strong>（醫療診斷）</li>
+                            <li><strong>電腦視覺</strong>（人臉辨識）</li>
+                            <li><strong>語音辨識</strong></li>
+                            <li><strong>自動化系統</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-comment-dots"></i> LLM 的角色
+                        </div>
+                        <p><strong>生成式 AI 的一部分，專注於文本處理</strong></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-not-equal"></i> 差異
+                        </div>
+                        <p><strong>AI 涵蓋多學科，LLM 只是其中一環</strong></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-exclamation-circle"></i> 誤解
+                        </div>
+                        <p><strong>LLM 的成功常讓人誤以為它代表整個 AI</strong></p>
+                        <p class="examples"><em>常見誤解：LLM ≠ 整個 AI</em></p>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 5：LLM 發展趨勢 -->
+        <div id="slide-5" class="slide slide-fifth content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">LLM 發展趨勢</div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-layer-group"></i> 多模態 LLM
+                        </div>
+                        <p><strong>支援文字、圖像、聲音的整合處理</strong></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-search"></i> RAG 技術
+                        </div>
+                        <p><strong>即時檢索外部知識，提升準確性</strong></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-tools"></i> 即時資訊工具
+                        </div>
+                        <div class="tag-container">
+                            <span class="tag">Perplexity AI</span>
+                            <span class="tag">felo.ai</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-user-cog"></i> 個人化應用
+                        </div>
+                        <p><strong>如 NotebookLM 分析個人文件</strong></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-balance-scale"></i> 負責任 AI
+                        </div>
+                        <p><strong>注重公平性與透明度</strong></p>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-robot"></i> AI 代理與邊緣 AI
+                        </div>
+                        <p><strong>自主任務執行與終端運算</strong></p>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 6：Python 在 AI 中的角色 -->
+        <div id="slide-6" class="slide slide-sixth content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">Python 在 AI 中的角色</div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-code"></i> AI 開發工具
+                        </div>
+                        <p><strong>豐富函式庫開發支援</strong></p>
+                        <div class="tag-container">
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">scikit-learn</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-database"></i> 數據處理
+                        </div>
+                        <p><strong>強大的數據處理能力</strong></p>
+                        <div class="tag-container">
+                            <span class="tag">Pandas</span>
+                            <span class="tag">NumPy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-cloud-upload-alt"></i> 模型部署
+                        </div>
+                        <p><strong>支援多種部署方式</strong></p>
+                        <div class="tag-container">
+                            <span class="tag">Web 服務</span>
+                            <span class="tag">嵌入式應用</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-laptop-code"></i> 程式碼生成
+                        </div>
+                        <p><strong>AI 輔助開發新趨勢</strong></p>
+                        <div class="tag-container">
+                            <span class="tag">GitHub Copilot</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-bug"></i> 偵錯與優化
+                        </div>
+                        <p><strong>提升開發效率</strong></p>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 7：實作教學大綱 -->
+        <div id="slide-7" class="slide slide-seventh content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">實作教學大綱</div>
+                    
+                    <div class="content-block">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th>階段</th>
+                                    <th>內容</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="stage-number">階段 1</td>
+                                    <td class="stage-content"><strong>Python 基礎</strong>：環境建置（Anaconda）、語法、資料結構</td>
+                                </tr>
+                                <tr>
+                                    <td class="stage-number">階段 2</td>
+                                    <td class="stage-content"><strong>機器學習</strong>：scikit-learn、分類與回歸模型</td>
+                                </tr>
+                                <tr>
+                                    <td class="stage-number">階段 3</td>
+                                    <td class="stage-content"><strong>深度學習</strong>：TensorFlow/PyTorch、神經網路應用</td>
+                                </tr>
+                                <tr>
+                                    <td class="stage-number">階段 4</td>
+                                    <td class="stage-content"><strong>NLP 入門</strong>：Transformers、情感分析</td>
+                                </tr>
+                                <tr>
+                                    <td class="stage-number">階段 5</td>
+                                    <td class="stage-content"><strong>LLM 應用</strong>：OpenAI API、提示工程、工具輔助開發</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-lightbulb"></i> 學習目標
+                        </div>
+                        <p><strong>從基礎到應用，建立完整AI開發能力</strong></p>
+                        <p class="examples"><em>實作導向，強調解決實際問題能力</em></p>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 8：實作亮點與建議 -->
+        <div id="slide-8" class="slide slide-eighth content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">實作亮點與建議</div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-lightbulb"></i> 亮點
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>從零開始，逐步深入 AI 應用</strong></li>
+                            <li><strong>結合 LLM 工具（如 GitHub Copilot）提升學習效率</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-clipboard-list"></i> 建議
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>使用 Python 3.x，注意 API 費用</strong></li>
+                            <li><strong>提供更多實作練習與專案</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-bullseye"></i> 目標
+                        </div>
+                        <p><strong>打造從入門到實務的 AI 學習路徑</strong></p>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 投影片 9：總結與展望 -->
+        <div id="slide-9" class="slide slide-ninth content-slide">
+            <div class="parallax-bg">
+                <div class="bg-decoration bg-circle circle-1"></div>
+                <div class="bg-decoration bg-circle circle-2"></div>
+                <div class="bg-decoration shape-1"></div>
+                <div class="bg-decoration grid-pattern"></div>
+                <div class="bg-decoration wave-pattern"></div>
+                <div class="bg-decoration light-beam"></div>
+            </div>
+            
+            <div class="slide-content">
+                <!-- 可滾動的內容區域 -->
+                <div class="content-scrollable">
+                    <div class="content-section-title">總結與展望</div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-check-circle"></i> 現在總結
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>AI 是多學科領域，LLM 是重要組成部分</strong></li>
+                            <li><strong>Python 是 AI 開發的基石，應用廣泛</strong></li>
+                            <li><strong>教學大綱提供完整學習體驗</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-divider"></div>
+                    
+                    <div class="content-block">
+                        <div class="content-block-title">
+                            <i class="fas fa-rocket"></i> 未來展望
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>LLM 技術持續突破，更智慧化、多模態化</strong></li>
+                            <li><strong>開發工具進化，降低 AI 應用門檻</strong></li>
+                            <li><strong>Python 與 AI 協作推動產業革新</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="corner-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 頁面指示器 -->
+    <div class="indicator-container">
+        <div class="page-indicator">
+            <span class="current-page">1</span>
+            <span class="separator">/</span>
+            <span class="total-pages">9</span>
+        </div>
+    </div>
+    
+    <script src="js/main.js"></script>
+</body>
+</html> 

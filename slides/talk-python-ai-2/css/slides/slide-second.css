@@ -1,0 +1,46 @@
+/* 第二頁特有的內容樣式 */
+.slide .examples {
+    font-size: 1.1rem;
+    margin-top: 0.8rem;
+    color: var(--text-medium);
+}
+
+
+
+.slide-second .info-list {
+    margin-top: 1.5rem;
+}
+
+.slide-second .info-list li {
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.2rem;
+}
+
+.slide-second .info-list li i {
+    color: var(--primary-color);
+    margin-right: 1rem;
+    font-size: 1.3rem;
+    min-width: 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 2px var(--glow-primary));
+}
+
+.slide-second .summary-text {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--text-medium);
+    font-style: italic;
+}
+
+.slide-second .corner-icon {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    opacity: 0.5;
+} 

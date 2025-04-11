@@ -1,0 +1,337 @@
+/* backgrounds.css - 背景樣式 */
+
+/*----------------------------------------------
+  基本背景與裝飾元素
+----------------------------------------------*/
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    background-color: var(--dark-bg);
+}
+
+.bg-decoration {
+    position: absolute;
+    pointer-events: none;
+}
+
+.bg-circle {
+    border-radius: 50%;
+    opacity: 0.5;
+    filter: blur(3px);
+}
+
+/*----------------------------------------------
+  首頁特有背景元素
+----------------------------------------------*/
+/* 首頁背景 */
+.slide-first .circle-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle at center, var(--primary-color) 5%, var(--glow-primary) 40%, transparent 70%);
+    top: -80px;
+    right: -80px;
+    opacity: 0.35;
+    animation: pulsate 15s ease-in-out infinite alternate;
+    box-shadow: 0 0 40px var(--glow-primary);
+}
+
+.slide-first .circle-2 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at center, var(--secondary-color) 5%, var(--glow-secondary) 40%, transparent 70%);
+    bottom: -50px;
+    left: -50px;
+    opacity: 0.35;
+    animation: pulsate 12s ease-in-out infinite alternate-reverse;
+    box-shadow: 0 0 30px var(--glow-secondary);
+}
+
+.slide-first .shape-1 {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, var(--primary-color) 0%, var(--glow-primary) 50%, transparent 100%);
+    top: 20%;
+    left: -100px;
+    opacity: 0.3;
+    animation: rotate 20s linear infinite;
+    filter: blur(2px);
+    box-shadow: 0 0 20px var(--glow-primary);
+}
+
+.slide-first .dots-pattern {
+    background-image: radial-gradient(var(--primary-color) 1px, transparent 2px);
+    background-size: 20px 20px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    animation: fadeInOut 8s ease-in-out infinite alternate;
+}
+
+.slide-first .light-beam {
+    position: absolute;
+    width: 150px;
+    height: 800px;
+    background: linear-gradient(90deg, transparent, var(--glow-primary), transparent);
+    transform: rotate(45deg);
+    top: -200px;
+    left: -200px;
+    animation: moveBeam 10s linear infinite;
+    box-shadow: 0 0 30px var(--glow-primary);
+    filter: blur(5px);
+}
+
+/*----------------------------------------------
+  內容頁通用背景元素
+----------------------------------------------*/
+/* 內容頁背景漸變 */
+.content-slide .parallax-bg {
+    background: radial-gradient(circle at 70% 20%, #050505, var(--dark-bg));
+}
+
+/* 波浪底部 */
+.content-slide .wave-pattern {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(0deg, var(--glow-primary) 0%, transparent 100%);
+    opacity: 0.1;
+    filter: blur(30px);
+    transform-origin: bottom;
+    animation: waveMove 20s ease-in-out infinite alternate;
+}
+
+/* 左上角圓形 */
+.content-slide .bg-circle.circle-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at center, var(--accent-color) 5%, var(--glow-accent) 40%, transparent 70%);
+    top: -150px;
+    left: -100px;
+    opacity: 0.25;
+    animation: pulsate 18s ease-in-out infinite alternate;
+}
+
+/* 右下角圓形 */
+.content-slide .bg-circle.circle-2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle at center, var(--primary-color) 5%, var(--glow-primary) 40%, transparent 70%);
+    bottom: -80px;
+    right: -50px;
+    opacity: 0.2;
+    animation: pulsate 15s ease-in-out infinite alternate-reverse;
+}
+
+/* 右側形狀 */
+.content-slide .shape-1 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--glow-secondary) 50%, transparent 100%);
+    top: 40%;
+    right: -150px;
+    opacity: 0.15;
+    animation: rotate 30s linear infinite reverse;
+    transform-origin: center;
+}
+
+/* 網格圖案 */
+.content-slide .grid-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--glow-primary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--glow-primary) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.05;
+    animation: fadeInOut 10s ease-in-out infinite alternate;
+}
+
+/* 光束效果 */
+.content-slide .light-beam {
+    width: 200px;
+    height: 1000px;
+    background: linear-gradient(90deg, transparent, var(--glow-secondary) 50%, transparent);
+    transform: rotate(-45deg);
+    top: 50%;
+    right: -400px;
+    animation: moveBeamSecond 15s linear infinite;
+    filter: blur(8px);
+}
+
+/* 內容區樣式 - 只保留視覺效果相關屬性 */
+.content-slide .slide-content {
+    background-color: var(--bg-transparent);
+    border: 1px solid rgba(70, 130, 180, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/*----------------------------------------------
+  動畫定義
+----------------------------------------------*/
+/* 首頁光束移動 */
+@keyframes moveBeam {
+    0% {
+        transform: rotate(45deg) translateX(-500px);
+    }
+    100% {
+        transform: rotate(45deg) translateX(1500px);
+    }
+}
+
+/* 內容頁光束移動 */
+@keyframes moveBeamSecond {
+    0% {
+        transform: rotate(-45deg) translateX(1000px);
+    }
+    100% {
+        transform: rotate(-45deg) translateX(-1000px);
+    }
+}
+
+/* 脈動效果 */
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        opacity: 0.25;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+}
+
+/* 旋轉效果 */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 淡入淡出效果 */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0.15;
+    }
+}
+
+/* 波浪移動效果 */
+@keyframes waveMove {
+    0% {
+        transform: scaleY(0.8) translateY(10px);
+    }
+    100% {
+        transform: scaleY(1.2) translateY(-10px);
+    }
+}
+
+/* 神秘光球效果 */
+.mysterious-orb {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.9), rgba(255, 215, 0, 0));
+    box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0.3);
+    opacity: 0.8;
+    z-index: 1;
+    top: 30%;
+    left: 10%;
+    filter: blur(2px);
+}
+
+/* 神秘光跡效果 */
+.mysterious-trail {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0), rgba(255, 215, 0, 0.7), rgba(255, 215, 0, 0));
+    opacity: 0.6;
+    z-index: 1;
+    top: 32%;
+    left: 15%;
+    transform-origin: left center;
+    transform: rotate(30deg);
+    filter: blur(3px);
+}
+
+/* 星座路徑效果 */
+.constellation-path {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    border: 1px dashed rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    top: 20%;
+    left: 15%;
+    transform: rotate(-15deg);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* 星星效果 */
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ffea80;
+    box-shadow: 0 0 8px 2px rgba(255, 234, 128, 0.7);
+    z-index: 1;
+}
+
+.star-1 {
+    top: 25%;
+    left: 20%;
+    width: 5px;
+    height: 5px;
+}
+
+.star-2 {
+    top: 15%;
+    left: 35%;
+    width: 3px;
+    height: 3px;
+}
+
+.star-3 {
+    top: 40%;
+    left: 28%;
+    width: 4px;
+    height: 4px;
+}
+
+.star-4 {
+    top: 22%;
+    left: 42%;
+    width: 6px;
+    height: 6px;
+}
+
+.star-5 {
+    top: 35%;
+    left: 50%;
+    width: 3px;
+    height: 3px;
+} 

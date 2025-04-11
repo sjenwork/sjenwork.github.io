@@ -1,0 +1,65 @@
+/* layout.css - 頁面佈局樣式 */
+
+.slides-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--light-bg);
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+/* 所有幻燈片內容區域的統一尺寸和定位屬性 */
+.slide-content {
+    width: 95%;
+    height: 95%;    
+    background-color: var(--bg-transparent);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-transparent);
+    backdrop-filter: blur(10px);
+}
+
+/* 特殊幻燈片內容區可以覆蓋這些樣式 */
+.title-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.content-section {
+    flex: 1;
+    overflow: auto;
+    padding: 1rem;
+}
+
+.slide-number {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: var(--text-medium);
+    font-size: 14px;
+    opacity: 0.7;
+} 

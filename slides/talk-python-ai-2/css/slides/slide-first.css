@@ -1,0 +1,169 @@
+/* slide-first.css - 第一張幻燈片樣式 */
+
+.slide-first {
+    background-color: var(--dark-bg);
+}
+
+.slide-first .slide-content {
+    background-color: var(--bg-transparent);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.slide-first .title-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.slide-first .title-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.slide-first .title-section h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+.slide-first .presenter-info {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.slide-first .presenter-info p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+
+.slide-first .overview h3 {
+    font-size: 28pt;
+    color: var(--accent-color);
+    margin: 0 0 2rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.slide-first .overview ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.slide-first .overview li {
+    font-size: 18pt;
+    color: var(--text-dark);
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    line-height: 1.5;
+    border: none;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+.slide-first .overview li i {
+    color: var(--primary-color);
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 2px var(--glow-primary));
+}
+
+.slide-first .overview li::before {
+    content: "";
+    position: absolute;
+    left: 2.5rem;
+    bottom: -0.75rem;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+    transition: width 0.3s ease;
+}
+
+.slide-first .overview li:hover::before {
+    width: 80%;
+}
+
+.slide-first .overview li:hover {
+    transform: translateX(5px);
+    text-shadow: 0 0 5px var(--glow-primary);
+}
+
+.slide-first .overview li:hover i {
+    transform: scale(1.1);
+}
+
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    height: auto;
+    padding: 2rem 0;
+}
+
+.main-title {
+    font-size: 58pt;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 30pt;
+    color: var(--text-dark);
+    font-weight: 400;
+    margin: 0.5rem 0 2rem;
+    opacity: 0.8;
+    max-width: 80%;
+    text-align: center;
+}
+
+.presenter-info {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 16pt;
+    color: var(--text-medium);
+}
+
+.presenter-info i {
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
+}
+
+.title-separator {
+    width: 100px;
+    height: 2px;
+    background: var(--primary-color);
+    margin: 1rem auto 3rem;
+}
+
+.python-logo i {
+    font-size: 3rem;
+    color: #306998;
+}
