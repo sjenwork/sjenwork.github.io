@@ -8,14 +8,21 @@
         padding: 2rem;
     }
     
-
+    .title-container {
+        height: 70%;
+        padding: 2rem 0 1rem 0;
+    }
+    
+    .slide-first .overview {
+        height: 30%;
+    }
     
     .main-title {
-        font-size: 64pt;
+        font-size: 62pt;
     }
     
     .subtitle {
-        font-size: 28pt;
+        font-size: 26pt;
     }
 }
 
@@ -28,24 +35,30 @@
     }
     
     .title-container {
-        margin-bottom: 1rem;
-        padding: 2rem 0rem;
+        height: 70%;
+        padding: 1.5rem 0 0.5rem 0;
+    }
+    
+    .slide-first .overview {
+        height: 30%;
     }
 
     .python-logo {
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
     }
 
     .slide-first .presenter-info {
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
     }
     
     .main-title {
-        font-size: 52pt;
+        font-size: 50pt;
+        margin-bottom: 0.8rem;
     }
     
     .subtitle {
-        font-size: 22pt;
+        font-size: 20pt;
+        margin: 0.3rem 0 0.8rem;
     }
     
     .slide-first .overview li {
@@ -58,36 +71,45 @@
     .slide-content {
         width: 95%;
         height: 95%;
-        padding: 1.5rem;
+        padding: 1.2rem;
     }
     
+    .title-container {
+        height: 70%;
+        padding: 1rem 0 0.5rem 0;
+    }
+    
+    .slide-first .overview {
+        height: 30%;
+    }
     
     .main-title {
-        font-size: 52pt;
+        font-size: 48pt;
     }
     
     .subtitle {
-        font-size: 20pt;
+        font-size: 18pt;
     }
     
     .presenter-info {
-        font-size: 16pt;
+        font-size: 15pt;
     }
     
     .slide-first .overview h3 {
-        font-size: 24pt;
+        font-size: 22pt;
+        margin-bottom: 0.8rem;
     }
     
     .slide-first .overview li {
-        font-size: 16pt;
+        font-size: 15pt;
     }
     
     .slide-content h2 {
-        font-size: 32px;
+        font-size: 30px;
     }
     
     .slide-content h3 {
-        font-size: 22px;
+        font-size: 20px;
     }
 }
 
@@ -99,37 +121,44 @@
         padding: 1rem;
     }
     
+    .title-container {
+        height: 70%;
+        padding: 0.5rem 0;
+    }
+    
+    .slide-first .overview {
+        height: 30%;
+    }
     
     .main-title {
-        font-size: 48pt;
+        font-size: 44pt;
+        margin-bottom: 0.5rem;
     }
     
     .subtitle {
-        font-size: 18pt;
-        max-width: 90%;
+        font-size: 16pt;
+        max-width: 95%;
+        margin: 0.3rem 0 0.5rem;
     }
     
     .presenter-info {
         font-size: 14pt;
+        gap: 1rem;
     }
     
     .title-separator {
-        margin: 1rem auto 2rem;
-    }
-    
-    .slide-first .overview {
-        padding: 0 1rem;
-        margin: 0 1rem;
+        margin: 0.3rem auto 0.5rem;
     }
     
     .slide-first .overview h3 {
-        font-size: 20pt;
-        margin-bottom: 1.5rem;
+        font-size: 18pt;
+        margin-bottom: 0.5rem;
     }
     
     .slide-first .overview ul {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 0.5rem;
+        width: 95%;
     }
     
     .slide-first .overview li {
@@ -139,6 +168,8 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        line-height: 1.2;
+        margin-bottom: 0.1rem;
     }
     
     .slide-first .overview li i {
@@ -147,11 +178,11 @@
     }
     
     .slide-content h2 {
-        font-size: 28px;
+        font-size: 26px;
     }
     
     .slide-content h3 {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     .corner-icon {
@@ -163,34 +194,50 @@
 @media (max-width: 576px) {
     /* 確保首頁內容有合適的邊距 */
     
+    .title-container {
+        height: 70%;
+        padding: 0.3rem 0;
+    }
+    
+    .slide-first .overview {
+        height: 30%;
+    }
+    
     .main-title {
-        font-size: 40pt;
+        font-size: 36pt;
+        margin-bottom: 0.3rem;
     }
     
     .subtitle {
-        font-size: 16pt;
+        font-size: 14pt;
+        margin: 0.3rem 0 0.5rem;
     }
     
     .presenter-info {
-        font-size: 14pt;
+        font-size: 12pt;
         flex-direction: column;
-        gap: 0.3rem;
+        gap: 0.2rem;
     }
     
     .slide-first .overview h3 {
-        font-size: 16pt;
+        font-size: 15pt;
+        margin-bottom: 0.5rem;
     }
     
+    .title-separator {
+        margin: 0.3rem auto 0.5rem;
+        width: 80px;
+    }
     
     .slide-content h2 {
-        font-size: 24px;
+        font-size: 22px;
     }
     
     .slide-content h3 {
-        font-size: 18px;
+        font-size: 16px;
     }
     
     .corner-icon {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 } 

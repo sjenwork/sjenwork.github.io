@@ -166,13 +166,6 @@
     filter: blur(8px);
 }
 
-/* 內容區樣式 - 只保留視覺效果相關屬性 */
-.content-slide .slide-content {
-    background-color: var(--bg-transparent);
-    border: 1px solid rgba(70, 130, 180, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
 
 /*----------------------------------------------
   動畫定義
