@@ -12,14 +12,18 @@
     --title-color: #FFD700;      /* 金色：標題 */
     --text-dark: #FFFFFF;        /* 白色：深色文字 */
     --text-medium: #B0B0B0;      /* 中灰色：中等文字 */
+    --text-light: #8A8A8A;       /* 淺灰色：次要文字 */
     --bg-light: #1A1A1A;         /* 深灰色：淺背景 */
     --bg-light-blue: #2A2A2A;    /* 深藍灰色：卡片背景 */
+    --bg-solid: #1E1E1E;         /* 堅實深灰色：主要背景 */
+    --bg-card: #242424;          /* 卡片背景色 */
     --ai-color: #FFA500;         /* 橙色：AI相關 */
     --llm-color: #FFD700;        /* 金色：LLM相關 */
     
     /* 新增透明度變量 */
     --bg-transparent: rgba(26, 26, 26, 0.75);  /* 半透明背景 */
     --border-transparent: rgba(255, 215, 0, 0.25);  /* 半透明邊框 */
+    --border-light: rgba(255, 255, 255, 0.1);   /* 淺色邊框 */
     
     /* 新增裝飾元素顏色 */
     --glow-primary: rgba(255, 215, 0, 0.3);    /* 金色光暈 */

@@ -1,0 +1,155 @@
+/* popup.css - 機器學習彈出窗口樣式 */
+
+/* 機器學習彈出效果 */
+.with-popup {
+    position: relative;
+}
+
+.list-item-content {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.popup-trigger {
+    margin-left: 0.5rem;
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.popup-trigger:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.ml-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.ml-popup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: -1;
+}
+
+.ml-popup.active {
+    display: flex;
+}
+
+.popup-content {
+    background-color: var(--bg-solid);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-transparent);
+    animation: popup-fade-in 0.3s ease-out;
+    opacity: 1;
+}
+
+@keyframes popup-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup-content h4 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 24px;
+}
+
+.popup-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.example {
+    background-color: var(--bg-card);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    transition: transform 0.3s ease;
+}
+
+.example:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.example-img {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-light-blue);
+}
+
+.example-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.example p {
+    font-size: 14px;
+    color: var(--text-medium);
+    text-align: center;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.popup-close:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* 媒體查詢以適應不同屏幕尺寸 */
+@media (max-width: 768px) {
+    .popup-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+    
+    .popup-examples {
+        grid-template-columns: 1fr;
+    }
+} 
