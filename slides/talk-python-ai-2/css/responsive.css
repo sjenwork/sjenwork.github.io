@@ -28,28 +28,26 @@
     }
     
     .title-container {
-        margin-bottom: 0rem;
-        padding: 0rem ;
+        margin-bottom: 1rem;
+        padding: 2rem 0rem;
     }
 
     .python-logo {
-        margin-bottom: 0rem;
+        margin-bottom: 1rem;
     }
 
     .slide-first .presenter-info {
-        margin-bottom: 0rem;
+        margin-bottom: 1rem;
     }
     
     .main-title {
-        font-size: 48pt;
+        font-size: 52pt;
     }
     
     .subtitle {
         font-size: 22pt;
     }
     
-    .slide-first .overview ul {
-    }
     .slide-first .overview li {
         font-size: 16pt;
     }
@@ -65,7 +63,7 @@
     
     
     .main-title {
-        font-size: 42pt;
+        font-size: 52pt;
     }
     
     .subtitle {
@@ -73,7 +71,7 @@
     }
     
     .presenter-info {
-        font-size: 14pt;
+        font-size: 16pt;
     }
     
     .slide-first .overview h3 {
@@ -81,7 +79,7 @@
     }
     
     .slide-first .overview li {
-        font-size: 14pt;
+        font-size: 16pt;
     }
     
     .slide-content h2 {
@@ -103,7 +101,7 @@
     
     
     .main-title {
-        font-size: 36pt;
+        font-size: 48pt;
     }
     
     .subtitle {
@@ -112,7 +110,7 @@
     }
     
     .presenter-info {
-        font-size: 12pt;
+        font-size: 14pt;
     }
     
     .title-separator {
@@ -135,7 +133,7 @@
     }
     
     .slide-first .overview li {
-        font-size: 12pt;
+        font-size: 14pt;
         text-align: center;
         display: flex;
         flex-direction: row;
@@ -166,7 +164,7 @@
     /* 確保首頁內容有合適的邊距 */
     
     .main-title {
-        font-size: 30pt;
+        font-size: 40pt;
     }
     
     .subtitle {
@@ -174,7 +172,7 @@
     }
     
     .presenter-info {
-        font-size: 10pt;
+        font-size: 14pt;
         flex-direction: column;
         gap: 0.3rem;
     }
