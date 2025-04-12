@@ -27,7 +27,18 @@
         padding: 1.5rem;
     }
     
+    .title-container {
+        margin-bottom: 0rem;
+        padding: 0rem ;
+    }
 
+    .python-logo {
+        margin-bottom: 0rem;
+    }
+
+    .slide-first .presenter-info {
+        margin-bottom: 0rem;
+    }
     
     .main-title {
         font-size: 48pt;
@@ -37,8 +48,10 @@
         font-size: 22pt;
     }
     
+    .slide-first .overview ul {
+    }
     .slide-first .overview li {
-        font-size: 20pt;
+        font-size: 16pt;
     }
 }
 
@@ -68,7 +81,7 @@
     }
     
     .slide-first .overview li {
-        font-size: 18pt;
+        font-size: 14pt;
     }
     
     .slide-content h2 {
@@ -112,17 +125,27 @@
     }
     
     .slide-first .overview h3 {
-        font-size: 22pt;
+        font-size: 20pt;
         margin-bottom: 1.5rem;
     }
     
     .slide-first .overview ul {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
     }
     
     .slide-first .overview li {
-        font-size: 16pt;
+        font-size: 12pt;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .slide-first .overview li i {
+        margin-right: 0.5rem;
+        font-size: 14pt;
     }
     
     .slide-content h2 {
@@ -157,12 +180,9 @@
     }
     
     .slide-first .overview h3 {
-        font-size: 20pt;
+        font-size: 16pt;
     }
     
-    .slide-first .overview li {
-        font-size: 14pt;
-    }
     
     .slide-content h2 {
         font-size: 24px;
