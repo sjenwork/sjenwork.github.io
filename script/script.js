@@ -60,6 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 重新初始化滾動檢測（適用於新顯示的部分）
                 initScrollDetection();
+                
+                // 更新URL中的部分參數，但不刷新頁面
+                updateUrlWithSection(sectionId);
+                
+                // 保存最後訪問的頁面到localStorage
+                localStorage.setItem('last-visited-section', sectionId);
             }, 300);
         });
     });
@@ -110,7 +116,113 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化 AI 實驗室功能
     initPlaygroundFeatures();
     
+    // 根據URL參數或默認設置打開特定頁面
+    openInitialSection();
+    
 });
+
+// 根據URL參數或默認設置打開特定頁面
+function openInitialSection() {
+    // 從URL獲取section參數
+    const urlParams = new URLSearchParams(window.location.search);
+    const sectionParam = urlParams.get('section');
+    
+    // 如果URL中有指定section參數
+    if (sectionParam) {
+        // 查找匹配的側邊欄項目
+        const targetItem = document.querySelector(`.sidebar-item[data-section="${sectionParam}"]`);
+        if (targetItem) {
+            // 模擬點擊該項目
+            targetItem.click();
+            return;
+        }
+    }
+    
+    // 如果URL中沒有參數，或者參數無效，檢查本地存儲中的最後訪問頁面
+    const lastVisitedSection = localStorage.getItem('last-visited-section');
+    if (lastVisitedSection) {
+        const lastVisitedItem = document.querySelector(`.sidebar-item[data-section="${lastVisitedSection}"]`);
+        if (lastVisitedItem) {
+            lastVisitedItem.click();
+            return;
+        }
+    }
+    
+    // 如果沒有URL參數和最後訪問記錄，則檢查是否有用戶設置的默認頁面
+    const defaultSection = localStorage.getItem('default-section');
+    if (defaultSection) {
+        const defaultItem = document.querySelector(`.sidebar-item[data-section="${defaultSection}"]`);
+        if (defaultItem) {
+            defaultItem.click();
+            return;
+        }
+    }
+    
+    // 如果以上都沒有，則使用第一個側邊欄項目（默認行為）
+    // 第一個側邊欄項目通常是自動選擇的，因此這裡不需要額外操作
+}
+
+// 更新URL中的部分參數，但不刷新頁面
+function updateUrlWithSection(sectionId) {
+    if (history.pushState) {
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('section', sectionId);
+        window.history.pushState({path: newUrl.href}, '', newUrl.href);
+    }
+}
+
+// 添加設置默認頁面功能
+function initDefaultSectionSetting() {
+    // 創建設置默認頁面的UI元素（可以在設置菜單或其他適當位置添加）
+    const settingsContainer = document.getElementById('settingsContainer');
+    if (!settingsContainer) return;
+    
+    const defaultSectionSetting = document.createElement('div');
+    defaultSectionSetting.className = 'setting-item';
+    defaultSectionSetting.innerHTML = `
+        <h4>設置默認頁面</h4>
+        <p>選擇網站載入時自動打開的頁面：</p>
+        <select id="defaultSectionSelect">
+            <option value="">無（使用首頁）</option>
+        </select>
+        <button id="saveDefaultSection" class="setting-button">保存設置</button>
+    `;
+    
+    settingsContainer.appendChild(defaultSectionSetting);
+    
+    // 填充選項
+    const selectElement = document.getElementById('defaultSectionSelect');
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    
+    sidebarItems.forEach(item => {
+        const sectionId = item.getAttribute('data-section');
+        const sectionName = item.textContent.trim();
+        const option = document.createElement('option');
+        option.value = sectionId;
+        option.textContent = sectionName;
+        
+        // 如果是當前保存的默認值，則設為選中
+        if (sectionId === localStorage.getItem('default-section')) {
+            option.selected = true;
+        }
+        
+        selectElement.appendChild(option);
+    });
+    
+    // 保存按鈕點擊事件
+    document.getElementById('saveDefaultSection').addEventListener('click', function() {
+        const selectedValue = selectElement.value;
+        
+        if (selectedValue) {
+            localStorage.setItem('default-section', selectedValue);
+            alert('默認頁面設置已保存！下次訪問網站時將自動打開所選頁面。');
+        } else {
+            // 如果選擇"無"，則清除本地存儲中的設置
+            localStorage.removeItem('default-section');
+            alert('已清除默認頁面設置，網站將使用標準首頁。');
+        }
+    });
+}
 
 // 初始化滾動檢測
 function initScrollDetection() {
@@ -294,13 +406,11 @@ function loadResources() {
                     // 添加自定義數據屬性，用於保存資源數據
                     link.dataset.resource = JSON.stringify(item);
                     
-                    // 添加圖標
-                    if (item.icon) {
-                        const icon = document.createElement('i');
-                        icon.className = item.icon;
-                        icon.style.marginRight = '8px';
-                        link.appendChild(icon);
-                    }
+                    // 添加圖標 (使用燈泡圖標作為默認，代表知識和學習資源)
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-lightbulb';
+                    icon.style.marginRight = '8px';
+                    link.appendChild(icon);
                     
                     // 添加文字
                     const text = document.createTextNode(item.title);
@@ -378,20 +488,64 @@ function showResourceSidebar(resourceData) {
     // 設置資源標題
     title.textContent = resourceData.title;
     
-    // 設置資源圖標
+    // 設置資源圖標 (使用燈泡圖標作為默認，代表知識和學習資源)
     icon.innerHTML = '';
     const iconElement = document.createElement('i');
-    iconElement.className = resourceData.icon;
+    iconElement.className = 'fas fa-lightbulb';
     icon.appendChild(iconElement);
     
     // 設置資源描述
     description.textContent = resourceData.description || '沒有提供描述';
     
-    // 設置資源鏈接
-    const linkElement = linkContainer.querySelector('a');
-    if (linkElement) {
-        linkElement.href = resourceData.url || '#';
-        linkElement.style.display = resourceData.url && resourceData.url !== '#' ? 'inline-block' : 'none';
+    // 清空原有的鏈接
+    linkContainer.innerHTML = '';
+    
+    // 如果有links對象，創建各種社交媒體鏈接
+    if (resourceData.links) {
+        // 創建社交媒體鏈接容器
+        const socialLinksContainer = document.createElement('div');
+        socialLinksContainer.className = 'social-links-container';
+        
+        // 定義支持的社交媒體類型及其圖標
+        const socialMediaTypes = [
+            { type: 'youtube', icon: 'fab fa-youtube', label: 'YouTube' },
+            { type: 'github', icon: 'fab fa-github', label: 'GitHub' },
+            { type: 'blog', icon: 'fas fa-blog', label: '部落格' },
+            { type: 'facebook', icon: 'fab fa-facebook', label: 'Facebook' },
+            { type: 'twitter', icon: 'fab fa-twitter', label: 'Twitter' },
+            { type: 'instagram', icon: 'fab fa-instagram', label: 'Instagram' },
+            { type: 'linkedin', icon: 'fab fa-linkedin', label: 'LinkedIn' }
+        ];
+        
+        // 遍歷創建各種社交媒體鏈接
+        socialMediaTypes.forEach(social => {
+            const url = resourceData.links[social.type];
+            if (url && url.trim() !== '') {
+                const linkElement = document.createElement('a');
+                linkElement.href = url;
+                linkElement.target = '_blank';
+                linkElement.className = 'resource-social-link';
+                linkElement.title = `訪問 ${social.label}`;
+                
+                const socialIcon = document.createElement('i');
+                socialIcon.className = social.icon;
+                
+                linkElement.appendChild(socialIcon);
+                socialLinksContainer.appendChild(linkElement);
+            }
+        });
+        
+        // 只有在有社交媒體鏈接時才添加容器
+        if (socialLinksContainer.children.length > 0) {
+            linkContainer.appendChild(socialLinksContainer);
+        } else {
+            // 如果沒有任何有效的社交媒體鏈接，顯示提示
+            const noLinksMessage = document.createElement('p');
+            noLinksMessage.textContent = '沒有提供社交媒體鏈接';
+            noLinksMessage.style.fontStyle = 'italic';
+            noLinksMessage.style.opacity = '0.7';
+            linkContainer.appendChild(noLinksMessage);
+        }
     }
     
     // 設置子項目
@@ -416,8 +570,17 @@ function showResourceSidebar(resourceData) {
             
             // 如果有URL，添加一個小圖標表示可點擊
             if (subItem.url && subItem.url !== '#') {
+                // 創建圖標元素
                 const linkIcon = document.createElement('i');
-                linkIcon.className = 'fas fa-external-link-alt';
+                
+                // 使用子項目自己的圖標，如果有的話
+                if (subItem.icon) {
+                    linkIcon.className = subItem.icon;
+                } else {
+                    // 默認使用外部鏈接圖標
+                    linkIcon.className = 'fas fa-external-link-alt';
+                }
+                
                 linkIcon.style.fontSize = '0.8rem';
                 linkIcon.style.marginLeft = '8px';
                 linkIcon.style.opacity = '0.7';

@@ -1907,3 +1907,55 @@ a, button, input, select, textarea {
         padding: 20px;
     }
 }
+
+/* 社交媒體鏈接樣式 */
+.social-links-container {
+    display: flex;
+    gap: 12px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.resource-social-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.resource-social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--accent-color);
+}
+
+.resource-social-link i {
+    font-size: 20px;
+}
+
+/* YouTube 圖標特殊樣式 */
+.resource-social-link i.fa-youtube {
+    color: #ffffff;
+}
+
+/* GitHub 圖標特殊樣式 */
+.resource-social-link i.fa-github {
+    color: #ffffff;
+}
+
+/* Facebook 圖標特殊樣式 */
+.resource-social-link i.fa-facebook {
+    color: #ffffff;
+}
+
+/* Blog 圖標特殊樣式 */
+.resource-social-link i.fa-blog {
+    color: #ffffff;
+}

@@ -1,76 +1,206 @@
 [
     {
-        "category": "AI 學習資源",
+        "category": "我要學 AI！",
         "items": [
             {
                 "title": "李宏毅",
-                "url": "https://www.youtube.com/@HungyiLeeNTU",
-                "icon": "fab fa-youtube",
+                "links": {
+                    "youtube": "https://www.youtube.com/@hungyileentu",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
                 "description": "李宏毅是臺大的非常有名的教授，教學淺顯易懂，想當年我一開始在使用 Bert 的時候，就是看他的影片入門的，非常推薦！！",
                 "subItems": [
                     {
                         "title": "【機器學習2021】Transformer (上)",
                         "description": "啟蒙影片！介紹了什麼事Transformer，以及他的運作原理。",
-                        "url": "https://www.youtube.com/watch?v=n9TlOhRjYoc"
+                        "url": "https://www.youtube.com/watch?v=n9TlOhRjYoc",
+                        "icon": "fab fa-youtube"
                     },
                     {
                         "title": "【機器學習2021】Transformer (下)",
                         "description": "啟蒙影片！介紹了什麼事Transformer，以及他的運作原理。",
-                        "url": "https://www.youtube.com/watch?v=N6aRv06iv2g"
+                        "url": "https://www.youtube.com/watch?v=N6aRv06iv2g",
+                        "icon": "fab fa-youtube"
                     },
                     {
                         "title": "【生成式AI時代下的機器學習(2025)】第一講：一堂課搞懂生成式人工智慧的技術突破與未來發展",
                         "description": "2025年的課程，會說明什麼是生成式AI，以及他的基礎運作原理。非常推薦沒基礎的人可以來看～ 後續之後的課程應該也很推薦，每週必追！！",
-                        "url": "https://www.youtube.com/watch?v=QLiKmca4kzI"
+                        "url": "https://www.youtube.com/watch?v=QLiKmca4kzI",
+                        "icon": "fab fa-youtube"
                     }
                 ]
             },
             {
                 "title": "huangyihe",
-                "url": "https://www.youtube.com/@huanyihe777",
+                "links": {
+                    "youtube": "https://www.youtube.com/@huanyihe777",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
                 "description": "我不知道他是誰...。但他的影片會說明很多最新的AI發展，以及相關的工具整合介紹，也大大推薦",
-                "icon": "fab fa-youtube",
                 "subItems": [
                     {
                         "title": "有了MCP，AI才完整",
                         "description": "第一次看到他介紹的影片，是有關MCP，那時後對MCP還不是太清楚，看完之後覺得對MCP有更深的瞭解，也推薦給大家！！",
-                        "url": "https://www.youtube.com/watch?v=ElX5HO0wXyo&list=PLHoWMN3KVHQ-bzwgDgituehy3DA_WaPkj&index=7&t=3s"
+                        "url": "https://www.youtube.com/watch?v=ElX5HO0wXyo&list=PLHoWMN3KVHQ-bzwgDgituehy3DA_WaPkj&index=7&t=3s",
+                        "icon": "fab fa-youtube"
+                    }
+                ]
+            },
+            {
+                "title": "code秘密花园",
+                "links": {
+                    "youtube": "https://www.youtube.com/@garden-conard/videos",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
+                "description": "內容還不太多，但是是在研究MCP時，暫時還覺得不錯ＸＤ",
+                "subItems": [
+                    {
+                        "title": "MCP + 数据库，一种提高结构化数据检索精度的新方式！",
+                        "description": "說明 RAG的侷限 、function calling 的限制，以及 MCP 的優勢。",
+                        "url": "https://www.youtube.com/watch?v=t2L0ZY1u-gg&t=140s",
+                        "icon": "fab fa-youtube"
                     }
                 ]
             }
         ]
     },
     {
-        "category": "Web 開發資源",
+        "category": "前端開發好棒棒！",
         "items": [
             {
                 "title": "Alex 宅幹嘛",
-                "url": "https://www.youtube.com/@AlexOtakuWhat",
-                "icon": "fab fa-youtube",
+                "links": {
+                    "youtube": "https://www.youtube.com/@AlexOtakuWhat",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
                 "description": "他是我學習前端開始，第一個接觸到的框架啟發者，手把手的影片教學讓我對前端開發有更深的瞭解，也推薦給大家！！",
                 "subItems": [
                     {
                         "title": "Vue.js 手牽手，一起嗑光全家桶",
                         "description": "這系列的影片就是我開始學習 Vue.js 的啟蒙影片，非常推薦給大家！！",
-                        "url": "https://www.youtube.com/playlist?list=PLEfh-m_KG4dYor8h4Hi2lqKJ0xqNTFh16"
+                        "url": "https://www.youtube.com/playlist?list=PLEfh-m_KG4dYor8h4Hi2lqKJ0xqNTFh16",
+                        "icon": "fab fa-youtube"
+                    }
+                ]
+            }
+
+        ]
+    },
+    {
+        "category": "我要成為數據科學家！",
+        "items": [
+            {
+                "title": "資料科學家的工作日常",
+                "links": {
+                    "youtube": "https://www.youtube.com/watch?v=BTJQBgXaI0g",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
+                "description": "這個頻道是資料科學家的工作日常，會分享很多有關資料科學家的工作日常，以及他們在工作中遇到的問題，非常推薦給大家！！",
+                "subItems": [
+                ]
+            }
+        ]
+    },
+    {
+        "category": "科技知識追追追～",
+        "items": [
+            {
+                "title": "PAPAYA 電腦教室",
+                "links": {
+                    "youtube": "https://www.youtube.com/@papayaclass",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
+                "description": "PAPAYA 真的是個大神來著，從辦公室軟體到簡報製作，到使用OS的技巧，甚至AI應用，都會有相關的教學影片，而且教學的流暢度都讓我以為應該是用AI自動生成的！！",
+                "subItems": [
+                    {
+                        "title": "PAPAYA 電腦教室",
+                        "description": "PAPAYA 電腦教室是一個非常棒的網路資源，他們會分享很多有關電腦的知識，以及一些好用的工具，非常推薦給大家！！",
+                        "url": "https://www.youtube.com/playlist?list=PLgKat64mmTvUzkANGjLqu1lMKFcVQUOqH",
+                        "icon": "fab fa-youtube"
+                    }
+                ]
+            },
+            {
+                "title": "Will 保哥",
+                "links": {
+                    "youtube": "https://www.youtube.com/@Will_Huang",
+                    "github": "https://github.com/doggy8088",
+                    "blog": "https://blog.miniasp.com/",
+                    "facebook": "https://www.facebook.com/will.fans/"
+                },
+                "description": "Will 保哥，應該沒有做資訊的人不認識他了吧ＸＤ。比起從他的頻道學技術，更多時候看他的 facebook 分享的技術發展，尤其是 AI 應用這塊！",
+                "subItems": [
+                    
+                ]
+            },
+            {
+                "title": "上班了啊哈",
+                "links": {
+                    "youtube": "https://www.youtube.com/@ahagowork",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
+                "description": "很愛他的教學影片，而且都會把說明用視覺畫的方式呈現。",
+                "subItems": [
+                    
+                ]
+            }
+        ]
+    },
+    {
+        "category": "歷史故事好好聽！",
+        "items": [
+            {
+                "title": "李天豪",
+                "links": {
+                    "youtube": "https://www.youtube.com/@leecehao",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
+                "description": "最喜歡的歷史頻道，故事說得很生動，而且常常會用反諷針砭時事，非常有趣！！",
+                "subItems": [
+                    {
+                        "title": "總統大選系列",
+                        "description": "介紹了台灣總統大選的歷史狀況，雖然都是事後諸葛，但非常有趣！！",
+                        "url": "https://www.youtube.com/playlist?list=PLgKat64mmTvUzkANGjLqu1lMKFcVQUOqH",
+                        "icon": "fab fa-youtube"
                     }
                 ]
             }
         ]
     },
     {
-        "category": "學歷史",
+        "category": "訪談節目學經驗！",
         "items": [
             {
-                "title": "李天豪",
-                "url": "https://www.youtube.com/@leecehao",
-                "icon": "fab fa-youtube",
-                "description": "最喜歡的歷史頻道，故事說得很生動，而且常常會用反諷針砭時事，非常有趣！！",
+                "title": "集英信誠官方頻道",
+                "links": {
+                    "youtube": "https://www.youtube.com/@%E9%9B%86%E8%8B%B1%E4%BF%A1%E8%AA%A0%E5%AE%98%E6%96%B9%E9%A0%BB%E9%81%93",
+                    "github": "",
+                    "blog": "",
+                    "facebook": ""
+                },
+                "description": "會找很多資訊領域上經驗豐富的人分享，個人非常愛這個節目，很多人還會說很多資訊領域發展的歷史，以及技術上的發展，推薦～",
                 "subItems": [
                     {
-                        "title": "總統大選系列",
-                        "description": "介紹了台灣總統大選的歷史狀況，雖然都是事後諸葛，但非常有趣！！",
-                        "url": "https://www.youtube.com/playlist?list=PLgKat64mmTvUzkANGjLqu1lMKFcVQUOqH"
+                        "title": "【MentorTrust】EP95. 什麼是資料治理? 好久不見的藏鏡人冒出來揪百敬討論給大家聽！(1/2)",
+                        "description": "這應該是我看的第一部影片，那時候想了解資料治理到底是什麼，就找到他了！",
+                        "url": "https://www.youtube.com/watch?v=aFYawXehKIw",
+                        "icon": "fab fa-youtube"
                     }
                 ]
             }
