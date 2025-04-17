@@ -8,14 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.section');
     const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
     
-    // 為每個卡片和技能項添加淡入效果類
-    const fadeElements = document.querySelectorAll('.slide-card, .project-card, .blog-card, .skill-item, .resource-item');
-    fadeElements.forEach(element => {
-        element.classList.add('fade-in-element');
-    });
-    
     // 初始化滾動檢測
-    initScrollDetection();
+    // initScrollDetection();
     
     // 確保側邊欄初始狀態為收起
     sidebar.classList.remove('open');
@@ -207,29 +201,7 @@ function initDefaultSectionSetting() {
     });
 }
 
-// 初始化滾動檢測
-function initScrollDetection() {
-    const fadeElements = document.querySelectorAll('.fade-in-element');
-    
-    // 檢查元素是否在視口中
-    function checkVisibility() {
-        fadeElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementBottom = element.getBoundingClientRect().bottom;
-            const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
-            
-            if (isVisible) {
-                element.classList.add('visible');
-            }
-        });
-    }
-    
-    // 初始檢查
-    checkVisibility();
-    
-    // 滾動時檢查
-    window.addEventListener('scroll', checkVisibility);
-}
+
 
 
 
