@@ -40,7 +40,7 @@ function loadContactInfo() {
                 
                 // 創建圖標
                 const icon = document.createElement('i');
-                icon.className = `fas fab ${contact.icon}`;
+                icon.className = `${contact.icon}`;
                 icon.style.color = 'var(--primary-color)';
                 icon.style.marginRight = '10px';
                 

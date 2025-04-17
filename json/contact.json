@@ -8,13 +8,13 @@
   "contacts": [
     {
       "type": "email",
-      "icon": "fa-envelope",
+      "icon": "fas fa-envelope",
       "value": "sjenwork@gmail.com",
       "link": "mailto:sjenwork@gmail.com"
     },
     {
       "type": "github",
-      "icon": "fa-github",
+      "icon": "fab fa-github",
       "value": "github.com/sjenwork",
       "link": "https://github.com/"
     }
