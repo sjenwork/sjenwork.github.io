@@ -1959,3 +1959,38 @@ a, button, input, select, textarea {
 .resource-social-link i.fa-blog {
     color: #ffffff;
 }
+
+/* 專案狀態標籤樣式 */
+.project-status {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.7rem;
+    color: #666;
+}
+
+.status-badge {
+    background-color: #ff9800;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.status-badge.completed {
+    background-color: #4caf50;
+}
+
+.status-badge.planned {
+    background-color: #2196f3;
+}
+
+.status-badge.in-progress {
+    background-color: #ff9800;
+}
+
+.status-badge.paused {
+    background-color: #9e9e9e;
+}
