@@ -258,45 +258,7 @@
                 <h2 class="section-title">學習資源</h2>
                 <p style="text-align: center; margin-bottom: 2rem;">這裡匯集了我收集的優質學習資源，幫助你在技術領域不斷進步。</p>
                 <div class="resources-grid">
-                    <div class="resource-item">
-                        <h3 class="resource-title">機器學習資源</h3>
-                        <ul>
-                            <li><a href="#" style="color: var(--primary-color);">Stanford CS229 機器學習課程</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">Kaggle 機器學習入門</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">《機器學習實戰》書籍推薦</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">TensorFlow 官方教程</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-item">
-                        <h3 class="resource-title">Web 開發資源</h3>
-                        <ul>
-                            <li><a href="#" style="color: var(--primary-color);">MDN Web 文檔</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">FreeCodeCamp 課程</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">CSS-Tricks 網站</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">JavaScript.info 教程</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-item">
-                        <h3 class="resource-title">Python 編程資源</h3>
-                        <ul>
-                            <li><a href="#" style="color: var(--primary-color);">Python 官方文檔</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">Real Python 教程</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">Python Crash Course 書籍</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">PyCharm IDE 使用指南</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-item">
-                        <h3 class="resource-title">AI 研究資源</h3>
-                        <ul>
-                            <li><a href="#" style="color: var(--primary-color);">arXiv AI 論文庫</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">OpenAI 研究博客</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">DeepMind 研究成果</a></li>
-                            <li><a href="#" style="color: var(--primary-color);">AI 倫理與發展趨勢</a></li>
-                        </ul>
-                    </div>
+                    <!-- 資源項目將從JSON文件動態加載 -->
                 </div>
             </div>
             
@@ -338,6 +300,38 @@
             <button class="notice-close">我知道了</button>
         </div>
     </div>
+
+    <!-- 資源詳情側邊欄 -->
+    <div id="resourceSidebar" class="resource-sidebar">
+        <div class="resource-sidebar-header">
+            <button id="closeSidebar" class="close-sidebar"><i class="fa fa-times"></i></button>
+            <h2 id="resourceTitle" class="resource-sidebar-title">資源標題</h2>
+            <div id="resourceIcon" class="resource-sidebar-icon">
+                <i class="fas fa-book"></i>
+            </div>
+        </div>
+        <div class="resource-sidebar-content">
+            <div id="resourceDescription" class="resource-sidebar-description">
+                資源描述內容將顯示在這裡...
+            </div>
+            
+            <div id="resourceLink" class="resource-sidebar-link-container">
+                <a href="#" target="_blank" class="resource-sidebar-link">
+                    <i class="fas fa-external-link-alt"></i> 訪問資源
+                </a>
+            </div>
+            
+            <div id="subItemsContainer" class="resource-subitems-container">
+                <h3>相關內容</h3>
+                <div id="subItemsList" class="resource-subitems-list">
+                    <!-- 子項目將在此動態生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 遮罩層 -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
     <script src="script/script.js"></script>
     <script src="script/construction.js"></script>

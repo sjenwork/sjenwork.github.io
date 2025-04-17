@@ -3,6 +3,7 @@
     --bg-color: #f7f5f3;
     --card-bg: #ffffff;
     --primary-color: #7986cb;
+    --primary-color-rgb: 121, 134, 203;  /* 添加RGB值，用於rgba()函數 */
     --text-color: #333333;
     --hover-color: #9fa8da;
     --shadow-color: rgba(68, 68, 68, 0.15);
@@ -37,6 +38,7 @@
     --bg-color: #121212;
     --card-bg: #1e1e1e;
     --primary-color: #bb86fc;
+    --primary-color-rgb: 187, 134, 252;  /* 添加RGB值，用於rgba()函數 */
     --text-color: #e0e0e0;
     --hover-color: #d7a9ff;
     --shadow-color: rgba(187, 134, 252, 0.25);
@@ -64,6 +66,7 @@
     --bg-color: #f0f7f4;
     --card-bg: #ffffff;
     --primary-color: #2e7d32;
+    --primary-color-rgb: 46, 125, 50;  /* 添加RGB值，用於rgba()函數 */
     --text-color: #2e2e2e;
     --hover-color: #43a047;
     --shadow-color: rgba(0, 0, 0, 0.15);
@@ -90,6 +93,7 @@
     --bg-color: #e3f2fd;
     --card-bg: #ffffff;
     --primary-color: #0277bd;
+    --primary-color-rgb: 2, 119, 189;  /* 添加RGB值，用於rgba()函數 */
     --text-color: #263238;
     --hover-color: #039be5;
     --shadow-color: rgba(0, 0, 0, 0.15);
@@ -116,6 +120,7 @@
     --bg-color: #fff8e1;
     --card-bg: #ffffff;
     --primary-color: #ff6f00;
+    --primary-color-rgb: 255, 111, 0;  /* 添加RGB值，用於rgba()函數 */
     --text-color: #4e342e;
     --hover-color: #ff8f00;
     --shadow-color: rgba(0, 0, 0, 0.15);
@@ -585,6 +590,29 @@ h1 {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
     color: var(--heading-color);
+}
+
+.resource-item li {
+    margin-bottom: 8px;
+    list-style-type: none;
+}
+
+.resource-item a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.resource-item a:hover {
+    transform: translateX(3px);
+}
+
+.resource-item i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+    color: var(--primary-color);
 }
 
 /* 頁腳樣式優化 */
@@ -1662,4 +1690,220 @@ a, button, input, select, textarea {
     .playground-card {
         margin-bottom: 20px;
     }
-} 
+}
+
+/* 資源詳情側邊欄樣式 */
+.resource-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    max-width: 90vw;
+    height: 100vh;
+    background-color: var(--card-bg);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+    transition: right 0.4s var(--transition-function);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.resource-sidebar.active {
+    right: 0;
+}
+
+.resource-sidebar-header {
+    position: relative;
+    padding: 25px 30px;
+    background-color: var(--section-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-sidebar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-sidebar:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.resource-sidebar-title {
+    margin: 0;
+    font-size: 1.6rem;
+    color: var(--heading-color);
+    flex: 1;
+    padding-right: 40px;
+}
+
+.resource-sidebar-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    margin-left: 20px;
+}
+
+.resource-sidebar-content {
+    flex: 1;
+    padding: 25px 30px;
+    overflow-y: auto;
+}
+
+.resource-sidebar-description {
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 25px;
+}
+
+.resource-sidebar-link-container {
+    margin-bottom: 30px;
+}
+
+.resource-sidebar-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.resource-sidebar-link:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.resource-subitems-container h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    color: var(--heading-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.resource-subitems-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.subitem-card {
+    background-color: var(--section-bg);
+    border-radius: 8px;
+    padding: 15px;
+    border-left: 3px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subitem-card:hover {
+    transform: translateX(5px);
+}
+
+.subitem-card.clickable {
+    cursor: pointer;
+    position: relative;
+}
+
+.subitem-card.clickable:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(var(--primary-color-rgb, 121, 134, 203), 0.1);
+}
+
+.subitem-card.clickable::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.subitem-card.clickable:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.subitem-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: var(--heading-color);
+    display: flex;
+    align-items: center;
+}
+
+.subitem-description {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* 遮罩層樣式 */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 響應式調整 */
+@media (max-width: 576px) {
+    .resource-sidebar {
+        width: 100vw;
+        right: -100vw;
+    }
+    
+    .resource-sidebar-header {
+        padding: 20px;
+    }
+    
+    .resource-sidebar-content {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,237 @@
+[
+    {
+        "category": "AI 學習資源",
+        "items": [
+            {
+                "title": "李宏毅",
+                "url": "https://www.youtube.com/@HungyiLeeNTU",
+                "icon": "fab fa-youtube",
+                "description": "李宏毅是臺大的非常有名的教授，教學淺顯易懂，想當年我一開始在使用 Bert 的時候，就是看他的影片入門的，非常推薦！！",
+                "subItems": [
+                    {
+                        "title": "【機器學習2021】Transformer (上)",
+                        "description": "啟蒙影片！介紹了什麼事Transformer，以及他的運作原理。",
+                        "url": "https://www.youtube.com/watch?v=n9TlOhRjYoc"
+                    },
+                    {
+                        "title": "【機器學習2021】Transformer (下)",
+                        "description": "啟蒙影片！介紹了什麼事Transformer，以及他的運作原理。",
+                        "url": "https://www.youtube.com/watch?v=N6aRv06iv2g"
+                    },
+                    {
+                        "title": "【生成式AI時代下的機器學習(2025)】第一講：一堂課搞懂生成式人工智慧的技術突破與未來發展",
+                        "description": "2025年的課程，會說明什麼是生成式AI，以及他的基礎運作原理。非常推薦沒基礎的人可以來看～ 後續之後的課程應該也很推薦，每週必追！！",
+                        "url": "https://www.youtube.com/watch?v=QLiKmca4kzI"
+                    }
+                ]
+            },
+            {
+                "title": "huangyihe",
+                "url": "https://www.youtube.com/@huanyihe777",
+                "description": "我不知道他是誰...。但他的影片會說明很多最新的AI發展，以及相關的工具整合介紹，也大大推薦",
+                "icon": "fab fa-youtube",
+                "subItems": [
+                    {
+                        "title": "有了MCP，AI才完整",
+                        "description": "第一次看到他介紹的影片，是有關MCP，那時後對MCP還不是太清楚，看完之後覺得對MCP有更深的瞭解，也推薦給大家！！",
+                        "url": "https://www.youtube.com/watch?v=ElX5HO0wXyo&list=PLHoWMN3KVHQ-bzwgDgituehy3DA_WaPkj&index=7&t=3s"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Web 開發資源",
+        "items": [
+            {
+                "title": "MDN Web 文檔",
+                "url": "https://developer.mozilla.org/",
+                "icon": "fas fa-book",
+                "description": "Mozilla開發者網絡(MDN)提供了最全面的Web技術文檔，涵蓋HTML、CSS、JavaScript等所有Web開發相關知識。無論你是初學者還是專業開發者，這都是必備的參考資源。",
+                "subItems": [
+                    {
+                        "title": "HTML指南",
+                        "description": "從基礎到高級的HTML教程，包括語義化標籤、表單等內容。",
+                        "url": "https://developer.mozilla.org/zh-TW/docs/Web/HTML"
+                    },
+                    {
+                        "title": "CSS教程",
+                        "description": "詳細的CSS指南，包括選擇器、佈局技術、動畫等內容。",
+                        "url": "https://developer.mozilla.org/zh-TW/docs/Web/CSS"
+                    },
+                    {
+                        "title": "JavaScript參考",
+                        "description": "完整的JavaScript語言參考，包括語法、API、最佳實踐等。",
+                        "url": "https://developer.mozilla.org/zh-TW/docs/Web/JavaScript"
+                    }
+                ]
+            },
+            {
+                "title": "freeCodeCamp 課程",
+                "url": "https://www.freecodecamp.org/",
+                "icon": "fas fa-code",
+                "description": "freeCodeCamp是一個非營利組織，提供免費的編程學習平臺。它提供了全面的Web開發課程，從HTML和CSS基礎到複雜的JavaScript框架和後端開發，都有詳細的互動式教程。",
+                "subItems": [
+                    {
+                        "title": "響應式Web設計",
+                        "description": "學習HTML、CSS和響應式設計原則，建立現代化網站。",
+                        "url": "https://www.freecodecamp.org/learn/responsive-web-design/"
+                    },
+                    {
+                        "title": "JavaScript算法與數據結構",
+                        "description": "深入學習JavaScript和編程基礎知識。",
+                        "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"
+                    },
+                    {
+                        "title": "前端框架課程",
+                        "description": "學習React、Redux等現代前端框架的使用方法。",
+                        "url": "https://www.freecodecamp.org/learn/front-end-development-libraries/"
+                    }
+                ]
+            },
+            {
+                "title": "CSS-Tricks 網站",
+                "url": "https://css-tricks.com/",
+                "icon": "fab fa-css3-alt",
+                "description": "CSS-Tricks是一個專注於CSS技術的網站，提供了大量的教程、文章和實用技巧。該網站不僅關注CSS，還涵蓋了現代Web開發的各個方面，包括JavaScript框架、性能優化等內容。",
+                "subItems": [
+                    {
+                        "title": "CSS Grid指南",
+                        "description": "全面詳細的CSS Grid佈局教程，包含豐富的示例。",
+                        "url": "https://css-tricks.com/snippets/css/complete-guide-grid/"
+                    },
+                    {
+                        "title": "Flexbox完全指南",
+                        "description": "深入淺出講解Flexbox佈局的所有屬性和用法。",
+                        "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+                    },
+                    {
+                        "title": "CSS動畫技巧",
+                        "description": "各種CSS動畫和過渡效果的實現方法和優化技巧。",
+                        "url": "https://css-tricks.com/almanac/properties/a/animation/"
+                    }
+                ]
+            },
+            {
+                "title": "JavaScript.info 教程",
+                "url": "https://javascript.info/",
+                "icon": "fab fa-js",
+                "description": "一個現代JavaScript教程，從基礎到高級，簡單而詳細地解釋了JavaScript的核心概念和高級特性。教程分為三部分：語言基礎、瀏覽器相關特性和其他高級主題。",
+                "subItems": [
+                    {
+                        "title": "JavaScript語言基礎",
+                        "description": "變量、數據類型、函數、物件等基本概念的詳細講解。",
+                        "url": "https://javascript.info/first-steps"
+                    },
+                    {
+                        "title": "DOM操作",
+                        "description": "如何使用JavaScript操作網頁元素和處理事件。",
+                        "url": "https://javascript.info/document"
+                    },
+                    {
+                        "title": "網絡請求與存儲",
+                        "description": "AJAX、Fetch API、Cookie和本地存儲的使用方法。",
+                        "url": "https://javascript.info/network"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Python 程式教學資源",
+        "items": [
+            {
+                "title": "Python 官方文檔",
+                "url": "https://docs.python.org/",
+                "icon": "fab fa-python",
+                "description": "Python官方文檔是學習Python語言最權威的資源。它包含了語言參考、標準庫文檔、教程和各種指南，適合各個層次的Python開發者參考使用。",
+                "subItems": [
+                    {
+                        "title": "Python教程",
+                        "description": "官方提供的Python入門教程，介紹基本語法和概念。",
+                        "url": "https://docs.python.org/zh-tw/3/tutorial/index.html"
+                    },
+                    {
+                        "title": "標準庫參考",
+                        "description": "詳細的Python標準庫文檔，包括所有內置模塊。",
+                        "url": "https://docs.python.org/zh-tw/3/library/index.html"
+                    },
+                    {
+                        "title": "語言參考",
+                        "description": "Python語言的語法、語義和核心功能的完整參考。",
+                        "url": "https://docs.python.org/zh-tw/3/reference/index.html"
+                    }
+                ]
+            },
+            {
+                "title": "Real Python 教程",
+                "url": "https://realpython.com/",
+                "icon": "fab fa-python",
+                "description": "Real Python提供了大量高質量的Python教程，涵蓋從基礎到高級的各種主題。這些教程以實用為導向，包含豐富的示例代碼和實際應用場景，幫助讀者快速掌握Python技能。",
+                "subItems": [
+                    {
+                        "title": "Python基礎教程",
+                        "description": "適合初學者的Python基礎知識和編程概念講解。",
+                        "url": "https://realpython.com/python-basics/"
+                    },
+                    {
+                        "title": "Web開發",
+                        "description": "使用Flask、Django等框架進行Web開發的教程。",
+                        "url": "https://realpython.com/tutorials/web-dev/"
+                    },
+                    {
+                        "title": "數據科學與機器學習",
+                        "description": "Python在數據分析、可視化和機器學習中的應用。",
+                        "url": "https://realpython.com/tutorials/data-science/"
+                    }
+                ]
+            },
+            {
+                "title": "Python Crash Course 書籍",
+                "url": "#",
+                "icon": "fas fa-book",
+                "description": "《Python編程快速上手》是一本廣受好評的Python入門書籍，作者是Eric Matthes。這本書分為兩部分：第一部分介紹Python編程的基本概念，第二部分通過三個項目（遊戲、數據可視化和Web應用）來實踐所學知識。",
+                "subItems": [
+                    {
+                        "title": "基礎概念",
+                        "description": "變量、列表、字典、函數、類等Python基礎知識的講解。",
+                        "url": "https://nostarch.com/pythoncrashcourse2e"
+                    },
+                    {
+                        "title": "外星人入侵遊戲",
+                        "description": "使用Pygame創建一個2D射擊遊戲的完整教程。",
+                        "url": "https://ehmatthes.github.io/pcc_2e/chapters/projects.html#alien-invasion"
+                    },
+                    {
+                        "title": "數據可視化",
+                        "description": "使用matplotlib和Plotly進行數據可視化的實例。",
+                        "url": "https://ehmatthes.github.io/pcc_2e/chapters/projects.html#data-visualization"
+                    }
+                ]
+            },
+            {
+                "title": "PyCharm IDE 使用指南",
+                "url": "https://www.jetbrains.com/pycharm/guide/",
+                "icon": "fas fa-laptop-code",
+                "description": "PyCharm是一款功能強大的Python集成開發環境(IDE)，這個官方指南提供了PyCharm的使用教程、技巧和最佳實踐。通過學習這些內容，可以大幅提高Python開發的效率和代碼質量。",
+                "subItems": [
+                    {
+                        "title": "基本使用",
+                        "description": "PyCharm界面介紹、項目創建、文件管理等基礎功能。",
+                        "url": "https://www.jetbrains.com/pycharm/guide/tutorials/getting-started-pycharm/"
+                    },
+                    {
+                        "title": "代碼編輯技巧",
+                        "description": "代碼補全、重構、導航和搜索等高效編輯功能。",
+                        "url": "https://www.jetbrains.com/pycharm/guide/tutorials/tricks/"
+                    },
+                    {
+                        "title": "調試與測試",
+                        "description": "使用PyCharm進行代碼調試和單元測試的方法。",
+                        "url": "https://www.jetbrains.com/pycharm/guide/tutorials/visual_pytest/"
+                    }
+                ]
+            }
+        ]
+    }
+] 
