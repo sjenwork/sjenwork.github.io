@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link data-rh="true" rel="icon" href="https://avatars.githubusercontent.com/u/67739845?v=4">
+    <title>部落格文章 | 閱讀</title>
+    
+    <!-- CSS樣式表 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/themes.css">
+    <link rel="stylesheet" href="style/blog-reader.css">
+    
+    <!-- 引入 Markdown 解析器和語法高亮 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+</head>
+<body>
+    <div class="page-transition-overlay"></div>
+    
+    <div id="mainContent" class="blog-reader-content">
+        <header class="blog-reader-header">
+            <a href="index.html" class="back-to-home"><i class="fa fa-arrow-left"></i> 回到首頁</a>
+            <h1 id="blog-title">文章載入中...</h1>
+        </header>
+        
+        <div class="container">
+            <div class="blog-content-container">
+                <div class="blog-meta">
+                    <div class="blog-date">
+                        <i class="fa fa-calendar"></i> <span id="blog-date">--</span>
+                    </div>
+                    <div class="blog-tags" id="blog-tags">
+                        <!-- 標籤將在這裡動態生成 -->
+                    </div>
+                </div>
+                
+                <article id="blog-content" class="markdown-body">
+                    <div class="loading-spinner">
+                        <i class="fa fa-spinner fa-spin"></i>
+                        <p>正在載入文章內容...</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2024 孫既仁 個人網站 | 版權所有</p>
+        </footer>
+    </div>
+    
+    <!-- 垂直主題切換器 -->
+    <div class="theme-switcher-vertical">
+        <div class="theme-option active" data-theme="default" title="藍紫主題"></div>
+        <div class="theme-option" data-theme="dark" title="深色主題"></div>
+        <div class="theme-option" data-theme="green" title="綠色主題"></div>
+        <div class="theme-option" data-theme="ocean" title="海洋主題"></div>
+        <div class="theme-option" data-theme="warm" title="暖色主題"></div>
+    </div>
+    
+    <!-- JavaScript 文件 -->
+    <script src="script/themes.js"></script>
+    <script src="script/blog-reader.js"></script>
+</body>
+</html> 

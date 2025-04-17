@@ -1,0 +1,54 @@
+[
+    {
+        "category": "心得",
+        "items": [
+            {
+                "title": "感受 Agent 開發的威力",
+                "date": "2025-03-12",
+                "description": "從使用chatGPT問答，到 Agent 開發，感受 AI 代理開發的威力。",
+                "tags": ["AI", "代理", "開發"],
+                "file_path": "blogs/Insights/ai-dev.md",
+                "cover_image": "blogs/images/agent_coding.png"
+            }
+        ]
+    },
+    {
+        "category": "人工智慧",
+        "items": [
+            {
+                "title": "深度學習入門指南",
+                "date": "2024-02-15",
+                "description": "本文介紹深度學習的基本概念、常用框架和入門級專案，幫助新手快速上手。",
+                "tags": ["深度學習", "AI", "教學"],
+                "file_path": "blogs/ai/deep-learning-guide.md",
+                "cover_image": "https://cdn-icons-png.flaticon.com/512/2103/2103633.png"
+            }
+        ]
+    },
+    {
+        "category": "網頁開發",
+        "items": [
+            {
+                "title": "現代前端開發技巧",
+                "date": "2024-01-22",
+                "description": "分享我在前端開發中使用的高效工具和技巧，幫助你提高開發效率和代碼質量。",
+                "tags": ["前端", "開發工具", "效率提升"],
+                "file_path": "blogs/web-dev/modern-frontend-tips.md",
+                "cover_image": "https://cdn-icons-png.flaticon.com/512/8099/8099237.png"
+            }
+        ]
+    },
+    {
+        "category": "資料科學",
+        "items": [
+            {
+                "title": "資料視覺化入門：從零開始",
+                "date": "2024-03-15",
+                "description": "探索資料視覺化的基礎知識，以及如何使用現代工具將複雜數據轉化為直觀可理解的視覺呈現。",
+                "tags": ["資料視覺化", "D3.js", "Chart.js"],
+                "file_path": "blogs/data-science/data-visualization-basics.md",
+                "cover_image": "https://cdn-icons-png.flaticon.com/512/1875/1875768.png"
+            }
+        ]
+    }
+] 
