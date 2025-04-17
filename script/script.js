@@ -8,9 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.section');
     const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
     
-    // 初始化滾動檢測
-    // initScrollDetection();
-    
     // 確保側邊欄初始狀態為收起
     sidebar.classList.remove('open');
     mainContent.classList.remove('shifted');
@@ -53,7 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.scrollTo({top: 0, behavior: 'smooth'});
                 
                 // 重新初始化滾動檢測（適用於新顯示的部分）
-                initScrollDetection();
+                if (window.initScrollDetection) {
+                    window.initScrollDetection();
+                }
                 
                 // 更新URL中的部分參數，但不刷新頁面
                 updateUrlWithSection(sectionId);
@@ -78,9 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth > 768 && sidebar.classList.contains('open')) {
             mainContent.classList.add('shifted');
         }
-        
-        // 重新初始化滾動檢測
-        initScrollDetection();
     });
     
     // 初始化側邊欄
@@ -201,17 +197,6 @@ function initDefaultSectionSetting() {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // 初始化側邊欄功能
 function initSidebar() {
     const menuToggle = document.getElementById('menuToggle');
@@ -283,10 +268,6 @@ function initSidebar() {
         }
     });
 }
-
-
-
-
 
 // 添加回到頂部按鈕
 function addBackToTopButton() {
