@@ -13,8 +13,8 @@
             {
                 "title": "付費模型會更有自信的告訴你錯誤的答案",
                 "date": "2024-04-18",
-                "description": "付費模型會更有自信的告訴你錯誤的答案",
-                "tags": ["AI", "代理", "開發"],
+                "description": "Anthropic 說如果我們知道 Claude 內部的運作行為，我們我們就不會相信他所說的。",
+                "tags": ["Anthropic", "Unreliable"],
                 "file_path": "blogs/Insights/ai-unreliable.md"
             }
         ]
