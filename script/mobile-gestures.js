@@ -152,7 +152,7 @@ function initMobileGestures() {
     function addGestureTipsButton() {
         // 創建手勢提示按鈕
         const tipsButton = document.createElement('button');
-        tipsButton.className = 'gesture-tips-button';
+        tipsButton.className = 'gesture-tips-button glass-effect';
         tipsButton.innerHTML = '<i class="fa fa-hand-pointer"></i>';
         tipsButton.setAttribute('title', '手勢操作說明');
         document.body.appendChild(tipsButton);

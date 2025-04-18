@@ -272,7 +272,7 @@ function initSidebar() {
 // 添加回到頂部按鈕
 function addBackToTopButton() {
     const button = document.createElement('button');
-    button.className = 'back-to-top';
+    button.className = 'back-to-top glass-effect';
     button.innerHTML = '<i class="fa fa-arrow-up"></i>';
     document.body.appendChild(button);
     

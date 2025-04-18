@@ -4,6 +4,7 @@
     --card-bg: #ffffff;
     --primary-color: #7986cb;
     --primary-color-rgb: 121, 134, 203;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
     --text-color: #333333;
     --hover-color: #9fa8da;
     --shadow-color: rgba(68, 68, 68, 0.15);
@@ -39,6 +40,7 @@
     --card-bg: #1e1e1e;
     --primary-color: #bb86fc;
     --primary-color-rgb: 187, 134, 252;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
     --text-color: #e0e0e0;
     --hover-color: #d7a9ff;
     --shadow-color: rgba(187, 134, 252, 0.25);
@@ -67,6 +69,7 @@
     --card-bg: #ffffff;
     --primary-color: #2e7d32;
     --primary-color-rgb: 46, 125, 50;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
     --text-color: #2e2e2e;
     --hover-color: #43a047;
     --shadow-color: rgba(0, 0, 0, 0.15);
@@ -94,6 +97,7 @@
     --card-bg: #ffffff;
     --primary-color: #0277bd;
     --primary-color-rgb: 2, 119, 189;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
     --text-color: #263238;
     --hover-color: #039be5;
     --shadow-color: rgba(0, 0, 0, 0.15);
@@ -121,6 +125,7 @@
     --card-bg: #ffffff;
     --primary-color: #ff6f00;
     --primary-color-rgb: 255, 111, 0;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
     --text-color: #4e342e;
     --hover-color: #ff8f00;
     --shadow-color: rgba(0, 0, 0, 0.15);
@@ -1182,7 +1187,7 @@ a, button, input, select, textarea {
     right: 30px;
     width: 50px;
     height: 50px;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color-translucent);
     color: white;
     border: none;
     border-radius: 50%;
@@ -1229,11 +1234,11 @@ a, button, input, select, textarea {
 /* 手勢提示按鈕 */
 .gesture-tips-button {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--primary-color);
+    bottom: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: var(--primary-color-translucent);
     color: white;
     border: none;
     border-radius: 50%;
@@ -1241,7 +1246,7 @@ a, button, input, select, textarea {
     display: none; /* 預設隱藏 */
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     cursor: pointer;
     z-index: 99;
     transition: all 0.3s var(--transition-function);
@@ -1256,17 +1261,12 @@ a, button, input, select, textarea {
 @media (max-width: 768px) {
     .gesture-tips-button {
         display: flex; /* 在小屏幕上顯示 */
-        bottom: 20px;
-        left: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1rem;
     }
-    
-    /* 當回到頂部按鈕顯示時，提示按鈕移動位置 */
-    .back-to-top.active ~ .gesture-tips-button {
-        transform: translateY(-65px);
-    }
+}
+
+.glass-effect {
+    backdrop-filter: blur(10px); /* 模糊背景 10 像素 */
+    -webkit-backdrop-filter: blur(10px); /* 兼容 Safari */
 }
 
 /* 手勢提示對話框 */
@@ -1430,21 +1430,6 @@ a, button, input, select, textarea {
 
 
 
-/* 響應式調整 */
-@media (max-width: 768px) {
-    .gesture-tips-button {
-        bottom: 20px;
-        left: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1rem;
-    }
-    
-    /* 當回到頂部按鈕顯示時，提示按鈕移動位置 */
-    .back-to-top.active ~ .gesture-tips-button {
-        transform: translateY(-65px);
-    }
-}
 
 /* AI 實驗室樣式 */
 .playground-container {
