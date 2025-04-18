@@ -9,6 +9,13 @@
                 "tags": ["AI", "代理", "開發"],
                 "file_path": "blogs/Insights/ai-dev.md",
                 "cover_image": "blogs/images/agent_coding.png"
+            },
+            {
+                "title": "付費模型會更有自信的告訴你錯誤的答案",
+                "date": "2024-04-18",
+                "description": "付費模型會更有自信的告訴你錯誤的答案",
+                "tags": ["AI", "代理", "開發"],
+                "file_path": "blogs/Insights/ai-unreliable.md",
             }
         ]
     },
