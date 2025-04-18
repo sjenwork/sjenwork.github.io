@@ -84,18 +84,7 @@
     }
 
     
-    /* 當側邊欄打開時，移動菜單按鈕到右側外側 */
-    #sidebar.open ~ #mainContent #menuToggle {
-        transform: translateX(calc(var(--sidebar-width) + 15px));
-        background-color: var(--primary-color);
-        z-index: 1001; /* 確保按鈕在側邊欄上方 */
-        left: 0;
-    }
-    
-    /* 調整菜單按鈕旋轉方向 */
-    #sidebar.open ~ #mainContent #menuToggle i {
-        transform: rotate(180deg);
-    }    
+
 }    
 
 /* 側邊欄導航細節更新 */
