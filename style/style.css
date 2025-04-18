@@ -1652,56 +1652,69 @@ a, button, input, select, textarea {
 
 .resource-sidebar-header {
     position: relative;
-    padding: 25px 30px;
+    padding: 15px 30px 5px;
     background-color: var(--section-bg);
     border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.close-sidebar {
+.resource-header-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 20px;
+    position: relative;
+    width: 100%;
+    gap: 15px;
+}
+
+/* 資源側邊欄關閉按鈕樣式 */
+.resource-close-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 36px;
-    height: 36px;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
     border: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--text-color);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    z-index: 1003; /* 確保按鈕不被其他元素覆蓋 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.close-sidebar:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.resource-close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
     color: var(--primary-color);
+    transform: rotate(90deg);
 }
 
 .resource-sidebar-title {
-    margin: 0;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--heading-color);
-    flex: 1;
-    padding-right: 40px;
+    margin: 5px 0;
+    padding: 0;
+    line-height: 1.3;
 }
 
 .resource-sidebar-icon {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
+    min-width: 45px; /* 防止圖標縮小 */
     border-radius: 50%;
     background-color: var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.4rem;
-    margin-left: 20px;
+    font-size: 1.2rem;
+    position: relative; /* 改為相對定位 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .resource-sidebar-content {

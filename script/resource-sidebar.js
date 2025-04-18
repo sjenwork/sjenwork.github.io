@@ -1,10 +1,10 @@
 // 初始化資源詳情側邊欄
 function initResourceSidebar() {
-    const closeSidebarBtn = document.getElementById('closeSidebar');
+    const resourceSidebarCloseBtn = document.getElementById('resourceSidebarClose');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     
-    if (closeSidebarBtn) {
-        closeSidebarBtn.addEventListener('click', function() {
+    if (resourceSidebarCloseBtn) {
+        resourceSidebarCloseBtn.addEventListener('click', function() {
             hideResourceSidebar();
         });
     }
