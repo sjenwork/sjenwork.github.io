@@ -260,7 +260,7 @@ header {
 }
 
 /* 添加一個覆蓋層增強對比度 */
-header::before {
+header.header-container::before {
     content: '';
     position: absolute;
     top: 0;
