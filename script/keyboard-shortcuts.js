@@ -6,6 +6,7 @@ function initKeyboardShortcuts() {
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const sections = document.querySelectorAll('.section');
     const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
+    const mobileSidebarOverlay = document.querySelector('.mobile-sidebar-overlay');
     
     // 顯示快捷鍵指南
     createShortcutGuide();
@@ -63,6 +64,13 @@ function initKeyboardShortcuts() {
             // 在大屏幕上恢復主內容區
             if (window.innerWidth > 768) {
                 mainContent.classList.remove('shifted');
+            } else {
+                // 小屏幕下移除覆蓋層
+                if (mobileSidebarOverlay) {
+                    mobileSidebarOverlay.classList.remove('active');
+                }
+                // 恢復背景滾動
+                document.body.classList.remove('sidebar-open');
             }
         } else {
             // 打開側邊欄
@@ -71,6 +79,13 @@ function initKeyboardShortcuts() {
             // 在大屏幕上移動主內容區
             if (window.innerWidth > 768) {
                 mainContent.classList.add('shifted');
+            } else {
+                // 小屏幕下激活覆蓋層
+                if (mobileSidebarOverlay) {
+                    mobileSidebarOverlay.classList.add('active');
+                }
+                // 禁止背景滾動
+                document.body.classList.add('sidebar-open');
             }
         }
     }

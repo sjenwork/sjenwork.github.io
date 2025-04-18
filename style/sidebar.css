@@ -83,8 +83,31 @@
         transform: translateX(var(--sidebar-width));
     }
 
+    /* 小屏幕下的毛玻璃遮罩層 */
+    .mobile-sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
     
-
+    .mobile-sidebar-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* 當側邊欄打開時禁止body滾動的樣式 */
+    body.sidebar-open {
+        overflow: hidden;
+    }
 }    
 
 /* 側邊欄導航細節更新 */

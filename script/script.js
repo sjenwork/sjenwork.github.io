@@ -204,32 +204,73 @@ function initSidebar() {
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
     const sidebarItems = document.querySelectorAll('.sidebar-item');
+    const mobileSidebarOverlay = document.querySelector('.mobile-sidebar-overlay');
     
     // 菜單按鈕點擊事件 - 切換側邊欄開關
     menuToggle.addEventListener('click', function(e) {
         // 防止事件冒泡到mainContent
         e.stopPropagation();
         
-        sidebar.classList.toggle('open');
-        
-        // 在大屏幕上移動主內容區
-        if (window.innerWidth > 768) {
-            mainContent.classList.toggle('shifted');
-        }
+        toggleSidebar();
     });
     
-    // 側邊欄關閉按鈕點擊事件 (保留作為備用)
+    // 側邊欄關閉按鈕點擊事件
     if (sidebarClose) {
         sidebarClose.addEventListener('click', function(e) {
             e.stopPropagation();
             
-            sidebar.classList.remove('open');
-            
-            // 在大屏幕上恢復主內容區
-            if (window.innerWidth > 768) {
-                mainContent.classList.remove('shifted');
-            }
+            closeSidebar();
         });
+    }
+    
+    // 點擊毛玻璃覆蓋層關閉側邊欄
+    if (mobileSidebarOverlay) {
+        mobileSidebarOverlay.addEventListener('click', function() {
+            closeSidebar();
+        });
+    }
+    
+    // 側邊欄切換函數
+    function toggleSidebar() {
+        if (sidebar.classList.contains('open')) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    }
+    
+    // 打開側邊欄函數
+    function openSidebar() {
+        sidebar.classList.add('open');
+        
+        // 在大屏幕上移動主內容區
+        if (window.innerWidth > 768) {
+            mainContent.classList.add('shifted');
+        } else {
+            // 小屏幕下激活覆蓋層
+            if (mobileSidebarOverlay) {
+                mobileSidebarOverlay.classList.add('active');
+            }
+            // 禁止背景滾動
+            document.body.classList.add('sidebar-open');
+        }
+    }
+    
+    // 關閉側邊欄函數
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        
+        // 在大屏幕上恢復主內容區
+        if (window.innerWidth > 768) {
+            mainContent.classList.remove('shifted');
+        } else {
+            // 小屏幕下移除覆蓋層
+            if (mobileSidebarOverlay) {
+                mobileSidebarOverlay.classList.remove('active');
+            }
+            // 恢復背景滾動
+            document.body.classList.remove('sidebar-open');
+        }
     }
     
     // 點擊側邊欄項目
@@ -259,7 +300,7 @@ function initSidebar() {
             
             // 在移動設備上關閉側邊欄
             if (window.innerWidth <= 768) {
-                sidebar.classList.remove('open');
+                closeSidebar();
             }
         });
     });
@@ -267,7 +308,28 @@ function initSidebar() {
     // 點擊主內容區域時在移動設備上關閉側邊欄
     mainContent.addEventListener('click', function() {
         if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
-            sidebar.classList.remove('open');
+            closeSidebar();
+        }
+    });
+    
+    // 監聽窗口大小變化，自動調整側邊欄狀態
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            // 在大屏幕上，如果側邊欄打開，確保主內容移動
+            if (sidebar.classList.contains('open')) {
+                mainContent.classList.add('shifted');
+            }
+            // 移除移動設備相關樣式
+            mobileSidebarOverlay?.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        } else {
+            // 在小屏幕上，主內容不移動
+            mainContent.classList.remove('shifted');
+            // 如果側邊欄打開，確保覆蓋層和body樣式正確
+            if (sidebar.classList.contains('open')) {
+                mobileSidebarOverlay?.classList.add('active');
+                document.body.classList.add('sidebar-open');
+            }
         }
     });
 }
