@@ -17,8 +17,10 @@
 這個外掛可以讓你把網頁上的內容剪下來，並且存到 Obsidian 中，無敵超級好用！！
 
 
-最後， cursor 搭配 Obsidian ，
+cursor 搭配 Obsidian ，
 [Cursor 搭配 Obsidian ，打造你的專屬筆記軟體](https://www.youtube.com/watch?v=m78tOser7JM&t=2s)
 
+
+最後，MCP 加持的 Obsidian： [MCP-Obsidian（GitHub）](https://www.threads.net/@kordan.ou/post/DGmfKEMxLsr/才過沒多久現在竟然已經可以直接在-obsidian-裡和-claude-對話了現在透過-mcp-obsidian-這個插件已經能夠讓-claude-ai-進駐筆?hl=zh-tw)
 
 細節未來再慢慢補～
