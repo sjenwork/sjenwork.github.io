@@ -23,4 +23,6 @@ cursor 搭配 Obsidian ，
 
 最後，MCP 加持的 Obsidian： [MCP-Obsidian（GitHub）](https://www.threads.net/@kordan.ou/post/DGmfKEMxLsr/才過沒多久現在竟然已經可以直接在-obsidian-裡和-claude-對話了現在透過-mcp-obsidian-這個插件已經能夠讓-claude-ai-進駐筆?hl=zh-tw)
 
+[MCP-Obsidian](https://mcp.so/server/mcp-obsidian)
+
 細節未來再慢慢補～
