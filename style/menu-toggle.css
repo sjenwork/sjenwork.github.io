@@ -1,18 +1,17 @@
 /* 菜單按鈕 - 調整為header內部絕對定位 */
 #menuToggle {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: var(--sidebar-bg);
-    color: white;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 1001; /* 確保按鈕在側邊欄上方 */
-    box-shadow: 0 4px 10px var(--shadow-color);
+    z-index: 1000; /* 確保按鈕在header遮罩層上方 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,54 +19,52 @@
 }
 
 #menuToggle:hover {
-    background-color: var(--sidebar-hover);
-    transform: rotate(5deg) scale(1.05);
-    box-shadow: 0 6px 15px var(--shadow-color);
+    transform: scale(1.1);
+    color: var(--hover-color);
 }
 
-#menuToggle i {
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* 移除菜單按鈕動畫和旋轉效果 */
 
-#menuToggle.open i {
-    transform: rotate(90deg);
-}
-
-
-/* 菜單按鈕動畫 */
-#menuToggle {
-    /* ... existing code ... */
+/* 新增關閉按鈕樣式 */
+#sidebarClose {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all var(--transition-speed) var(--transition-function);
 }
 
-#menuToggle.open {
-    /* ... existing code ... */
-    transition: all var(--transition-speed) var(--transition-function);
+#sidebarClose:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
 }
 
 /* 響應式處理 */
 @media (max-width: 768px) {
-    /* 在側邊欄打開時移動菜單按鈕 */
+    /* 簡化菜單按鈕樣式 */
     #menuToggle {
-        top: 15px;
-        left: 15px;
-        width: 45px;
-        height: 45px;
-        z-index: 1001; /* 確保按鈕在側邊欄上方 */
-        transition: transform var(--transition-speed) var(--transition-function),
-                    background-color var(--transition-speed) var(--transition-function),
-                    box-shadow var(--transition-speed) var(--transition-function);
-    }
-    /* 當側邊欄打開時，移動菜單按鈕到右側外側 */
-    #sidebar.open ~ #mainContent #menuToggle {
-        transform: translateX(calc(var(--sidebar-width) + 15px));
-        background-color: var(--primary-color);
-        z-index: 1001; /* 確保按鈕在側邊欄上方 */
-        left: 0;
+        top: 6px;
+        right: 6px;
+        width: 40px;
+        height: 40px;
     }
     
-    /* 調整菜單按鈕旋轉方向 */
-    #sidebar.open ~ #mainContent #menuToggle i {
-        transform: rotate(180deg);
-    }        
+    /* 移除側邊欄打開時的位置移動效果 */
+    
+    #sidebarClose {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
 }

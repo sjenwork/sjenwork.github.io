@@ -108,8 +108,6 @@ function initMobileGestures() {
                 // 雙指向右滑動 - 打開側邊欄
                 if (multiSwipeDistance > 0 && !sidebar.classList.contains('open')) {
                     sidebar.classList.add('open');
-                    menuToggle.classList.add('open');
-                    menuToggle.querySelector('i').className = 'fa fa-times';
                     
                     // 在大屏幕上移動主內容區
                     if (window.innerWidth > 768) {
@@ -124,8 +122,11 @@ function initMobileGestures() {
                 // 雙指向左滑動 - 關閉側邊欄
                 else if (multiSwipeDistance < 0 && sidebar.classList.contains('open')) {
                     sidebar.classList.remove('open');
-                    menuToggle.classList.remove('open');
-                    menuToggle.querySelector('i').className = 'fa fa-bars';
+                    
+                    // 在大屏幕上恢復主內容區
+                    if (window.innerWidth > 768) {
+                        mainContent.classList.remove('shifted');
+                    }
                     
                     // 添加振動反饋
                     if (window.navigator && window.navigator.vibrate) {

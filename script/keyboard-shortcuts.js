@@ -1,6 +1,7 @@
 function initKeyboardShortcuts() {
     const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menuToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
     const mainContent = document.getElementById('mainContent');
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const sections = document.querySelectorAll('.section');
@@ -55,18 +56,22 @@ function initKeyboardShortcuts() {
     
     // 切換側邊欄
     function toggleSidebar() {
-        sidebar.classList.toggle('open');
-        menuToggle.classList.toggle('open');
-        
         if (sidebar.classList.contains('open')) {
-            menuToggle.querySelector('i').className = 'fa fa-times';
+            // 關閉側邊欄
+            sidebar.classList.remove('open');
+            
+            // 在大屏幕上恢復主內容區
+            if (window.innerWidth > 768) {
+                mainContent.classList.remove('shifted');
+            }
         } else {
-            menuToggle.querySelector('i').className = 'fa fa-bars';
-        }
-        
-        // 在大屏幕上移動主內容區
-        if (window.innerWidth > 768) {
-            mainContent.classList.toggle('shifted');
+            // 打開側邊欄
+            sidebar.classList.add('open');
+            
+            // 在大屏幕上移動主內容區
+            if (window.innerWidth > 768) {
+                mainContent.classList.add('shifted');
+            }
         }
     }
     

@@ -200,32 +200,37 @@ function initDefaultSectionSetting() {
 // 初始化側邊欄功能
 function initSidebar() {
     const menuToggle = document.getElementById('menuToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     
-    // 菜單按鈕點擊事件
+    // 菜單按鈕點擊事件 - 切換側邊欄開關
     menuToggle.addEventListener('click', function(e) {
         // 防止事件冒泡到mainContent
         e.stopPropagation();
         
         sidebar.classList.toggle('open');
-        this.classList.toggle('open');
         
         // 在大屏幕上移動主內容區
         if (window.innerWidth > 768) {
             mainContent.classList.toggle('shifted');
         }
-        
-        // 根據側邊欄狀態修改按鈕圖標
-        if(sidebar.classList.contains('open')) {
-            // 如果側邊欄打開，改變圖標為關閉圖標
-            this.querySelector('i').className = 'fa fa-times';
-        } else {
-            // 如果側邊欄關閉，改變圖標為菜單圖標
-            this.querySelector('i').className = 'fa fa-bars';
-        }
     });
+    
+    // 側邊欄關閉按鈕點擊事件 (保留作為備用)
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            sidebar.classList.remove('open');
+            
+            // 在大屏幕上恢復主內容區
+            if (window.innerWidth > 768) {
+                mainContent.classList.remove('shifted');
+            }
+        });
+    }
     
     // 點擊側邊欄項目
     sidebarItems.forEach(item => {
@@ -255,7 +260,6 @@ function initSidebar() {
             // 在移動設備上關閉側邊欄
             if (window.innerWidth <= 768) {
                 sidebar.classList.remove('open');
-                menuToggle.classList.remove('open');
             }
         });
     });
@@ -264,7 +268,6 @@ function initSidebar() {
     mainContent.addEventListener('click', function() {
         if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
             sidebar.classList.remove('open');
-            menuToggle.classList.remove('open');
         }
     });
 }

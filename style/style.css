@@ -165,9 +165,6 @@ body {
     animation: fadeIn 0.6s ease-in-out;
 }
 
-
-
-
 /* 用戶資訊區塊樣式 */
 .user-profile {
     display: flex;
@@ -179,6 +176,7 @@ body {
     border-bottom: 1px solid var(--border-light);
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 0 0 0 0; /* 移除圓角 */
+    position: relative; /* 添加相對定位，為關閉按鈕定位提供基準 */
 }
 
 .user-avatar-container {
@@ -218,7 +216,6 @@ body {
     color: white;
 }
 
-
 /* 主內容區 - 優化過渡效果 */
 #mainContent {
     padding: 0;
@@ -252,13 +249,36 @@ header {
     background-color: rgba(52, 73, 94, 0.7); /* 深灰色背景，半透明 */
 }
 
+.banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* 添加一個覆蓋層增強對比度 */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05); /* 半透明黑色遮罩 */
+    z-index: 2;
+    backdrop-filter: blur(1px); /* 整體模糊效果 */
+}
+
 .header-content {
     position: relative;
-    z-index: 2;
+    z-index: 3; /* 增加z-index，確保在覆蓋層上方 */
     padding: 2rem;
     width: 100%;
     background-color: var(--header-bg);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px); /* 增強模糊效果 */
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -274,17 +294,6 @@ h1 {
     opacity: 0.95;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Banner圖片樣式 */
-.banner-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
 }
 
 .container {
@@ -629,8 +638,6 @@ footer p {
 }
 
 @media (max-width: 768px) {
-
-    
     #mainContent {
         width: 100% !important; /* 強制在小屏幕上始終是100%寬 */
         padding: 0;
@@ -710,10 +717,6 @@ body::before {
     border-bottom: 1px solid var(--icon-border);
 }
 
-
-
-
-
 /* 添加漂亮的滾動效果 */
 html {
     scroll-behavior: smooth;
@@ -766,8 +769,6 @@ html {
 .blog-card:hover .card-preview::before {
     transform: translateX(100%);
 }
-
-
 
 /* 按鈕懸停特效增強 */
 .card-link {
@@ -866,8 +867,6 @@ html {
     visibility: visible;
 }
 
-
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -940,10 +939,6 @@ html {
     transition-delay: 0.5s;
 }
 
-
-
-
-
 /* 主內容區域移動動畫 */
 #mainContent {
     /* ... existing code ... */
@@ -954,8 +949,6 @@ html {
     /* ... existing code ... */
     transition: transform var(--transition-speed) var(--transition-function);
 }
-
-
 
 /* 頁面過渡效果 */
 .page-transition-overlay {
@@ -1016,8 +1009,6 @@ html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s var(--transition-function);
 }
-
-
 
 /* 基本動畫效果 */
 a, button, input, select, textarea {
@@ -1375,9 +1366,6 @@ a, button, input, select, textarea {
     50% { transform: translateY(4px); }
     100% { transform: translateY(-4px); }
 }
-
-
-
 
 /* AI 實驗室樣式 */
 .playground-container {

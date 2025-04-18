@@ -110,13 +110,18 @@
     border-bottom-color: var(--hover-color);
 }
 
-[data-theme="dark"] #menuToggle {
-    background-color: var(--dark-accent);
-}
 
 [data-theme="dark"] #menuToggle:hover {
-    background-color: var(--primary-color);
-    box-shadow: 0 0 15px var(--shadow-color);
+    color: var(--hover-color);
+}
+
+/* 深色主題關閉按鈕樣式 (保留) */
+[data-theme="dark"] #sidebarClose {
+    background-color: rgba(187, 134, 252, 0.2);
+}
+
+[data-theme="dark"] #sidebarClose:hover {
+    background-color: rgba(187, 134, 252, 0.3);
 }
 
 [data-theme="dark"] .user-avatar {
@@ -176,4 +181,19 @@
     /* ... existing code ... */
     transform: scale(1.1);
     transition: all 0.3s var(--transition-function);
+}
+
+
+[data-theme="green"] #menuToggle:hover {
+    color: var(--hover-color);
+}
+
+
+[data-theme="ocean"] #menuToggle:hover {
+    color: var(--hover-color);
+}
+
+
+[data-theme="warm"] #menuToggle:hover {
+    color: var(--hover-color);
 }
