@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     left: calc(-1 * var(--sidebar-width));
-    background-color: var(--sidebar-bg);
+    background: linear-gradient(to bottom, var(--sidebar-bg), var(--sidebar-hover)); /* 默認主題漸層 */
     overflow-x: hidden;
     transition: transform var(--transition-speed) var(--transition-function);
     box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
@@ -16,6 +16,23 @@
     padding: 20px 0;
     border-radius: 0; /* 確保側邊欄沒有圓角 */
     touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
+}
+
+/* 不同主題的側邊欄漸層背景 */
+[data-theme="dark"] #sidebar {
+    background: linear-gradient(135deg, #1a1a1a, #3a3052, #1a1a1a);
+}
+
+[data-theme="green"] #sidebar {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32, #1b5e20);
+}
+
+[data-theme="ocean"] #sidebar {
+    background: linear-gradient(135deg, #01579b, #0288d1, #01579b);
+}
+
+[data-theme="warm"] #sidebar {
+    background: linear-gradient(135deg, #e65100, #f57c00, #e65100);
 }
 
 #sidebar.open {
@@ -45,6 +62,7 @@
     margin-bottom: 5px;
     position: relative;
     overflow: hidden;
+    border-radius: 6px; /* 添加圓角 */
 }
 
 .sidebar-item:after {
@@ -112,8 +130,35 @@
 
 /* 側邊欄導航細節更新 */
 .sidebar-item.active {
-    background-color: #546e7a;
-    border-left-color: #7986cb;
+    background-color: rgba(255, 255, 255, 0.1); /* 更輕微的高亮效果 */
+    border-left-color: var(--primary-color); /* 使用主題主色作為邊框 */
+}
+
+/* 不同主題的側邊欄選項高亮樣式 */
+[data-theme="dark"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(187, 134, 252, 0.1);
+}
+
+[data-theme="green"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(46, 125, 50, 0.1);
+}
+
+[data-theme="ocean"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(2, 119, 189, 0.1);
+}
+
+[data-theme="warm"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(255, 111, 0, 0.1);
+}
+
+/* 側邊欄項目懸停效果 */
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.08); /* 更明顯的懸停效果 */
+    transform: translateX(3px); /* 輕微位移效果 */
 }
 
 /* 優化側邊欄菜單項展開效果 */
@@ -157,4 +202,16 @@
 #sidebar {
     /* 已有樣式 */
     touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
+}
+
+/* 用戶資訊區塊背景樣式 */
+.user-profile {
+    background: rgba(0, 0, 0, 0.1); /* 半透明黑色背景，與漸層搭配 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 主題切換器樣式調整 */
+.theme-switcher {
+    backdrop-filter: blur(5px); /* 模糊背景效果 */
+    -webkit-backdrop-filter: blur(5px);
 }
