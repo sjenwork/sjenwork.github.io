@@ -24,5 +24,4 @@ window.gtag = gtag;  // 確保gtag函數在全局範圍可用
     gtag('config', 'G-D5BW7CYDM0');
     
     // 輸出日誌
-    console.log('Google Analytics 已初始化');
 })(); 

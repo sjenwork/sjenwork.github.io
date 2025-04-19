@@ -1,6 +1,5 @@
 // 頁面載入後執行
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('【APP】DOMContentLoaded 事件觸發');
     
     // 獲取DOM元素
     const sidebar = document.getElementById('sidebar');
@@ -93,19 +92,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始化側邊欄 (這裡特別檢查)
     if (typeof window.sidebarController === 'undefined' || window.sidebarController === null) {
-        console.log('【APP】sidebarController未定義，嘗試調用sidebar-menu.js中的initSidebar');
         if (typeof window.initSidebar === 'function') {
             window.initSidebar();
         } else {
             console.error('【APP】找不到全局initSidebar函數，可能sidebar-menu.js未正確載入');
         }
     } else {
-        console.log('【APP】sidebarController已存在，無需再次初始化');
     }
     
-    // 添加回到頂部按鈕
-    addBackToTopButton();
-    
+
     // 初始化手機手勢
     initMobileGestures();
     
@@ -217,24 +212,3 @@ function initDefaultSectionSetting() {
     });
 }
 
-// 添加回到頂部按鈕
-function addBackToTopButton() {
-    const button = document.createElement('button');
-    button.className = 'back-to-top glass-effect';
-    button.innerHTML = '<i class="fa fa-arrow-up"></i>';
-    document.body.appendChild(button);
-    
-    // 滾動時顯示/隱藏按鈕
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
-    });
-    
-    // 點擊回到頂部
-    button.addEventListener('click', function() {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    });
-}

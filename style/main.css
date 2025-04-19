@@ -35,6 +35,7 @@
 @import 'ui/gesture-tips.css';
 @import 'ui/back-to-top.css';
 @import 'ui/construction-notice.css';
+@import 'ui/theme-switcher.css';
 
 /* 功能 */
 @import 'features/ai-playground.css';

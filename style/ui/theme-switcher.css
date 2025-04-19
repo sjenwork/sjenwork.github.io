@@ -1,0 +1,80 @@
+/* 主題切換器樣式 */
+
+/* 漂浮主題切換器 */
+.theme-switcher {
+    position: fixed;
+    bottom: 30px;
+    right: 90px;
+    background-color: var(--panel-bg);
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: flex;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.theme-switcher:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.theme-switcher .theme-option {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.theme-switcher .theme-option:hover {
+    transform: scale(1.2);
+}
+
+.theme-switcher .theme-option.active {
+    border: 3px solid var(--accent-color);
+}
+
+/* 默認主題選項 */
+.theme-switcher .theme-option[data-theme="default"] {
+    background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+}
+
+/* 深色主題選項 */
+.theme-switcher .theme-option[data-theme="dark"] {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+/* 綠色主題選項 */
+.theme-switcher .theme-option[data-theme="green"] {
+    background: linear-gradient(135deg, #22c55e 0%, #166534 100%);
+}
+
+/* 海洋主題選項 */
+.theme-switcher .theme-option[data-theme="ocean"] {
+    background: linear-gradient(135deg, #38bdf8 0%, #0c4a6e 100%);
+}
+
+/* 暖色主題選項 */
+.theme-switcher .theme-option[data-theme="warm"] {
+    background: linear-gradient(135deg, #f97316 0%, #9a3412 100%);
+}
+
+
+
+/* 適配不同設備大小 */
+@media (max-width: 768px) {
+    .theme-switcher {
+        bottom: 20px;
+        right: 20px;
+        padding: 8px;
+    }
+    
+    .theme-switcher .theme-option {
+        width: 20px;
+        height: 20px;
+        margin: 0 4px;
+    }
+} 

@@ -135,13 +135,7 @@
 }
 
 /* 主題切換器樣式 */
-.theme-switcher {
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 20px;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
+
 
 .theme-option {
     width: 25px;

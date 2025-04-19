@@ -19,9 +19,7 @@ function initializeFirebase() {
         try {
             if (!firebase.apps.length) {
                 firebase.initializeApp(window.firebaseConfig);
-                console.log("Firebase已由firebase-init.js初始化");
             } else {
-                console.log("Firebase已經被初始化過");
             }
             return true;
         } catch (error) {

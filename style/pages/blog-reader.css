@@ -11,7 +11,7 @@
 
 /* 閱讀頁面標題 */
 .blog-reader-header {
-    background-color: var(--primary-color);
+    background: linear-gradient(to bottom, var(--sidebar-bg), var(--sidebar-hover)); /* 默認主題漸層 */
     color: white;
     padding: 2rem 1.5rem;
     text-align: center;
@@ -22,6 +22,24 @@
     width: 100%;
     box-sizing: border-box;
     height: auto;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 不同主題的頁頭漸層背景 */
+[data-theme="dark"] .blog-reader-header {
+    background: linear-gradient(135deg, #1a1a1a, #3a3052, #1a1a1a);
+}
+
+[data-theme="green"] .blog-reader-header {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32, #1b5e20);
+}
+
+[data-theme="ocean"] .blog-reader-header {
+    background: linear-gradient(135deg, #01579b, #0288d1, #01579b);
+}
+
+[data-theme="warm"] .blog-reader-header {
+    background: linear-gradient(135deg, #e65100, #f57c00, #e65100);
 }
 
 .blog-reader-header h1 {
@@ -43,10 +61,15 @@
     align-items: center;
     transition: all 0.3s ease;
     z-index: 1001;
+    opacity: 0.85;
+    padding: 5px 10px;
+    border-radius: 4px;
 }
 
 .back-to-home:hover {
-    color: var(--accent-color);
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 1;
 }
 
 .back-to-home i {
@@ -56,7 +79,7 @@
 /* 滾動時的固定頂部樣式 */
 .blog-reader-header.sticky {
     padding: 0.5rem 1.5rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
     min-height: 0;
 }
 
@@ -357,6 +380,7 @@
     
     .blog-reader-header.sticky {
         padding: 0.5rem 1rem;
+        background-position: center; /* 確保漸變在小屏幕上居中顯示 */
     }
     
     .blog-reader-header.sticky h1 {
@@ -382,113 +406,7 @@
     }
 }
 
-/* 垂直主題切換器 */
-.theme-switcher-vertical {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px 5px;
-    border-radius: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
 
-.theme-switcher-vertical:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    background-color: rgba(255, 255, 255, 0.95);
-}
-
-.theme-switcher-vertical .theme-option {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin: 5px 0;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    border: 2px solid transparent;
-    box-sizing: content-box;
-}
-
-.theme-switcher-vertical .theme-option:hover {
-    transform: scale(1.1);
-}
-
-.theme-switcher-vertical .theme-option.active {
-    border-color: white;
-    box-shadow: 0 0 0 2px var(--primary-color);
-}
-
-/* 主題顏色 */
-.theme-switcher-vertical .theme-option[data-theme="default"] {
-    background-color: #7986cb;
-}
-
-.theme-switcher-vertical .theme-option[data-theme="dark"] {
-    background-color: #bb86fc;
-}
-
-.theme-switcher-vertical .theme-option[data-theme="green"] {
-    background-color: #2e7d32;
-}
-
-.theme-switcher-vertical .theme-option[data-theme="ocean"] {
-    background-color: #0277bd;
-}
-
-.theme-switcher-vertical .theme-option[data-theme="warm"] {
-    background-color: #ff6f00;
-}
-
-/* 主題提示文字 */
-.theme-switcher-vertical .theme-option::after {
-    content: attr(title);
-    position: absolute;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-.theme-switcher-vertical .theme-option:hover::after {
-    opacity: 1;
-    visibility: visible;
-    right: 35px;
-}
-
-/* 移動設備上的主題切換器 */
-@media (max-width: 768px) {
-    .theme-switcher-vertical {
-        right: 10px;
-        padding: 8px 4px;
-        border-radius: 20px;
-    }
-
-    .theme-switcher-vertical .theme-option {
-        width: 20px;
-        height: 20px;
-        margin: 4px 0;
-    }
-
-    .theme-switcher-vertical .theme-option::after {
-        display: none;
-    }
-}
 
 /* 綠色主題特定樣式 */
 [data-theme="green"] .blog-content-container {

@@ -21,7 +21,6 @@ function loadBlogPosts() {
             if (!snapshot.exists()) {
                 throw new Error('無法載入部落格文章數據');
             }
-            console.log("從Firebase獲取的部落格數據:", snapshot.val());
             displayBlogPosts(snapshot.val());
         })
         .catch(error => {
@@ -40,9 +39,6 @@ function initializeFirebase() {
     if (typeof window.firebaseHelper !== 'undefined') {
         // 使用共享的初始化函數
         const result = window.firebaseHelper.initialize();
-        if (result) {
-            console.log("Firebase已通過共享初始化模組初始化");
-        }
         return result;
     } else {
         // 嘗試檢查Firebase是否已經在其他地方初始化

@@ -16,8 +16,7 @@
     
     <!-- CSS樣式表 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/themes.css">
+    <link rel="stylesheet" href="style/main.css">
     
     <style>
         .admin-container {
@@ -156,6 +155,8 @@
     </style>
 </head>
 <body>
+    <div class="page-transition-overlay"></div>
+    
     <div id="loginContainer" class="login-container">
         <h2>部落格管理後台</h2>
         <p>請登入以繼續</p>
@@ -701,5 +702,9 @@
             return `${year}-${month}-${day}`;
         }
     </script>
+    
+    <!-- 主題切換器腳本 -->
+    <script src="script/ui/theme-switcher.js"></script>
+    <script src="script/ui/back-to-top.js"></script>
 </body>
 </html> 
