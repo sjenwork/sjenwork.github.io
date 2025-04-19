@@ -3,8 +3,13 @@
  * 處理側邊欄的顯示、隱藏和導航功能
  */
 
+// 將側邊欄控制器暴露為全局變數
+window.sidebarController = null;
+
 // 初始化側邊欄功能
 function initSidebar() {
+    console.log('【側邊欄】initSidebar() 函數開始執行');
+    
     const menuToggle = document.getElementById('menuToggle');
     const sidebarClose = document.getElementById('sidebarClose');
     const sidebar = document.getElementById('sidebar');
@@ -12,17 +17,41 @@ function initSidebar() {
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const mobileSidebarOverlay = document.querySelector('.mobile-sidebar-overlay');
     
+    // 檢查DOM元素是否存在
+    if (!menuToggle) {
+        console.error('【側邊欄】找不到menuToggle按鈕元素！');
+    }
+    if (!sidebar) {
+        console.error('【側邊欄】找不到sidebar元素！');
+        return; // 無法繼續初始化
+    }
+    
+    console.log('【側邊欄】所有需要的DOM元素已找到，準備添加事件監聽器');
+    
     // 菜單按鈕點擊事件 - 切換側邊欄開關
-    menuToggle.addEventListener('click', function(e) {
+    if (menuToggle) {
+        // 移除舊的事件監聽器（如果有的話）
+        menuToggle.removeEventListener('click', menuToggleHandler);
+        
+        // 添加新的事件監聽器
+        menuToggle.addEventListener('click', menuToggleHandler);
+        console.log('【側邊欄】menuToggle按鈕已添加點擊事件監聽器');
+    }
+    
+    // 菜單按鈕點擊處理函數
+    function menuToggleHandler(e) {
+        console.log('【側邊欄】menuToggle按鈕被點擊');
         // 防止事件冒泡到mainContent
         e.stopPropagation();
         
+        // 切換側邊欄
         toggleSidebar();
-    });
+    }
     
     // 側邊欄關閉按鈕點擊事件
     if (sidebarClose) {
         sidebarClose.addEventListener('click', function(e) {
+            console.log('【側邊欄】關閉按鈕被點擊');
             e.stopPropagation();
             
             closeSidebar();
@@ -32,21 +61,26 @@ function initSidebar() {
     // 點擊毛玻璃覆蓋層關閉側邊欄
     if (mobileSidebarOverlay) {
         mobileSidebarOverlay.addEventListener('click', function() {
+            console.log('【側邊欄】覆蓋層被點擊');
             closeSidebar();
         });
     }
     
     // 側邊欄切換函數
     function toggleSidebar() {
+        console.log('【側邊欄】toggleSidebar 函數被調用');
         if (sidebar.classList.contains('open')) {
+            console.log('【側邊欄】側邊欄目前是開啟狀態，即將關閉');
             closeSidebar();
         } else {
+            console.log('【側邊欄】側邊欄目前是關閉狀態，即將開啟');
             openSidebar();
         }
     }
     
     // 打開側邊欄函數
     function openSidebar() {
+        console.log('【側邊欄】開啟側邊欄');
         sidebar.classList.add('open');
         
         // 在大屏幕上移動主內容區
@@ -64,6 +98,7 @@ function initSidebar() {
     
     // 關閉側邊欄函數
     function closeSidebar() {
+        console.log('【側邊欄】關閉側邊欄');
         sidebar.classList.remove('open');
         
         // 在大屏幕上恢復主內容區
@@ -150,9 +185,13 @@ function initSidebar() {
         close: closeSidebar,
         toggle: toggleSidebar
     };
+    
+    console.log('【側邊欄】初始化完成，已創建全局sidebarController對象');
+    return window.sidebarController;
 }
 
 // 在DOM加載完成後初始化側邊欄功能
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('【側邊欄】DOMContentLoaded 事件觸發，開始初始化側邊欄');
     initSidebar();
 }); 

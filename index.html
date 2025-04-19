@@ -297,8 +297,15 @@
     <!-- 遮罩層 -->
     <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
+    <!-- 腳本加載順序非常重要！ -->
+    <!-- 側邊欄腳本必須優先載入 -->
+    <script src="script/sidebar/main-menu/sidebar-menu.js"></script>
+    
     <!-- 核心腳本 -->
     <script src="script/core/app.js"></script>
+    
+    <!-- 資源側邊欄 -->
+    <script src="script/sidebar/resource/resource-sidebar.js"></script>
 
     <!-- 互動腳本 -->
     <script src="script/interaction/input/mobile-gestures.js"></script>
@@ -307,10 +314,6 @@
     <!-- 分析腳本 -->
     <script src="script/analytics/analytics.js"></script>
     <script src="script/analytics/user-behavior.js"></script>
-    
-    <!-- 側邊欄腳本 -->
-    <script src="script/sidebar/resource/resource-sidebar.js"></script>
-    <script src="script/sidebar/main-menu/sidebar-menu.js"></script>
 
     <!-- UI腳本 -->
     <script src="script/ui/scroll-effects/scroll-detection.js"></script>

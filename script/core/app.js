@@ -1,5 +1,7 @@
 // 頁面載入後執行
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('【APP】DOMContentLoaded 事件觸發');
+    
     // 獲取DOM元素
     const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menuToggle');
@@ -39,8 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 在小螢幕上點擊後關閉sidebar
                 if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('open');
-                    menuToggle.classList.remove('open');
+                    // 使用全局sidebarController關閉側邊欄
+                    if (window.sidebarController && typeof window.sidebarController.close === 'function') {
+                        window.sidebarController.close();
+                    } else {
+                        // 向後兼容處理
+                        sidebar.classList.remove('open');
+                    }
                 }
                 
                 // 隱藏頁面切換效果
@@ -66,8 +73,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 在小屏幕下點擊主內容區域時關閉側邊欄
     mainContent.addEventListener('click', function() {
         if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
-            sidebar.classList.remove('open');
-            menuToggle.classList.remove('open');
+            // 使用全局sidebarController關閉側邊欄
+            if (window.sidebarController && typeof window.sidebarController.close === 'function') {
+                window.sidebarController.close();
+            } else {
+                // 向後兼容處理
+                sidebar.classList.remove('open');
+            }
         }
     });
     
@@ -79,9 +91,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // 初始化側邊欄
-    initSidebar();
-    
+    // 初始化側邊欄 (這裡特別檢查)
+    if (typeof window.sidebarController === 'undefined' || window.sidebarController === null) {
+        console.log('【APP】sidebarController未定義，嘗試調用sidebar-menu.js中的initSidebar');
+        if (typeof window.initSidebar === 'function') {
+            window.initSidebar();
+        } else {
+            console.error('【APP】找不到全局initSidebar函數，可能sidebar-menu.js未正確載入');
+        }
+    } else {
+        console.log('【APP】sidebarController已存在，無需再次初始化');
+    }
     
     // 添加回到頂部按鈕
     addBackToTopButton();
@@ -195,16 +215,6 @@ function initDefaultSectionSetting() {
             alert('已清除默認頁面設置，網站將使用標準首頁。');
         }
     });
-}
-
-// 初始化側邊欄功能
-/* 
- * 注意：側邊欄功能已移動到 script/sidebar/main-menu/sidebar-menu.js
- * 此處僅保留呼叫以保持向後兼容性
- */
-function initSidebar() {
-    // 已移至獨立檔案
-    console.log("initSidebar() 已移至 sidebar-menu.js");
 }
 
 // 添加回到頂部按鈕

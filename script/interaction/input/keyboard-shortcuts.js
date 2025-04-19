@@ -21,7 +21,12 @@ function initKeyboardShortcuts() {
         // ESC 鍵：切換側邊欄
         if (e.key === 'Escape') {
             e.preventDefault();
-            toggleSidebar();
+            // 使用全局sidebarController來切換側邊欄
+            if (window.sidebarController && typeof window.sidebarController.toggle === 'function') {
+                window.sidebarController.toggle();
+            } else {
+                console.warn('警告：找不到sidebarController，無法切換側邊欄');
+            }
         }
         
         // Alt + 數字鍵：切換到對應的部分
@@ -54,41 +59,6 @@ function initKeyboardShortcuts() {
             }
         }
     });
-    
-    // 切換側邊欄
-    function toggleSidebar() {
-        if (sidebar.classList.contains('open')) {
-            // 關閉側邊欄
-            sidebar.classList.remove('open');
-            
-            // 在大屏幕上恢復主內容區
-            if (window.innerWidth > 768) {
-                mainContent.classList.remove('shifted');
-            } else {
-                // 小屏幕下移除覆蓋層
-                if (mobileSidebarOverlay) {
-                    mobileSidebarOverlay.classList.remove('active');
-                }
-                // 恢復背景滾動
-                document.body.classList.remove('sidebar-open');
-            }
-        } else {
-            // 打開側邊欄
-            sidebar.classList.add('open');
-            
-            // 在大屏幕上移動主內容區
-            if (window.innerWidth > 768) {
-                mainContent.classList.add('shifted');
-            } else {
-                // 小屏幕下激活覆蓋層
-                if (mobileSidebarOverlay) {
-                    mobileSidebarOverlay.classList.add('active');
-                }
-                // 禁止背景滾動
-                document.body.classList.add('sidebar-open');
-            }
-        }
-    }
     
     // 導航到對應部分
     function navigateToSection(item) {
