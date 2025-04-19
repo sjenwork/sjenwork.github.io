@@ -1,0 +1,268 @@
+/* 側邊欄樣式 */
+
+#sidebar {
+    height: 100%;
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: calc(-1 * var(--sidebar-width));
+    background: linear-gradient(to bottom, var(--sidebar-bg), var(--sidebar-hover)); /* 默認主題漸層 */
+    overflow-x: hidden;
+    transition: transform var(--transition-speed) var(--transition-function);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000; /* 提高z-index確保側邊欄在按鈕上方 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-radius: 0; /* 確保側邊欄沒有圓角 */
+    touch-action: pan-y; /* 允許垂直滑動，但優化水平滑動 */
+}
+
+/* 不同主題的側邊欄漸層背景 */
+[data-theme="dark"] #sidebar {
+    background: linear-gradient(135deg, #1a1a1a, #3a3052, #1a1a1a);
+}
+
+[data-theme="green"] #sidebar {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32, #1b5e20);
+}
+
+[data-theme="ocean"] #sidebar {
+    background: linear-gradient(135deg, #01579b, #0288d1, #01579b);
+}
+
+[data-theme="warm"] #sidebar {
+    background: linear-gradient(135deg, #e65100, #f57c00, #e65100);
+}
+
+#sidebar.open {
+    transform: translateX(var(--sidebar-width)); /* 使用transform顯示菜單 */
+    transition: transform var(--transition-speed) var(--transition-function);
+}
+
+/* 兼容舊的.active類 */
+#sidebar.active {
+    transform: translateX(var(--sidebar-width));
+}
+
+/* 側邊欄菜單樣式 */
+.sidebar-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* 側邊欄菜單項 - 增加延遲加載效果 */
+.sidebar-item {
+    width: 100%;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s var(--transition-function);
+    border-left: 3px solid transparent;
+    white-space: nowrap;
+    margin-bottom: 5px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px; /* 添加圓角 */
+    font-weight: 500;
+}
+
+.sidebar-item:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.sidebar-item:hover:after {
+    width: 100%;
+}
+
+.sidebar-item.active:after {
+    width: 100%;
+}
+
+.sidebar-item i {
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.08); /* 更明顯的懸停效果 */
+    transform: translateX(3px); /* 輕微位移效果 */
+    color: white;
+}
+
+/* 側邊欄導航細節更新 */
+.sidebar-item.active {
+    background-color: rgba(255, 255, 255, 0.1); /* 更輕微的高亮效果 */
+    border-left-color: var(--primary-color); /* 使用主題主色作為邊框 */
+}
+
+/* 不同主題的側邊欄選項高亮樣式 */
+[data-theme="dark"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(187, 134, 252, 0.1);
+}
+
+[data-theme="green"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(46, 125, 50, 0.1);
+}
+
+[data-theme="ocean"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(2, 119, 189, 0.1);
+}
+
+[data-theme="warm"] .sidebar-item.active {
+    border-left-color: var(--primary-color);
+    background-color: rgba(255, 111, 0, 0.1);
+}
+
+/* 主題切換器樣式 */
+.theme-switcher {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-option {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 0 2px transparent;
+}
+
+.theme-option:hover {
+    transform: scale(1.1);
+}
+
+.theme-option.active {
+    box-shadow: 0 0 0 2px white;
+    transform: scale(1.1);
+}
+
+/* 主題顏色 */
+.theme-option[data-theme="default"] {
+    background-color: #7986cb;
+}
+
+.theme-option[data-theme="dark"] {
+    background-color: #bb86fc;
+}
+
+.theme-option[data-theme="green"] {
+    background-color: #2e7d32;
+}
+
+.theme-option[data-theme="ocean"] {
+    background-color: #0277bd;
+}
+
+.theme-option[data-theme="warm"] {
+    background-color: #ff6f00;
+}
+
+/* 側邊欄關閉按鈕 */
+#sidebarClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+#sidebarClose:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* 手機側邊欄覆蓋層 */
+.mobile-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 用戶資訊區塊背景樣式 */
+.user-profile {
+    background: rgba(0, 0, 0, 0.1); /* 半透明黑色背景，與漸層搭配 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 優化側邊欄菜單項展開效果 */
+#sidebar.open .sidebar-item {
+    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+#sidebar.open .sidebar-item:nth-child(1) { animation-delay: 0.1s; }
+#sidebar.open .sidebar-item:nth-child(2) { animation-delay: 0.15s; }
+#sidebar.open .sidebar-item:nth-child(3) { animation-delay: 0.2s; }
+#sidebar.open .sidebar-item:nth-child(4) { animation-delay: 0.25s; }
+#sidebar.open .sidebar-item:nth-child(5) { animation-delay: 0.3s; }
+#sidebar.open .sidebar-item:nth-child(6) { animation-delay: 0.35s; }
+#sidebar.open .sidebar-item:nth-child(7) { animation-delay: 0.4s; }
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: var(--sidebar-width);
+        left: calc(-1 * var(--sidebar-width));
+        z-index: 1000; /* 確保側邊欄在按鈕上方 */
+    }
+    
+    #sidebar.open {
+        transform: translateX(var(--sidebar-width));
+    }
+    
+    #sidebar.active {
+        transform: translateX(var(--sidebar-width));
+    }
+
+    /* 當側邊欄打開時禁止body滾動的樣式 */
+    body.sidebar-open {
+        overflow: hidden;
+    }
+} 

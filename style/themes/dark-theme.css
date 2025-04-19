@@ -1,0 +1,28 @@
+/* 深色主題 */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --primary-color: #bb86fc;
+    --primary-color-rgb: 187, 134, 252;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
+    --text-color: #e0e0e0;
+    --hover-color: #d7a9ff;
+    --shadow-color: rgba(187, 134, 252, 0.25);
+    --sidebar-bg: #1a1a1a;
+    --sidebar-hover: #3a3052;
+    --notification-color: #ff79c6;
+    --section-bg: #2d2d2d;
+    --header-overlay: rgba(18, 18, 18, 0.85);
+    
+    /* 深色主題特有變量 */
+    --border-color: rgba(187, 134, 252, 0.3);
+    --border-light: rgba(187, 134, 252, 0.1);
+    --heading-color: var(--primary-color);
+    --dark-accent: #a869ff;
+    --grid-color: rgba(187, 134, 252, 0.05);
+    --avatar-border: var(--dark-accent);
+    --header-bg: rgba(98, 0, 238, 0.2);
+    --card-border-bottom: var(--dark-accent);
+    --icon-bg: rgba(187, 134, 252, 0.1);
+    --icon-border: rgba(187, 134, 252, 0.2);
+} 

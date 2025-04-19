@@ -1,0 +1,80 @@
+/* 個人資料樣式 */
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.profile-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    border: 4px solid var(--primary-color);
+    object-fit: cover;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* 用戶資訊區塊樣式 */
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0 25px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-bottom: 1px solid var(--border-light);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0 0 0 0; /* 移除圓角 */
+    position: relative; /* 添加相對定位，為關閉按鈕定位提供基準 */
+}
+
+.user-avatar-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--avatar-border);
+    object-fit: cover;
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--notification-color);
+    color: white;
+    font-size: 0.8rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.user-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .profile {
+        flex-direction: column;
+    }
+} 

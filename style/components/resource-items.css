@@ -1,0 +1,41 @@
+/* 資源項目樣式 */
+
+.resource-item {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 3px solid var(--primary-color);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    border-bottom: 2px solid var(--card-border-bottom);
+}
+
+.resource-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s var(--transition-function);
+}
+
+.resource-item li {
+    margin-bottom: 8px;
+    list-style-type: none;
+}
+
+.resource-item a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.resource-item a:hover {
+    transform: translateX(3px);
+}
+
+.resource-item i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+    color: var(--primary-color);
+}

@@ -1,0 +1,27 @@
+/* 綠色主題 */
+[data-theme="green"] {
+    --bg-color: #f0f7f4;
+    --card-bg: #ffffff;
+    --primary-color: #2e7d32;
+    --primary-color-rgb: 46, 125, 50;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
+    --text-color: #2e2e2e;
+    --hover-color: #43a047;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --sidebar-bg: #1b5e20;
+    --sidebar-hover: #2e7d32;
+    --notification-color: #f44336;
+    --section-bg: #e8f5e9;
+    --header-overlay: rgba(27, 94, 32, 0.8);
+    
+    /* 綠色主題特有變量 */
+    --border-color: rgba(46, 125, 50, 0.2);
+    --border-light: rgba(255, 255, 255, 0.2);
+    --heading-color: var(--primary-color);
+    --grid-color: rgba(27, 94, 32, 0.05);
+    --avatar-border: var(--primary-color);
+    --header-bg: rgba(27, 94, 32, 0.4);
+    --card-border-bottom: var(--primary-color);
+    --icon-bg: rgba(46, 125, 50, 0.1);
+    --icon-border: rgba(46, 125, 50, 0.2);
+} 

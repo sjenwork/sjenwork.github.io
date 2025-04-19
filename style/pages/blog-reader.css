@@ -260,26 +260,26 @@
 }
 
 .table-of-contents h3 {
+    font-size: 1.2rem;
     margin-top: 0;
-    font-size: 1.3rem;
     margin-bottom: 1rem;
     color: var(--primary-color);
 }
 
 .table-of-contents ul {
-    margin: 0;
-    padding: 0;
     list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .table-of-contents li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .table-of-contents a {
     color: #333;
     text-decoration: none;
-    transition: color 0.2s;
+    font-size: 0.95rem;
 }
 
 .table-of-contents a:hover {
@@ -287,91 +287,94 @@
 }
 
 .toc-h2 {
-    font-weight: bold;
+    margin-left: 0;
 }
 
 .toc-h3 {
-    padding-left: 1.5rem;
+    margin-left: 1.2rem;
     font-size: 0.9rem;
 }
 
 .toc-h4 {
-    padding-left: 3rem;
+    margin-left: 2.4rem;
     font-size: 0.85rem;
 }
 
-/* 載入動畫 */
+/* 載入中動畫 */
 .loading-spinner {
     text-align: center;
-    padding: 2rem;
-    color: #777;
+    padding: 3rem;
+    color: #666;
 }
 
 .loading-spinner i {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: var(--primary-color);
 }
 
-/* 錯誤信息 */
+/* 錯誤信息樣式 */
 .error-message {
     text-align: center;
-    padding: 2rem;
-    color: #d9534f;
+    padding: 3rem;
+    color: #d32f2f;
 }
 
 .error-message i {
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
 }
 
 .return-button {
     display: inline-block;
-    margin-top: 1rem;
-    padding: 0.7rem 1.5rem;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
     background-color: var(--primary-color);
     color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    font-size: 1rem;
 }
 
 .return-button:hover {
     background-color: var(--primary-color-dark);
 }
 
-/* 響應式設計 */
+/* 移動設備響應式樣式 */
 @media (max-width: 768px) {
     .blog-reader-header {
-        padding: 1.2rem 1rem;
-        text-align: left;
+        padding: 1.5rem 1rem;
+        text-align: center;
     }
     
     .blog-reader-header h1 {
-        font-size: 1.5rem;
-        margin-left: 0;
-        padding-left: 2.5rem; /* 為返回按鈕留出空間 */
+        font-size: 1.6rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
     
     .blog-reader-header.sticky {
-        padding: 0.4rem 1rem;
+        padding: 0.5rem 1rem;
     }
     
     .blog-reader-header.sticky h1 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .back-to-home {
-        position: absolute;
         left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        margin: 0;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+    }
+    
+    .back-to-home i {
+        margin-right: 0.3rem;
     }
     
     .blog-content-container {
         padding: 1.5rem;
-        margin-top: 1rem;
+        margin: 1rem 0.5rem;
     }
     
     .table-of-contents {
@@ -379,218 +382,219 @@
     }
 }
 
-/* 垂直主題切換器樣式 */
+/* 垂直主題切換器 */
 .theme-switcher-vertical {
     position: fixed;
-    left: 20px;
-    bottom: 20px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 10px 8px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 5px;
     border-radius: 30px;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
-    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
 }
 
 .theme-switcher-vertical:hover {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 .theme-switcher-vertical .theme-option {
-    width: 26px;
-    height: 26px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
-    margin: 6px 0;
+    margin: 5px 0;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 2px solid transparent;
     position: relative;
+    border: 2px solid transparent;
+    box-sizing: content-box;
 }
 
 .theme-switcher-vertical .theme-option:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .theme-switcher-vertical .theme-option.active {
-    border-color: #fff;
+    border-color: white;
     box-shadow: 0 0 0 2px var(--primary-color);
 }
 
-/* 主題顏色設定 */
+/* 主題顏色 */
 .theme-switcher-vertical .theme-option[data-theme="default"] {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    background-color: #7986cb;
 }
 
 .theme-switcher-vertical .theme-option[data-theme="dark"] {
-    background: linear-gradient(135deg, #222 0%, #444 100%);
+    background-color: #bb86fc;
 }
 
 .theme-switcher-vertical .theme-option[data-theme="green"] {
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    background-color: #2e7d32;
 }
 
 .theme-switcher-vertical .theme-option[data-theme="ocean"] {
-    background: linear-gradient(135deg, #1cb5e0 0%, #000851 100%);
+    background-color: #0277bd;
 }
 
 .theme-switcher-vertical .theme-option[data-theme="warm"] {
-    background: linear-gradient(135deg, #f83600 0%, #f9d423 100%);
+    background-color: #ff6f00;
 }
 
-/* 主題切換器工具提示 */
+/* 主題提示文字 */
 .theme-switcher-vertical .theme-option::after {
     content: attr(title);
     position: absolute;
-    left: 40px;
+    right: 40px;
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 12px;
+    white-space: nowrap;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
     pointer-events: none;
-    white-space: nowrap;
 }
 
 .theme-switcher-vertical .theme-option:hover::after {
     opacity: 1;
     visibility: visible;
-    left: 45px;
+    right: 35px;
 }
 
-/* 響應式調整 */
+/* 移動設備上的主題切換器 */
 @media (max-width: 768px) {
     .theme-switcher-vertical {
-        left: 10px;
-        bottom: 10px;
-        padding: 8px 6px;
+        right: 10px;
+        padding: 8px 4px;
+        border-radius: 20px;
     }
-    
+
     .theme-switcher-vertical .theme-option {
-        width: 22px;
-        height: 22px;
-        margin: 5px 0;
+        width: 20px;
+        height: 20px;
+        margin: 4px 0;
     }
-    
+
     .theme-switcher-vertical .theme-option::after {
-        display: none; /* 在移動設備上隱藏工具提示 */
+        display: none;
     }
 }
 
-/* 綠色主題樣式 */
+/* 綠色主題特定樣式 */
 [data-theme="green"] .blog-content-container {
-    background-color: #f5fff5;
-    box-shadow: 0 4px 6px rgba(0, 150, 0, 0.1);
+    border-top: 3px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.1);
 }
 
 [data-theme="green"] .markdown-body h2 {
-    color: #0d904f;
+    color: var(--primary-color);
 }
 
 [data-theme="green"] .markdown-body h3 {
-    color: #097040;
+    color: var(--primary-color-dark);
 }
 
 [data-theme="green"] .markdown-body a {
-    color: #0d904f;
+    color: var(--primary-color);
 }
 
 [data-theme="green"] .markdown-body blockquote {
-    border-left-color: #0d904f;
+    border-left-color: var(--primary-color);
 }
 
 [data-theme="green"] .table-of-contents {
-    background-color: #e8f5e9;
+    border-top: 2px solid var(--primary-color);
 }
 
 [data-theme="green"] .table-of-contents h3 {
-    color: #0d904f;
+    color: var(--primary-color);
 }
 
 [data-theme="green"] .table-of-contents a:hover {
-    color: #0d904f;
+    color: var(--primary-color);
 }
 
-/* 海洋主題樣式 */
+/* 海洋主題特定樣式 */
 [data-theme="ocean"] .blog-content-container {
-    background-color: #f0f8ff;
-    box-shadow: 0 4px 6px rgba(0, 100, 150, 0.1);
+    border-top: 3px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(2, 119, 189, 0.1);
 }
 
 [data-theme="ocean"] .markdown-body h2 {
-    color: #0277bd;
+    color: var(--primary-color);
 }
 
 [data-theme="ocean"] .markdown-body h3 {
-    color: #01579b;
+    color: var(--primary-color-dark);
 }
 
 [data-theme="ocean"] .markdown-body a {
-    color: #0277bd;
+    color: var(--primary-color);
 }
 
 [data-theme="ocean"] .markdown-body blockquote {
-    border-left-color: #0277bd;
+    border-left-color: var(--primary-color);
 }
 
 [data-theme="ocean"] .table-of-contents {
-    background-color: #e1f5fe;
+    border-top: 2px solid var(--primary-color);
 }
 
 [data-theme="ocean"] .table-of-contents h3 {
-    color: #0277bd;
+    color: var(--primary-color);
 }
 
 [data-theme="ocean"] .table-of-contents a:hover {
-    color: #0277bd;
+    color: var(--primary-color);
 }
 
-/* 暖色主題樣式 */
+/* 暖色主題特定樣式 */
 [data-theme="warm"] .blog-content-container {
-    background-color: #fffaf0;
-    box-shadow: 0 4px 6px rgba(150, 100, 0, 0.1);
+    border-top: 3px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(255, 111, 0, 0.1);
 }
 
 [data-theme="warm"] .markdown-body h2 {
-    color: #e65100;
+    color: var(--primary-color);
 }
 
 [data-theme="warm"] .markdown-body h3 {
-    color: #bf360c;
+    color: var(--primary-color-dark);
 }
 
 [data-theme="warm"] .markdown-body a {
-    color: #e65100;
+    color: var(--primary-color);
 }
 
 [data-theme="warm"] .markdown-body blockquote {
-    border-left-color: #e65100;
+    border-left-color: var(--primary-color);
 }
 
 [data-theme="warm"] .table-of-contents {
-    background-color: #fff3e0;
+    border-top: 2px solid var(--primary-color);
 }
 
 [data-theme="warm"] .table-of-contents h3 {
-    color: #e65100;
+    color: var(--primary-color);
 }
 
 [data-theme="warm"] .table-of-contents a:hover {
-    color: #e65100;
+    color: var(--primary-color);
 }
 
-/* 深色主題下的元素樣式補充 */
+/* 深色主題額外調整 */
 [data-theme="dark"] .blog-meta {
-    border-bottom-color: #444;
+    border-bottom-color: #333;
 }
 
 [data-theme="dark"] .blog-date {
@@ -598,14 +602,13 @@
 }
 
 [data-theme="dark"] .blog-tag {
-    background-color: #333;
-    color: #ddd;
+    background-color: rgba(187, 134, 252, 0.2);
+    color: #bb86fc;
 }
 
 [data-theme="dark"] .markdown-body img {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     border: 1px solid #444;
-    filter: brightness(0.9);
-    background-color: #7b4bb6;
 }
 
 [data-theme="dark"] .loading-spinner {
@@ -613,9 +616,9 @@
 }
 
 [data-theme="dark"] .error-message {
-    color: #ff6b6b;
+    color: #f44336;
 }
 
 [data-theme="dark"] .table-of-contents h3 {
-    color: #64b5f6;
+    color: #bb86fc;
 } 

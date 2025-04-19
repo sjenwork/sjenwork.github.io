@@ -1,0 +1,104 @@
+/* 快捷鍵指南樣式 */
+
+.shortcut-guide {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 300px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s var(--transition-function);
+    overflow: hidden;
+    border-left: 4px solid var(--primary-color);
+}
+
+.shortcut-guide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.guide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--section-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.guide-header h3 {
+    margin: 0;
+    color: var(--heading-color);
+    font-size: 1.2rem;
+}
+
+.guide-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s var(--transition-function);
+}
+
+.guide-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.guide-content {
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.shortcut-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.key {
+    background-color: var(--section-bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-right: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 80px;
+    text-align: center;
+}
+
+.description {
+    flex: 1;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .shortcut-guide {
+        width: 90%;
+        max-width: 300px;
+    }
+} 

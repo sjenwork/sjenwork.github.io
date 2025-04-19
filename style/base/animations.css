@@ -1,0 +1,111 @@
+/* 動畫樣式 */
+
+/* 淡入動畫 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 淡入上升動畫 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 滑動動畫 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 手勢提示動畫 */
+@keyframes swipeRight {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(-5px); }
+}
+
+@keyframes swipeLeft {
+    0% { transform: translateX(5px); }
+    50% { transform: translateX(-5px); }
+    100% { transform: translateX(5px); }
+}
+
+@keyframes swipeExchange {
+    0% { transform: translateX(-5px); }
+    33% { transform: translateX(5px); }
+    66% { transform: translateX(-5px); }
+    100% { transform: translateX(-5px); }
+}
+
+@keyframes upDownAnimation {
+    0% { transform: translateY(-4px); }
+    50% { transform: translateY(4px); }
+    100% { transform: translateY(-4px); }
+}
+
+/* 淡入元素效果 */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--transition-function), 
+                transform 0.8s var(--transition-function);
+}
+
+.fade-in-element.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 卡片的出現順序延遲 */
+.slide-card:nth-child(1),
+.project-card:nth-child(1),
+.blog-card:nth-child(1),
+.skill-item:nth-child(1),
+.resource-item:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.slide-card:nth-child(2),
+.project-card:nth-child(2),
+.blog-card:nth-child(2),
+.skill-item:nth-child(2),
+.resource-item:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.slide-card:nth-child(3),
+.project-card:nth-child(3),
+.blog-card:nth-child(3),
+.skill-item:nth-child(3),
+.resource-item:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.slide-card:nth-child(4),
+.project-card:nth-child(4),
+.blog-card:nth-child(4),
+.skill-item:nth-child(4),
+.resource-item:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.slide-card:nth-child(n+5),
+.project-card:nth-child(n+5),
+.blog-card:nth-child(n+5),
+.skill-item:nth-child(n+5),
+.resource-item:nth-child(n+5) {
+    transition-delay: 0.5s;
+} 

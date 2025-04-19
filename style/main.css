@@ -1,0 +1,45 @@
+/* main.css - 主要樣式文件，導入所有其他CSS組件 */
+
+/* 基礎樣式 */
+@import 'base/reset.css';
+@import 'base/typography.css';
+@import 'base/animations.css';
+
+/* 主題變數和主題 */
+@import 'themes/variables.css';
+@import 'themes/default-theme.css';
+@import 'themes/dark-theme.css';
+@import 'themes/green-theme.css';
+@import 'themes/ocean-theme.css';
+@import 'themes/warm-theme.css';
+
+/* 布局元素 */
+@import 'layout/grid.css';
+@import 'layout/container.css';
+@import 'layout/header.css';
+@import 'layout/footer.css';
+@import 'layout/responsive.css';
+
+/* 組件 */
+@import 'components/cards.css';
+@import 'components/buttons.css';
+@import 'components/profile.css';
+@import 'components/skills.css';
+@import 'components/resource-items.css';
+@import 'components/sidebar.css';
+@import 'components/menu-toggle.css';
+
+/* UI元素 */
+@import 'ui/dialog.css';
+@import 'ui/shortcut-guide.css';
+@import 'ui/gesture-tips.css';
+@import 'ui/back-to-top.css';
+@import 'ui/construction-notice.css';
+
+/* 功能 */
+@import 'features/ai-playground.css';
+@import 'features/chat-bot.css';
+@import 'features/resource-sidebar.css';
+
+/* 頁面特定樣式 */
+@import 'pages/blog-reader.css'; 

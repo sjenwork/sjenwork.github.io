@@ -1,0 +1,36 @@
+/* 共用變數 */
+:root {
+    /* 默認主題變量 (藍紫色主題) */
+    --bg-color: #f7f5f3;
+    --card-bg: #ffffff;
+    --primary-color: #7986cb;
+    --primary-color-rgb: 121, 134, 203;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
+    --text-color: #333333;
+    --hover-color: #9fa8da;
+    --shadow-color: rgba(68, 68, 68, 0.15);
+    --sidebar-width: 280px;
+    --sidebar-bg: #37474f;
+    --sidebar-hover: #546e7a;
+    --notification-color: #ef5350;
+    --section-bg: #f1f3f7;
+    --header-overlay: rgba(55, 71, 79, 0.7);
+    
+    /* 透明度變量 */
+    --trans-light: 0.1;
+    --trans-medium: 0.2;
+    --trans-dark: 0.3;
+    
+    /* 輔助顏色變量 */
+    --border-color: rgba(121, 134, 203, 0.15);
+    --border-light: rgba(255, 255, 255, 0.2);
+    --heading-color: var(--sidebar-bg);
+    --grid-color: rgba(55, 71, 79, 0.03);
+    --avatar-border: var(--primary-color);
+    --header-bg: rgba(55, 71, 79, 0.6);
+    --card-border-bottom: var(--primary-color);
+    --icon-bg: #f5f7fc;
+    --icon-border: #dde3f0;
+    --transition-speed: 0.3s;
+    --transition-function: cubic-bezier(0.4, 0, 0.2, 1);
+} 

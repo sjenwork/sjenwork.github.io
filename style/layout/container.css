@@ -1,0 +1,77 @@
+/* 容器樣式 */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 2rem 2rem 2rem;
+    background-color: transparent; /* 確保容器背景透明 */
+}
+
+/* 分頁切換效果 */
+.section {
+    display: none;
+    background-color: var(--section-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    border-left: 4px solid var(--primary-color);
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden;
+    transition: opacity 0.5s var(--transition-function), 
+                transform 0.5s var(--transition-function),
+                visibility 0s 0.5s;
+}
+
+.section.active {
+    display: block;
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition: opacity 0.5s var(--transition-function), 
+                transform 0.5s var(--transition-function),
+                visibility 0s 0s;
+}
+
+/* 主內容區 */
+#mainContent {
+    padding: 0;
+    transition: transform var(--transition-speed) var(--transition-function);
+    position: relative;
+    width: 100%;
+    margin-left: 0;
+    background-color: var(--bg-color);
+}
+
+#mainContent.shifted {
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+    transition: transform var(--transition-speed) var(--transition-function);
+}
+
+@media (max-width: 992px) {
+    .container {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #mainContent {
+        width: 100% !important; /* 強制在小屏幕上始終是100%寬 */
+        padding: 0;
+        margin-left: 0 !important; /* 強制在小屏幕上沒有左邊距 */
+    }
+    
+    #mainContent.shifted {
+        transform: translateX(0); /* 手機版不移動內容 */
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    
+    .container {
+        padding: 0 1rem 1rem 1rem; /* 小屏幕上減少邊界距離 */
+    }
+} 

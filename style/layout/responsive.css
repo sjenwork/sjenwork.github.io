@@ -1,0 +1,113 @@
+/* 響應式布局樣式 */
+
+@media (max-width: 1200px) {
+    .slides-grid, .projects-grid, .blog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
+    }
+}
+
+@media (max-width: 992px) {
+    .slides-grid, .projects-grid, .blog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 280px));
+    }
+    
+    .container {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #mainContent {
+        width: 100% !important; /* 強制在小屏幕上始終是100%寬 */
+        padding: 0;
+        margin-left: 0 !important; /* 強制在小屏幕上沒有左邊距 */
+    }
+    
+    #mainContent.shifted {
+        transform: translateX(0); /* 手機版不移動內容 */
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    
+    header {
+        height: 200px; /* 移動裝置上縮小header高度 */
+        margin-bottom: 2rem;
+        padding: 0;
+    }
+    
+    .header-content {
+        padding-top: 0; /* 移除頂部填充 */
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .slides-grid, .projects-grid, .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile {
+        flex-direction: column;
+    }
+    
+    .container {
+        padding: 0 1rem 1rem 1rem; /* 小屏幕上減少邊界距離 */
+    }
+    
+    .slide-card, .project-card, .blog-card {
+        max-width: 100%;
+    }
+    
+    footer {
+        padding: 1.5rem 0;
+    }
+    
+    footer p {
+        padding: 0 1rem;
+    }
+    
+    .playground-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .playground-card {
+        margin-bottom: 20px;
+    }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .shortcut-guide {
+        width: 90%;
+        max-width: 300px;
+    }
+    
+    .gesture-tips-button {
+        display: flex; /* 在小屏幕上顯示 */
+    }
+}
+
+@media (max-width: 576px) {
+    .resource-sidebar {
+        width: 100vw;
+        right: -100vw;
+    }
+    
+    .resource-sidebar-header {
+        padding: 20px;
+    }
+    
+    .resource-sidebar-content {
+        padding: 20px;
+    }
+}

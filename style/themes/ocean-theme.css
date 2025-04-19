@@ -1,0 +1,27 @@
+/* 海洋主題 */
+[data-theme="ocean"] {
+    --bg-color: #e3f2fd;
+    --card-bg: #ffffff;
+    --primary-color: #0277bd;
+    --primary-color-rgb: 2, 119, 189;  /* 添加RGB值，用於rgba()函數 */
+    --primary-color-translucent: rgba(var(--primary-color-rgb), 0.5);
+    --text-color: #263238;
+    --hover-color: #039be5;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --sidebar-bg: #01579b;
+    --sidebar-hover: #0288d1;
+    --notification-color: #ff5722;
+    --section-bg: #bbdefb;
+    --header-overlay: rgba(1, 87, 155, 0.8);
+    
+    /* 海洋主題特有變量 */
+    --border-color: rgba(2, 119, 189, 0.2);
+    --border-light: rgba(255, 255, 255, 0.2);
+    --heading-color: var(--primary-color);
+    --grid-color: rgba(1, 87, 155, 0.05);
+    --avatar-border: var(--primary-color);
+    --header-bg: rgba(1, 87, 155, 0.4);
+    --card-border-bottom: var(--primary-color);
+    --icon-bg: rgba(2, 119, 189, 0.1);
+    --icon-border: rgba(2, 119, 189, 0.2);
+} 

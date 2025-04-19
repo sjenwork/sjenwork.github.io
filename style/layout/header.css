@@ -1,0 +1,83 @@
+/* 頁頭樣式 */
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    margin-top: 0; /* 移除頂部間距 */
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0; /* 移除圓角 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    height: 300px; /* 固定header高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(52, 73, 94, 0.7); /* 深灰色背景，半透明 */
+}
+
+.banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* 添加一個覆蓋層增強對比度 */
+header.header-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05); /* 半透明黑色遮罩 */
+    z-index: 2;
+    backdrop-filter: blur(1px); /* 整體模糊效果 */
+}
+
+.header-content {
+    position: relative;
+    z-index: 3; /* 增加z-index，確保在覆蓋層上方 */
+    padding: 2rem;
+    width: 100%;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(4px); /* 增強模糊效果 */
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 頁面過渡效果覆蓋層 */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.page-transition-overlay.active {
+    opacity: 0.8;
+    visibility: visible;
+}
+
+@media (max-width: 768px) {
+    header {
+        height: 200px; /* 移動裝置上縮小header高度 */
+        margin-bottom: 2rem;
+        padding: 0;
+    }
+    
+    .header-content {
+        padding-top: 0; /* 移除頂部填充 */
+    }
+} 
