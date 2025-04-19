@@ -7,6 +7,7 @@ function initKeyboardShortcuts() {
     const sections = document.querySelectorAll('.section');
     const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
     const mobileSidebarOverlay = document.querySelector('.mobile-sidebar-overlay');
+    const resourceSidebar = document.getElementById('resourceSidebar');
     
     // 顯示快捷鍵指南
     createShortcutGuide();
@@ -18,8 +19,15 @@ function initKeyboardShortcuts() {
             return;
         }
         
-        // ESC 鍵：切換側邊欄
-        if (e.key === 'Escape') {
+        // SPACE 鍵：切換側邊欄
+        if (e.key === ' ') {
+            // 檢查resourceSidebar是否處於active狀態
+            if (resourceSidebar && resourceSidebar.classList.contains('active')) {
+                // 如果resourceSidebar處於active狀態，則不執行側邊欄切換
+                console.log('【鍵盤快捷鍵】resourceSidebar處於active狀態，不執行側邊欄切換');
+                return;
+            }
+            
             e.preventDefault();
             // 使用全局sidebarController來切換側邊欄
             if (window.sidebarController && typeof window.sidebarController.toggle === 'function') {
@@ -111,7 +119,7 @@ function initKeyboardShortcuts() {
             </div>
             <div class="guide-content">
                 <div class="shortcut-item">
-                    <span class="key">ESC</span>
+                    <span class="key">SPACE</span>
                     <span class="description">切換側邊欄</span>
                 </div>
                 <div class="shortcut-item">
