@@ -1,3 +1,8 @@
+/**
+ * 資源詳情側邊欄
+ * 用於顯示資源詳細信息的彈出側邊欄
+ */
+
 // 初始化資源詳情側邊欄
 function initResourceSidebar() {
     const resourceSidebarCloseBtn = document.getElementById('resourceSidebarClose');

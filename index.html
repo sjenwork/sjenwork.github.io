@@ -7,7 +7,7 @@
     <title>個人網站 | 首頁</title>
     
     <!-- 核心腳本優先載入 -->
-    <script src="script/ga-init.js"></script>
+    <script src="script/analytics/ga-init.js"></script>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -15,7 +15,7 @@
     
     <!-- Firebase配置和初始化 -->
     <script src="config/firebase-config.js"></script>
-    <script src="script/firebase-init.js"></script>
+    <script src="script/firebase/firebase-init.js"></script>
     
     <!-- CSS樣式表 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -302,12 +302,13 @@
     <script src="script/playground.js"></script>
     <script src="script/script.js"></script>
     <script src="script/construction.js"></script>
-    <script src="script/visitor-counter.js"></script>
-    <script src="script/analytics.js"></script>
-    <script src="script/user-behavior.js"></script>
-    <script src="script/data-loaded.js"></script>
-    <script src="script/resource-sidebar.js"></script>
+    <script src="script/firebase/visitor-counter.js"></script>
+    <script src="script/analytics/analytics.js"></script>
+    <script src="script/analytics/user-behavior.js"></script>
+    <script src="script/data-loaders/data-loaded.js"></script>
+    <script src="script/sidebar/resource/resource-sidebar.js"></script>
+    <script src="script/sidebar/main-menu/sidebar-menu.js"></script>
     <script src="script/themes.js"></script>
-    <script src="script/blog-loader-firebase.js"></script>
+    <script src="script/firebase/blog-loader-firebase.js"></script>
 </body>
 </html> 
