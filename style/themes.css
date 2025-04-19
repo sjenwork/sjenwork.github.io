@@ -1,32 +1,10 @@
-@media (max-width: 768px) {
-    .theme-switcher {
-        width: 85%; /* 在小螢幕上稍微寬一點 */
-        padding: 6px; /* 更小的內邊距 */
-        margin-bottom: 15px; /* 更小的底部間距 */
-    }
-    
-    .theme-option {
-        width: 22px; /* 更小的主題選項 */
-        height: 22px; /* 更小的主題選項 */
-        margin: 0 3px; /* 更小的間距 */
-    }    
-}
 
 /* 主題切換器樣式 - 調整為側邊欄底部 */
 .theme-switcher {
-    position: relative; /* 改為相對定位 */
     margin-top: auto; /* 推至sidebar底部 */
     margin-bottom: 20px; /* 底部間距 */
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.1); /* 半透明背景，更協調 */
-    border-radius: 20px; /* 更小的圓角，更協調 */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    padding: 8px; /* 更小的內邊距 */
     display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-    justify-content: center; /* 居中顯示 */
-    width: 75%; /* 調整寬度稍微小一點 */
 }
 
 .theme-option {
@@ -47,7 +25,7 @@
     border-color: white; /* 使用白色邊框，更協調 */
     border-width: 2px; /* 細一點的邊框 */
     transform: scale(1.15);
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* 柔和的發光效果 */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* 柔和的發光效果 s*/
 }
 
 /* 各個主題選項的固定顏色 */
@@ -71,11 +49,6 @@
     background: linear-gradient(135deg, #ff6f00 50%, #e65100 50%);
 }
 
-/* 主題切換器懸停效果增強 */
-.theme-switcher:hover {
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transform: translateY(-2px);
-}
 
 /* 清理掉深色主題的特定樣式，使用統一的變量 */
 [data-theme="dark"] .card-content {

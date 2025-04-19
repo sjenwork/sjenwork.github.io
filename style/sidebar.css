@@ -209,9 +209,3 @@
     background: rgba(0, 0, 0, 0.1); /* 半透明黑色背景，與漸層搭配 */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-/* 主題切換器樣式調整 */
-.theme-switcher {
-    backdrop-filter: blur(5px); /* 模糊背景效果 */
-    -webkit-backdrop-filter: blur(5px);
-}
