@@ -121,17 +121,17 @@
 
 [data-theme="green"] .sidebar-item.active {
     border-left-color: var(--primary-color);
-    background-color: rgba(46, 125, 50, 0.1);
+    background-color: rgba(110, 255, 117, 0.1);
 }
 
 [data-theme="ocean"] .sidebar-item.active {
     border-left-color: var(--primary-color);
-    background-color: rgba(2, 119, 189, 0.1);
+    background-color: rgba(154, 214, 248, 0.1);
 }
 
 [data-theme="warm"] .sidebar-item.active {
     border-left-color: var(--primary-color);
-    background-color: rgba(255, 111, 0, 0.1);
+    background-color: rgba(248, 238, 231, 0.1);
 }
 
 /* 主題切換器樣式 */
