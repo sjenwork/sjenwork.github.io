@@ -43,7 +43,6 @@
     position: relative;
     width: 100%;
     margin-left: 0;
-    background-color: var(--bg-color);
 }
 
 #mainContent.shifted {
@@ -58,20 +57,3 @@
     }
 }
 
-@media (max-width: 768px) {
-    #mainContent {
-        width: 100% !important; /* 強制在小屏幕上始終是100%寬 */
-        padding: 0;
-        margin-left: 0 !important; /* 強制在小屏幕上沒有左邊距 */
-    }
-    
-    #mainContent.shifted {
-        transform: translateX(0); /* 手機版不移動內容 */
-        width: 100% !important;
-        margin-left: 0 !important;
-    }
-    
-    .container {
-        padding: 0 1rem 1rem 1rem; /* 小屏幕上減少邊界距離 */
-    }
-} 
