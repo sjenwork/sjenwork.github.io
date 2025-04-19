@@ -1,6 +1,7 @@
 /* 綠色主題 */
 [data-theme="green"] {
     --bg-color: #f0f7f4;
+    --bg-gradient: linear-gradient(135deg, #f0f7f4 0%, #e4f1e9 50%, #d5eadc 100%);
     --card-bg: #ffffff;
     --primary-color: #2e7d32;
     --primary-color-rgb: 46, 125, 50;  /* 添加RGB值，用於rgba()函數 */
