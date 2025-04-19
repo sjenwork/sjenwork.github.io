@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link data-rh="true" rel="icon" href="https://avatars.githubusercontent.com/u/67739845?v=4">
+    <title>部落格管理工具</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <!-- Firebase配置 -->
+    <script src="config/firebase-config.js"></script>
+    
+    <!-- CSS樣式表 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/themes.css">
+    
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .admin-form {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .admin-btn {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .admin-btn:hover {
+            background: #3a5ce5;
+        }
+        
+        .blog-list {
+            margin-top: 30px;
+        }
+        
+        .blog-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .blog-item-title {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .blog-item-cat {
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        .blog-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .edit-btn:hover {
+            color: #4a6cf7;
+        }
+        
+        .delete-btn:hover {
+            color: #f74a4a;
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom-color: #4a6cf7;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginContainer" class="login-container">
+        <h2>部落格管理後台</h2>
+        <p>請登入以繼續</p>
+        <div class="form-group">
+            <input type="email" id="emailInput" placeholder="電子郵件" required>
+        </div>
+        <div class="form-group">
+            <input type="password" id="passwordInput" placeholder="密碼" required>
+        </div>
+        <button id="loginBtn" class="admin-btn">登入</button>
+        <p id="loginError" style="color: #f74a4a; margin-top: 10px;"></p>
+    </div>
+
+    <div id="adminContainer" class="admin-container" style="display: none;">
+        <div class="admin-header">
+            <h1>部落格管理工具</h1>
+            <p>管理您的部落格文章和分類</p>
+            <button id="logoutBtn" class="admin-btn" style="background: #888;">登出</button>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="posts">文章管理</div>
+            <div class="tab" data-tab="categories">分類管理</div>
+        </div>
+        
+        <!-- 文章管理 -->
+        <div id="postsTab" class="tab-content active">
+            <div class="admin-form">
+                <h2>新增/編輯文章</h2>
+                <form id="blogForm">
+                    <input type="hidden" id="editingId" value="">
+                    <input type="hidden" id="editingCategoryIndex" value="">
+                    <input type="hidden" id="editingPostIndex" value="">
+                    
+                    <div class="form-group">
+                        <label for="title">標題</label>
+                        <input type="text" id="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">分類</label>
+                        <select id="category" required>
+                            <!-- 分類將動態載入 -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">日期</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">描述</label>
+                        <textarea id="description" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tags">標籤 (用逗號分隔)</label>
+                        <input type="text" id="tags">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="filePath">檔案路徑</label>
+                        <input type="text" id="filePath" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="coverImage">封面圖片URL</label>
+                        <input type="text" id="coverImage" required>
+                    </div>
+                    
+                    <button type="submit" class="admin-btn">儲存文章</button>
+                    <button type="button" id="cancelEdit" class="admin-btn" style="background: #888; display: none;">取消編輯</button>
+                </form>
+            </div>
+            
+            <div class="blog-list">
+                <h2>現有文章</h2>
+                <div id="blogItems">
+                    <!-- 部落格列表將動態載入 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 分類管理 -->
+        <div id="categoriesTab" class="tab-content">
+            <div class="admin-form">
+                <h2>新增/編輯分類</h2>
+                <form id="categoryForm">
+                    <input type="hidden" id="editingCategoryId" value="">
+                    
+                    <div class="form-group">
+                        <label for="categoryName">分類名稱</label>
+                        <input type="text" id="categoryName" required>
+                    </div>
+                    
+                    <button type="submit" class="admin-btn">儲存分類</button>
+                    <button type="button" id="cancelCategoryEdit" class="admin-btn" style="background: #888; display: none;">取消編輯</button>
+                </form>
+            </div>
+            
+            <div class="blog-list">
+                <h2>現有分類</h2>
+                <div id="categoryItems">
+                    <!-- 分類列表將動態載入 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 使用共享的Firebase配置
+        // 初始化Firebase
+        firebase.initializeApp(window.firebaseConfig);
+        const database = firebase.database();
+        const auth = firebase.auth();
+        
+        // DOM元素
+        const loginContainer = document.getElementById('loginContainer');
+        const adminContainer = document.getElementById('adminContainer');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginError = document.getElementById('loginError');
+        
+        // 表單元素
+        const blogForm = document.getElementById('blogForm');
+        const categoryForm = document.getElementById('categoryForm');
+        const categorySelect = document.getElementById('category');
+        const blogItems = document.getElementById('blogItems');
+        const categoryItems = document.getElementById('categoryItems');
+        
+        // 編輯狀態變數
+        let blogData = [];
+        
+        // 登入邏輯
+        loginBtn.addEventListener('click', function() {
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // 登入成功
+                    loginContainer.style.display = 'none';
+                    adminContainer.style.display = 'block';
+                    loginError.textContent = '';
+                    loadData();
+                })
+                .catch((error) => {
+                    // 登入失敗
+                    loginError.textContent = `登入失敗: ${error.message}`;
+                });
+        });
+        
+        // 登出
+        logoutBtn.addEventListener('click', function() {
+            auth.signOut().then(() => {
+                loginContainer.style.display = 'block';
+                adminContainer.style.display = 'none';
+            });
+        });
+        
+        // 檢查使用者登入狀態
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                // 使用者已登入
+                loginContainer.style.display = 'none';
+                adminContainer.style.display = 'block';
+                loadData();
+            } else {
+                // 使用者未登入
+                loginContainer.style.display = 'block';
+                adminContainer.style.display = 'none';
+            }
+        });
+        
+        // 載入部落格資料
+        function loadData() {
+            const blogRef = database.ref('blog-posts');
+            
+            blogRef.once('value')
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        blogData = snapshot.val();
+                    } else {
+                        blogData = [];
+                    }
+                    
+                    // 渲染分類下拉列表
+                    renderCategoryOptions();
+                    
+                    // 渲染部落格列表
+                    renderBlogList();
+                    
+                    // 渲染分類列表
+                    renderCategoryList();
+                })
+                .catch(error => {
+                    console.error('載入資料失敗:', error);
+                    alert('載入資料失敗，請檢查網路連線');
+                });
+        }
+        
+        // 渲染分類選項
+        function renderCategoryOptions() {
+            categorySelect.innerHTML = '';
+            
+            blogData.forEach((category, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = category.category;
+                categorySelect.appendChild(option);
+            });
+        }
+        
+        // 渲染部落格列表
+        function renderBlogList() {
+            blogItems.innerHTML = '';
+            
+            blogData.forEach((category, categoryIndex) => {
+                // 新增分類標題
+                const categoryTitle = document.createElement('h3');
+                categoryTitle.textContent = category.category;
+                blogItems.appendChild(categoryTitle);
+                
+                // 新增此分類下的部落格文章
+                if (category.items && category.items.length > 0) {
+                    category.items.forEach((post, postIndex) => {
+                        const blogItem = document.createElement('div');
+                        blogItem.className = 'blog-item';
+                        
+                        blogItem.innerHTML = `
+                            <div>
+                                <span class="blog-item-title">${post.title}</span>
+                                <span class="blog-item-cat">${post.date}</span>
+                            </div>
+                            <div class="blog-item-actions">
+                                <button class="action-btn edit-btn" data-category="${categoryIndex}" data-post="${postIndex}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn delete-btn" data-category="${categoryIndex}" data-post="${postIndex}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        
+                        blogItems.appendChild(blogItem);
+                    });
+                } else {
+                    const emptyNotice = document.createElement('p');
+                    emptyNotice.textContent = '此分類下暫無文章';
+                    emptyNotice.style.color = '#888';
+                    emptyNotice.style.fontStyle = 'italic';
+                    blogItems.appendChild(emptyNotice);
+                }
+            });
+            
+            // 新增編輯按鈕事件
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryIndex = this.dataset.category;
+                    const postIndex = this.dataset.post;
+                    editPost(categoryIndex, postIndex);
+                });
+            });
+            
+            // 新增刪除按鈕事件
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryIndex = this.dataset.category;
+                    const postIndex = this.dataset.post;
+                    deletePost(categoryIndex, postIndex);
+                });
+            });
+        }
+        
+        // 渲染分類列表
+        function renderCategoryList() {
+            categoryItems.innerHTML = '';
+            
+            blogData.forEach((category, index) => {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'blog-item';
+                
+                categoryItem.innerHTML = `
+                    <div>
+                        <span class="blog-item-title">${category.category}</span>
+                        <span class="blog-item-cat">${category.items ? category.items.length : 0}篇文章</span>
+                    </div>
+                    <div class="blog-item-actions">
+                        <button class="action-btn edit-btn" data-category="${index}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" data-category="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                categoryItems.appendChild(categoryItem);
+            });
+            
+            // 新增分類編輯按鈕事件
+            document.querySelectorAll('#categoryItems .edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryIndex = this.dataset.category;
+                    editCategory(categoryIndex);
+                });
+            });
+            
+            // 新增分類刪除按鈕事件
+            document.querySelectorAll('#categoryItems .delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryIndex = this.dataset.category;
+                    deleteCategory(categoryIndex);
+                });
+            });
+        }
+        
+        // 編輯文章
+        function editPost(categoryIndex, postIndex) {
+            const post = blogData[categoryIndex].items[postIndex];
+            
+            document.getElementById('title').value = post.title;
+            document.getElementById('category').value = categoryIndex;
+            document.getElementById('date').value = formatDate(post.date);
+            document.getElementById('description').value = post.description;
+            document.getElementById('tags').value = post.tags.join(', ');
+            document.getElementById('filePath').value = post.file_path;
+            document.getElementById('coverImage').value = post.cover_image;
+            
+            document.getElementById('editingId').value = 'editing';
+            document.getElementById('editingCategoryIndex').value = categoryIndex;
+            document.getElementById('editingPostIndex').value = postIndex;
+            
+            document.getElementById('cancelEdit').style.display = 'inline-block';
+            
+            // 捲動到表單
+            blogForm.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 刪除文章
+        function deletePost(categoryIndex, postIndex) {
+            if (confirm('確定要刪除這篇文章嗎？此操作不可撤銷。')) {
+                blogData[categoryIndex].items.splice(postIndex, 1);
+                
+                // 儲存到Firebase
+                saveData();
+            }
+        }
+        
+        // 編輯分類
+        function editCategory(categoryIndex) {
+            const category = blogData[categoryIndex];
+            
+            document.getElementById('categoryName').value = category.category;
+            document.getElementById('editingCategoryId').value = categoryIndex;
+            
+            document.getElementById('cancelCategoryEdit').style.display = 'inline-block';
+            
+            // 切換到分類選項卡
+            document.querySelector('[data-tab="categories"]').click();
+            
+            // 捲動到表單
+            categoryForm.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 刪除分類
+        function deleteCategory(categoryIndex) {
+            if (confirm('確定要刪除這個分類嗎？該分類下的所有文章也將被刪除。此操作不可撤銷。')) {
+                blogData.splice(categoryIndex, 1);
+                
+                // 儲存到Firebase
+                saveData();
+            }
+        }
+        
+        // 儲存資料到Firebase
+        function saveData() {
+            const blogRef = database.ref('blog-posts');
+            
+            blogRef.set(blogData)
+                .then(() => {
+                    // 重新載入資料
+                    loadData();
+                })
+                .catch(error => {
+                    console.error('儲存資料失敗:', error);
+                    alert('儲存資料失敗，請檢查網路連線');
+                });
+        }
+        
+        // 部落格表單提交
+        blogForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const categoryIndex = document.getElementById('category').value;
+            const date = document.getElementById('date').value;
+            const description = document.getElementById('description').value;
+            const tagsStr = document.getElementById('tags').value;
+            const filePath = document.getElementById('filePath').value;
+            const coverImage = document.getElementById('coverImage').value;
+            
+            // 處理標籤
+            const tags = tagsStr.split(',').map(tag => tag.trim()).filter(tag => tag);
+            
+            // 建立文章物件
+            const post = {
+                title,
+                date: formatDateForDisplay(date),
+                description,
+                tags,
+                file_path: filePath,
+                cover_image: coverImage
+            };
+            
+            // 判斷是新增還是編輯
+            const editingId = document.getElementById('editingId').value;
+            
+            if (editingId === 'editing') {
+                // 編輯現有文章
+                const editingCategoryIndex = document.getElementById('editingCategoryIndex').value;
+                const editingPostIndex = document.getElementById('editingPostIndex').value;
+                
+                // 如果分類發生變化
+                if (editingCategoryIndex !== categoryIndex) {
+                    // 從原分類中刪除
+                    blogData[editingCategoryIndex].items.splice(editingPostIndex, 1);
+                    
+                    // 新增到新分類
+                    if (!blogData[categoryIndex].items) {
+                        blogData[categoryIndex].items = [];
+                    }
+                    blogData[categoryIndex].items.push(post);
+                } else {
+                    // 在原分類中更新
+                    blogData[categoryIndex].items[editingPostIndex] = post;
+                }
+            } else {
+                // 新增文章
+                if (!blogData[categoryIndex].items) {
+                    blogData[categoryIndex].items = [];
+                }
+                blogData[categoryIndex].items.push(post);
+            }
+            
+            // 儲存到Firebase
+            saveData();
+            
+            // 重置表單
+            resetBlogForm();
+        });
+        
+        // 重置部落格表單
+        function resetBlogForm() {
+            blogForm.reset();
+            document.getElementById('editingId').value = '';
+            document.getElementById('editingCategoryIndex').value = '';
+            document.getElementById('editingPostIndex').value = '';
+            document.getElementById('cancelEdit').style.display = 'none';
+        }
+        
+        // 取消編輯按鈕
+        document.getElementById('cancelEdit').addEventListener('click', function() {
+            resetBlogForm();
+        });
+        
+        // 分類表單提交
+        categoryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const categoryName = document.getElementById('categoryName').value;
+            const editingCategoryId = document.getElementById('editingCategoryId').value;
+            
+            if (editingCategoryId !== '') {
+                // 編輯現有分類
+                blogData[editingCategoryId].category = categoryName;
+            } else {
+                // 新增分類
+                blogData.push({
+                    category: categoryName,
+                    items: []
+                });
+            }
+            
+            // 儲存到Firebase
+            saveData();
+            
+            // 重置表單
+            resetCategoryForm();
+        });
+        
+        // 重置分類表單
+        function resetCategoryForm() {
+            categoryForm.reset();
+            document.getElementById('editingCategoryId').value = '';
+            document.getElementById('cancelCategoryEdit').style.display = 'none';
+        }
+        
+        // 取消分類編輯按鈕
+        document.getElementById('cancelCategoryEdit').addEventListener('click', function() {
+            resetCategoryForm();
+        });
+        
+        // 選項卡切換
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有選項卡的active類
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                
+                // 移除所有內容區域的active類
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // 新增當前選項卡的active類
+                this.classList.add('active');
+                
+                // 顯示對應的內容區域
+                const tabId = this.dataset.tab;
+                document.getElementById(`${tabId}Tab`).classList.add('active');
+            });
+        });
+        
+        // 日期格式化工具函數
+        function formatDate(dateStr) {
+            // 將YYYY-MM-DD格式轉換為yyyy-mm-dd格式
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+                const year = parts[0];
+                const month = parts[1];
+                const day = parts[2];
+                return `${year}-${month}-${day}`;
+            }
+            return dateStr;
+        }
+        
+        // 日期格式化工具函數(用於顯示)
+        function formatDateForDisplay(dateStr) {
+            // 將yyyy-mm-dd格式轉換為YYYY-MM-DD格式
+            const date = new Date(dateStr);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+    </script>
+</body>
+</html> 

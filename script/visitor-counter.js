@@ -3,38 +3,6 @@
  * 用於記錄網站的訪問人次
  */
 
-// Firebase 配置
-// 注意: 請將以下配置替換為您從Firebase控制台獲得的配置
-const firebaseConfig = {
-    apiKey: "AIzaSyB3gvcVEiFkm5jptM1qw5uZMsED0yLIXiA",
-    authDomain: "sjenwork-github.firebaseapp.com",
-    databaseURL: "https://sjenwork-github-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "sjenwork-github",
-    storageBucket: "sjenwork-github.appspot.com",
-    messagingSenderId: "1010951404944",
-    appId: "1:1010951404944:web:0af04ded3f97237154c715",
-    measurementId: "G-D5BW7CYDM0"
-};
-
-// 初始化Firebase應用
-function initializeFirebase() {
-    if (typeof firebase !== 'undefined') {
-        // 檢查Firebase是否已經初始化
-        try {
-            if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
-            }
-            return true;
-        } catch (error) {
-            console.error("Firebase初始化失敗:", error);
-            return false;
-        }
-    } else {
-        console.error("Firebase SDK未載入，請確保在HTML中引入Firebase SDK");
-        return false;
-    }
-}
-
 // 初始化訪問計數器
 function initVisitorCounter() {
     // 確保DOM已完全載入
@@ -47,9 +15,16 @@ function initVisitorCounter() {
 
 // 設置訪問計數器
 function setupVisitorCounter() {
-    // 檢查Firebase是否已正確初始化
-    if (!initializeFirebase()) {
-        displayError("Firebase初始化失敗");
+    // 檢查Firebase是否已正確初始化 - 使用共享的初始化功能
+    if (typeof window.firebaseHelper !== 'undefined') {
+        // 使用共享的初始化函數
+        if (!window.firebaseHelper.initialize()) {
+            displayError("Firebase初始化失敗");
+            return;
+        }
+    } else {
+        console.error("Firebase初始化模組未載入");
+        displayError("Firebase模組未載入");
         return;
     }
 
@@ -156,7 +131,8 @@ function displayError(message) {
 
 // 獲取當前訪問計數（可供外部調用）
 function getCurrentVisitorCount(callback) {
-    if (!initializeFirebase()) {
+    // 使用共享的初始化函數
+    if (typeof window.firebaseHelper === 'undefined' || !window.firebaseHelper.initialize()) {
         callback(0, new Error("Firebase初始化失敗"));
         return;
     }

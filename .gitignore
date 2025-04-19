@@ -1,0 +1,38 @@
+# Firebase 配置和服務帳號
+firebase-migration/serviceAccountKey.json
+.firebase/
+.firebaserc
+firebase-debug.log
+
+# 依賴包
+node_modules/
+package-lock.json
+yarn.lock
+
+# 構建輸出
+build/
+dist/
+*.log
+
+# 環境變量
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE和編輯器
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 操作系統文件
+.DS_Store
+Thumbs.db
+.directory
+
+# 臨時文件
+*.tmp
+*.bak
+*.backup 
