@@ -2,9 +2,9 @@
 
 *發布日期：2024-03-15*
 
-*標籤：Agent, RAG*
+*標籤：LLMs, Gemini, ChatGPT, Claude*
 
-![agent](blogs/images/agent_coding.png)
+![agent](blogs/images/ai-dev.png)
 
 ## 前言
 
