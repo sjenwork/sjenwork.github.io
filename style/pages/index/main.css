@@ -43,4 +43,4 @@
 @import 'features/resource-sidebar.css';
 
 /* 頁面特定樣式 */
-@import 'pages/blog-reader.css'; 
+@import '../blog-reader/blog-reader.css'; 
