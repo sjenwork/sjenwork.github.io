@@ -1,0 +1,135 @@
+:root {
+    --sidebar-width: 280px;
+    --collapsed-sidebar-width: 60px;
+    --topbar-height: 50px;
+    --border-radius: 8px;
+    --transition-duration: 0.3s;
+}
+
+/* 頁面過渡效果 */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.page-transition-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 主布局 */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    position: relative;
+}
+
+/* 主内容区 */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.topbar {
+    height: var(--topbar-height);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content-area {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: var(--bg-color);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-color);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    :root {
+        --collapsed-sidebar-width: 0;
+    }
+    
+    .sidebar {
+        position: absolute;
+        z-index: 100;
+        height: 100%;
+    }
+    
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+    
+    /* 添加一个叠加层，当侧边栏展开时显示 */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 90;
+    }
+    
+    .sidebar:not(.collapsed) + .sidebar-overlay {
+        display: block;
+    }
+} 

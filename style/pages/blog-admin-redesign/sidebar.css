@@ -1,0 +1,223 @@
+/* 侧边栏 */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: linear-gradient(to bottom, var(--sidebar-bg), var(--sidebar-hover)); /* 默認主題漸層 */
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+
+/* 不同主題的側邊欄漸層背景 */
+[data-theme="dark"] .sidebar {
+    background: linear-gradient(135deg, #1a1a1a, #3a3052, #1a1a1a);
+}
+
+[data-theme="green"] .sidebar {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32, #1b5e20);
+}
+
+[data-theme="ocean"] .sidebar {
+    background: linear-gradient(135deg, #01579b, #0288d1, #01579b);
+}
+
+[data-theme="warm"] .sidebar {
+    background: linear-gradient(135deg, #e65100, #f57c00, #e65100);
+}
+
+.sidebar.collapsed {
+    width: var(--collapsed-sidebar-width);
+}
+
+.sidebar.collapsed .logo,
+.sidebar.collapsed .section-title span,
+.sidebar.collapsed .item-title {
+    display: none;
+}
+
+.sidebar.collapsed .section-header {
+    justify-content: center;
+    padding: 8px;
+}
+
+.sidebar.collapsed .sidebar-item {
+    padding: 10px 15px;
+    justify-content: center;
+}
+
+.sidebar.collapsed .section-actions,
+.sidebar.collapsed .item-actions {
+    display: none;
+}
+
+.sidebar-header {
+    height: var(--topbar-height);
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-light);
+    color: white;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.sidebar-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0;
+}
+
+/* 侧边栏列表项 */
+.sidebar-section {
+    margin-bottom: 15px;
+}
+
+.collapsible-section .sidebar-list {
+    max-height: 1000px;
+    opacity: 1;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.collapsible-section.collapsed .sidebar-list {
+    max-height: 0;
+    opacity: 0;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color 0.2s;
+}
+
+.section-header:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.sidebar-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-category-title {
+    padding: 5px 15px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.sidebar-category-title:after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: var(--border-light);
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+    opacity: 0.5;
+}
+
+.sidebar-item {
+    padding: 8px 15px 8px 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 4px;
+    margin: 3px 5px;
+    transition: all 0.2s ease;
+    color: white;
+}
+
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(2px);
+}
+
+.sidebar-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.item-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-actions {
+    display: none;
+    gap: 5px;
+}
+
+.sidebar-item:hover .item-actions {
+    display: flex;
+}
+
+.collapsible-section .section-title i.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.collapsible-section.collapsed .section-title i.toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.collapsible-section.collapsed .sidebar-list {
+    display: none;
+} 
