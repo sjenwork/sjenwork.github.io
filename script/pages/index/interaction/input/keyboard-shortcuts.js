@@ -38,7 +38,6 @@ function initKeyboardShortcuts() {
             // 檢查resourceSidebar是否處於active狀態
             if (resourceSidebar && resourceSidebar.classList.contains('active')) {
                 // 如果resourceSidebar處於active狀態，則不執行側邊欄切換
-                console.log('【鍵盤快捷鍵】resourceSidebar處於active狀態，不執行側邊欄切換');
                 return;
             }
             

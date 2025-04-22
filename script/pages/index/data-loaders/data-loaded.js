@@ -30,48 +30,8 @@ function loadContactInfo() {
             // 清空容器
             aboutContentElement.innerHTML = '';
             
-            console.log(markdownText);
             // 使用marked解析Markdown
             aboutContentElement.innerHTML = marked.parse(markdownText);
-            console.log(marked.parse(markdownText));
-            // 為所有鏈接添加樣式和target屬性
-            // const links = aboutContentElement.querySelectorAll('a');
-            // links.forEach(link => {
-            //     link.style.color = 'var(--primary-color)';
-            //     link.style.textDecoration = 'none';
-                
-            //     // 如果是外部鏈接，添加target="_blank"
-            //     if (link.href.includes('github.com') || 
-            //         link.href.includes('http://') || 
-            //         link.href.includes('https://')) {
-            //         link.target = '_blank';
-            //     }
-            // });
-            
-            // 添加圖標到聯絡方式（假設格式為：[icon:class] 文本）
-            const paragraphs = aboutContentElement.querySelectorAll('p');
-            paragraphs.forEach(p => {
-                const text = p.innerHTML;
-                const iconMatch = text.match(/\[icon:(.*?)\](.*)/);
-                if (iconMatch) {
-                    const iconClass = iconMatch[1].trim();
-                    const remainingText = iconMatch[2].trim();
-                    
-                    // 創建圖標
-                    const icon = document.createElement('i');
-                    icon.className = iconClass;
-                    icon.style.color = 'var(--primary-color)';
-                    icon.style.marginRight = '10px';
-                    
-                    // 清空原內容並添加新內容
-                    p.innerHTML = '';
-                    p.appendChild(icon);
-                    p.insertAdjacentHTML('beforeend', remainingText);
-                    
-                    // 設置段落樣式
-                    p.style.marginBottom = '5px';
-                }
-            });
             
             // 為標題增加行高和樣式
             const headings = aboutContentElement.querySelectorAll('h2, h3');

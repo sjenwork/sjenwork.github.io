@@ -45,7 +45,6 @@ function initializeFirebase() {
         if (typeof firebase !== 'undefined') {
             try {
                 if (firebase.apps.length > 0) {
-                    console.log("Firebase已在其他地方初始化");
                     return true;
                 } else {
                     console.error("Firebase未初始化，且找不到初始化模組");

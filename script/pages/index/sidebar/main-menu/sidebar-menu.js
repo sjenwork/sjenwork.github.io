@@ -88,7 +88,6 @@ function initSidebar() {
     
     // 關閉側邊欄函數
     function closeSidebar() {
-        console.log('【側邊欄】關閉側邊欄');
         sidebar.classList.remove('open');
         
         // 在大屏幕上恢復主內容區
