@@ -1,4 +1,4 @@
-// 從JSON文件加載聯絡資訊
+// 從Markdown文件加載聯絡資訊
 function loadContactInfo() {
     const aboutContentElement = document.querySelector('.about-content');
     
@@ -7,59 +7,87 @@ function loadContactInfo() {
         return;
     }
     
-    // 使用fetch API加載contact.json文件
-    fetch('json/contact.json')
+    // 配置marked選項
+    marked.setOptions({
+        highlight: function(code, lang) {
+            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+            return hljs.highlight(code, { language }).value;
+        },
+        langPrefix: 'hljs language-',
+        gfm: true,
+        breaks: true
+    });
+    
+    // 使用fetch API加載Markdown文件
+    fetch('https://raw.githubusercontent.com/sjenwork/personal-website-data/refs/heads/main/about/introduction.md')
         .then(response => {
             if (!response.ok) {
                 throw new Error('無法加載聯絡資訊：' + response.status);
             }
-            return response.json();
+            return response.text(); // 讀取文本
         })
-        .then(data => {
+        .then(markdownText => {
             // 清空容器
             aboutContentElement.innerHTML = '';
             
-            // 添加自我介紹段落
-            data.intro.forEach(paragraph => {
-                const p = document.createElement('p');
-                p.textContent = paragraph;
-                p.style.marginBottom = '1.5rem';
-                aboutContentElement.appendChild(p);
+            console.log(markdownText);
+            // 使用marked解析Markdown
+            aboutContentElement.innerHTML = marked.parse(markdownText);
+            console.log(marked.parse(markdownText));
+            // 為所有鏈接添加樣式和target屬性
+            // const links = aboutContentElement.querySelectorAll('a');
+            // links.forEach(link => {
+            //     link.style.color = 'var(--primary-color)';
+            //     link.style.textDecoration = 'none';
+                
+            //     // 如果是外部鏈接，添加target="_blank"
+            //     if (link.href.includes('github.com') || 
+            //         link.href.includes('http://') || 
+            //         link.href.includes('https://')) {
+            //         link.target = '_blank';
+            //     }
+            // });
+            
+            // 添加圖標到聯絡方式（假設格式為：[icon:class] 文本）
+            const paragraphs = aboutContentElement.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                const text = p.innerHTML;
+                const iconMatch = text.match(/\[icon:(.*?)\](.*)/);
+                if (iconMatch) {
+                    const iconClass = iconMatch[1].trim();
+                    const remainingText = iconMatch[2].trim();
+                    
+                    // 創建圖標
+                    const icon = document.createElement('i');
+                    icon.className = iconClass;
+                    icon.style.color = 'var(--primary-color)';
+                    icon.style.marginRight = '10px';
+                    
+                    // 清空原內容並添加新內容
+                    p.innerHTML = '';
+                    p.appendChild(icon);
+                    p.insertAdjacentHTML('beforeend', remainingText);
+                    
+                    // 設置段落樣式
+                    p.style.marginBottom = '5px';
+                }
             });
             
-            // 添加聯絡方式標題
-            const h3 = document.createElement('h3');
-            h3.textContent = data.contactTitle;
-            h3.style.color = 'var(--primary-color)';
-            h3.style.margin = '2rem 0 1rem';
-            aboutContentElement.appendChild(h3);
-            
-            // 添加聯絡方式
-            data.contacts.forEach(contact => {
-                const p = document.createElement('p');
+            // 為標題增加行高和樣式
+            const headings = aboutContentElement.querySelectorAll('h2, h3');
+            headings.forEach(heading => {
+                heading.style.lineHeight = '1.5';
+                heading.style.margin = '1.5rem 0 1rem';
+                heading.style.color = 'var(--primary-color)';
                 
-                // 創建圖標
-                const icon = document.createElement('i');
-                icon.className = `${contact.icon}`;
-                icon.style.color = 'var(--primary-color)';
-                icon.style.marginRight = '10px';
-                
-                // 創建鏈接
-                const link = document.createElement('a');
-                link.href = contact.link;
-                link.textContent = contact.value;
-                link.style.color = 'var(--text-color)';
-                link.style.textDecoration = 'none';
-                
-                // 如果是GitHub鏈接，添加target="_blank"
-                if (contact.type === 'github') {
-                    link.target = '_blank';
+                // 為h2和h3設置不同的樣式
+                if (heading.tagName === 'H2') {
+                    heading.style.fontSize = '1.8rem';
+                    heading.style.borderBottom = '1px solid var(--border-color)';
+                    heading.style.paddingBottom = '0.5rem';
+                } else if (heading.tagName === 'H3') {
+                    heading.style.fontSize = '1.5rem';
                 }
-                
-                // 組裝
-                p.appendChild(icon);
-                p.appendChild(link);
-                aboutContentElement.appendChild(p);
             });
         })
         .catch(error => {
@@ -78,7 +106,7 @@ function loadResources() {
     }
     
     // 使用fetch API加載resources.json文件
-    fetch('json/resources.json')
+    fetch('https://raw.githubusercontent.com/sjenwork/personal-website-data/refs/heads/main/resources/resources.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('無法加載學習資源數據：' + response.status);
@@ -159,7 +187,7 @@ function loadSkills() {
     }
     
     // 使用fetch API加載skills.json文件
-    fetch('json/skills.json')
+    fetch('https://raw.githubusercontent.com/sjenwork/personal-website-data/refs/heads/main/skills/skills.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('無法加載技能數據：' + response.status);

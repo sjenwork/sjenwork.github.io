@@ -17,6 +17,12 @@
       "icon": "fab fa-github",
       "value": "github.com/sjenwork",
       "link": "https://github.com/"
+    },
+    {
+      "obsidian": "https://obsidian.md/",
+      "icon": "fas fa-book",
+      "value": "obsidian.md",
+      "link": "https://obsidian.md/"
     }
   ]
 } 

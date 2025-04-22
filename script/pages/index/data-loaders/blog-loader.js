@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadBlogPosts() {
     // 從blog.json獲取部落格文章數據
+    // 目前暫時不使用，改用 firebase 紀錄文章清單
     fetch('json/blog.json')
         .then(response => {
             if (!response.ok) {
