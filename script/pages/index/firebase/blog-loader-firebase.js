@@ -21,6 +21,7 @@ function loadBlogPosts() {
             if (!snapshot.exists()) {
                 throw new Error('無法載入部落格文章數據');
             }
+            console.log(snapshot.val());
             displayBlogPosts(snapshot.val());
         })
         .catch(error => {
